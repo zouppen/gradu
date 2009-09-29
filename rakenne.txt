@@ -1,0 +1,15 @@
+Rakenne
+=======
+
+Tutkimusongelma: Web-palveluihin liittyvät hyökkäykset ja niiden analyysi.
+
+Syksy 2009: n. 50-80 sivua
+1) Johdanto
+2) WWW-palvelun arkkitehtuuri
+3) Palveluita vastaan kohdistuvat hyökkäykset
+
+Kevät 2010: n. 30-50 sivua
+4) Tiedon keruu
+5) Analysointi
+6) ?
+7) Johtopäätökset
