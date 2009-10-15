@@ -1,15 +1,69 @@
 Rakenne
 =======
 
-Tutkimusongelma: Web-palveluihin liittyvät hyökkäykset ja niiden analyysi.
+Tutkimusongelma: Web-palveluihin kohdistuvien hyökkäysten analyysi ja
+torjunta.
+
+Otsikko:
 
 Syksy 2009: n. 50-80 sivua
+-----------
+
 1) Johdanto
 2) WWW-palvelun arkkitehtuuri
+
+ - käytetyt palvelinohjelmistoyhdistelmät
+   - LAMP (Linux + Apache + MySQL + PHP)
+   - Zope / Plone
+ - hajautetut palvelut (esim. Facebook ajetaan sadoilla koneilla) 
+
 3) Palveluita vastaan kohdistuvat hyökkäykset
 
+ - yleisimmät tietoturva-aukot eri palvelinohjelmistoyhdistelmiin.
+
+ - hyökkäystavat
+   - DOS
+   - Hajautetut hyökkäykset (esim. DDOS)
+   - Spoofing
+   - L2R (Local to Root)
+   - R2L (Remote to Local)
+   - data injection (tiedon ruiskutus :-D)
+     - "AJAX-hyökkäykset"
+     - SQL-hyökkäykset)
+   - OSI-mallin kerroksille <7 kohdistuvat hyökkäykset
+     - Käsitellään tosi lyhyesti, koska tästä on jo gradu
+
+4) Aiempi tutkimus
+
+5) Hyökkäysten torjunta (ja ennustaminen)
+
+ - Sääntöpohjaiset IDS:t
+   - SNORT
+   - BRO
+ - Jako kerrosten <7 ja 7 torjuntakeinoihin. Käsitellään 7 paremmin.
+ - Poikkeavuuksien havaitsemiseen (anomaly detection) perustuvat IDS:t
+ - Heuristiset IDS:t (?)
+   - Onko näitä olemassa?
+
 Kevät 2010: n. 30-50 sivua
-4) Tiedon keruu
-5) Analysointi
-6) ?
-7) Johtopäätökset
+-----------
+
+6) Tiedon keruu
+
+ - Mistä data on peräisin?
+ - Millaista data on?
+   - HTTP
+   - Apachen logit
+ - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
+ - Miten dataa on käsiteltu ja suodatettu?
+
+7) Analysointi
+
+ - Amirin algoritmit
+ - Muut poikkeavuuksien tunnistusjärjestelmät
+ - Sääntöpohjaiset IDS
+ - Vertailu näiden välillä (esim ristiintaulukointia?)
+
+8) Johtopäätökset
+
+*) Lähteet
