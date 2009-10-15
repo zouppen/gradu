@@ -1,0 +1,32 @@
+Muutosten hakeminen
+-------------------
+
+git pull
+git pull joel
+
+Ensimmäinen hakee omat muutoksesi (ei tarvetta, jos teet vain yhdellä
+koneella).  Toinen komento (git pull joel) hakee Joelin tekemät
+muutokset ja yhdistää (merge) ne omaan versioosi.
+
+git commit -a
+
+Tallentaa tehdyt muutokset versiohallintaan, mutta ei siirrä niitä
+vielä palvelimelle. Kannattaa ajaa tämä aina , kun on tehnyt jonkin
+loogisen kokonaisuuden, esimerkiksi oikolukenut, kirjoittanut jonkin
+luvun valmiiksi ym. Commitin yhteydessä annetaan viesti, jossa
+kerrotaan, mitä on tehty.
+
+git push
+
+Lähettää muutokset palvelimelle, jolloin ne on noudettavissa muiltakin koneilta.
+
+git add tiedostonnimi
+
+Lisää tiedoston versiohallintaan. Tarvitsee ajaa vain kerran per
+tiedosto. Muista ajaa git commit tiedostojen lisäämisen jälkeen.
+
+git status
+
+Näyttää lyhyesti, mitä on muutettu.
+
+Lisää ohjeita löytyy gitin tutoriaalista.
