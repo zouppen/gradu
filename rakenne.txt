@@ -15,7 +15,17 @@ Syksy 2009: n. 50-80 sivua
  - käytetyt palvelinohjelmistoyhdistelmät
    - LAMP (Linux + Apache + MySQL + PHP)
    - Zope / Plone
- - hajautetut palvelut (esim. Facebook ajetaan sadoilla koneilla) 
+ - keskitetyt "välimuistilliset" palvelut
+   - Yksi palvelin, monta välimuistia
+   - Esimerkiksi Wikipedia
+ - hajautetut palvelut
+   - hyödyt verrattuna keskitettyyn
+   - Esimerkkejä arkkitehtuurista, esim Google, Facebook, ...
+ - eri arkkitehtuurit vertailtuna
+   - tietoturvan kannalta
+   - tiedon keräämisen kannalta IDS:lle
+
+ Joel kirjoittaa pohjan.
 
 3) Palveluita vastaan kohdistuvat hyökkäykset
 
@@ -32,6 +42,8 @@ Syksy 2009: n. 50-80 sivua
      - SQL-hyökkäykset)
    - OSI-mallin kerroksille <7 kohdistuvat hyökkäykset
      - Käsitellään tosi lyhyesti, koska tästä on jo gradu
+
+ Kristian kirjoittaa pohjan tälle luvulle.
 
 4) Aiempi tutkimus
 
