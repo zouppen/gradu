@@ -1,0 +1,102 @@
+% MASTER'S THESIS IN MATHEMATICAL INFORMATION TECHNOLOGY
+% Tuomo Sipola
+%
+% Based on Timo Männikkö's template. 
+% Uses latex template by Antti-Juhani Kaijanaho and Matthieu Weber.
+%
+
+\documentclass[finnish,logo,nonumbib,nocopyright,lof,pdftex]{gradu2}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{palatino} % Better font
+\usepackage[intlimits]{amsmath} % For better math mode, namely integrals
+\usepackage{amssymb} % Math symbols
+
+\usepackage[pdftex]{graphicx} % Pictures
+\usepackage{pdfpages} % For inclusion of the article
+
+% Optional 1,5 point line spacing
+%\usepackage{setspace}
+%\onehalfspace
+
+% Define our own abbreviations list
+\newenvironment{abbrlist}[1]{
+  \begin{list}{}{\settowidth{\labelwidth}{\textbf{#1}}
+  \setlength{\leftmargin}{\labelwidth}
+  \addtolength{\leftmargin}{\labelsep}
+  \renewcommand{\makelabel}[1]{\textbf{\hfill##1}}}}%
+{\end{list}}
+
+% No spacing with this enumeration
+\newenvironment{enumerate_no_space}{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+{\end{enumerate}}
+
+% Remoge pagebackref in the final version
+% Add "pagebackref=true" to get page numbers where each reference is used
+% Link version for internet viewing
+%\usepackage[pdftex,colorlinks=true]{hyperref}
+
+% PDF information tags
+\pdfinfo{/Title (Applying Hilbert-Huang Transform to Mismatch Negativity) /Author (Tuomo Sipola) /Subject (Advanced EEG signal processing methods) /Keywords (electroencephalography, EEG, event-related potential, ERP, mismatch negativity, MMN, Hilbert-Huang transform, HHT, empirical mode decomposition, EMD)}
+
+%%% Actual content begins here
+
+\title{Applying Hilbert-Huang Transform \\ to Mismatch Negativity}
+\translatedtitle{Hilbert-Huang-muunnoksen soveltaminen aivos\"{a}hk\"{o}signaaliin}
+
+\linja{Mobile Systems}
+
+\setauthor{Tuomo}{Sipola}
+\yhteystiedot{tuomo.s.sipola@jyu.fi}
+%\setdate{30}{8}{2008}
+
+\abstract{EEG signals can be analyzed with modern mathematical methods
+  in order to separate the most meaningful components from the
+  rest. Hilbert-Huang transform is a new method to construct a sharp
+  and clean time-frequency spectrum of a nonlinear and nonstationary
+  signal. It consists of empirical mode decomposition (EMD), which
+  decomposes the signal to intrinsic mode functions (IMF), and Hilbert
+  transform, which is used to obtain the spectrum. This method was
+  used on EEG data recorded during an oddball paradigm test. The
+  subjects consisted of children divided into three groups:
+  attention-deficit hyperactivity disorder (ADHD), reading-disabled
+  (RD) and control group. Hilbert-Huang transform revealed differences
+  between the groups that could not have been obtained using more
+  conventional analysis methods. }
+\tiivistelma{Aivosähkökäyriä, bzzzz!
+}
+
+\avainsanat{aivos\"{a}hk\"{o}, her\"{a}tepotentiaali, Hilbert-Huang-muunnos, empiirinen aaltomuotohajotelma, aika-taajuusanalyysi}
+\keywords{electroencephalography, EEG, event-related potential, ERP, mismatch negativity, MMN, Hilbert-Huang transform, HHT, empirical mode decomposition, EMD, time-frequency analysis}
+
+\begin{document}
+
+\def\termlistname{Abbreviations}
+\termlist
+
+\begin{abbrlist}{ANOVA}
+\item[OMG] Oh my god
+\item[LOL] Lulz
+\end{abbrlist}
+
+\mainmatter
+
+\include{tuomo_intro}
+
+\include{tuomo_toka}
+
+\include{lahteet}
+
+\appendix
+
+%\chapter{Published article}
+%
+%\includepdf[pages=-]{published_article.pdf}
+
+\end{document}
+

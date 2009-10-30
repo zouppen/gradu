@@ -1,0 +1,1502 @@
+% MASTER'S THESIS IN MATHEMATICAL INFORMATION TECHNOLOGY
+% Tuomo Sipola
+%
+% Based on Timo Männikkö's template. 
+% Uses latex template by Antti-Juhani Kaijanaho and Matthieu Weber.
+%
+
+\documentclass[english,logo,nonumbib,nocopyright,lof,pdftex]{gradu2}
+
+\usepackage{palatino} % Better font
+\usepackage[intlimits]{amsmath} % For better math mode, namely integrals
+\usepackage{amssymb} % Math symbols
+
+\usepackage[pdftex]{graphicx} % Pictures
+\usepackage{pdfpages} % For inclusion of the article
+
+% Optional 1,5 point line spacing
+%\usepackage{setspace}
+%\onehalfspace
+
+% Define our own abbreviations list
+\newenvironment{abbrlist}[1]{
+  \begin{list}{}{\settowidth{\labelwidth}{\textbf{#1}}
+  \setlength{\leftmargin}{\labelwidth}
+  \addtolength{\leftmargin}{\labelsep}
+  \renewcommand{\makelabel}[1]{\textbf{\hfill##1}}}}%
+{\end{list}}
+
+% No spacing with this enumeration
+\newenvironment{enumerate_no_space}{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+{\end{enumerate}}
+
+% Remoge pagebackref in the final version
+% Add "pagebackref=true" to get page numbers where each reference is used
+% Link version for internet viewing
+%\usepackage[pdftex,colorlinks=true]{hyperref}
+
+% PDF information tags
+\pdfinfo{/Title (Applying Hilbert-Huang Transform to Mismatch Negativity) /Author (Tuomo Sipola) /Subject (Advanced EEG signal processing methods) /Keywords (electroencephalography, EEG, event-related potential, ERP, mismatch negativity, MMN, Hilbert-Huang transform, HHT, empirical mode decomposition, EMD)}
+
+%%% Actual content begins here
+
+\title{Applying Hilbert-Huang Transform \\ to Mismatch Negativity}
+\translatedtitle{Hilbert-Huang-muunnoksen soveltaminen aivos\"{a}hk\"{o}signaaliin}
+
+\linja{Mobile Systems}
+
+\setauthor{Tuomo}{Sipola}
+\yhteystiedot{tuomo.s.sipola@jyu.fi}
+%\setdate{30}{8}{2008}
+
+\abstract{EEG signals can be analyzed with modern mathematical methods in order to separate the most meaningful components from the rest. Hilbert-Huang transform is a new method to construct a sharp and clean time-frequency spectrum of a nonlinear and nonstationary signal. It consists of empirical mode decomposition (EMD), which decomposes the signal to intrinsic mode functions (IMF), and Hilbert transform, which is used to obtain the spectrum. This method was used on EEG data recorded during an oddball paradigm test. The subjects consisted of children divided into three groups: attention-deficit hyperactivity disorder (ADHD), reading-disabled (RD) and control group. Hilbert-Huang transform revealed differences between the groups that could not have been obtained using more conventional analysis methods. }
+\tiivistelma{Aivos\"{a}hk\"{o}signaalia voidaan analysoida moderneilla matemaattisilla menetelmill\"{a} merkityksellisten komponenttien erottamiseksi. Hilbert-Huang-muunnos on uusi menetelm\"{a}, joka tuottaa ter\"{a}v\"{a}n ja puhtaan aika-taajuus-spektrin ep\"{a}lineaarisesta ja ep\"{a}stationaarisesta signaalista. Se koostuu empii\-ri\-sest\"{a} aaltomuotohajotelmasta, joka hajottaa signaalin ominaisaaltomuotofunktioiksi, ja Hilbert-muunnoksesta, jolla tuotetaan spektri. T\"{a}t\"{a} menetelm\"{a}\"{a} k\"{a}ytettiin nk. oddball-kokeen aikana saatuihin aivos\"{a}hk\"{o}mittauksiin. Koehenkil\"{o}t olivat lapsia, joista o\-sal\-la oli todettu tarkkaavaisuush\"{a}iri\"{o}, osalla lukih\"{a}iri\"{o} ja osalla ei kumpaakaan. Hilbert-Huang-muunnos paljasti ryhmien v\"{a}lill\"{a} eroja, joita ei olisi voitu havaita perinteisemmill\"{a} analysointimenetelmill\"{a}. }
+
+\avainsanat{aivos\"{a}hk\"{o}, her\"{a}tepotentiaali, Hilbert-Huang-muunnos, empiirinen aaltomuotohajotelma, aika-taajuusanalyysi}
+\keywords{electroencephalography, EEG, event-related potential, ERP, mismatch negativity, MMN, Hilbert-Huang transform, HHT, empirical mode decomposition, EMD, time-frequency analysis}
+
+\begin{document}
+
+\def\termlistname{Abbreviations}
+\termlist
+
+\begin{abbrlist}{ANOVA}
+\item[ADHD] attention-deficit hyperactivity disorder
+\item[ANOVA] analysis of variance
+\item[BCI] brain-computer interface
+\item[DW] difference wave
+%\item[DFT] discrete fourier transform
+\item[EEG] electroencephalography
+\item[EMD] empirical mode decomposition
+\item[ERP] event-related potential
+\item[FFT] fast Fourier transform
+\item[fMRI] functional magnetic resonance imaging
+\item[GLM] general linear model
+\item[HHT] Hilbert-Huang transform
+\item[ICA] independent component analysis
+\item[IMF] intrinsic mode function
+\item[MMN] mismatch negativity
+\item[MWT] Morlet wavelet transform
+\item[ODF] optimal digital filtering
+\item[RD] reading-disabled
+\item[SAR] support-to-absence ratio
+\item[SNR] signal-to-noise ratio
+\item[STFT] short-time Fourier transform
+\end{abbrlist}
+
+\mainmatter
+
+\chapter{Introduction}
+
+%1--2 pages
+%WHY, SOME BACKGROUND
+
+The objective of this Master's thesis is to introduce electroencephalography (EEG) and mathematical methods used to analyze EEG signals. In addition to some older and widely used methods the empirical mode decomposition (EMD) is presented in depth. This new method was tested with real recorded EEG data from children. Observations show that this decomposition combined with Hilbert transform gives more accurate and more interpretable results than conventional methods. 
+
+Biomedical data, such as EEG, exhibits some characteristics that are challenging for signal processing. Such data is usually nonlinear and nonstationary. In addition, since data time spans are short, overall signal characteristics cannot be estimated very well. These restrictions render some of the more conventional signal processing methods developed for linear data less useful. When conducting measurements, as when analyzing the data, noise and other artifacts must be taken into account by detecting and removing them. New EEG analysis methods have been developed taking advantage of the methods used for many other natural phenomena. 
+
+%Many naturally occurring phenomena produce such data but traditionally it has been analyzed with methods developed for linear data.
+
+Hilbert-Huang transform (HHT) is an adaptive time-frequency method for nonlinear and nonstationary data. HHT gives much more reliable, and in this study, more accurate time-frequency presentation. By applying the empirical mode decomposition (EMD) a signal can be decomposed into parts that usually represent physical components. Hilbert transform then reveals the spectral features of those components and a time-frequency distribution as function of time can be constructed \cite{HUANG1998}. With support-to-absence ratio (SAR) the existence of MMN can be then established and statistical analysis conducted \cite{CONG2008a}. 
+
+HHT has been applied to a wide range of data. It has been used by Huang et al. who explored wind, ocean waves, tidal altitudes and earthquakes with this method \cite{HUANG1998}. The method has been tested with biomedical data, for example signal noise reduction \cite{BOUDRAA2004} , electrogastrographic artifact reduction \cite{LIANG2000} and heartbeat time series monitoring \cite{BALOCCHI2004}. The transform has also been used for EEG analysis: epilepsy seizure observation \cite{LI2006} and event-related potential detection \cite{LIANG2005}. 
+
+In the empirical part of this thesis we applied the Hilbert-Huang transform to detect a certain auditory EEG component, mismatch negativity (MMN), of children. The aim was to evaluate the usefulness of this method on this component. Three groups of children, control, reading-disabled and attention deficit were compared. All the subjects listened to alternating sound with sudden changes 	inserted to it. The MMN caused by these changes was observed. 
+
+The structure of this thesis is following. In chapter \ref{CHAPTER:EEG} the basics of EEG will be explained. Event-related potentials (ERP) and their components are introduced in chapter \ref{CHAPTER:ERP} along with a special case of ERP, mismatch negativity (MMN). After the basic biomedical concepts the focus will shift to data analysis methods. Chapter \ref{CHAPTER:LINEAR} takes a brief look at the more traditional linear time-frequency methods used in EEG analysis. Empirical mode decomposition and intrinsic mode functions are discussed in chapter \ref{CHAPTER:EMD}. Theoretical background behind Hilbert transform and Hilbert spectrum are introduced in chapter \ref{CHAPTER:HT_HS}. 
+
+Chapter \ref{CHAPTER:HHT} builds on the two previous ones presenting the Hilbert-Huang transform and its algorithms for MMN detection. It also reveals how to interpret the Hilbert spectrum with specific statistical tools. The empirical part in chapter \ref{CHAPTER:HHTONMMN} discusses the use of Hilbert-Huang transform on mismatch negativity of children. The results are presented and findings on the suitability of Hilbert-Huang transform discussed. Finally, a conclusion of this research is provided. 
+
+The primary findings were that EEG data can be analyzed using Hilbert-Huang transform. It was found to produce more accurate time-frequency presentation of the data than a traditional method. The obtained results show that there is difference in the EEG time-frequency representation when the children listen to sound with sudden changes of different length. These results have been published in the peer-reviewed international scientific journal Nonlinear Biomedical Physics \cite{CONG2009}. 
+
+% Below this  in this chapter only some fragments
+
+%Studying EEG gives more information on the functionality of the brain. 
+
+%Hilbert-Huang transform was used to analyze EEG recordings of children. 
+
+
+
+%The empirical mode decomposition detects the oscillations of a signal and produces intrinsic mode functions. By observing these functions it is possible to gain knowledge about the signal. The instantaneous frequency can be calculated from IMFs using Hilbert transform. 
+
+%...
+
+
+% REPETITION!!!
+
+%Traditional signal processing methods have certain disadvantages when used with non-linear, non-stationary data with short time spans. Empirical mode decomposition (EMD) is a rather new method used for such data. It decomposes the signal to intrinsic mode functions (IMF) which can be processed with the Hilbert transform.
+
+%With the Hilbert spectrum it is possible to calculate the overall frequency probabilities of the signal and also the instantaneous frequency at a certain time. EMD has found its uses in many fields, one of which is the electroencephalography (EEG). 
+
+% REPETITION!!!
+
+\chapter{Electroencephalography}
+\label{CHAPTER:EEG}
+
+Electroencephalography, EEG, is the study of bioelectric phenomena caused by the brain. It is usually studied by recording voltage changes with electrodes positioned on the scalp. Brain activity causes differences in electrical potentials on the electrodes giving indirect information in the form of biomedical data. These differences of potential are observed to study the underlying functional neural processes \cite[ch. 1]{SANEI2007}. 
+
+%The human body is full of processes that cause electric potentials. 
+
+The brain is not the only part of the body where electricity carries some biomedical information. Similar measurements may be conducted on other organs, for example heart (electrocardiography, ECG) and stomach (electrogastrography, EGG). However, extracting the right information from naturally occurring signals is not easy. Problems with signal processing are alike in each case, specifically with EEG measurements it is desirable to find the source location, event time and spectral feature. Using this information it is possible to deduce which part of the brain reacts to certain kind of stimulus. 
+
+EEG signal features non-meaningful noise and artifacts caused by other processes in the brain and in the equipment. Nevertheless certain frequency ranges can be identified as more informative than others. The most meaningful information usually lies under $100 Hz$ frequency, often even below $30 Hz$. Because of this sampling frequency is set to $200 Hz$ when saving EEG into digital format, according to the Nyquist-Shannon sampling theorem. However, frequencies up to $2000 Hz$ may be used for finer precision \cite[p. 14]{SANEI2007}. The potentials on the scalp vary between $10-100 \mu V$ which makes it difficult to observe more subtle phenomena, because some high-amplitude components may overwhelm the smaller potentials \cite[p. 12]{SANEI2007}. 
+
+Ideally, when measuring EEG the result is clean data on differences of potentials. Here clean could mean that the measurements present the actual potential differences caused by the brain processes. As mentioned, in practise artifacts and noise decrease the signal-to-noise ratio. Countering these effects is one goal in EEG signal processing. A curve presenting potential as function of time is produced as the actual result from the measurements. By analyzing this signal it is possible to draw conclusions on the origins of EEG and important events in brain function. 
+
+Because it provides an access, although indirect, to the processes in the brain, EEG has many practical applications in alertness, epilepsy seizure and mental disorder research \cite[p. 9--10]{SANEI2007}. EEG is also an alternative and supplementary method to functional magnetic resonance imaging (fMRI) or any other brain monitoring method. Although possibly not as precise as the other methods, EEG is rather easy to measure from different groups of subjects. However, the temporal precision of EEG is good. 
+
+In conclusion, the EEG method can quite straightforwardly reveal the electric oscillatory bursts generated by the brain. With this kind of tool it is possible to monitor functionality of the brain and changes in it. Signal processing techniques can be used to analyze the spatial, temporal and spectral features of these EEG signals. Even then the interpretation of EEG is challenging because ultimately the brain is a complex and unknown system. 
+
+\section{History}
+
+The study of electricity in the body has its roots in the observations of Galvani, von Humboldt and Aldini about animal electricity. In 1875 Caton described evoked response from the brain surface, he also reported visual evoked potentials . In the early 19th century the method and technique of potential recording advanced and made possible the discovery of EEG \cite{SWARTZ1998b}. 
+
+In 1929 Hans Berger published his findings on human EEG. Electrodes placed on the scalp recorded the electrical activity of the brain. By amplifying and plotting these signals an electroencephalogram was obtained. At first the brain rhythms were seen as noise but further proofs established EEG as a real phenomenon \cite{BERGER1929, LUCK2005, SWARTZ1998b}. 
+
+Specific events are much more easier to extract from EEG by averaging and this was the main analysis method. The first event-related potentials were recorded during the 1930s. These waveforms were captured during quiet stages of EEG activity since no computer post-processing was available then \cite{LUCK2005}. Sleep EEG and epileptic seizures were recorded for the first time \cite[pp.~2--3]{SANEI2007}. 
+
+In 1964 Walter described contingent negative variation (CNV). This is the first time cognitive event-related potentials are reported in the modern sense. A warning signal and then target stimuli were presented to the subjects. When no task was given, normal event-related potentials were observed. However, when the subjects were instructed to push a button, a CNV was observed after the warning signal. This preparation for task caused a cognitive event-related potential \cite{LUCK2005, SWARTZ1998b}. 
+
+1970s introduced evoked potential techniques to clinical diagnosis in visual, auditory and somatosensory areas. In the 1980s digital methods became more widely used and topographic mapping made EEG popular in several fields \cite{SWARTZ1998b}. Different cognitive components were identified from the event-related response and new methods for analysis were developed \cite{LUCK2005}. 
+
+During the 1990s EEG was used increasingly with alternative neuroimagining techniques. Intensive care units were deployed to monitor EEG in real time in hospital environments. Complementary methods were invented but EEG has superior time resolution and remains in use \cite{LUCK2005, SWARTZ1998b}. 
+
+\section{Brain rhythms}
+
+Some recurrent parts of EEG have a clear origin and frequency. These repeating rhythms can be rather easily observed and they are associated with different states of alertness. For these reasons the rhythms were discovered early in EEG research and have been used as diagnostic tools and ways to characterize an EEG waveform. The most common rhythms are historically named beta ($13-30Hz$), alpha ($8-13Hz$), theta ($4-8Hz$) and delta ($0.5-4Hz$) \cite[pp. 10--12]{SANEI2007}. 
+
+Delta waves are observed during deep sleep, they are also produced by movement of big muscles. Theta waves are most active when a person falls from conscious state to sleep. Alfa waves originate from the back of the brain. They resemble sine waves and they are associated with conscious state with no stimuli or concentration. Beta waves, on the other hand, are associated with active thinking, active attention, focus on the outside world or solving concrete problems. Gamma waves have a low frequency ($30-45Hz$) and are rarely observed. They are, however, useful when diagnosing certain diseases and when detecting finger movement \cite[pp.~10--12]{SANEI2007}. 
+
+Rhythms are usually an annoyance when observing the more subtle EEG components. They might be considered noise. Thus the experiment situation is set up so that rhythms are not normally produced \cite{SANEI2007}. 
+
+\section{EEG experiments}
+
+The goal of EEG experiments is to know when a difference in potentials happens and where it originates. It is important to understand what can be deducted, for example the signal components do not necessarily correspond to functional or physiological components \cite{OTTEN2005}. 
+
+Interpreting the results should not be made hastily. Even if the location of the phenomena is known it does not explain how it happens. Furthermore, the exact localization of the oscillation source is difficult \cite{LUCK2005}. The experiments might yield a null result which is nevertheless as valuable as any. Even though some phenomena are observed, it is possible that it is not caused by any cognitive process. Because of this caution should be exercised when making interpretation based solely on EEG data \cite{OTTEN2005}. 
+
+The most conventional way to measure EEG activity is by scalp electrodes, but it is also possible to study the potential differences inside the brain, especially with animal subjects. The electrodes are positioned according to certain conventions so that the results and methods would be compatible. The most common so called 10-20 positioning scheme consists of 21 electrodes (figure \ref{ELECTRODE_POSITIONS}). It is also possible to use fewer electrodes \cite[p. 16]{SANEI2007}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=150pt]{pics/electrode_positions.pdf}
+\caption[Conventional electrode positioning]{Conventional 10--20 electrode positions. Figure adapted from Sanei and Chambers \cite[p. 16]{SANEI2007}.}
+\label{ELECTRODE_POSITIONS}
+\end{figure}
+
+Each electrode is recorded separately so that many channels are available for analysis. The F-electrodes are situated in the frontal region, C-electrodes central in the middle and P-electrodes parietal region in the back of the head. The electrodes are numbered so that odd ones are on the left and even ones on the right, the middle electrodes have no numbering but the letter z is associated with them. A1 and A2 which are positioned in ears are usually used as reference electrodes although there are other points for this purpose. Instead of using referencing, differential measuring may be used so that the difference between the measuring electrodes is used in analysis \cite[p. 15--17]{SANEI2007}. 
+
+\section{Mathematical nature of EEG signal}
+
+EEG signals can be described as functions of time. The brain can be seen as a stochastic wave generator whose output is stochastic time series. EEG signals tend to be nonstationary and nonlinear \cite{KAWABATA, KLONOWSKI2009, PALUS}. This leads to various problems when applying signal processing methods or statistical analysis to EEG. 
+
+A stationary system has the same probability distribution regardless of shift in time. Stationarity measures how much the statistical features of a given signal differ during the signal. High stationarity means that those features remain the same at any given time, for example signal's mean and variance do not change. Intuitively, in a nonstationary system the statistical characteristics change over time. 
+
+From the probability point of view a stochastic process $X=X(t)$ is stationary if vector $\mathbf{X}(t)=(X(t_1), X(t_2), \dots, X(t_n))$ has the same cumulative distribution as $\mathbf{X}(t+s)=(X(t_1+s),X(t_2+s),\dots,X(t_n+s))$, that is, 
+
+\begin{equation}
+F_{\mathbf{X}(t+s)}(\textbf{x}) = F_{\mathbf{X}(t)}(\textbf{x})
+\label{CUM_DIST}
+\end{equation}
+
+\noindent The fact that mean and variance are constant in a stationary process arises from this definition. 
+
+Linearity makes a system much more predictable since the response to a sum of stimuli is always the sum of responses to these stimuli independently. A shift invariant system that satisfies the linearity criteria, 
+
+\begin{equation}
+\forall a,b \in \mathbb{R}: f(ax+by)=af(x)+bf(y), 
+\label{LINEARITY}
+\end{equation}
+
+\noindent is linear. Inversely, a system that does not conform to these properties of superposition or scaling is nonlinear. 
+
+There is, however, distinction between the nonlinear signals and systems. It should be noted that a nonlinear signal does not necessarily mean that the underlying system is nonlinear \cite{GAUTAMA2003b}. This nonlinearity of EEG signals can be studied for example with delay vector variance \cite{GAUTAMA2003a, GAUTAMA2003b}. 
+
+The problems with real-world signals are discussed by Mandic et al. They group signals on the dimensions of linearity-nonlinearity and determinism-stochasticity \cite{MANDIC2008}. Sanei et al. take the EEG signal as output of nonlinear system that has deterministic characteristics. There are changes in the environment that the signals traverse, i.e. the brain, during the mixing process. This causes the nonlinearity of the signals. It is possible to measure some of their properties \cite[pp. 50--51]{SANEI2007}
+
+\section{Applications}
+
+EEG helps in the study of brain and disorder research because some neural or psychological states alter the EEG response. The brain of a child elicits EEG differently from adults so the development of the brain can be monitored \cite[ch. 1]{SANEI2007}. 
+
+Applications include, for example, monitoring alertness or coma and the detection of injuries or brain tumors. Multitude of cognitive activities are also detectable from the EEG signal. Other possible applications include monitoring brain development and neural disorders. Especially the changes of EEG regarding epileptic seizure help to predict them \cite{LEVANQUYEN2001} or locate their source \cite{SANEI2007}. 
+
+Another possible usage of EEG analysis lies in the field of brain-computer interface (BCI). The separation of background noise from the control signals is also a key problem in this application \cite[ch. 7]{SANEI2007}. 
+
+\section{Traditional analysis}
+\label{TRADITIONAL ANALYSIS}
+
+An EEG signal needs to be interpreted in some way. Visual inspection can reveal the most prominent peaks and noise levels but there are a multitude of processes that can only be studied with mathematical analysis. An experienced viewer can indeed recognize different phenomena but digital signal processing gives the results a more formal backing.
+
+The characteristic parameters of an EEG signal $x(t)$ are period $T>0$, fundamental frequency $f_0$, amplitude $a$, phase $\theta(t)$, phase shift $C$, average value $\bar{x}$, energy $E$ and power $P$ \cite{KIZHNER2004}. Traditionally EEG has been studied with averaging and Fourier-based transforms whose kernels are predefined. The basic Fourier transform gives just the frequency distribution, for temporal analysis more advanced time-frequency methods must be used. An example of a single EEG trial recording is given in figure \ref{EEG_SINGLE_TRIAL}. 
+
+A baseline or zero point for the recording has to be determined. Usually the average prestimulus voltage is subtracted from the signal. Baseline removal may distort the signal because noise in the baseline will affect also the rest of it. Usually the baseline is obtained from $200ms$ before stimulus onset although other peaks may have corrupted it \cite[p.~236]{LUCK2005}.
+
+Averaging is a simple method where the mean of multiple repeated trials is calculated. The noise elements suppress each other out while the ERP elements strengthen the peak. Repeating the same trial is a widely used method to produce similar data. The averaged mean trace reveals the underlying components that are present in all the trials. Such components might not be evident from a single trial trace. Averaging method has been extensively used with ERPs because they are so small when compared to other waves \cite[p.~127]{SANEI2007}. Averaging attenuates other components so that the recurrent ERPs become evident. Some believe that this is the only way to perceive the more subtle peaks, namely ERPs \cite[pp.~131--151]{LUCK2005}. 
+
+Averaging irreversibly loses information. The signal is distorted and some important aspects might be overlooked. Consequently, it is not guaranteed that certain peak is indeed caused by an ERP. A single peak may also be the sum of multiple ERPs thus leaving the true latent components undetected \cite[ch. 4]{LUCK2005}.
+
+Averaging is used specifically to improve the signal-to-noise ratio. The algorithm assumes that the trials are invariant, there are no artifacts and the noise is Gaussian distributed \cite{MOCKS1988}. In other words, taking the mean of multiple trials assumes that noise and artifacts are random and zero-centric. This might not be the case in reality since e.g. spontaneous ERPs might distort the trial. Averaging also assumes that the signal is similar in each trial, this is not true since latencies and amplitude differences do occur \cite{CONG2008b}. 
+
+Figure \ref{EEG_AVERAGED_CHANNEL} will show an averaged trace of an EEG channel. Compare this to the single trial signal of the same channel in figure \ref{EEG_SINGLE_TRIAL} where it is even visually difficult to detect the desired peak at $500ms$. In the averaged trace the high frequencies have been attenuated and the mismatch negativity is more clearly present at $500ms$. Comparing these averaged traces is easier than noisy single trials. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/eeg_single_trial_Fz_s13_50ms.pdf}
+\caption[EEG of a single trial]{Single trial EEG signal of a subject in the Fz channel during an oddball experiment. Negative plotted upwards. }
+\label{EEG_SINGLE_TRIAL}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/eeg_averaged_Fz_s13_50ms.pdf}
+\caption[Averaged EEG signal]{Average of all trials of a subject. Negative plotted upwards. }
+\label{EEG_AVERAGED_CHANNEL}
+\end{figure}
+
+Filtering is a data preprocessing phase to reduce the amount of meaningless information. The signal is then analyzed with some other methods. The most widely used filter is the low-pass filter which removes frequencies over $100 Hz$. In practise these frequencies carry no information about the brain activity related to the experiment. Very often frequencies over $30 Hz$ are filtered because they are meaningless. Filtering can be done analogically or digitally. The digital approach is used more often in the later stages of analysis \cite[pp.~175--224]{LUCK2005}. 
+
+\chapter{Event-related potentials}
+\label{CHAPTER:ERP}
+
+Event-related potential, ERP, is a particular kind of EEG peak. Its electric potential is very small $1-30\mu V$ compared to the average scalp potentials of $10-100\mu V$. ERPs are detected after sensory, motor or cognitive events. \cite[p.12,127--131]{SANEI2007} ERPs are involuntary automatic processes and they seem not to compete of resources with parallel processes \cite[pp. 102--103]{NAATANEN1992}. These concerns make ERPs easy to generate but difficult to detect. Historically ERPs were called evoked potentials (EPs) but since 1970s the term event-related potential has become more popular \cite[p.~6]{LUCK2005}. 
+
+ERPs can be categorized into exogenous and endogenous ones. The exogenous ERPs are obligatorily elicited and they reveal some information about the characteristics of the external stimulus. Endogenous ERPs reflect intentions and actions of the subject and they show more variability \cite[p. 102--103]{NAATANEN1992}. 
+
+Usually an external stimulus elicits an ERP. Some of the interesting properties are amplitude, latency and scalp distribution of the ERP component. An ERP consists of many overlapping and simultaneous components that together form the ERP peak. It should be stressed that a peak is not necessarily a component. Finding the components is a central problem in EEG signal processing \cite{LUCK2005}. 
+
+\section{Detecting event-related potentials}
+
+Several reasons complicate the detection of ERPs. Each subject has a unique ERP response, which also varies with age and environment. An ERP might be a sum of several action potentials and thus a single peak doesn't necessarily represent single physiological event. The separation of these latent components is a problem. Because of these difficulties the repetition of trials during measurements is conducted. Even after repetitions and other precautions noise and random artifacts, such as blinking the eyes, must be processed \cite{TALSMA2005}. The desired pieces of information from the ERPs are when and where they do occur. In order to know whether an experiment causes ERPs, the time of the occurring potentials must be known. Furthermore, the interpretation of these components should be addressed because the ERPs might not be caused by cognitive processes \cite{OTTEN2005}.
+
+ERPs are usually very small compared to the other potentials. The most used technique to detect them is to average the repeated trials \cite[p. 127]{SANEI2007}. Other methods have also been devised, their main attention being on the decomposition of the signal to remove its uninteresting parts. With these methods the detection of an ERP even from one trial may be possible. 
+
+\section{Noise and artifacts}
+
+Noise and artifacts reduce the signal-to-noise ratio. These problems might have origin in the measurement system or subject's head. It is noteworthy that averaging the trials in itself degenerates the signal. There are two methods for noise reduction. The easier one is to detect and reject the problematic trials. The other way is to try to remove the artifacts even though it distorts the signal \cite{TALSMA2005}. 
+
+The EEG signal is composed of multiple oscillations. An EEG signal $x(t)$ can be thought as superposition of several ($N$) individual signals $a_i(t)$ that have different origin and that are summed up. This model also includes noise $n(t)$. Each of these components has its own origin and some of them are more meaningful for the current problem. This can be expressed as
+
+\begin{equation}
+x(t) = \sum_{i=1}^{N} a_i(t) + n(t).
+\label{LINEAR}
+\end{equation}
+
+The noise part contains signal that distorts the sum of the interesting physical components. This additional signal randomly changes the clean signal over time making its interpretation more difficult. 
+
+Artifacts are transient events that lower the signal-to-noise ratio for a period of time. There are two possible ways to handle artifacts. The first is to detect them with some method and then reject those trials containing artifacts altogether. The second one is to detect and remove the artifact. The latter should be used with caution because removing loses some information and may distort the signal \cite{LUCK2005}. 
+
+Artifacts are disturbing peaks that appear sparsely. The causes of these artifacts include motoric muscle movement, heart beats, circulatory system and for example recording equipment. The changing electrical conductivity and other changing features of the environment and of the electrodes also cause unexpected changes. These artifacts include peaks, repeating noise and the $50Hz$ noise of the electrical equipment \cite{TALSMA2005}. 
+
+The rhythmic activity of the brain discussed earlier also contributes to the noise. This is the case especially with alpha-waves, whose frequency range corresponds to the ERP range. One well-known cause of artifacts is the blinking of the eyes \cite{TALSMA2005}.
+
+%Overlapping components include some of the $a_i(t)$ signals that have . Such overlap makes it difficult to detect the ERP and shows that a decomposition would facilitate the detection. 
+
+The overlapping of two or more consequent event-related potentials having prominent amplitude peaks at the same time is also a problem. Similarly, the several components of an ERP may overlap each other or other ERPs. This kind of artifact is hard to remove since the several components need to be separated. This shows that a decomposition would facilitate the detection. Normally this usually leads to the rejection of such trials, if they are detected at all \cite{TALSMA2005}. 
+
+\section{Auditory ERP components}
+
+%TODO: More on ERPs. How can they be generated? What are their functions? See \cite{LUCK2005}
+
+Auditory ERPs contain multiple components. The early components in audition feature auditory brainstream response (ABR), middle-latency response (MLR) and auditory steady-state response (SSR). These appear in the first $100ms$ time frame from stimulus onset. The late exogenous ERP components are numbered and marked with the potential (P for positive and N for negative), including N1 and P2 \cite{NAATANEN1992}. Figure \ref{ERP_EXAMPLE} presents the basic form of an auditory ERP. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/erp_example.pdf}
+\caption[Schematic ERP waveform]{A schematic presentation of an ERP and its peaks. The late exogenous components are named. Negative plotted upwards. Figure adapted from Luck \cite[p. 229]{LUCK2005}. }
+\label{ERP_EXAMPLE}
+\end{figure}
+
+% Would reference backwards
+%These components are schematically presented in figure \ref{ERP_EXAMPLE}. 
+
+Of the early components, the high frequency auditory brainstream response (ABR) appears $10ms$ after the onset. A discrete sound or click causes smaller potential. It has been deduced that most of these ABRs originate from multiple sources in the brain. Latency and amplitude of this component depend on stimulation intensity, although it seems to be dissociated with perception \cite[pp. 103--107]{NAATANEN1992}. 
+
+The middle-latency responses (MLR) appear $50ms$ after the onset. They are small and sometimes difficult to differentiate from ABRs. MLRs are exogenous responses and one application for them could be anaesthesia monitoring \cite[pp. 107--108]{NAATANEN1992}. 
+
+There seems to be an auditory steady-state response (SSR) at $40Hz$ range. This continuous component appears when the rate of stimuli is high so that overlapping responses cause constant phase relation to stimuli. SSR's origin might also be superimposed MLRs \cite[pp. 109--113]{NAATANEN1992}. 
+
+After the early components, there are several late exogenous components in the form of peaks in EEG. The late transient responses N1 and P2 are large waves. It seems that not single, but multiple cerebral events generate these components. The negative N1 appears about $100ms$ from stimulus onset, while P2 follows it at $180-200ms$. A smaller positive P1 appears before N1 about $50ms$ after onset \cite[pp. 113-118]{NAATANEN1992}. 
+
+N1 is possibly generated in the primary auditory cortex. There have been observations of subcortical correlates for N1 in the nonspecific sensory system. There could also be large areas of the frontal cortex with multiple generators. Most probably N1 response is generated at least in two different locations in the auditory cortex. P2 and N1 vary similarly but their origin could be different. However, their scalp distribution is different \cite[pp. 113-118]{NAATANEN1992}. 
+
+N1 is evoked by change in sensory input energy. Another method to evoke N1 is by changing the tonal frequency or intensity of continuous stimulus. Furthermore, N1 and P2 components are observed when change from rest to motion of the sensory system happens. When the stimulus decreases, N1 amplitude also decreases and latency increases, though with some people the amplitude increases too \cite[pp. 119--133]{NAATANEN1992}. 
+
+N1 is sensitive to stimulus rate. Also, first N1 and P2 are much larger than with the subsequent stimuli. These changes do not happen by habituation. N1 is larger at higher alertness, though arousal may not necessarily enhance it. Sleep affects these late responses, especially N2 is larger. Ethanol and sedative medication reduce N1. N1 might correlate with task performance. Changing the loudness of stimuli does not change N1 \cite[p. 119--133]{NAATANEN1992}. 
+
+So-called sustained potentials are caused by long-duration acoustic signals, appearing after N1 and P2. These potentials have different generator mechanisms. Sustained potentials are also more closely related to loudness than N1 and P2 \cite[pp. 133--135]{NAATANEN1992}. 
+
+\section{Mismatch negativity}
+
+Mismatch negativity (MMN) is an ERP component that appears when there are changes in sensory stimuli. MMN could be an indirect physiological measure of actual brain process. This makes MMN somewhat unique in the field of ERP components \cite[136--137]{NAATANEN1992}. Both auditory and visual MMN have been researched. The research started with audition but later the existence of visual MMN was proved \cite{HESLENFELD2003}. The focus of this study is the auditory one. It can be isolated from auditory N2 peak, the earlier component being MMN itself and the later N2b \cite[136--137]{NAATANEN1992}. 
+
+Visual counterparts for the MMN were searched during the 1990's but there was no effect or the exogenous stimulus parameters were confounding. Later such MMN has been observed but present study shows that unlike auditory MMN, visual MMN is independent of the features of evoking stimulus. The auditory MMN appears more endogenous \cite{HESLENFELD2003}. 
+
+Auditory MMN can be elicited by so called oddball paradigm. Two alternating tones (e.g. $600Hz$ and $800Hz$) are played continuously so that each tone lasts for a certain time (e.g. $100ms$). Some percent of the lower tones are randomly shorter or longer than expected, this deviation causes MMN response. Thus blocks of two different tones alternate (standard stimulus) while some of these blocks differ in length (deviant stimulus) \cite{PIHKO1995}. A schematic presentation of such experiment will be given in figure \ref{ODDBALL} in  chapter \ref{CHAPTER:HHTONMMN}. 
+
+Some parameters may change the time delay of the MMN peak. Increasing the stimulus deviation decreases MMN latency and causes MMN and N-component overlap. The amplitude of difference may also increase under such conditions. It should be noted that also undetected stimuli could elicit MMN \cite[pp. 136--139]{NAATANEN1992}. 
+
+The purpose and origin of MMN has been considered by research and there is an understanding of the underlying principle. MMN is generated by some automatic process in the brain. This process seems to be necessary but not sufficient for conscious perception of change in stimulus. Occurrence of change in stimulus is the only occasion when a response to difference between stimuli is elicited \cite[pp. 136--139]{NAATANEN1992}.
+
+The underlying cause of MMN is still unclear, it is nevertheless assumed that it has some connection to the auditory memory. There are many explanations for MMN. One explanation is that new features in the sound cause new afferent elements. Another, more widely accepted, states that a process registers change in stimulus. The electricity caused by this memory trace mismatch is then observed as MMN \cite[pp. 137--139]{NAATANEN1992}.
+
+The stimulus change can be varied in many ways, but MMN is elicited in most cases regardless of the variation. Different parameters that can be varied include intensity, spatial locus of origin, rise time and duration. Weaker intensity causes larger response in MMN, N1 (the late ERP component following MMN) on the other hand seems to be a linear function of intensity. MMN is curvilinear under the same conditions with zero point at intensity of standard stimulus sound. N1 is generated even with every standard stimulus sound whereas MMN only when a change happens \cite[pp. 139--148]{NAATANEN1992}. 
+
+Changing the duration of deviant stimulus affects the occurrence of MMN, although if the deviant duration is almost the same length as the repeated stimulus length, MMN might not be generated. The standard stimulation must be regular in order to get MMN response from the deviant stimulus. In the same manner the location of the sound source does not affect MMN. Increasing stimulus deviation causes the MMN ot be larger, earlier and possibly shorter \cite[pp. 139--148]{NAATANEN1992}. 
+
+MMN is an automatic process so even a subject predicting the deviance does not affect its generation. This is also highlighted by the fact that MMN is observed during sleep. Central nervous system affecting activating drugs enhance MMN response. Varying standard stimulus elicits MMN but with reduced amplitude. Although the generation itself is not affected, the quality of the MMN is. Active attention alters the MMN response while passive attention does not affect it \cite[pp. 148--175]{NAATANEN1992}. 
+
+Attention independence of MMN is evident since even under deviant block oddball paradigm with highly demanding tasks the MMN is elicited. Similar tests with drug, sleep or anaesthesia do also give a MMN response. This leads to the remark that memory-trace duration is not dependable on attention. Nevertheless, withdrawal of attention decreases the MMN intensity. Frequency, however, is not affected by changes in attention \cite[148--175]{NAATANEN1992}. 
+
+MMN has several applications including diagnostic and clinical ones. Being related to the auditory functions of brain, MMN can be used to evaluate ability to understand spoken foreign languages. For the same reasons early diagnostics of hearing dysfunction is also a feasible application. Aging does not affect MMN but prolonged P3 component could be used as an indicator. Some aphasic patients do not elicit MMN which could hint to disturbed auditory cortex. MMN is useful for frontal lobe patient diagnosis because frontal lesions attenuate the frontal MMN. With schizophrenic patients deviation duration change reduces MMN amplitude \cite[pp. 175--139]{NAATANEN1992}. 
+
+The detection of MMN requires modern data processing. Since EEG signal is recorded from multiple channels two different approaches exist. Firstly, single channels can be analyzed. Secondly, multichannel methods exist for taking into account the changes among channels. Furthermore, time and frequency domains are used in MMN analysis. Traditional time-domain analysis studies the change of amplitude over time. With Fourier-like methods the frequency composition of a signal can be studied. Combining these two approaches time-frequency analysis can reveal changes in frequency over time. 
+
+\chapter{Linear time-frequency analysis}
+\label{CHAPTER:LINEAR}
+
+With waveform analysis only the amplitude over time can be measured. Similarly, when using frequency analysis only the frequency distribution of the whole signal can be studied. Time-frequency analysis has the advantage of evaluating the signal in both time and frequency domains simultaneously. This method outperforms waveform and spectrum analysis because of its multidimensional presentation over time. 
+
+However, the available time-frequency methods are linear. This, of course, is not the true nature of EEG signals which are highly nonlinear and nonstationary \cite{KAWABATA, KLONOWSKI2009, PALUS}. This makes these traditional methods in a sense meaningless. Below are some linear transformations that have been applied to EEG or are used for time-frequency analysis. Their disadvantages and benefits are highlighted. 
+
+\section{Fourier transform}
+
+Fourier transform has been a widely used spectral analysis method. The signal is transformed from the time domain to the frequency domain but with ease it can be used for time-frequency analysis (see below). For meaningful results the Fourier transform requires linearity and data periodicity i.e. the data must be stationary. The limited length of EEG source material reduces its usability. Moreover, in practise EEG data does not meet the requirements of the Fourier transform. Because Fourier transform distributes the energy over wide frequency bands, it doesn't represent the actual frequency distribution \cite[p.904--905]{HUANG1998}. 
+
+Because digitized signals are discrete, the discrete versions of transforms are used. Discrete Fourier transform (DFT) is introduced in equation \ref{DFT}, where $x(n)$ is the signal, $N$ is the length of the signal and $j$ is the imaginary unit. This is the most basic Fourier transform and is used to obtain the spectral feature of the signal. 
+
+\begin{equation}
+\hat{x}(k)=\frac{1}{N} \sum_{n=0}^{N-1}x(n)e^{-jnk\frac{2\pi}{N}}
+\label{DFT}
+\end{equation}
+
+The waveform in figure \ref{EXAMPLE_WAVEFORM} is from EEG recordings of MMN. The Fourier spectrum of this example signal has been calculated in figure \ref{FOURIER_SPECTRUM}. This spectrum shows how much energy there is in each frequency. 
+
+%It has the nonlinear and nonstationary features that make linear methods in a sense meaningless. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/Fz_grand_average_50ms.pdf}
+\caption[Example waveform (same as figure \ref{AVERAGED_WAVEFORM})]{Example EEG MMN waveform. Negative plotted upwards. This is the same waveform as in figure \ref{AVERAGED_WAVEFORM}. }
+\label{EXAMPLE_WAVEFORM}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/Fz_grand_average_50ms_fourier.pdf}
+\caption[Fourier spectrum]{Fourier frequency distribution of example signal in figure \ref{EXAMPLE_WAVEFORM}. }
+\label{FOURIER_SPECTRUM}
+\end{figure}
+
+\section{Short-time Fourier transform}
+
+Fourier transform gives the frequency presentation of a signal. It incorporates all the frequency information from all the time points to a single presentation. Usually it is desirable to inspect the frequency changes as a function of time. This can be done by applying the Fourier transform only to a small range of the signal at time. This method is called short-time Fourier transform. 
+
+Short-time Fourier transform slides a time window along the time axis (see equation \ref{STFT}, $w(n)$ is the window). The result will be a time-frequency distribution. Finding the exact time of an event requires short window due to Heisenberger's uncertainty principle ($\Delta t \Delta \omega \ge \frac{1}{2}$). On the other hand, a long time window is better for extracting spectral feature \cite[pp.55--58]{SANEI2007}. 
+
+\begin{equation}
+\hat{x}(n,\omega)=\sum_{\tau=-\infty}^\infty x(\tau)w(n-\tau)e^{-j\omega\tau}
+\label{STFT}
+\end{equation}
+
+
+Figure \ref{STFT_EXAMPLE} includes a smoothed time-frequency presentation of the example signal. The window was set to $16$ samples long and overlap to $50\%$. Frequency resolution was $200$. 
+
+% Does this print out OK?
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/linear_stft.pdf}
+\caption[SFTF example]{Short-time Fourier transform applied to the signal in figure \ref{EXAMPLE_WAVEFORM}}
+\label{STFT_EXAMPLE}
+\end{figure}
+
+Another similar method is the Gabor transform, which has been used for time-frequency analysis of epileptic EEG. It is somewhat similar to the wavelet method and uses fixed window. Continuous Gabor transform for signal $x(t)$ is presented in equation \ref{GABOR} \cite{BLANCO1995}. 
+
+\begin{equation}
+\mathcal{G}_D(\omega_0,t_0) = \int_{-\infty}^{\infty} x(t) g_D^*(t-t_0) e^{j \omega_0 t} \mathrm{d}t
+\label{GABOR}
+\end{equation}
+
+\noindent where $j$ is the imaginary unit. The Gaussian window $g_D(t)$ has  width $D$. The presentation of this transform is quite close to the short-time Fourier transform. The window function is substituted with a Gaussian window function. Naturally a discrete version has to be used with digital signals. 
+
+\section{Shortcomings of Fourier transform}
+
+As mentioned, Fourier transform bears little meaning with nonstanionary and non-linear data. While it expects linearity and Gaussian distribution from the signal, such signals are rarely found in the biomedical field \cite[pp. 55--67, 143--145]{SANEI2007}. Although it is easy to perform and implement, the results do not necessarily present the physical components accurately. It is also an established tool and familiar to even those who are not experts in the time-frequency analysis community \cite[s.907]{HUANG1998}. 
+
+%Despite its disadvantages Fourier transform is used because it is easy to implement. 
+
+Fourier transform requires narrow window when localizing an event time. Inversely, long time series are needed when obtaining frequency resolution. Thus Fourier transform is not usable with EEG data. The short-time Fourier transform assumes the stationarity of the signal within the time window. This, of course, cannot be assured when inspecting naturally occurring signals \cite{HUANG1998}. 
+
+It can be stated that Fourier transform does not offer compact support. The sinusoid functions run from negative infinity to infinity, which formally makes the short-time Fourier transform wrong, although in practise these restrictions are usually dismissed. Furthermore, the frequency at a certain time is affected by the whole signal because these sinusoid functions span for the whole duration. This means that at a time $t$ the whole signal contributes to the frequency $\omega(t)$. 
+
+\section{Wavelet transform}
+
+ERPs have a tendency of having high frequencies in the beginning and then changing to low frequencies. Time-frequency analysis makes it possible to detect such changes. This is why wavelet analysis is used to detect them. Wavelets have become the new standard for more accurate time-frequency analysis \cite{HERRMANN2005}. 
+
+Wavelet transform relies on a predefined kernel function that has to be chosen before analysis. Equation \ref{CWT} presents the continuous wavelet transform, where $(.)*$ is the complex conjugate and $\psi(t)$ is the analyzing wavelet function, which has to satisfy certain restrictions. The two other parameters are $a$ for scaling and $b$ for position \cite[pp. 58--59]{SANEI2007}. 
+
+\begin{equation}
+W_\psi (a,b) = \frac{1}{\sqrt{|a|}} \int_{-\infty}^{\infty} x(t) \psi^* \left(\frac{t-b}{a}\right) \mathrm{d}t
+\label{CWT}
+\end{equation}
+
+When compared to the short-time Fourier transform, wavelet transform substitutes the window and the Fourier-like exponent function with the kernel wavelet. One of the most used wavelet function is Morlet's wavelet, as seen in equation \ref{MORLET} \cite[pp. 58--59]{SANEI2007}. 
+
+\begin{equation}
+\psi(t)=\frac{1}{\sqrt{2\pi}}\exp\left(\frac{-t^2}{2 + j 2 \pi b_0 t}\right)
+\label{MORLET}
+\end{equation}
+
+An advantage gained from the use of wavelets is that they have compact support and thus have a better mathematical formality behind them. This means that they can analyze finite length signals. With wavelets time-frequency analysis is not only possible but theoretically sound. However, the energy leakage of wavelet transform causes the time-frequency representation to be wider and smoother than the actual spectrum \cite[p.~907--908]{HUANG1998}.
+
+Wavelets can also be used for signal decomposition, called multiresolution analysis. This makes band filtering possible by leaving composition parts out. Even then the decomposition depends on the selected wavelet \cite[pp.~60, 142]{SANEI2007}. Such decomposition has been used in EEG time-frequency analysis \cite{YAMAGUCHI}. 
+
+There are some problems with wavelet transform when applied to nonlinear and nonstationary data. The wavelet transform depends on the predetermined wavelet function. This distorts the results of and the frequency distribution doesn't appear clear enough. Wavelet analysis is linear whether it is discrete or continuous so it doesn't either fit for non-linear data. However, it is nonstationary method and thus is usable with linear but nonstationary data \cite[pp.~907--908]{HUANG1998, HUANG2005}. 
+
+Moreover, wavelet analysis uses uniform resolution for all scales because it is limited by the size of the basic wavelet function. The resolution is uniformly poor in every situation. The wavelet transform is non-adaptive because a kernel function has to be chosen in advance from the readily available predefined functions, or a new one has to be invented. Moreover, wavelet transform is not adaptive and is too dependent on the wavelet function \cite[pp.~907--908]{HUANG1998}. 
+
+Figure \ref{WAVELET_EXAMPLE} has the Morlet wavelet transform applied to the example signal. The wavelet half-length was set to $6$. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/linear_wavelet.pdf}
+\caption[Wavelet transform example]{Wavelet transform applied to the signal in figure \ref{EXAMPLE_WAVEFORM}.}
+\label{WAVELET_EXAMPLE}
+\end{figure}
+
+\section{Wigner-Ville transform}
+
+Wigner-Ville transformation is essentially the Fourier transform of central covariance function. For signal $x(t)$ the central variance is defined by equation \ref{CENTVAR}. It has good resolution in both time and frequency domains \cite[p. 65]{SANEI2007}. 
+
+\begin{equation}
+C_c(\tau,t)=x(t-\frac{1}{2}\tau)x^*(t+\frac{1}{2}\tau)
+\label {CENTVAR}
+\end{equation}
+
+\noindent Then the Wigner-Ville distribution is calculated by equation \ref{WV}.
+ 
+\begin{equation}
+V(\omega,t)=\int_{-\infty}^{\infty} C_c(\tau,t)e^{-j\omega\tau}\mathrm{d}t
+\label{WV}
+\end{equation}
+
+This distribution is still Fourier-based. It also introduces the idea of negative energy which is difficult to explain in physical terms \cite[pp. 908--909]{HUANG1998}. 
+
+Figure \ref{WV_EXAMPLE} presents the Wigner-Ville distribution for the example signal. It should be noted that the sampling frequency was $200Hz$ so the Wigner-Ville distribution is symmetrical along the frequency dimension. Here, however, the maximum frequency is set to $30Hz$ for illustrative purposes. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/linear_wv.pdf}
+\caption[Wigner-Ville distribution example]{Wigner-Ville distribution for the example signal.}
+\label{WV_EXAMPLE}
+\end{figure}
+
+% This should begin at page 30 or so...
+\chapter{Empirical mode decomposition}
+\label{CHAPTER:EMD}
+ 
+An EEG signal consists of multiple superimposed oscillatory components which possibly present different underlying physical components of brain activity. If these components are extracted, interpreting the signal becomes much easier. A single component can then be observed without the noise caused by other components. Equation \ref{FIRST_COMPOSITION} shows how the components $c_i$ and residue, or trend, $r_n$ compose the signal $x(t)$. 
+
+\begin{equation}
+x(t)=\sum_{i=1}^{n} c_i+r_n
+\label{FIRST_COMPOSITION}
+\end{equation}
+
+The oscillatory components $c_i$ of the signal are separated with empirical mode decomposition (EMD) which is nonlinear method that adapts to the signal. Components produced by this method are so-called intrinsic mode functions (IMFs). Consequently, the instantaneous frequency of these IMFs can be calculated in a meaningful way. The ability of EMD to decompose nonlinear signals and retain their intra-wave modulation makes it suitable for EEG signals \cite{HUANG1998}. 
+
+The underlying idea is that a signal $x(t)$ is high oscillations superimposed on low oscillations. This leads to the possibility to separate the details $c(t)$ from the trend $r(t)$. The signal $x(t)=c(t)+r(t)$ consists of intrinsic mode function and residue signal. This same decomposition can be used again on the residual to extract low-frequency details and so on \cite{FLANDRIN2004b}. 
+
+The algorithm consists of the following steps: 
+
+\begin{enumerate_no_space}
+\item find the extrema of $x(t)$ \label{FIRST}
+\item create envelope $E_u(t)$ by interpolating between the maxima ($E_l(t)$ for minima)\label{ENV}
+\item mean envelope $m(t) = (E_u(t)+E_l(t))/2$
+\item extract the details $c(t) = x(t) - m(t)$ \label{DETAIL}
+\item go to \ref{ENV} until $c(t)$ is considered IMF \label{SIFT}
+\item iterate from the start with the residue signal $r(t) = x(t) - c(t)$.
+\end{enumerate_no_space}
+
+The extraction of detail from the trend is in the steps from \ref{FIRST} to \ref{DETAIL}. In practice this not sufficient to produce IMFs. This is why EMD extracts an IMF $c(t)$ using the sifting process consisting of steps from \ref{FIRST} to \ref{SIFT}. This process is then iterated on the residue \cite{FLANDRIN2004b}. 
+
+Three assumptions are made before the use of EMD: (1) The signal has at least one minimum and one maximum, (2) the time difference between successive extrema defines the characteristic time scale, (3) if there are no extrema but only inflection points, the data may be differentiated, then EMD applied and the result obtained by integrating the components \cite[p. 917]{HUANG1998}. 
+
+The characteristic time scales are used to find the intrinsic modes. A signal can be though as waves riding upon waves. Each of such wave has its own characteristic scale \cite[p. 917]{HUANG1998}. Thus, the features of the original signal are still present in the IMFs extracted by EMD because IMFs are created by searching the riding waves. In addition, the EMD process can reveal oscillations that are not clearly visible to the human eye in the original signal \cite{KIZHNER2004}. 
+
+By adapting to the signal this method produces a basis eliminating the need for \textit{a priori} basis or kernel. Because the basis is derived from data, it does not have any other prior assumptions than that the signal is composed of intrinsic modes of oscillations \cite{HUANG1998}. There is no predefined sub-band filter as with wavelet transforms. EMD is suitable for both traditional sinusoidal model decomposition and wavelet-like filter bank for stochastic processes \cite{FLANDRIN2004b}.
+
+After its introduction by Huang et al. \cite{HUANG1998} EMD has been applied to many areas of research: deriving respiratory arrhythmia from heartbeat \cite{BALOCCHI2004}, signal noise reduction \cite{BOUDRAA2004}, mismatch negativity extraction from EEG \cite{CONG2008b}, EEG temporal structure \cite{LI2006}, electrogastrogram artifact reduction \cite{LIANG2000}, neural data analysis \cite{LIANG2005} and in engineering for example in fault diagnosis of roller bearings \cite{YU2005}. Recently the method has been extended for complex signals \cite{TANAKA2007} and even new algorithms for bivariate decomposition have been proposed \cite{RILLING2007}. Instead of one-dimensional time-series data, bidimensional image data has also been analyzed with EMD-like methods, for an overview see, for example, Wan et al. \cite{WAN2008}. 
+
+The overall process will be described in flowchart form in figure \ref{FLOWCHART}.  Alternatively, the EMD algorithm will be described in chapter \ref{CHAPTER:HHT}. Below is a more profound and formal introduction to EMD. 
+
+\section{Instantaneous frequency}
+
+Intuitively, instantaneous frequency means the oscillation frequency of a signal at a certain point of time. Nevertheless, the definition of frequency is how many cycles occur during a certain amount of time. This suggests that to measure frequency one would need more reference points than just one point in time. Thus it is not surprising that even though the notion of instantaneous energy is accepted, instantaneous frequency is an ambiguous concept. A meaningful instantaneous frequency sets some restrictions to the signal in question \cite{HUANG1998}. 
+
+Nonlinear processes usually feature intra-wave frequency modulation. This means that in addition to the inter-wave modulation the frequency changes during one oscillation cycle. Fourier-type transforms are not able to extract intra-wave modulation because wavelets span over more than one wave. \cite{HUANG1998, HUANG2005}. Instantaneous frequency reveals intra-wave frequency modulation which has traditionally been described by harmonics. Nonlinear distorted harmonics produced by Fourier analysis have no physical meaning. Rather, they are mathematical artifacts stemming from the use of linear analysis on nonlinear systems. \cite{HUANG1999, HUANG2005}. 
+
+The definition of monocomponent frequency is discussed by Cohen. A component is like a mountain ridge, its center forming a trajectory in the time-frequency plane while the spread of this ridge varies. Because the components exist locally in time the frequency spectrum does not really give an understanding of the components \cite{COHEN1992}. Boashash investigated the instantaneous frequency mathematically and discussed the interpretation of instantaneous frequency. He discusses Hilbert transform, analytic signal, monocomponent and multicomponent signals. The meaning of instantaneous frequency is clear but with multicomponent signal a decomposition is needed for it to be meaningful. \cite{BOASHASH}. 
+
+The instantaneous frequency of an IMF is obtained from its Hilbert transform (see chapter \ref{CHAPTER:HT_HS}) through simple derivation (equation \ref{INST_FREQ}). Because this derivation of phase can be applied to only one frequency at a time, the function in question has to be monocomponent. Thus, multicomponent signals need to be decomposed. The IMFs satisfy this requirement since EMD extracts each characteristic oscillation as one component \cite{HUANG1998, KIZHNER2004, WAN2008}. 
+
+\begin{equation}
+\omega(t)=\frac{\mathrm{d}\theta(t)}{\mathrm{d}t}
+\label{INST_FREQ}
+\end{equation}
+
+%Because equation \ref{INST_FREQ} is mono-function of time, the signal has to be decomposed in order to obtain the instantaneous frequency.
+
+If a signal has only one frequency component at a time, its instantaneous frequency can be calculated with this derivation. A naturally occurring signal usually has more than one frequency components at a given time \cite[pp. 916--917]{HUANG1998}. The concept of intrinsic mode functions is introduced because they are monocomponent. 
+
+\section{Intrinsic mode function}
+
+The need for intrinsic mode functions is presented in a sense by Oliveira and Barroso. They showed that the traditional definition of instantaneous frequency is not sufficient for all possible signals. There are some restrictions imposed on functions for instantaneous frequency to be meaningful. By extracting intrinsic modes from the signal it will be possible to determine their instantaneous frequency because \cite{OLIVEIRA2000}. 
+
+An intrinsic mode function (IMF) needs to satisfy two criteria. Firstly, the number of extrema and the number of zero crossings must differ at most by one. Secondly, the mean of the upper and the lower envelopes must equal to zero. These restrictions are necessary to meet the strict conditions for calculating instantaneous frequency. The number of extrema restriction renders the signal narrow-banded and the zero mean ready for demodulation. These characteristics make an IMF suitable for later Hilbert transform \cite{HUANG1998, HUANG2005}. Figure \ref{IMF_EXAMPLE} features an example of an IMF. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/imf_example.pdf}
+\caption[Intrinsic mode function]{An example IMF. The solid line is the function itself, dotted lines are the envelopes defined by local maxima and local minima. The 16 zero crossings and 15 local extrema (not counting the end points) and the average of 0 of the envelopes satisfy the criteria of an IMF. }
+\label{IMF_EXAMPLE}
+\end{figure}
+
+As an oscillatory mode IMF has amplitude and frequency as functions of time. Because IMFs are locally symmetrical and monocomponent the instantaneous frequency can be calculated meaningfully \cite{HUANG2005}. 
+
+\section{The sifting process}
+
+EMD is used to obtain monocomponent intrinsic mode functions from a signal. Sifting is the iterative process of separating one oscillation from the signal. EMD features multiple such iterations, the goal being to decompose the whole signal. 
+
+The local maxima are connected with a cubic spline to form an envelope (see figure \ref{EMD_ENVELOPES}). Same is done to the local minima. The use of cubic spline is justified empirically because linear or polynomial interpolation spread their components to other modes \cite{HUANG1998, RILLING2003}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/emd_envelopes.pdf}
+\caption[Extrema envelopes]{EMD being applied to a randomly generated test signal. The solid line is the signal itself, dotted lines are the cubic splines that go through extrema points (marked with dots). The mean envelope is also shown and it tells that this IMF is not yet ready. To reach this goal, more sifting rounds will be needed to bring the mean envelope to a zero level. }
+\label{EMD_ENVELOPES}
+\end{figure}
+
+The local mean of the signal, $m_1$ of these envelopes is calculated. The first component for this round of this sifting $h_1$ is obtained by subtracting the mean from the original signal (equation \ref{M_FIRST_SUBSTRACT}). 
+
+\begin{equation}
+h_1 = x(t)-m_1
+\label{M_FIRST_SUBSTRACT}
+\end{equation}
+
+This subtraction of mean envelope from the component in question is repeated $k$ times (equation \ref{M_GENERAL_SUBSTRACT}) until a predefined stopping criterion is met. It should be noted that this $k$ is individual for each IMF. 
+
+\begin{equation}
+h_{1k}=h_{1(k-1)}-m_{1k}
+\label{M_GENERAL_SUBSTRACT}
+\end{equation}
+
+After the last subtraction, i.e. after $k$ rounds, the first IMF $c_1$ is obtained (equation \ref{FIRST_IMF}). This IMF is suitable for further analysis, especially for calculating instantaneous frequency. 
+
+\begin{equation}
+c_1=h_{1k}
+\label{FIRST_IMF}
+\end{equation}
+
+This concludes the sifting process since an IMF, in this case $c_1$, is sifted from the original signal. In other words, the first sifting extracts the highest frequency oscillation from the signal. 
+
+\section{Stopping criterion}
+
+A critical part of the EMD procedure is the stopping criterion for sifting. It determines when sifting is complete and a new IMF has been found i.e. how many ($k$) times the mean envelope is subtracted. Too many iterations over-decomposes the signal and loses the meaningful modes \cite{HUANG1998, RILLING2003}. 
+
+The most traditional manner is to sift until a condition of standard deviation between consecutive components is met. If the two components from successive iterations are close enough to each other, it is assumed that the extracted component is actually the oscillation mode \cite[p. 920]{HUANG1998}. The standard deviation between components $h_{1(k-1)}$ and $h_{1k}$ during $k$th iteration is defined in equation \ref{SD}. 
+
+\begin{equation}
+SD=\sum_{t=0}^T \left[ \frac{|h_{1(k-1)}(t)-h_{1k}(t)|^2}{h_{1(k-1)}^2(t)} \right]  < 0.3
+\label{SD}
+\end{equation}
+
+The predefined limit should be small enough to let the sifting separate all the oscillations but large enough so that the sifting does not overwork the signal losing the meaningful components. Oversifting captures also the neighboring modes and mixes them. Again, larger limits might stop too early and leave some modes unseparated. Deviation limit is usually set between 0.2 and 0.3 \cite[p.~920]{HUANG1999}. 
+
+EMD assumes that the extracted oscillations are intrinsic mode functions. A more serious problem with the standard deviation criterion is that it does not test whether the component actually is an IMF thus relying only on the IMF-producing capabilities of the sifting process. However, the sifting process does not have any mathematical certainty for producing IMFs. 
+
+To address this problem, another stopping criterion may be added by selecting a predefined $S$-number. If the number of extrema and zero crossings are the same or differ at most by one after $S$ rounds of sifting, an IMF is considered to be found. This way the definition of IMF also affects the stopping. The $S$-number has to be determined by testing and a value between 4 and 8 has been observed to produce good results \cite{HUANG1999, HUANG2003}. 
+
+The separation of global changes and local changes is also challenging. It is not easy to prove that the extracted oscillation is actually the right one. Rilling et al. propose a way to guarantee that the mean contains globally small fluctuations and at the same time is aware of locally large differences. This is done by using predefined thresholds and comparing mode amplitude with an evaluation function \cite{RILLING2003}. 
+
+\section{Extracting rest of the oscillations}
+
+The IMF is subtracted from the original signal to gain the first residue (equation \ref{RESIDUE}). Then another round of sifting is started using this residue as the input signal. The first sifting process has extracted the highest frequency oscillation. The following siftings will produce the second highest oscillation etc. Similarly, the number of extrema decreases as more IMFs are extracted. 
+
+\begin{equation}
+r_1=x(t)-c_1
+\label{RESIDUE}
+\end{equation}
+
+The process is finished when $r_n$ becomes monotonic or $c_n$ or $r_n$ have too small an effect. The number of the resulting IMFs is not predefined, the EMD method automatically determines how many oscillation modes are to be found. After $n$ rounds of sifting a residue is left, which is constant or represents the trend (equation \ref{LAST_RESIDUE}). It is usually disregarded in further analysis. The signal has now been decomposed into $n$ IMFs. 
+
+\begin{equation}
+r_n=r_{n-1}-c_n
+\label{LAST_RESIDUE}
+\end{equation}
+
+Because EMD relies on subtraction, the original signal can be composed by summing up the IMFs and the residue (equation \ref{COMPOSITION}). The functions $c_i$ are most of the time orthogonal and they have a mean of zero. 
+
+\begin{equation}
+x(t)=\sum_{i=1}^{n} c_i+r_n
+\label{COMPOSITION}
+\end{equation}
+
+As each IMF contain lower frequencies than the earlier ones, it is possible to exclude high or low frequencies thus denoising or detrending the signal. With this case, the problem is the right identification of trend or noise components \cite{FLANDRIN2004a}. 
+
+Figure \ref{IMFS} shows the IMFs of a signal. The first one has captured the highest frequency oscillations, the second a little lower frequencies and so on. The original waveform is shown in figure \ref{AVERAGED_WAVEFORM}. The benefit of EMD is that the produced components are usually equivalent with the actual underlying physical components. 
+
+The sifting process is the core of EMD method, it forms the IMFs from the input signal. Sifting removes riding waves from the signal and makes it more symmetric. Maxima with a negative are moved up and minima with a positive value are moved down. It is noteworthy that this method requires only the local extrema as parameters. Therefore, no zero reference is required since the EMD method generates it for each IMF \cite{HUANG1998, HUANG2005}. 
+
+%\section{Completeness and orthogonality}
+
+The basis adapted from the data can be shown to indeed be a basis. Created with EMD it is complete because equation \ref{COMPOSITION} is an identical equation, i.e. it is true for any value of the variable. This means that the original signal can be reconstructed from the decomposition \cite[p.923]{HUANG1998}. Huang et al. suggest an orthogonality index to validate that the IMFs actually are very close to orthogonal basis. This index is presented in equation \ref{IO} \cite{HUANG1998}. Orthogonality can be used as a measure for the validity of decomposition \cite{HUANG2003}. 
+
+\begin{equation}
+IO=\sum_{t=0}^{T} \left( \sum_{k=1}^{n+1} \sum_{l=1}^{n+1} \frac{c_k(t)c_l(t)}{x^2(t)} \right)
+\label{IO}
+\end{equation}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/Fz_grand_average_50ms.pdf}
+\caption[Averaged waveform]{Averaged EEG waveform of all the subjects' all trials during an oddball experiment ($50ms$ deviant tone). Negative plotted upwards. }
+\label{AVERAGED_WAVEFORM}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/imfs_50ms.pdf}
+\caption[Intrinsic mode functions produced by EMD]{IMFs of the signal in figure \ref{AVERAGED_WAVEFORM}. The IMFs are acquired using EMD method. Second and third IMFs have a form that hints towards the ERP peaks. The last waveform is the residue and the original signal is obtained by summing up all the components. Negative plotted upwards. }
+\label{IMFS}
+\end{figure}
+
+\section{Problems concerning EMD}
+
+There are still several problems with EMD. Because it is an empirical method its behavior is not easy to predict in all cases. Some of the problems include mathematical proof of the method itself, spline fitting, boundary effects and the feasibility of the basis. Many of these challenges remain unanswered. 
+
+Spline fitting is the most error-prone phase of the process. Even so improvements to it might be only marginal. The ends of a data span are usually distorted so adding characteristic waves to the beginning and the end might help. EMD doesn't necessarily produce orthogonal data. This is not a problem since practically every time the components are orthogonal at a given time \cite{HUANG1998, HUANG2005}. 
+
+The Hilbert transform needs over-sampled data so that instantaneous frequency can be determined. A real problem is that frequencies too close to each other cannot be separated. Also, the correspondence between IMFs and physical components is not guaranteed \cite{HUANG1998, HUANG2005}. 
+
+%\section{Boundary effects}
+
+There are usually unwanted fluctuations near the ends. Sometimes the envelopes at the end cause the values grow or decrease rapidly near the end. At other times small unwanted changes in the waveform distort the signal. These problems affect the instantaneous frequency near the ends also. The cause for boundary effects is naturally the abrupt stop, there is no more data from which to draw oscillations \cite{HUANG1998, HUANG2005}. 
+
+The signal can be extended in the beginning and at the end with zero level so that the IMFs can end at a more natural level. The same could be achieved with extending the extrema point vectors because ultimately the envelope is calculated from them. Elimination of end effects was discussed by Huang et al. \cite{HUANG1998}. Mirroring the extrema points has also been proven as an alternative \cite{RILLING2003}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=400pt]{pics/flowchart.pdf}
+\caption[Flow chart for EMD]{Flow chart for EMD. In this figure the signal $x(t)$ is decomposed into IMFs $c_i, i=1,\dots,n$ and residue $r$. Figure adapted from Yu et al. \cite{YU2005}. }
+\label{FLOWCHART}
+\end{figure}
+
+\chapter{Nonlinear time-frequency analysis and Hilbert transform}
+\label{CHAPTER:HT_HS}
+
+In order to produce a time-frequency-domain presentation of the signal, the Hilbert spectrum must be calculated. Producing a frequency-domain presentation, marginal spectrum, comparable to the Fourier spectrum is also possible. Hilbert transform is an applicable way to calculate the instantaneous frequency. It is a complex conjugate transform that takes into account the local changes of a signal. To understand the transform, an integration technique called Cauchy principal value must be introduced. To extract phase and frequency information from a signal it is desirable to construct an analytic signal. The real part $x(t)$ of this signal is naturally the signal itself but the complex part $\tilde{x}(t)$ needs to be generated. Hilbert transform offers a straightforward way to do this. However it needs a symmetric, narrowband monocomponent signal as input, like the intrinsic mode functions that EMD produces. 
+
+\section{Cauchy principal value}
+
+Cauchy principal value is an integration method that is used in the Hilbert transform. By surrounding a point with small interval $\epsilon$ a mathematically difficult (e.g. singularity point) point may be integrated along a positive semi-circle of radius $\epsilon$. The integration is completed when $\epsilon$ approaches $0$ \cite{KIZHNER2004}.
+
+The principal value of a finite integral between $a \leq b$ of function $f$ at point $c$, where $a\leq c \leq b$ is defined in equation \ref{CAUCHY} \cite[p. 261]{HENRICI1988}. 
+
+\begin{equation}
+\mathcal{P} \int_a^b f(x) \mathrm{d}x \equiv \lim_{\epsilon \rightarrow 0^+} \left[ \int_a^{c-\epsilon} f(x) \mathrm{d}x + \int_{c+\epsilon}^b f(x) \mathrm{d}x \right]
+\label{CAUCHY}
+\end{equation}
+
+For a doubly infinite integral the Cauchy principal value is defined in equation \ref{CAUCHY_DI} \cite[p. 261]{HENRICI1988}. This is the definition that is used with Hilbert transform. 
+
+\begin{equation}
+\mathcal{P} \int_{-\infty}^{\infty} f(x) \mathrm{d}x \equiv \lim_{R \rightarrow \infty} \int_{-R}^R f(x) \mathrm{d}x
+\label{CAUCHY_DI}
+\end{equation}
+
+Cauchy principal value is denoted by $\mathcal{P}$ although other symbols like P or p.v. are found in literature. 
+
+\section{Hilbert transform}
+
+Hilbert transform can be used to transform signals into complex plane. It defines the complex conjugate of any real valued function. The deductions to form this conjugate transform from Fourier's integral formulae are presented, for example, by Titchmarsh \cite[pp. 119--120]{TITCHMARSH1937}. This Hilbert transform is essentially the convolution of $x(t)$ with $\frac{1}{t}$ and thus accentuates the local properties of the signal \cite[p. 911]{HUANG1998}. It exists for all $L^p$ class functions \cite[p. 132]{TITCHMARSH1937}. Hilbert transform is defined in equation \ref{HILBERT}.  
+
+\begin{equation}
+%H[x(t)] = 
+\tilde{x}(t)=\frac{1}{\pi} \mathcal{P} \int_{-\infty}^\infty \frac{x(u)}{t-u} \mathrm{d}u,
+\label{HILBERT}
+\end{equation}
+
+\noindent Here $\mathcal{P}$ indicates the Cauchy principal value, which solves the singularity point problem when $u=t$. Point $t$ is delimited with a small interval $[t-\epsilon, t+\epsilon]$ and then this point is approached from each ends of the interval \cite{KIZHNER2004}. 
+
+It is worth mentioning that the inverse Hilbert transform is as elegant as in equation \ref{INVERSE_HILBERT}. 
+
+\begin{equation}
+%H^{-1} = -H
+\tilde{x}^{-1}(t) = -\tilde{x}(t)
+\label{INVERSE_HILBERT}
+\end{equation}
+
+\section{Analytic signal}
+
+The original signal can be expressed in the complex plane by representing it with an analytic signal. The analytic signal $z(t)$ (equation \ref{ANALYTIC}) associated with signal $x(t)$ is obtained with the use of Hilbert transform. 
+
+\begin{equation}
+z(t)=x(t)+j\tilde{x}(t)=a(t)e^{j\theta(t)}
+\label{ANALYTIC}
+\end{equation}
+
+\noindent Here imaginary unit $j=\sqrt{-1}$. The instantaneous amplitude $a(t)$ and phase $\theta(t)$ are gained from the alternative presentation. Imaginary part $\tilde{x}(t)$ is the Hilbert transform of $x(t)$ as defined in equation \ref{HILBERT}. 
+
+The instantaneous features of the analytic signal $z(t)$ are quite simple to compute. The instantaneous amplitude $a(t)$ can be interpreted as the distance of the values of the analytic signal from the time axis (equation \ref{ANALYTIC_AMPLITUDE}). Likewise, the instantaneous phase $\theta(t)$ is gained from the angle in the complex plane (equation \ref{ANALYTIC_PHASE}). This concept is illustrated with the schematic figure \ref{HTRANS_SCHEMATIC}. The instantaneous frequency $\omega(t)$ can be calculated as the derivative of the phase if the processed signal is an intrinsic mode function, as presented earlier (equation \ref{INST_FREQ}).
+ 
+\begin{equation}
+a(t)=\sqrt{x^2(t)+\tilde{x}^2(t)}
+\label{ANALYTIC_AMPLITUDE}
+\end{equation}
+
+\begin{equation}
+\theta(t)=\arctan\left[\frac{\tilde{x}(t)}{x(t)}\right]
+\label{ANALYTIC_PHASE}
+\end{equation}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/htrans_schematic.pdf}
+\caption[Calculating features from analytic signal]{A schematic analytic signal. At a time $t$ the amplitude $a$ and the phase $\theta$ are calculated from the analytic signal $z(t)$ using equations \ref{ANALYTIC_AMPLITUDE} and \ref{ANALYTIC_PHASE}, respectively. }
+\label{HTRANS_SCHEMATIC}
+\end{figure}
+
+The idea behind calculating instantaneous frequency from Hilbert transform is illustrated by applying it to a simple cosine wave \cite{KIZHNER2004}. Figure \ref{COS_HTRANS} has the transformation plotted. If we let
+
+\begin{equation}
+x(t)=\cos(\omega t),
+\end{equation}
+
+\noindent and we know that 
+
+\begin{equation}
+\tilde{x}(t)=\sin(\omega t),
+\end{equation}
+
+\noindent then the analytic signal is
+
+\begin{equation}
+z(t)=x(t)+j\tilde{x}(t) = \cos(\omega t) + j \sin(\omega t).
+\end{equation}
+
+\noindent To calculate the phase we simply determine the angle in the complex plane by 
+
+\begin{equation}
+\theta (t) = \arctan \left[ \frac{\sin(\omega t)}{\cos(\omega t)} \right] = \arctan(\tan(\omega t)) = \omega t,
+\end{equation}
+
+\noindent and then by differentiating we get 
+
+\begin{equation}
+\frac{\mathrm{d}\theta(t)}{\mathrm{d}t} = \frac{\mathrm{d}(\omega t)}{\mathrm{d}t} = \omega
+\end{equation}
+
+\noindent which is in accordance with equation \ref{INST_FREQ}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/cos_htrans.pdf}
+\caption[Analytic signal for cosine]{Analytic signal for the $\cos$ function. The general idea of the transformation can be seen. If looked from the top, the real part of the signal (i.e. cosine) is visible. }
+\label{COS_HTRANS}
+\end{figure}
+
+
+\section{Time-frequency representation}
+
+Intrinsic mode functions have the narrow band characteristic that is required for the instantaneous frequency to be meaningful. The monocomponent IMFs are transformed to the complex plane with the Hilbert transform. Analytic signals are then created for each IMF and from these analytic signals the amplitude and frequency information is extracted as functions of time. 
+
+After having acquired the $n$ Hilbert transforms of the IMFs it is possible to reconstruct the signal. The original signal can be expressed with equation \ref{REAL_PART_SIGNAL} as the real part $\Re$. The residue is left out because its energy involved could be too great and because the interest lies in the low-energy oscillations. This distribution gives for each component their frequency and amplitude as functions of time \cite[p. 928]{HUANG1998}. 
+
+\begin{equation}
+x(t)=\Re\left[ \sum_{i=1}^{n} a_i(t) \exp \left( j \int \omega_i(t) \mathrm{d}t \right) \right]
+\label{REAL_PART_SIGNAL}
+\end{equation}
+
+An amplitude distribution on the time-frequency plane is called Hilbert spectrum $H(\omega,t)$ that can be constructed from the Hilbert analytical signal. It is a three-dimensional plot where amplitude and frequency act as functions of time. Hilbert spectrum is presented as color map with time and frequency axes and the color indicating the amplitude. Figure \ref{HILBERT_SPECTRUM} shows such color map of averaged Fz channel in our experiment. This sharp and sparse representation is more precise than the linear presentations seen earlier in chapter \ref{CHAPTER:LINEAR}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/hspec_bw_50ms.pdf}
+\caption[Hilbert spectrum]{Hilbert spectrum of averaged Fz channel of all the subjects during $50ms$ deviant tone. Color represents the amplitude value. The channel signal is decomposed with EMD and then the Hilbert transform applied to the components. The sharp feature of Hilbert spectrum is visible. The time scale is in samples, the sampling frequency is 200 Hz. }
+\label{HILBERT_SPECTRUM}
+\end{figure}
+
+The same data expressed with Fourier transform would look like equation \ref{FOURIER_EXPANSION}. 
+
+\begin{equation}
+x(t)=\Re\left[ \sum_{i=1}^{n} a_i \exp (j \omega_i t) \right]
+\label{FOURIER_EXPANSION}
+\end{equation}
+
+\noindent Here both $a_i$ and $\omega_i$ stay constant. As Huang et al. state, the IMF represents a generalized Fourier expansion. The changing frequency and amplitude in the Hilbert-Huang expansion extend its use to nonlinear and nonstationary data \cite[p. 928]{HUANG1998}. 
+
+A more intuitive way to present Hilbert spectrum is shown in equation \ref{HHT_REPR} \cite{CONG2009}. At a given time $t$, the time-frequency analysis of $x(t)$ using HHT can also be expressed according to equation \ref{HHT_REPR} where frequency is gained using equation \ref{HHT_FREQ}. This frequency is calculated from the instantaneous frequency, which in turn is derived from the phase (see equation \ref{INST_FREQ}). Hilbert spectrum reflects the signal so that it gives the amplitude of a frequency at a certain time. 
+
+\begin{equation}
+H(f,t)=|a(t)|
+\label{HHT_REPR}
+\end{equation}
+
+\begin{equation}
+f=\left(\frac{1}{2\pi}\right)\omega(t)
+\label{HHT_FREQ}
+\end{equation}
+
+In practical terms, the Hilbert spectrum presents the time-frequency distribution as a matrix of time by frequency rows and columns. The value of a selected cell then represents the amplitude at that time at that frequency. Each of the IMFs is presented in this matrix having its frequency and amplitude changes plotted through the time-frequency field. 
+
+\section{Marginal spectrum and instantaneous energy}
+\label{MS_IE}
+
+Furthermore, the marginal spectrum, i.e. the probability of a frequency appearing in the signal, can be calculated with simple integration over time of Hilbert spectrum as shown in equation \ref{MARG_SPEC} \cite[p. 929]{HUANG1998}. With a discrete numerical algorithm this procedure simply becomes a sum over the frequencies \cite{KIZHNER2004}. By using the marginal spectrum, the overall spectral feature can be observed. This may be compared to the Fourier spectrum or wavelet decomposition. Figure \ref{MARGINAL_SPECTRUM} shows the marginal spectrum, or frequency distribution of an EEG signal (in figure \ref{AVERAGED_WAVEFORM}). Compared to the corresponding Fourier spectrum in figure \ref{FOURIER_SPECTRUM} energy leakage is lower, especially with higher frequencies. 
+
+\begin{equation}
+h(\omega)=\int_0^T H(\omega,t)\mathrm{d}t
+\label{MARG_SPEC}
+\end{equation}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/Fz_grand_average_50ms_marginal.pdf}
+\caption[Marginal spectrum]{Marginal frequency distribution $h(\omega)$ of all the subjects taken from the Fz channel during the $50ms$ deviant tone (see figure \ref{AVERAGED_WAVEFORM}). The marginal spectrum is calculated with equation \ref{MARG_SPEC}. }
+\label{MARGINAL_SPECTRUM}
+\end{figure}
+
+In a similar way to the marginal spectrum, the instantaneous energy density level is defined in equation \ref{IE}. This makes it possible to follow energy fluctuations along the time axis \cite[p. 930]{HUANG1998}. See figure \ref{ENERGY_DENSITY} for an example of instantaneous energy density of the signal in figure \ref{AVERAGED_WAVEFORM}. 
+
+\begin{equation}
+\mathrm{IE}(t) = \int_\omega H^2(\omega,t)\mathrm{d}\omega
+\label{IE}
+\end{equation}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/Fz_grand_average_50ms_energy_density.pdf}
+\caption[Instantaneous energy density]{Instantaneous energy density $\mathrm{IE}(t)$ of averaged trace taken from Fz channel during the $50ms$ deviant tone. }
+\label{ENERGY_DENSITY}
+\end{figure}
+
+Marginal spectrum and instantaneous energy density level can be used to inspect the data in simple time or frequency space. These features can be used to gain quickly knowledge about the overall characteristics of the signal. 
+
+\chapter{Hilbert-Huang transform on MMN}
+\label{CHAPTER:HHT}
+
+Empirical mode decomposition was introduced in chapter \ref{CHAPTER:EMD}. Furthermore, a method to obtain the time-frequency presentation of a signal was covered in chapter \ref{CHAPTER:HT_HS}. This chapter combines these two methods into Hilbert-Huang transform (HHT), discusses its algorithmic implementation and statistical analysis of the results in the context of MMN detection. 
+
+It is supposed that the data consists of recorded EEG of subjects. Each subject has been tested for multiple trials which have been conducted under similar conditions. Single trial means that only one such trial recording is being examined. Averaged trial means that the trials of a single subject have been averaged over time. It is also good for illustrative purposes to calculate the grand average over all subjects. Time-frequency analysis can be applied to any of these signals. 
+
+Hilbert-Huang transform is an adaptive time-frequency analysis tool for nonlinear and nonstationary data. The time-frequency spectrum is produced from a time series signal. Unlike traditional methods, it does not need a predefined basis because the basis is constructed during the adaptive process from the local properties of the signal \cite{HUANG1998}. As stated, EEG signals are nonlinear, nonstationary and noisy \cite{KAWABATA, PALUS, KLONOWSKI2009}. This makes HHT a correct tool for EEG time-frequency analysis and MMN detection. 
+
+Hilbert-Huang transform combines the two methods presented previously. At first several intrinsic mode functions (IMFs) are separated from the signal with empirical mode decomposition (EMD). Then a spectral analysis of these functions can be made using the Hilbert transform. EMD produces IMFs that have the narrow-band characteristic needed for Hilbert transform. This way it produces meaningful analytic signal to obtain instantaneous frequency \cite{HUANG1998}. 
+
+Hilbert-Huang transform uses differentiation to extract the instantaneous frequency. Thus, only two consecutive samples affect the frequency presentation. Compared to the Fourier-based methods this is a clear improvement since in those methods convolution causes all the samples to affect the time-frequency presentation at a single point of time. Differentiation also releases the method from the restrictions of uncertainty principle \cite{HUANG1998, HUANG2005}. 
+
+EMD in itself is only a decomposition. In a sense it is only a preprocessing method for further analysis. To use the obtained components they must be transformed and interpreted. Because the useful information usually lies in the frequency domain, the IMFs in time-domain should be transformed into time-frequency domain. This is done with Hilbert transform. 
+
+Hilbert transform produces the time-frequency presentation known as the Hilbert spectrum. Hilbert spectrum reveals the amplitude and frequency changes over time. Furthermore, feature extraction is possible from this time-frequency-energy space \cite{HUANG2005, ROY2008}. Hilbert spectrum is comparable to the time-frequency spectrum produced by short-time Fourier transform or wavelet transform. 
+
+The Hilbert spectrum contains information about the time-frequency characteristics of a signal. The spectrum can be post-processed for easier observation and for simpler features. The information must be squeezed into fewer dimension for statistical testing. A single test measure called support-to-absence ratio presents the prevalence of MMN in a specified time window. 
+
+\section{Algorithm}
+
+Implementing a HHT system with modern high-level languages is straightforward. The code is simply two loops with certain stopping conditions. The core of the loops is the subtraction of the mean envelope from the component. A pseudocode implementation of EMD might look like the following (compare to the flow chart in figure \ref{FLOWCHART}): 
+
+\begin{verbatim}
+residue = original_signal;
+while residue is not monotonic
+    component = residue;
+    while (deviation limit < deviation(component, last_compnent))
+        maxima_locations = local_max(component);
+        minima_locations = local_max(-component);
+
+        max_envelope = spline(maxima_locations);
+        min_envelope = spline(minima_locations);
+        mean_envelope = mean(max_envelope, min_envelope);
+
+        last_component = component;
+        component = component - mean_envelope;
+
+    imfs = [imfs;component];
+    residue = residue - component;
+\end{verbatim}
+
+\noindent The output IMFs will be in the list \texttt{imfs} and a \texttt{residue} will be left of the signal. 
+
+This first algorithm with its deviation-based stopping condition has been criticized for its independence of the IMF definition. Huang et al. further suggest a method where sifting is stopped if the number of extrema and zero crossings stay the same for $S$ number of rounds. A maximum number of siftings $M$ is also suggested \cite{HUANG2003}. 
+
+It is possible to use other conditions for the inner \texttt{while} loops, the following is that of Kizhner et al. The prospective component is tested if it is an IMF. If it is, a counter is incremented, otherwise set to zero. The \texttt{while} condition is true until the counter reaches some user-defined value \cite{KIZHNER2004}. 
+
+\begin{verbatim}
+MAX_SIFTINGS = 8;
+residue = original_signal;
+while residue is not monotonic
+    component = residue;
+    counter = 0;
+    while ( counter < MAX_SIFTINGS )
+        maxima_locations = local_max(component);
+        minima_locations = local_max(-component);
+
+        max_envelope = spline(maxima_locations);
+        min_envelope = spline(minima_locations);
+        mean_envelope = mean(max_envelope, min_envelope);
+
+        component = component - mean_envelope;
+
+        if component is an IMF
+            counter += 1;
+        else
+            counter = 0;
+
+    imfs = [imfs;component];
+    residue = residue - component;
+
+\end{verbatim}
+
+By generating the Hilbert analytical signal, and from it the instantaneous amplitude and frequency, the Hilbert spectrum is computed with the following pseudocode. For mathematical details of these operations, see chapter \ref{CHAPTER:HT_HS}. The implementation of Hilbert transform itself is considered to be out of scope for this text. 
+
+\begin{verbatim}
+for imf in imfs
+    analytic = hilbert(imf)
+    phase = angle(analytic)
+    amplitude = abs(analytic)
+    frequency = sampling_frequency/(2*pi) * derivate(phase)
+    amplitudes = [amplitudes;amplitude]
+    frequencies = [frequencies;frequency]
+
+spectrum = zeros
+for i = from 1 to number of frequencies
+    for j = from 1 to length of signal
+        spectrum(frequencies(i, j), j) = amplitudes(i, j)
+\end{verbatim}
+
+The amplitudes, phases and frequencies of each IMF can be plotted to visualize the time-frequency development of the signal. The spectrum here is not logarithmic and gets inaccurate with low frequencies $f<1.0$. This spectrum matrix can be used for feature extraction and other analysis. 
+
+\section{HHT on averaged trials}
+
+The methods presented earlier can be combined for experimental use with ease. A simple way to produce the Hilbert spectrum is to average all the trials of an experiment and apply EMD and Hilbert transform to it \cite{CONG2009}. 
+
+The procedure is as follows:
+
+\begin{enumerate_no_space}
+\item Remove bad trials, 5\% removed.
+\item Average the trials to gain one signal for each channel.
+\item Use EMD to extract the IMFs.
+\item Use Hilbert transform to create Hilbert spectrum.
+\end{enumerate_no_space}
+
+At first some bad trials are removed. Noisy recordings are one of the most common reasons for removal. Equipment malfunctions, electrodes etc. can cause such problems. Sometimes the electrodes are not in contact with the scalp and the signal is zeroed. Artefacts with high amplitude should also be disregarded since they contain information irrelevant to the MMN research. Eye blinking is the most prominent cause of such artifacts. All these phenomena are not related to MMN and have external causes. Because of this they should be removed. 
+
+With the acquired Hilbert spectrum different spectral and statistical analyses may be performed. 
+
+\section{Concatenated trial based HHT}
+
+Another variation connects the single trials as one long signal that facilitates the extraction of different modes \cite{CONGU}. 
+
+\begin{enumerate_no_space}
+\item Remove bad trials, 5\% removed.
+\item Connect the trials to a continuous long signal.
+\item Use EMD on this long signal to obtain IMFs.
+\item Disconnect IMFs to get IMF based trials.
+\item Average these IMF based trials.
+\item Use Hilbert transform on these IMFs to create Hilbert spectrum.
+\end{enumerate_no_space}
+
+Concatenation is useful because EMD generates more IMFs with a longer signal. Whether the concatenated trace is meaningful is debatable since the different trials are not next to each other in the original signal. However, because each trial has roughly the same overall components, EMD might be able to extract the recurrent oscillations better. However, this is one of the reasons averaging itself is not necessarily suited for ERP extraction. 
+
+Concatenating emphasizes the cyclic nature of the repeating trials. It does not, however, present any physical time series and is just an artificial construct. Concatenation has been used with independent component analysis (ICA) procedure and could be useful with HHT also \cite{KALYAKIN2008a, KALYAKIN2009}. 
+
+Another variation of this technique would be to specifically choose the IMFs for later inspection. The problem here is that it is not easy to judge which IMFs represent the desired components even if the component is present in the current set of IMFs. Averaging IMFs is also possible but problems remain the same. The matching IMFs need to be matched. 
+
+\section{Processing the Hilbert spectrum}
+
+It is possible to post-process Hilbert spectrum for different purposes. Two-dimensional smoothing may be used to produce figures for visual inspection and evaluation. Consequently, the time-frequency distribution appears wider and covers more area than the sparse original distribution which might almost resemble plotted lines \cite{HUANG2005}. 
+
+There are several possible ways to present the spectrum. In addition to the colored maps, simply presenting the frequencies as functions of time gives a meaningful presentation of the frequency changes over time without the intensity information. Smoothing the colormap gives more qualitative results that can be used for initial visual investigation. In any case, the change of frequency over time can be observed easily. 
+
+\section{Support-to-absence ratio}
+
+Support-to-absence ratio (SAR) is a feature extracted from the time-frequency presentation of a signal presented by Cong et al. It can qualify the trace initially and detect whether the trace contains any ERP-like components \cite{CONG2008a}. The method has been used with Hilbert spectrum to detect high-amplitude oscillations with certain frequency \cite{CONG2008b, CONG2009}. 
+
+After obtaining the Hilbert spectrum it is desirable to detect whether there is activity at a certain time at certain frequencies. To achieve this, a measurable index should be calculated. Support-to-absence ratio is in a manner modelled after signal-to-noise ratio. It is a way to measure the intensity of a certain frequency in a certain time window from time-frequency representation. 
+
+%The problem of defining a clean signal is a problem in signal processing. In practical situations there will always be some noise. A 
+
+Prior to calculating SAR there is a need to know where the response is because the time-frequency energy of the whole signal is compared with that of the specified window. This locating must be done according to the theoretical expectations of the experiment. Locating the response is one of the main problems but if the frequency range is known, the time frame can be found. 
+
+After the time-frequency analysis with HHT, a data matrix with time and frequency dimensions is generated. This matrix has the time, frequency and amplitude information of the EEG signal. The time range where event-related potential appears is called support, rest is called absence \cite{CONG2008b, MOCKS1988}. 
+
+From the Hilbert spectrum (such as in figure \ref{HILBERT_SPECTRUM}) information on the mismatch negativity event-related potentials can be extracted. To represent the ERP with one dimension, the support-to-absence ratio (SAR) must be calculated according to the equation \ref{SAR} \cite{CONG2008b}. 
+
+The idea of SAR is to combine the marginal spectrum and energy density level calculations (see section \ref{MS_IE}). It provides only one test statistic for a signal so that multiple signals can be compared in population analysis. 
+
+The support is calculated as 
+
+\begin{equation}
+TF_S=\frac{1}{T_S}\sum_{f=F_L}^{F_H}\sum_{t=T_1}^{T_2}|H(f,t)|,
+\label{SUPPORT}
+\end{equation}
+
+\noindent where $T_S$ is the length of the support interval, $F_L$ and $F_H$ the limits of the frequency range, $T_1$ and $T_2$ the limits of the support interval and $H$ the Hilbert spectrum. This support measures how much energy is concentrated in the relevant frequencies to the time window of MMN. 
+
+Then the absence is obtained by 
+
+\begin{equation}
+TF_A=\frac{1}{T-T_S}\sum_{f=F_L}^{F_H} \left[ \sum_{t=1}^{T}|H(f,t)|-\sum_{t=T_1}^{T_2}|H(f,t)| \right],
+\label{ABSENCE}
+\end{equation}
+
+\noindent where $T$ is the length of the whole trial. The energies concentrated in the time window are subtracted from the energy density of the whole signal. Then the average energy in the frequency range outside the time window is calculated. 
+
+Finally, the support-to-absence ratio itself is obtained with equation \ref{SAR}. It compares support and absence so that the possible prevalence of high-energy activity in the time window $T_1-T_2$ is revealed. 
+
+\begin{equation}
+SAR=20 \log_{10} \left( \frac{TF_S}{TF_A} \right)
+\label{SAR}
+\end{equation}
+
+After obtaining the SAR it is easy to apply statistical analysis to it. The statistical characteristics of an MMN occurrence and its intensity can be measured. 
+
+SAR contains information from both time and frequency domains. Furthermore, it is a single metrics to measure the prevalence of MMN and thus contains more information than the more traditional peak amplitude that only gives information from the time domain. 
+
+\section{Analysis of variance}
+
+There must be some way to measure if there truly is statistical difference between recording channels, different experiment situations and different subject groups. Ultimately this gives some information if certain things affect different aspects of the EEG response of the subjects. 
+
+Analysis of variance (ANOVA) is similar to the t-test used in statistics. ANOVA compares multiple factors against a variable. Then it determines if there is any real difference between changing levels of the factors. At first, a null hypothesis is made to assume that the said factors do not have effect on the value of the variable. Then ANOVA might disprove this hypothesis and show that this difference exists. 
+
+The factors are changed in each experimental situation. The factors can be within subjects (like recording channel or experiment situation) or between subjects (like grouping or sex). Factors are set to different levels during the experiment. Factors that are between subjects group the data because an individual subject can only belong to one level of that factor. Within-subject factors can be things that are thought to affect the response. Every subject has every level of them. 
+
+The variable, or response, is usually some value that is measured every time a level of a factor is changed. If there are many variables multivariate analysis of variance (MANOVA) can be conducted. In an EEG experiment different features extracted from the recordings can be used as variables. Then ANOVA can be used for each of these values. 
+
+In conclusion, variable is the value whose behavior with regard to the factors is observed. ANOVA tries to answer to the question "How does the variable statistically change when the factor is changed?" 
+
+% This should start at page 45 or so
+\chapter{HHT on MMN of children}
+\label{CHAPTER:HHTONMMN}
+
+The experimental part of this thesis focuses on the use of Hilbert-Huang transform on mismatch negativity of children. The goal of this experiment was to evaluate and validate the use of HHT for time-frequency analysis and the use of SAR for MMN occurrence measurement. The experiment also produced information about the differences among the children. 
+
+It was expected that the Hilbert-Huang transform would produce more accurate presentation of frequency changes over time and would reveal the same information as the traditional methods while conforming to the neuropsychological theory. 
+
+Results of HHT being applied to MMN of children have been published \cite{CONG2008b,  CONG2009}. The later publication includes some of the observations presented in this study. In addition, there are some results on concatenated method. 
+
+\section{Subjects}
+
+The volunteer participants were gathered from a local school, a local clinic for learning disabilities and Minimal Brain Dysfunction Association. They took part in a test to assure that their IQ scores were within the normal range and had their literary skills measured. The parents and teachers estimated possible attentional, emotional and conduct problems. Some of the children had to be excluded for various reasons leaving the amount of subjects to 102 \cite{HUTTUNEN2007}. 
+
+The participants consisted of these 102 children aged 8-16 years with normal hearing. The MMN responses to repeated stimuli of these children were recorded. In our research four of these subjects were excluded due to data problems, mainly noise. Thus, the total amount of subjects was 98 \cite{HUTTUNEN2007}. 
+
+Three groups were formed to study the effects of reading disability and attention deficit on MMN. The reading-disabled group consisted of 16 children (11 boys, 5 girls) with mean age of 12 years 2 months. The attention deficit group had 16 children (15 boys, 1 girl) with mean age of 11 years. The rest 66  subjects were in the control group (41 boys, 25 girls) with mean age of 11 years 11 months \cite{KALYAKIN2007, CONG2009}. This information is presented in table \ref{SUBJECTS}. 
+
+\begin{table}
+\centering
+\begin{tabular}{c c c c c c c}
+
+\textbf{Group} & \textbf{Number} & \textbf{Boys} & \textbf{Girls} & \textbf{Min age} & \textbf{Mean age} & \textbf{Max age} \\ \hline
+RD      & 16 & 11 & 5  & 8y8m & 12y2m  & 14y2m \\
+ADHD    & 16 & 15 & 1  & 9y2m & 11y0m  & 13y5m \\
+Control & 66 & 41 & 25 & 8y2m & 11y11m & 16y9m \\
+
+\end{tabular}
+\caption{Subjects were divided into three groups}
+\label{SUBJECTS}
+\end{table}
+
+\section{Recording}
+
+EEG data were recorded using Brain Atlas Amplifier (Bio-Logic, Chicago, USA) with a gain of 50K. The sampling frequency was $200Hz$ and the signal was preprocessed with an analog bandpass filter of $0.1-200Hz$. The data were converted to digital form with Tecmar's Labmaster 12-bit AD-converter with 16 channels and with DSAMP software. During the recording session impedances were always under $10k\Omega$ and usually under $5k\Omega$ \cite{KALYAKIN2007}. 
+
+Electro-Cap International 20-electrode cap was used to monitor nine channels, which are presented in figure \ref{CHANNELS}. The cap featured silver/silver-chloride electrodes filled with Electro-Gel. These positions are the same as with the standard 10-20 positioning. The channels included frontal (F3, Fz, F4), central (C3, Cz, C4), parietal (Pz) and mastoid (M1, M2).  All the channels were referred to the tip of the nose. \cite{KALYAKIN2007}. 
+
+In order to detect trials affected by blinking artifacts Neuroline (Type 725-01-K) disposable silver/silver chloride  electrodes filled with Electro-Gel were used on upper corner of the left eye (G1) and lower corner of the right eye (G2). Similar electrodes were also used to record the mastoid channels.  \cite{KALYAKIN2007}. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=150pt]{pics/channels.pdf}
+\caption[Recorded channels in the experiment]{Nine channels were recorded, including F3, Fz, F4, C3, Cz, C4, Pz and M1, M2. }
+\label{CHANNELS}
+\end{figure}
+
+\section{Experiment situation}
+
+The children participated in an oddball paradigm experiment. The idea of using oddball experiment to elicit MMN was introduced by Pihko et al. \cite{PIHKO1995}. The oddball test situation was part of a longer experiment series that lasted 3--4 hours for each children. Before the MMN measurement the electrodes were placed and heart rate baseline was measured \cite{HUTTUNEN2007}. 
+
+During the experiment the children listened to a sound consisting of standard stimuli and deviant tones. The sound included alternating $100 ms$ standard stimulus segments of $600 Hz$ and $800 Hz$ tones. The tone was a sine wave that changed to the other frequency without interruption and without amplitude change. However, some of the $600 Hz$ tones (15\%) were of different length. Of these deviant tones half were $30 ms$ long and the other half $50 ms$ long. Between the deviants at least three standard stimuli ($600 Hz$-$800 Hz$ pair) were given. A schematic of the procedure is given in figure \ref{ODDBALL}. During the experiment session 350 of each of the two deviant tones were presented. In total the children were subject to 700 trials \cite{HUTTUNEN2007}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=200pt]{pics/oddball.pdf}
+\caption[Oddball paradigm]{Experiment oddball paradigm. The $100 ms$ long $600 Hz$ and $800 Hz$ tones alternate. The deviant $600 Hz$ tone is shorter and causes the MMN response. Figure adapted from Kalyakin et al. \cite{KALYAKIN2007}.}
+\label{ODDBALL}
+\end{figure}
+
+The sounds were presented binaurally through stereo headphones at $65 dB$ volume. The children were seated and they watched a silent film for 15 minutes.  The film featured subtitles and the children would have to read while watching it. They were instructed to sit still and disregard the sounds so that it was not their main focus. By distracting the participants from the auditory part of the experiment the elicited MMN would be more probably non-conscious and automatic process \cite{HUTTUNEN2007}. 
+
+\section{Earlier research}
+
+This data set has been studied because it provides a possibility to detect differences in different groups of children and is suitable for method comparison. The validation of traditional methods for MMN extraction is one potential area of research. This kind of nonlinear and nonstationary data collection is also suitable for testing new nonlinear methods. Neuropsychological research benefits from method research since recording times can be shortened and MMN extraction will be more accurate. 
+
+Huttunen et al. found difference in the lateralization of the MMN peak amplitude between control and RD groups. In RD group the response was more negative on the left side of the head. No other significant difference was found between the groups (control, RD, ADHD) \cite{HUTTUNEN2007}. Huttunen et al. regrouped the data into four groups which included control, RD, ADHD and a group of children with both RD and ADHD. With difference wave method they found out that "the MMNs were diminished in the right hemisphere in the RD group, in all frontal and central channels in the RD+AD group, and the MMN peaks appeared earlier in frontal channels in the AD group" \cite{HUTTUNEN2008}. 
+
+Different EEG signal processing methods have been used to extract MMN from ERP these traces. Kalyakin et al. compared the difference wave (DW) and optimal digital filtering techniques (ODF). They could not separate MMN with difference wave method but optimal digital filtering improved signal-to-noise ratio and revealed the MMN more clearly. The optimal extraction frequency range was found to be $2-8.5Hz$ \cite{KALYAKIN2007}. Kalyakin et al. compared independent component analysis (ICA) with difference wave method and discovered that ICA extracts MMN more cleanly. With improved SNR they suggested that recording sessions could be shortened \cite{KALYAKIN2008a}. 
+
+Kalyakin et al. also compared difference wave, optimal digital filtering and ICA assessing that ODF and ICA provide better signal-to-noise ratio than DW \cite{KALYAKIN2008b}. The same comparison of these three methods was also conducted with adult subjects \cite{KALYAKIN2009}. 
+
+Cong et al. tested ERP qualification by SAR using the same data set and argued that it can qualify the raw trace, tell whether artifacts have been cancelled and find ERP-like components in ICA \cite{CONG2008a}. Cong et al. decomposed and analyzed the data with EMD. EMD cancels the overlapping ERPs in both time and frequency domain. In this data set EMD outperformed averaging and ODF. The use of SAR instead peak amplitude was also verified \cite{CONG2008b}. 
+
+\section{Data analysis}
+
+Initially 102 subjects were to be used in this study. However, four of the recordings were rejected mainly because of noise. Ultimately the data that was analyzed comprised of 98 subjects, 9 channels for each subject, 130 samples for each channel and each subject was tested under two different deviant tones, $50ms$ and $30ms$. The unwanted high frequency oscillations were already filtered with $30Hz$ analog band-pass filter in the recording phase. The deviant sweeps beginning after the offset of the deviant tone and lasting for $650ms$ were used. The trials were averaged so that each subject had only one trace for each channel. The first $300ms$ of the averaged trace was used for baseline removal. 
+
+Each trace was decomposed with EMD. The EMD algorithm used solely the standard deviation stopping condition as originally presented by Huang et al., using the standard deviation limit $0.3$ \cite{HUANG1998}. Before using the method the signal was elongated in the ends so that it started and ended at zero level. Each trace produced several IMFs each of which were Hilbert transformed. The Hilbert spectrum was then calculated for each subject incorporating all the IMFs of that subject. All in all, a Hilbert spectrum of nine channels for each of the 98 children was calculated. 
+
+The SAR value for each subject on each channel was calculated from the Hilbert spectra. These values were averaged over channels.  In an oddball experiment different deviant tones cause different time windows for the MMN so this needed to be taken into account. The optimal frequency range, $2-8.5Hz$, determined by Kalyakin et al. was used \cite{KALYAKIN2007}. As the data was gathered with a sampling frequency of $200Hz$, the overall length of each trial was 130 samples ($650ms$). For the $50ms$ deviant tone recordings the starting sample was $T_1=80$, end sample $T_2=110$ and thus the window length $T_S=30$. The respective numbers for the $30ms$ deviant tone recordings were $T_1=96$, $T_2=106$ and $T_S=10$. 
+
+For statistical analysis, repeated measures of ANOVA was performed for the SAR values using the general linear model (GLM). 
+
+\section{Results}
+
+The aim of our experiment was to test if Hilbert-Huang transform is suitable for detecting mismatch negativity. The feasibility of it was tested by comparing the results with more traditional method, the Morlet wavelet decomposition. The form of the resulting time-frequency distribution was also under inspection. Another motive was to reveal some undetected statistically significant features when using SAR of reading-disabled and attention deficit children. 
+
+The earlier application of HHT on time series data to natural phenomena encouraged to use it to MMN detection \cite{LIANG2000, LIANG2005, LI2006}. The highly nonlinear and non-stationary features of EEG signal require a similarly nonlinear method to separate the oscillations and construct a sharp time-frequency representation. 
+
+The parts specific to MMN were selected for analysis. The grand average over all the subjects and trials at Fz channel was used, because the MMN peak amplitude is largest at the Fz channel. The EMD algorithm generated five IMFs for this average \cite{CONG2009}. 
+
+The SAR results from the Hilbert spectrum were statistically tested under the two deviant tones ($50ms$ and $30ms$). ANOVA with general linear model was used, where deviant tone was the independent variable (two levels) and SAR value the dependent response variable. It gave $F(1,97)=8.87$, $p<0.004$, which means that the difference between the deviant tones was significant. In corresponding SAR values from Morlet wavelet the statistical analysis gave $F(1,97)=3.37$, $p<0.074$ \cite{CONG2009}. 
+
+HHT revealed more evidently the MMN change of magnitude under different deviant tones. Under the $30ms$ deviant tone the averaged SAR of all subjects was $7.28$ times the SAR of all subjects under $50ms$ deviant tone. The corresponding number when using Morlet wavelet transform was $1.03$ \cite{CONG2009}. 
+
+In addition, the SAR of three groups (RD, ADHD, control) were compared using the concatenated method. ANOVA statistical analysis was conducted using the deviant tone as variable. SAR calculated from HHT gave $F(1,65)=0.78$, $p=0.38$ for control group, $F(1,15)=20.01$, $p<0.00$ for RD group and $F(1,15)=2.28$, $p=1.15$ for 	ADHD group. With control and ADHD groups the SAR between $50ms$ and $30ms$ deviant tone was not significant. However, RD children had significant difference between the two deviant tone. In addition, RD children had larger SAR under $30ms$. For the three groups the SAR of Morlet wavelet spectrum were $F(1,65)=0.76$, $p=0.39$ for control group, $F(1,15)=4.45$, $p=0.05$ for RD group and $F(1,15)=0.66$, $p=0.45$ for ADHD group \cite{CONGU}. 
+
+\section{Discussion}
+
+% Purpose of research
+
+The suitability of Hilbert-Huang transform for MMN detection was proven in this research. It has been applied to ERP type phenomena earlier \cite{LIANG2005}. The extraction of MMN oscillation from the signal was possible, since one IMF usually contained a high-amplitude peak within the time window. Time-frequency presentation enables the tracking of MMN in both frequency and time domain. This means that the frequency changes over time can be followed and sudden MMN-like changes can be observed more easily. 
+
+% Superiority of HHT
+
+HHT seems to be very feasible for extracting MMN from EEG signal with overlapping electrical activity. The HHT method was shown to be more accurate with SAR than with the more traditional wavelet method. HHT reveals larger SAR with more deviant stimulus ($30ms$), which was not seen from the wavelet SAR values. This corresponds to the theoretical expectation of larger MMN peak when stimulus deviation is increased \cite[pp. 148--175]{NAATANEN1992}. Thus, the method actually detected the phenomena as predicted by theory. 
+
+% HHT development
+
+The development of a HHT application with high level, well-established signal processing tools is possible. However, this process had its challenges. Fortunately, others have already solved similar problems. Kizhner et al. have given an overview on constructing a Hilbert-Huang data processing system. They also treat the many theoretical background problems \cite{KIZHNER2004}. Even though these problems are real in the formal mathematical sense and in some real world cases, our findings are that EMD can be applied to EEG problems. 
+
+% HHT problems
+
+In other words, one of the most severe disadvantages of HHT is that that the method is not mathematically proven. In practice this seems not to be a problem because HHT often produces physically meaningful results. Furthermore, the same problems affect HHT that affect other similar transforms. Huang even calls the method a "superior tool for time-frequency analysis" because it empirically performs so well \cite{HUANG2005}. 
+
+% HHT parameters
+
+The implementation of HHT analysis system revealed some of the known problems \cite{HUANG2005, KIZHNER2004}. While the method is praised for its lack of parameters \cite{ROY2008}, some very parameter-like choices have to be made before applying the method to data. The optimal parameter selection is a problem that needs to be solved in the future. This task requires deeper understanding of the analytic nature of HHT. In the following, some of these parameter-like properties are discussed. 
+
+% HHT improvements
+
+Some have tried to improve the accuracy of EMD. One of the problematic parts is the construction of the envelopes \cite{KOPSINIS2007}. Kopsinis and McLaughlin suggested that the extrema of the subsignal having the higher instantaneous frequency should be used as interpolation points instead of the plain extrema of the signal. They found out that under these circumstances the EMD process selects more in number and more precise interpolation points \cite{KOPSINIS2008}. The accuracy of decomposition would help to extract the true underlying components. With inaccurate EMD the modes are mixed or extracted haphazardly which leads to inaccurate time-frequency presentation and ultimately to false conclusions. However, it is difficult to measure the accuracy when system input is not known, only the output in the form of brain electricity. 
+
+% EMD, how many IMFs
+
+Most of the time our implementation of EMD produced fewer IMFs than expected. The averaged trials produced 4--6 IMFs depending on the parameters. One reason could be that the data was only 130 samples long. Traditionally EMD has been used on much longer recordings and with greater sampling frequency \cite{HUANG1998}. Because EMD is used on discrete-time signals over-sampling is needed for correct identification of extrema \cite{RILLING2003}. This lead to different approaches in implementation of the algorithm, for example concatenating the trials. This might suggest that EMD is not optimal for signals with very short time span and that some alterations to the algorithm could be done for such data, for example the sifting condition. Xu et al. have introduced a novel method for signals with low sampling rate \cite{XU2009}. Despite this problem, our final IMFs were numerous enough to separate the interesting oscillation. 
+
+The number of IMFs itself could be a measurable feature. Each IMF is believed to represent an oscillation related to brain activity. The difference in the number of the IMFs between different channels may suggest that the recorded activity is different in different parts of the brain. Specifically, the number of produced IMFs might reveal the complexity of underlying processes. The small amount of IMFs might also reflect the fact that the signals do not contain many oscillations. 
+
+
+% EMD improvements
+
+The implemented algorithm lacked the more advanced features developed lately \cite{HUANG2005, KOPSINIS2008, RILLING2003, XU2009}. Instead, the standard algorithm with zero-padding at the ends was used. While setting the standard deviation limit of sifting to a very low value results in more IMFs, the oscillations are suppressed so that the SAR results become more difficult to interpret. Over-sifting can be avoided by setting the limit to a higher value, but this value is determined arbitrarily. Some method for determining this beforehand would be beneficial. Huang et al. presented a confidence limit to estimate the correctness of the IMFs obtained \cite{HUANG2003}. 
+
+Getting the stopping condition right is quite crucial, for example in our data some conditions caused the algorithm to halt at few trials whereas with other condition some other trials caused halting. One such infinite loop phenomenon was the rapid changing movement of the signal near the ends between consecutive components. This was avoided to some extent by extending the signal with zeros at the ends. The ends of the signal tended to become unstable so that high-amplitude oscillations not present in the original signal appeared. This was the case especially with the IMFs generated later in the process. The problem has been observed and earlier solutions exist \cite{HUANG1998, HUANG2005}. 
+
+% Sifting
+
+The sifting process presented also some challenges. Smaller deviation limit in the algorithm tended to produce more IMFs. Explanation for this is that the sifting process is applied more often and the data is decomposed with greater accuracy. Too small values lost some of the information because modes with similar frequencies were mixed or two IMFs completely merged. Limiting maximum iterations or using the definition of IMF numerically were also tried as sifting conditions. The best method was to simply let the sifting condition only depend on deviation and consequently more clear MMN peak band was seen in the Hilbert spectrum. 
+
+% Comparison to other methods
+
+The Hilbert spectrum had a much sharper and precise look than the Morlet wavelet spectrum \cite{CONG2009}. While the Morlet wavelet might reveal the main concentrations of energy, it is not very precise. The energy leakage with wavelet transform is very evident. Whereas the frequency of wavelet transform is gained through convolution over the signal, the HHT defines the frequency as differentiation of adjacent time samples \cite{HUANG2005}. In the traditional methods the whole signal affects the frequency at a certain time but with HHT, the instantaneous frequency is only dependent of the information gained from adjacent samples. 
+
+% EMD on averaged trial vs. single trials
+
+In this experiment the averaged signals were decomposed. The problems with averaging were discussed in section \ref{TRADITIONAL ANALYSIS}. Applying EMD to single trial traces could give even better results. Because EMD is capable of extracting the noisy high frequencies and overlapping ERPs it could be a better alternative. Then single IMFs could possibly be identified as MMNs. 
+
+% SAR
+
+The SAR algorithm gave very low values, especially when compared to the SAR values of wavelet transform. The sparse nature of Hilbert spectrum produced by HHT is a contributing factor here. Most of the spectrum field is at zero amplitude so SAR doesn't collect as much energy than the corresponding wavelet spectrum. The implementation of SAR algorithm was straightforward, including summing over the Hilbert spectrum and taking logarithm. Some of the support ratios were too small to be recognized as nonzero by the numerical calculations. This led to a problem with the logarithm because $\log(0) \to -\infty$. As a solution in these cases, the SAR was set to a very low value, below the minimum of the other values. 
+
+% ANOVA
+
+The number of subjects in different groups might pose a problem. Normal ANOVA requires the use of balanced groups. However, in this study the number of subjects varied between the groups (66 control, 16 RD, 16 ADHD). Using general linear model ANOVA for unbalanced designs is acceptable but the setting is still dubious because of the overwhelming amount of control subjects. This problem can be avoided by regrouping the subjects to equally-sized groups. The normal ANOVA method is usable with such groups. 
+
+% What do the methods tell us about the data?
+
+Our data was gathered under oddball paradigm experiment. Such ERP data should contain responses to the repeated stimuli and the deviant stimulus. In addition other irrelevant ERPs and background noise is also mixed to the signal. Because some overlapping ERPs might be present the signal could be contaminated by them. HHT is suitable for detecting these unwanted ERPs \cite{CONG2009}. 
+
+HHT reveals that larger duration deviant ($50ms$) produces larger SAR for MMN. Theoretically it is expected that larger deviants elicit bigger peak amplitudes and shorter peak latencies. Because SAR is computed from Hilbert spectrum it contains information from both time and frequency domains. Peak amplitude and latency have only time domain information \cite{CONG2009}. 
+
+With concatenated trial analysis, only the reading-disabled children had different SAR between the two deviations. The control and ADHD group did not show such difference. This emphasises the speciality of MMN in the RD group and that these children might be more sensitive to different deviations. Moreover, the RD children had smaller SAR than control children under $50ms$ deviation  \cite{CONGU}. Same kind of difference with peak amplitude was found by Huttunen et al. \cite{HUTTUNEN2008}. These findings complement each other and validate that RD children generate smaller MMN \cite{CONGU}. 
+
+% Further study
+
+It is feasible to use nonlinear methods to signals generated by nonlinear systems, like the brain. HHT is suitable for EEG research but more case studies and method validation is needed. The optimal parameters and changes to EMD method should be studied in more detail. Future work also remains in proving the mathematical validity of EMD-based methods. 
+
+
+\chapter{Conclusion}
+\label{CHAPTER:CONCLUSION}
+
+%1--2 pages
+
+This Master's thesis has introduced the Hilbert-Huang transform and its application to the mismatch negativity of children. It suggests that this new nonlinear method should be used for time-frequency analysis when detecting and qualifying MMN response. Comparison to traditional methods was made and the performance of HHT against Morlet wavelet was evaluated. 
+
+Traditionally EEG signals have been analyzed by averaging, Fourier-based filtering and wavelet transforms. These methods are not suitable for analysis of most natural data because they are linear. EEG signals are nonlinear, nonstationary and noisy which renders traditional analysis suspicious, and it is not correct to use linear methods on such data distorting the results and creating undesirable side effects that have no physical meaning. These concerns led this research to use HHT. 
+
+% REPEAT THE PURPOSE
+
+%The children were grouped to control, reading-disabled and attention deficit groups so that differences between the groups could be observed. 
+
+The purpose of this study was to evaluate the eligibility of Hilbert-Huang transform for EEG analysis and to gain more knowledge about mismatch negativity of children under oddball paradigm experiment. The EEG of children aged 8--16 years was measured while they listened to a changing sound. Some of the changes were of deviant length. The goal was to find a special event-related potential named mismatch negativity (MMN), which is elicited during such deviant sound.  Since the application of HHT to MMN of children was a novel idea, the use of this method itself for MMN study was also a predefined object. More accurate time-frequency methods for MMN detection could help qualification of patient condition and possibly make clinical tests shorter in time. 
+
+% EVALUATE THE RESULTS
+
+%The goal was to find a certain ERP from the signal.
+
+The results show that HHT produces a much cleaner, sharper and sparser time-frequency presentation. Compared to the Morlet wavelet this new time-frequency method conforms better to the theoretical neuropsychological expectations by revealing the larger MMN SAR value with more deviant sound. The use of HHT for MMN was validated. This nonlinear time-frequency tool was found to be more accurate and sensitive compared to the linear wavelet method. Because there is nothing MMN-specific in the HHT method, it could be used for other ERPs also. Furthermore, the methods are adaptable to a wide variety of data collected from nonlinear systems, for example the human body and different industrial systems. Altogether, the novelty of this method leaves room for exploration and deeper understanding of its performance. 
+
+% METHODICAL FINDINGS
+
+%The HHT method was not difficult to implement. The EMD method itself is not complex and the spectrum construction using Hilbert transform is also understandable. There are still . Finding optimal parameters for the case in question can be tedious and needs some more rigorous solution. The algorithms themselves have variations that could be tested and evaluated in the future. 
+
+% MAYBE SOMETHING ABOUT FURTHER RESEARCH
+
+%Even though EMD is quite simple there are still many problems. The formation of envelopes is the most crucial challenge. Finding best stopping condition is another. There is also a need for measuring the correctness and error of the decomposition. 
+
+%This thesis has presented a framework for using HHT for MMN detection. Detection of ERPs other than MMN is a feasible use for these methods because there is nothing MMN-specific in them. 
+
+\begin{thebibliography}{99}
+
+\bibitem{BALOCCHI2004}
+R. Balocchi, D. Menicucci, E. Santarcangelo, L. Sebastiani, A. Gemignani, B. Ghelarducci et al., \textit{Deriving the respiratory arrhythmia from the heartbeat time series using empirical mode decomposition}, Chaos, Solitons and Fractals, 20 (2004), pp.~171--177. 
+
+\bibitem{BERGER1929}
+H. Berger, \textit{\"{U}ber das Elektrenkephalogramm des Menschen}, European Archives of Psychiatry and Clinical Neuroscience, 87 no. 1 (1929), pp.~527-570. 
+
+\bibitem{BLANCO1995}
+S. Blanco, R. Quian Quiroga, O.A. Rosso and S. Kochen, \textit{Time-frequency analysis of electroencephalogram series}, Physical Review E, 51(3) (1995), pp.~26224--2631.
+
+\bibitem{BOASHASH}
+B. Boashash, \textit{Estimating and Interpreting the Instantaneous Frequency of a Signal --- Part 1: Fundamentals}, Proc. of IEEE, 80(4) (1992), pp.~520--538.
+
+\bibitem{BOUDRAA2004}
+A.O. Boudraa, J.C. Cexus and Z. Saidi, \textit{EMD-based signal noise reduction}, International Journal of Signal Processing, 1 (2004).
+
+\bibitem{COHEN1992}
+L. Cohen, \textit{What is a multicomponent signal?}, Proc. IEEE Int. Conf. Acoust., Speech, Signal Processing, 5 (1992), pp.~113--116.
+
+\bibitem{CONG2008a}
+F. Cong, T. Ristaniemi, H. Lyytinen, \textit{ERP qualification exploiting waveform, spectral and time-frequency infomax}, Communications, Control and Signal Processing, 2008. ISCCSP 2008. 3rd International Symposium on, pp.~31--36.
+
+\bibitem{CONG2008b}
+F. Cong, X. Xu, T. Ristaniemi, H. Lyytinen, \textit{Empirical mode decomposition on mismatch negativity}, 14th Nordic-Baltic Conference on Biomedical Engineering and Medical Physics, 20 (2008), pp.~206--209. 
+
+\bibitem{CONG2009}
+F. Cong, T. Sipola, T. Huttunen-Scott, X. Xu, T. Ristaniemi, H. Lyytinen, \textit{Hilbert-Huang versus Morlet wavelet transformation on mismatch negativity of children in uninterrupted sound paradigm}, Nonlinear Biomedical Physics, 3:1 (2009). 
+
+\bibitem{CONGU}
+F. Cong, T. Sipola, X. Xu, T. Ristaniemi, H. Lyytinen, \textit{Concatenated Trial based Hilbert Huang Transformation on MMN of Childre}, unpublished manuscript. 
+
+\bibitem{FLANDRIN2004a}
+P. Flandrin, P. Gon\c{c}alv\`{e}s, G. Rilling, \textit{Detrending and denoising with empirical mode decomposition}, Proceedings of XII EUSIPCO, Wien, 2004. 
+
+\bibitem{FLANDRIN2004b}
+P. Flandrin, G. Rilling, P. Gon\c{c}alv\`{e}s, \textit{Empirical mode decomposition as a filter bank}, IEEE Signal Process. Lett., vol. 11 no. 2 (2004), pp.~112--114. 
+
+%\bibitem{FLANDRIN2004c}
+%P. Flandrin, P. Gon\c{c}alv\`{e}s, \textit{Empirical mode decomposition as data-driven wavelet-like expansions}, Int. J. Wavelets Multiresolut. Inform. Process., 2 (2004), pp.~477--496. 
+
+\bibitem{GAUTAMA2003a}
+T. Gautama, D.P. Mandic, M.M. Van Hulle, \textit{Indications of nonlinear structures in brain electrical activity}, Physical Review E, 67 (2003), 046204. 
+
+\bibitem{GAUTAMA2003b}
+T. Gautama, D.P. Mandic, M.M. Van Hulle, \textit{Signal nonlinearity in fMRI: a comparison between BOLD and MION}, IEEE Trans. Med. Imaging, 22 (2003), pp.~636--644.
+
+\bibitem{HENRICI1988}
+P. Henrici, \textit{Applied and Computational Complex Analysis, Vol. 1: Power Series, Integration, Conformal Mapping, Location of Zeros}, Wiley, New York, 1988. 
+
+\bibitem{HERRMANN2005}
+C.S. Herrmann, M. Grigutsch, N.A. Busch, \textit{EEG Oscillations and Wavelet Analysis}, in book Event-Related Potentials: A Methods Handbook, (ed. T.C. Handy), MIT Press, Cambridge, 2005, pp.~229--260.
+
+\bibitem{HESLENFELD2003}
+D.J. Heslenfeld, \textit{Visual Mismatch Negativity}, in book Detection of change: event-related potential and fMRI findings, (ed. J. Polich), Springer Verlag, 2003, pp.~41--60.
+
+\bibitem{HUANG1998}
+N.E. Huang, Z. Shen, S.R. Long, M.C. Wu, H.H. Shih, Q. Zheng, N.-C. Yen, C.C. Tung, H.H. Liu, \textit{The empirical mode decomposition an the Hilbert spectrum for nonlinear and nonstationary time series analysis}, Proc. R. Soc. London Ser. A, 454 (1998), pp.~903--995.
+
+\bibitem{HUANG1999}
+N.E. Huang, Z. Shen, S.R. Long, \textit{A new view of nonlinear water waves: the Hilbert spectrum}, A. Rev. Fluid Mech., 31 (1999), pp.~417--457.
+
+\bibitem{HUANG2003}
+N.E. Huang, M.-L. C. Wu, S.R. Long, S.S.P. Shen, W. Qu, P. Gloersen, K.L. Fan, \textit{A confidence limit for the empirical mode decomposition and Hilbert spectral analysis}, Proc. Roy. Soc. London A, 459 (2003), pp.~2317--2345.
+
+\bibitem{HUANG2005}
+N.E. Huang, \textit{Introduction to the Hilbert-Huang transform and its related mathematical problems}, in book Hilbert-Huang Transform and its Applications, (eds. N.E. Huang and S.S.P. Shen), World Scientific, 2005.
+
+\bibitem{HUTTUNEN2007}
+T. Huttunen, A. Halonen, J. Kaartinen, etc., \textit{Does mismatch negativity show differences in reading-disabled children as compared to normal children and children with attention deficit?}, Developemental Neuropsychology, 31 (2007), pp.~453--470.
+
+\bibitem{HUTTUNEN2008}
+T. Huttunen-Scott, J. Kaartinen, A. Tolvanen, H. Lyytinen, \textit{Mismatch negativity (MMN) elicited by duration deviations in children with reading disorder, attention deficit or both}, International Journal of Psychophysiology, 69 (2008), pp.~69--77.
+
+\bibitem{KALYAKIN2007}
+I. Kalyakin, N. Gonz\'alez, J. Joutsensalo, etc., \textit{Optimal digital filtering versus difference waves on the mismatch negativity in an uninterrupted sound paradigm}, Developemental Neuropsychology, 31 (2007), pp.~429--452.
+
+\bibitem{KALYAKIN2008a}
+I. Kalyakin, N. Gonz\'{a}lez, H. Lyytinen, \textit{Extraction of the Mismatch Negativity on Two Paradigms Using Independent Component Analysis}, Computer-Based Medical Systems CBMS '08. 21st IEEE International Symposium on, 2008, pp.~59--64.
+
+\bibitem{KALYAKIN2008b}
+I. Kalyakin, N. Gonz\'{a}lez, T. K\"{a}rkk\"{a}inen, H. Lyytinen, \textit{Independent component analysis on the mismatch negativity in an uninterrupted sound paradigm}, Journal of Neuroscience Methods, 174 (2008), pp.~301--312.
+
+\bibitem{KALYAKIN2009}
+I. Kalyakin, N. Gonz\'{a}lez, A. Ivannikov, H. Lyytinen, \textit{Extraction of the mismatch negativity elicited by sound duration decrements: A comparison of three procedures}, Data \& Knowledge Engineering (2009) (in press).
+
+\bibitem{KAWABATA}
+N. Kawabata, \textit{A Nonstationary Analysis of the Electroencephalogram}, Biomedical Engineering, IEEE Transactions on, 20:6 (1973), pp.~444-452.
+
+\bibitem{KIZHNER2004}
+S. Kizhner, T.P. Flatley, N.E. Huang, K. Blank, E. Conwell, \textit{On the Hiblert-Huang Transform Data Processing System Development}, 2004 IEEE Aerospace Conference Proceedings, vol. 3, 2004, pp.~1961--1979.
+
+\bibitem{KLONOWSKI2009}
+W. Klonowski, \textit{Everything you wanted to ask about EEG but were afraid to get the right answer}, Nonlinear Biomedical Physics, 3:2 (2009). 
+
+\bibitem{KOPSINIS2007}
+Y. Kopsinis, S. McLaughlin, \textit{Investigation of the empirical mode decomposition based on genetic algorithm optimization schemes}, Proceedings of the IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP '07), vol. 3, 2007, pp.~1397--1400.
+
+\bibitem{KOPSINIS2008}
+Y. Kopsinis, S. McLauglin, \textit{Investigation and performance enhancement of the empirical mode decomposition method based on a heuristic search optimization approach}, IEEE Trans. Signal Processing, Jan. (2008), pp.~1--13. 
+
+%\bibitem{KROPOTOV2000}
+%J.D. Kropotov, K. Alho, R. N\"{a}\"{a}t\"{a}nen, V.A. Ponomarev, O.V. Kropotova, A.D. Anichkov, V.B. Nechaev, \textit{Human auditory-cortex mechanisms of preattentive sound discrimination}, Neuroscience Letters, 280 (2000), p.~87--90.
+
+\bibitem{LEVANQUYEN2001}
+M. Le Van Quyen, J. Martinerie, V. Navarro, P. Boon, M. D'Hav\'{e}, C. Adam, B. Renault, F. Varela, M. Baulac, \textit{Anticipation of epileptic seizures from standard EEG recordings}, Lancet, 357 (2001), pp.~183--188.
+
+\bibitem{LI2006}
+X. Li, \textit{Temporal structure of neuronal population oscillations with empirical mode decomposition}, Physics Letters A, 356 (2006), pp.~237--241.
+
+\bibitem{LIANG2000}
+H. Liang, Z. Lin, R.W. McCallum, \textit{Artifact reduction in electrogastrogram based on the empirical mode decomposition method}, Med. Biol. Eng. Comput., 38 (2000), pp.~35--41.
+
+\bibitem{LIANG2005}
+H. Liang, S.L. Bressler, R. Desimone and P. Fries, \textit{Empirical mode decomposition: a method for analyzing neural data}, Neurocomputing, 65--66 (2005), pp.~801--807.
+
+\bibitem{LUCK2005}
+S.J. Luck, \textit{An introduction to the event-related potential technique}, MIT Press, Cambridge, 2005.
+
+\bibitem{MANDIC2008}
+D.P. Mandic, M. Chen, T. Gautama, M.M. Van Hulle, A. Constantinides, \textit{On the characterization of the deterministic / stochastic and linear / nonlinear nature of time series}, Proc. R. Soc. A, 464  (2008), pp.~1141--1160.
+
+\bibitem{MOCKS1988}
+J. M\"{o}cks, T. Gasser, W. K\"{o}hler, \textit{Basic statistical parameters of event-related potentials}, Journal of Psychopsysiology, 2 (1988), pp.~61--70
+
+\bibitem{NAATANEN1992}
+R. N\"{a}\"{a}t\"{a}nen, \textit{Attention and Brain Function}, Erlbaum, Hillsdale, New Jersey, 1992.
+
+\bibitem{OLIVEIRA2000}
+P. Oliveira, B. Varroso, \textit{Definitions of instantaneous frequency under physical constraints}, Journal of the Franklin Institute, 337 (2000) pp.~303--316. 
+
+\bibitem{OTTEN2005}
+L.J. Otten and M.D. Rugg, \textit{Interpreting Event-Related Brain Potentials}, in book Event-Related Potentials: A Methods Handbook, (ed. T.C. Handy), MIT Press, Cambridge, 2005, pp.~3--16.
+
+%\bibitem{PAKARINEN2007}
+%S. Pakarinen, R. Takegata, T. Rinne, M. Huotilainen, R. N\"{a}\"{a}t\"{a}nen, \textit{Measurement of extensive auditory discrimination profiles using the mismatch negativity (MMN) of the auditory event-related potential (ERP)}, Clin Neurophysiol, 118 (2007), pp.~177--85.
+
+\bibitem{PALUS}
+M. Palu\v{s}, \textit{Nonlinearity in normal human EEG: cycles, temporal asymmetry, nonstationarity and randomness, not chaos}, Biological Cybernetics, 75 no. 5 (1996), pp.~389--396. 
+
+\bibitem{PIHKO1995}
+E. Pihko, T. Lepp\"{a}saari, H. Lyytinen, \textit{Brain reacts to occasional changes in duration of elements in a continuous sound}, NeuroReport, 6 (1995), pp.~1215--1218. 
+
+\bibitem{RILLING2003}
+G. Rilling, P. Flandrin, P. Gon\c{c}alv\`{e}s, \textit{On empirical mode decomposition and its algorithms}, IEEE-EURASIP Workshop on Nonlinear Signal and Image Processing NSIP-03, Grado(I), 2003.
+
+\bibitem{RILLING2007}
+G. Rilling, P. Flandrin, P. Goncalves, J.M. Lilly, \textit{Bivariate empirical mode decomposition}, IEEE Signal Processing Letters, vol. 14 no. 12 (2007), pp.~936--939.
+
+\bibitem{ROY2008}
+A. Roy, C.-H. Wen, J.F. Doherty and J.D. Mathews, \textit{Signal Feature Extraction From Microbarograph Observations Using the Hilbert-Huang Transform}, IEEE Trans. Geosci. Remote Sens., vol. 46, no. 5, 2008, pp.~1442--1447.
+
+\bibitem{SANEI2007}
+S. Sanei and J. Chambers, \textit{EEG Signal Processing}, John Wiley \& Sons, New York, 2007.
+
+%\bibitem{SLOTNICK2005}
+%S.D. Slotnick, \textit{Source Localization of ERP Generators}, in book Event-Related Potentials: A Methods Handbook, (ed. T.C. Handy), MIT Press, Cambridge, 2005, pp.~149--166.
+
+%\bibitem{SWARTZ1998a}
+%B.E. Swartz, \textit{The advantages of digital over analog recording techniques}, Electroencephalogr Clin Neurophysiol, 106 (1998), pp.~113--117.
+
+\bibitem{SWARTZ1998b}
+B.E. Swartz , E.S. Goldensohn, \textit{Timeline of the history of EEG and associated fields}, Electroencephalogr Clin Neurophysiol, 106 (1998), pp.~173--176.
+
+\bibitem{TALSMA2005}
+D. Talsma and M.G. Woldorff, \textit{Methods for the Estimation and Removal of Artifacts and Overlap in ERP Waveforms}, in book Event-Related Potentials: A Methods Handbook, (ed. T.C. Handy), MIT Press, Cambridge, 2005, pp.~115--148.
+
+\bibitem{TANAKA2007}
+T. Tanaka, D.P. Mandic, \textit{Complex Empirical Mode Decomposition}, IEEE Sig. Proc. Lett., vol. 14 no. 2 (2007), pp.~101--104. 
+
+\bibitem{TITCHMARSH1937}
+E.C. Titchmarsh, \textit{Introduction to the theory of Fourier integrals}, (2nd ed., repr. with corr. 1967), Clarendon Press, Oxford, 1937. 
+
+%\bibitem{WINKLER2007}
+%I. Winkler, \textit{Interpreting the Mismatch Negativity}, Journal of Psychophysiology, 21 (2007), pp.~147--163.
+
+\bibitem{WAN2008}
+J. Wan, L. Ren, C. Zhao, \textit{Image Feature Extraction Based on the Two-Dimensional Empirical Mode Decomposition}, Image and Signal Processing, CISP'08 Congress on, 1 (2008), pp.~627-631. 
+
+%\bibitem{WU2004}
+%Z. Wu, N.E. Huang, \textit{A study of the characteristics of white noise using the empirical mode decomposition method}, Proc. R. Soc. London Ser. A, 460 (2004), pp.~1597--1611. 
+
+\bibitem{XU2009}
+Z. Xu, B. Huang, F. Zhang, \textit{Improvement of empirical mode decomposition under low sampling rate}, Signal Processing, 89 (2009), pp.~2296--2303. 
+
+\bibitem{YAMAGUCHI}
+C. Yamaguchi, \textit{Fourier and Wavelet Analyses of Normal and Epileptic Electroencephalogram (EEG)}, Proceedings of the 1st Internationel IEEE EMBS, (2003), pp.~406--409. 
+
+\bibitem{YU2005}
+D.J. Yu, J.S Cheng, Y. Yang, \textit{Appliation of EMD method and Hilbert spectrum to the fault diagnosis of roller bearings}, Mech. Syst. Signal Processing, 19 (2005), pp.~259--270. 
+
+%%%% ESIMERKIT
+
+%\bibitem{kirj2001}
+%Kimmo Kirjoittaja, \textit{Artikkelin otsikko}, Lehden nimi,
+%11 (2001), p.~12--45. % volume-numero, julkaisuvuosi, sivunumerot
+
+%\bibitem{kirjtoin2002}
+%Kimmo Kirjoittaja and Torsti Toinenkirjoittaja, \textit{Artikkelin otsikko},
+%kirjassa Kirjan otsikko, (Toivo Toimittaja, toim.), Mahdollinen lisätieto,
+%Kustantaja, Paikkakunta, 2002, p.~123--456.
+
+%\bibitem{kirjtoinkolm2003}
+%Kimmo Kirjoittaja, Torsti Toinenkirjoittaja and Konsta Kolmaskirjoittaja,
+%\textit{Kirjan tai raportin otsikko}, Mahdollinen lisätieto,
+%Kustantaja, Paikkakunta, 2003.
+
+%\bibitem{teki2004}
+%Teppo Tekijä, \textit{Sivun tai sivuston otsikko}, saatavilla WWW-muodossa
+%<URL: \texttt{http://www.mit.jyu.fi/}>, 1.1.2004. % sivuston päiväys
+% TAI:                         viitattu 1.1.2004. % jos sivustoa ei päivätty
+
+\end{thebibliography}
+
+\appendix
+
+\chapter{Published article}
+
+\includepdf[pages=-]{published_article.pdf}
+
+\end{document}
+
