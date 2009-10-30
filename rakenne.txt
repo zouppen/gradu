@@ -45,9 +45,7 @@ Syksy 2009: n. 50-80 sivua
 
  Kristian kirjoittaa pohjan tälle luvulle.
 
-4) Aiempi tutkimus
-
-5) Hyökkäysten torjunta (ja ennustaminen)
+4) Hyökkäysten torjunta (ja ennustaminen)
 
  - Sääntöpohjaiset IDS:t
    - SNORT
@@ -56,6 +54,8 @@ Syksy 2009: n. 50-80 sivua
  - Poikkeavuuksien havaitsemiseen (anomaly detection) perustuvat IDS:t
  - Heuristiset IDS:t (?)
    - Onko näitä olemassa?
+
+5) Aiempi tutkimus
 
 Kevät 2010: n. 30-50 sivua
 -----------
