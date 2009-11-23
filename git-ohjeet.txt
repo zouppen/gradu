@@ -2,7 +2,7 @@ Muutosten hakeminen
 -------------------
 
 git pull
-git pull joel
+git pull joel master
 
 Ensimmäinen hakee omat muutoksesi (ei tarvetta, jos teet vain yhdellä
 koneella).  Toinen komento (git pull joel) hakee Joelin tekemät
