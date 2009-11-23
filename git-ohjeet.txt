@@ -8,7 +8,7 @@ Ensimmäinen hakee omat muutoksesi (ei tarvetta, jos teet vain yhdellä
 koneella).  Toinen komento (git pull joel) hakee Joelin tekemät
 muutokset ja yhdistää (merge) ne omaan versioosi.
 
-git commit -a
+git commit -am "viesti"
 
 Tallentaa tehdyt muutokset versiohallintaan, mutta ei siirrä niitä
 vielä palvelimelle. Kannattaa ajaa tämä aina , kun on tehnyt jonkin
