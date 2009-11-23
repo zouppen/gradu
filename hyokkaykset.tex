@@ -44,11 +44,11 @@ ovat mahdollista [7].
 \subsection{IP Spoofing}
 
 IP Spoofing on hyökkäystapa, jossa hyökkääjä pyrkii murtautumaan verkkoon
-käyttäen luotetun koneen IP:tä. Ensimmäisessä vaiheessa hyökkääjän selvittää
-luotetun kohteen IP:een käyttäen joko sokeaa tai aktiivistä hyökkäystapaa.
-Varsinainen hyökkäys tapahtuu, kun kohdekone yrittää muodostaa yhteyden
-koneeseen, jonka IP:een hakkeri on ottanut käyttöönsä. Tässä onnistuakseen
-hakkerin tulee ylläpitää tietoa luotetun koneen käyttämistä TCP:een
+käyttäen luotetun koneen IP:tä (kuva \ref{IP-spoofing}). Ensimmäisessä
+vaiheessa hyökkääjän tulee selvittää luotetun kohteen IP:een käyttäen joko sokeaa 
+tai aktiivistä hyökkäystapaa. Varsinainen hyökkäys tapahtuu, kun kohdekone yrittää 
+muodostaa yhteyden koneeseen, jonka IP:een hakkeri on ottanut käyttöönsä. Tässä 
+onnistuakseen hakkerin tulee ylläpitää tietoa luotetun koneen käyttämistä TCP:een
 kuittausnumeroista, joita käytetään kolmivaiheisessa yhteydenmuodostuksessa.
 Tämän tiedon avulla hakkeri pystyy muokkaamaan yhteyden vaatimia
 kuittausviestejä siten, että ne sisältävät oikeat kuittausnumerot. Nämä
@@ -57,15 +57,15 @@ hyökkäystapa on monimutkainen toteuttaa [7].
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=10cm]{pics/spoofing.pdf}
-\caption[Conventional electrode positioning]{Conventional 10--20 electrode positions. Figure adapted from Sanei and Chambers}
-\label{ELECTRODE_POSITIONS}
+\includegraphics[width=12cm]{pics/spoofing.pdf}
+\caption{Hyökkäys käyttäen varastettua IP-osoitetta}
+\label{IP-spoofing}
 \end{figure}
 
-Vaikka IP spoofing hyökkäykset ovat vaikeita toteuttaa, ovat ne melko yleisiä,
-koska jokainen TCP/IP protokollaa käyttävä järjestelmä on sille altis. Tämä
+Vaikka IP-osoitteen varastamiseen perustuvat hyökkäykset ovat vaikeita toteuttaa,
+ovat ne melko yleisiä, koska jokainen TCP/IP protokollaa käyttävä järjestelmä on sille altis. Tämä
 johtuu siitä, että TCP/IP-pino sallii pakettien käsin muokkaamisen. Tämä
-toiminto on sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
+toiminto on taas sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
 käsin muokkaamaan pakettien sisältöä ennen lähettämistä. Tällaisia palveluita
 ovat mm. mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
 muutetaan toiseksi [11].
@@ -76,6 +76,34 @@ väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulee verkkoon
 ulkopuolisesta liitännästä. Jos tämä kuitenkin halutaan sallia, niin jokainen
 sessio tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen tulisi
 pohjautua koko järjestelmän kattavaan salaukseen [7].
+
+\subsection{ARP Spoofing}
+
+Nykyisin lähes jokainen verkko pohjautuu TCP/IP-protokollan ja Ethernet-verkon
+väliseen toimintaan. Tämän toiminnan mahdollistamiseksi tarvitaan ARP-protokollaa,
+jonka tehtävänä on selvittää jokaista IP-osoitetta vastaava Ethernet- eli MAC-osoite. Tämä osoite
+on uniikki jokaiselle verkkokortille, ja sen avulla verkossa olevat koneet pystytään tunnistamaan.
+Tämä tieto taas tarvitaan, koska ilman sitä
+verkko ei pysty välittämään paketteja oikealle koneelle. ARP-spoofing, jota
+kutsutaan myös ARP-myrkyttämiseksi, pyrkii hyödyntämään ARP-protokollan
+toimintaa syöttämällä reitittimissä ylläpidettäviin ARP-tauluihin virheellistä
+tietoa (kuva \ref{ARP-spoofing}). Tämä tapahtuu kaappaamalla verkon yleislähetysviestejä ja muokkaamalla
+kuittausviestin sisältöä siten, että kuittausviestiin hyökkääjä laittaa
+kohdeosoitteeksi oman IP-osoitteen ja vastaa viestiin omalla MAC-osoitteella.
+Tämän jälkeen kohdekoneelle tarkoitetut paketit ohjautuvat hyökkääjän koneelle[7].
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=12cm]{pics/arp_spoofing.pdf}
+\caption{Hyökkääjä muokannut kytkimen ARP-taulua}
+\label{ARP-spoofing}
+\end{figure}
+
+ARP-protokolla on hyvin haavoittuvainen hyökkäyksille, koska oletuksena se ei
+sisällä suojauskeinoa ARP-spoofaukselle. Siksi paras keino suojautua
+tällaisilta hyökkäyksiltä on varmistaa, että ennen ARP-taulun muokkausta
+tunnistetaan käyttäjät jollakin keinolla. Toinen mahdollisuus on käyttää
+staattista ARP-taulua [7].
 
 \section{Denial Of Service}
 
@@ -89,7 +117,7 @@ web-sovellukset. Hyökkäyksillä pyritään lamauttamaan palvelua tarjoava
 verkko tai palvelin siten, että oikeiden pyyntöjen vastaanottamiseen
 ei enää riitä resursseja. Keinoja tähän on monia, ja koska näistä
 lähes jokainen käyttää nykyisin hyväkseen eri protokollien sallittuja
-toimintoja, on hyökkäyksiä vastaan suojautuminen hyvin vaikeaa [2].
+toimintoja, on hyökkäyksiä vastaan suojautuminen hyvin vaikeaa [2]
 
 Palvelunestohyökkäykset voidaan jakaa kolmeen ryhmään näiden
 toteutustapojen ja tavoitteiden mukaan. Ensimmäiseen ryhmään kuuluvat
@@ -145,7 +173,6 @@ miljoonan dollarin tappiot, ja pysäytti toiminnan lähes kahdeksi
 viikoksi [4].
 
 \subsection{SYN-hukuttaminen}
-
 TCP/IP-protokollan yksi suunnittelulähtökodista oli, että sitä
 käytettäisiin avoimessa ja luotetussa ympäristössä. Tästä syystä sen
 suunnittelussa ei osattu ottaa huomioon mahdollisia vihamielisiä
@@ -154,69 +181,81 @@ avulla. TCP/IP-protokollan käyttö kuitenkin levisi ja yleistyi
 arvaamattomasti, jonka johdosta suunnitteluvaiheessa tehdyt virheet
 periytyivät nyt käytössä olevaan IPv4-verkkorakenteeseen[2].
 
-Perityistä heikkouksista tunnetuin ja käytetyin lienee
-SYN-hukuttamiseksi kutsuttu hyökkäys, jossa hyökkääjä pyrkii
-kuluttamaan kohteen kaistan loppuun tekaistuilla
-yhteydenmuodostuspyynnöillä. Hyökkäys on toteutukseltaan hyvin
-yksinkertainen ja helppo toteuttaa, sillä se käyttää hyväkseen
-TCP-protokollaan määritettyjä toimintoja. Hyökkäys perustuu siihen,
-että kolmiosaisessa yhteydenmuodostusvaiheessa kone lähettää
-palvelimelle SYN-paketin, jonka johdosta palvelin varaa tulevalle
-yhteydelle resursseja ja lähettämänsä SYN/ACK-viestin jälkeen jää
-odottamaan yhteyden muodostamista. Tähän koneen kuuluu vastata
-ACK-viestillä, jonka jälkeen yhteys muodostetaan [2].
+Perityistä heikkouksista tunnetuin ja käytetyin on SYN-hukuttamiseksi kutsuttu
+hyökkäys, jossa hyökkääjä pyrkii kuluttamaan kohteen kaistan loppuun
+tekaistuilla yhteydenmuodostuspyynnöillä. Hyökkäys on toteutukseltaan hyvin
+yksinkertainen ja helppo toteuttaa, sillä se käyttää hyväkseen TCP-protokollaan
+määritettyjä toimintoja. Hyökkäys perustuu siihen, että kolmiosaisessa
+yhteydenmuodostusvaiheessa kone lähettää palvelimelle SYN-paketin, jonka
+johdosta palvelin varaa tulevalle yhteydelle resursseja ja lähettämänsä SYN /
+ACK-viestin jälkeen jää odottamaan yhteyden muodostamista. Tähän koneen kuuluu
+vastata ACK-viestillä, jonka jälkeen yhteys muodostetaan [2].
 
-Tähän toimintamalliin perustuu mm. HTTP-protokollan toiminta, ja sen
-avulla web-palvelimet pystyvät nopeasti palvelemaan käyttäjiä. Koska
-TCP-protokolla pyrkii aina varmistamaan yhteyden muodostumisen, ja
-tarvittaessa lähettämään SYN/ACK-viestin uudestaan SYN-paketin
-lähettäneelle koneelle, pystyy hyökkääjä käyttämään tätä ominaisuutta
-hyväkseen. Riittää, että hyökkääjä nuuskii selville käyttämättömän
-IP-osoitteen, joka on mieluiten samasta osoiteavaruudesta kuin missä
-palvelin on. Tämän jälkeen hyökkääjä luo SYN-paketin, jossa on tämä
-tekaistu IP-osoite. Koska palvelimen lähettämä SYN/ACK-viesti ei
-koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta,
-jolloin TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan
-kunnes määritetty raja yhteyden aikakatkaisulle tulee vastaan
-[6]. Hyökkääjälle riittää, että tämä toiminta automatisoidaan ja
-koneina käytetään esimerkiksi jo aikaisemmin mainittuja
-zombie-koneista muodostettuja verkostoja.
+Tähän toimintamalliin perustuu mm. HTTP-protokollan toiminta, ja sen avulla web-
+palvelimet pystyvät nopeasti palvelemaan useita yhtäaikaisia käyttäjiä.
+Koska TCP-protokolla pyrkii aina varmistamaan yhteyden muodostumisen, ja tarvittaessa 
+lähettämään SYN/ACK-viestin uudestaan SYN-paketin lähettäneelle koneelle, pystyy hyökkääjä
+käyttämään tätä ominaisuutta hyväkseen. Riittää, että hyökkääjä nuuskii
+selville käyttämättömän IP-osoitteen, joka on vielä mieluiten samasta
+osoiteavaruudesta kuin missä palvelin on. Tämän jälkeen hyökkääjä luo SYN-
+paketin, jossa on tämä tekaistu IP-osoite. Koska palvelimen lähettämä SYN/ACK-
+viesti ei koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta,
+jolloin TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan kunnes
+määritetty raja yhteyden aikakatkaisulle tulee vastaan [6]. Hyökkääjälle
+riittää, että tämä toiminta automatisoidaan ja koneina käytetään esimerkiksi
+saastuneista koneista muodostettuja verkostoja. Tällä tavoin saadaan aikaiseksi
+kuvan \ref{syn} mukainen tilanne, jossa usean koneen avulla hyökkääjä häiritsee
+kohteen toimintaa turhilla yhteydenottopyynnöillä.
 
-SYN-hukuttamisen mahdollistavan mekanismin avulla voidaan myös
-toteuttaa heijastettu hyökkäys (engl. reflective attack), joka on
-muunnos SYN-hukuttamisesta. Tässä hyökkäyksessä väärennetyissä
-SYN-viesteissä on lähettäjäksi merkitty haluttu kohde. Lähettämällä
-suuri määrä näitä SYN-viestejä esimerkiksi web-palvelimelle, aiheutuu
-vastaustulvasta ongelmia kohteelle [6].
+\begin{figure}[hpt]
+\centering
+\includegraphics[width=12cm]{pics/syn.pdf}
+\caption{SYN-hyökkäys käyttäen useita koneita}
+\label{syn}
+\end{figure}
 
-Koska harvalla yrityksellä on mahdollista pitää ylimääräisiä
-resursseja SYN-hu\-kut\-ta\-mi\-sen varalta, joudutaan ratkaisua hakemaan
-muilla keinoin. Yksi alkeellinen keino on rajoittaa puoliavonaisten
-yhteyksien määrää, jolloin rajan ylittyessä aletaan yhteyksiä pudottaa
-[5]. Toinen käytetty keino on reitittimiltä verkkoon päin tulevan
-liikennemäärän seuraaminen, ja liikennepiikkeihin
-reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua liikenteen
-seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla
-[6]. Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin
-toteutettua hyökkäystä vastaan on vaikea suojautua ilman, että
-sallittuja yhteyksiä ei tiputettaisi.
+SYN-hukuttamisen mahdollistavan mekanismin avulla voidaan myös toteuttaa
+heijastettu hyökkäys (engl. reflective attack), joka on muunnos SYN-
+hukuttamisesta. Tässä hyökkäyksessä väärennetyissä SYN-viesteissä on
+lähettäjäksi merkitty haluttu kohde. Lähettämällä suuri määrä näitä SYN-
+viestejä esimerkiksi web-palvelimelle, aiheutuu vastaustulvasta ongelmia
+kohteelle [6].
+
+Koska harvalla yrityksellä on mahdollista pitää ylimääräisiä resursseja SYN-
+hukuttamisen varalta, joudutaan ratkaisua hakemaan muilla tavoin. Yksi
+alkeellinen keino on rajoittaa puoliavonaisten yhteyksien määrää, jolloin rajan
+ylittyessä aletaan yhteyksiä pudottaa [5]. Toinen käytetty keino on
+reitittimiltä verkkoon päin tulevan liikennemäärän seuraaminen, ja
+liikennepiikkeihin reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua
+liikenteen seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla [6].
+Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin toteutettua
+hyökkäystä vastaan on vaikea suojautua ilman, että sallittuja yhteyksiä ei
+tiputeta.
 
 \subsection{UDP Echo}
 
 Myös UDP-protokolla mahdollistaa hyökkäysten tekemisen. Nämä
-hyökkäykset käyttävät hyväkseen UDP:n ECHO-toimintaa, johon muut
-koneet vastaavat jollei verkossa toisin ole määritelty. Fraggleksi
-nimetty hyökkäys toimii siten, että hyökkääjä lähettää UDP
+hyökkäykset käyttävät hyväkseen UDP:n ECHO-toimintaa, jos sen käyttö
+on vain sallittu verkossa. Näistä hyökkäyksistä tunnetuin lienee Fraggleksi
+nimetty hyökkäys, joka nykyisinkin  aiheuttaa väärin konfiguroidussa verkossa suuria ongelmia.
+Fraggle toimii siten, että hyökkääjä lähettää UDP
 echo-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
-hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet vastaavat,
-jolloin kohdekoneen kaista ja resurssit loppuvat. Fraggle on hyvä
-esimerkki vahvistetusta hyökkäyksestä, jossa verkon laitteiden määrä
+hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet pyrkivät vastaamaan,
+jolloin kohdekoneen kaista ja resurssit joudutaan varaamaan viestien vastaanottamiseen (kuva \ref{echo}). 
+Fraggle on hyvä esimerkki vahvistetusta hyökkäyksestä, jossa verkon laitteiden määrä
 vaikuttaa siihen, kuinka vakava hyökkäys on [7]. Vastaavanlainen
 hyökkäys voidaan myös toteuttaa kahden koneen välillä, jos kummassakin
 on sallittuna UDP echo-viestit. Tällöin hyökkääjä väärentää viestiin
 lähettäjän osoitteen ja halutun kohdeportin. Vastaanottaja vastaa
 tähän viestiin omalla echo-viestillä, ja näin kahden koneen välille on
 muodostunut ikuinen silmukka [5].
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/echo.pdf}
+\caption{UDP Echo hyökkäys}
+\label{echo}
+\end{figure}
 
 \subsection{Smurf}
 
@@ -237,6 +276,130 @@ ECHO-viestien tuen poistamisella verkon laitteilta pääsee jo
 pitkälle. Samoin ICMP-protokollan käyttöä kannattaa verkossa rajoittaa
 [2].
 
+\section{Distributed Denial of Service}
+
+Vielä viime vuosikymmenellä palvelunestohyökkäykset perustuivat yleensä
+käyttöjärjestelmistä löydettyjen heikkouksien hyödyntämiseen. Näiden
+hyökkäysten aikaansaama tuho oli usein konekohtaista ja melko rajattua, joten
+hyökkäyksiä ei nähty kovinkaan vakavana uhkana. 2000-luvulla
+palvelunestohyökkäykset ovat kuitenkin kehittyneet siihen pisteeseen, että
+nykyisin palvelu saattaa joutua hajautetun palvelunestohyökkäyksen (engl.
+Distrubuted Denial of Service) kohteeksi, jolloin palvelua saattaa olla
+lamauttamassa jopa yli 140000 saastunutta konetta. Tällaisia saastuneita
+koneita kutsutaan zombeiksi, sillä näihin on murtauduttu ja asennettu
+ohjelmisto, jonka avulla murtautuja pystyy hallitsemaan konetta käyttäjän
+tietämättä. Zombie-verkoston ei tarvitse edes olla kovinkaan suuri
+aiheuttaakseen tuhoa, sillä jo 3000 koneen verkosto, jossa jokainen kone
+tuottaa 25 Kbps liikennettä, aiheuttaa yhteensä 75 Mbps kuorman verkolle [2].
+Palvelunestohyökkäyksen seuraamukset saattavatkin olla varautumattomalle
+taholle usein katastrofaaliset, ja pahimmillaan hyökkäys saattaa pysäyttää
+organisaation toiminnan useiksi päiviksi [1].
+
+Hyökkäysten hajauttaminen useammalla koneelle tuo useita hyötyjä verrattuna
+perinteiseen palvelunestohyökkäykseen, jossa hyökkäys toteutetaan käyttäen yhtä
+konetta. Otetaan esimerkiksi vaikka web-palveluita tarjoava palvelin, jota
+vastaan halutaan tehdä palvelunestohyökkäys. Tällaisella palvelimella on
+käytössä huomattavasti suurempi määrä resursseja (kaista, muisti,
+prosessointiteho) kuin mitä yhdellä tavallisella koneella on. Tekemällä
+hyökkäyksen yhtäaikaisesti useammalla koneella, pystyy hakkeri kuluttamaan
+suuretkin resurssit loppuun melko lyhyessä ajassa. Yhdeltä koneelta tuleva
+palvelunestohyökkäys on myös helppo tunnistaa ja estää verkon ylläpitäjän
+toimesta. Hyökkääjien määrän kasvaessa tehtävä vaikeutuu huomattavasti, koska
+suurin koneista pitää tunnistaa ja liikennöinti pysäyttää, jotta tästä olisi
+jonkinlaista hyötyä. Jos nämä koneet ovat vielä levitetty ympäri internetiä, on
+hyökkäysten pysäyttäminen ilman palvelun kärsimistä mahdoton tehtävä käsin
+tehtynä. Tällaista hyökkäysliikennettä on vaikea erottaa tavallisesta
+liikenteestä, koska se tulee palvelimelle eri reittejä pitkin [11].
+
+Nopeiden yhteyksien ja verkossa olevien koneiden räjähdysmäinen kasvu on tehnyt
+hajautetuista palvelunestohyökkäyksistä hyvin tehokkaita ja tuhoisia. Suuri
+määrä verkossa kiinni olevista koneista on huonosti suojattu ja päivitetty, ja
+ihmisten tietoisuus verkon vaaroista on usein puutteellista. Tämä on luonut
+otollisen maaperän suurten zombie-verkostojen muodostamiselle virusten ja
+matojen avustuksella. Tarjolla on myös tätä tarkoitusta varten suunniteltuja
+työkaluja ja ohjelmistoja, jotka tekevät tarvittavat toimenpiteet
+automaattisesti. Jo ensimmäiset työkalut kuten Trinoo ja Shaft, jotka ovat
+vapaasti saatavilla verkosta, mahdollistivat tuhansien suojaamattomien koneiden
+haltuunoton vaatimatta sen suurempaa tietämystä [11].
+
+Hyökkäyksessä käytetyt koneet voidaan jakaa agentteihin (engl. agents) ja
+liikenteen ohjaajiin (engl. handlers) riippuen näiden rooleista. Näistä
+koneista hyökkääjä käskyttää suoraan liikenteen ohjaajia, jotka sitten ohjaavat
+annetut käskyt agenteille hyökkäyksen alettua [7] [11]. Ensimmäisissä DDoS-
+verkoissa nämä ohjausviestit olivat salaamattomia, ja kuka tahansa pystyi
+kaappaamaan niitä. Tämä oli ongelmallista, koska liikenteen ohjaajat joutuivat
+pitämään yllä IP-listaa agenteista, jolloin liikenteen välittäjän joutuessa
+vastahyökkäyksen kohteeksi, paljastui verkon jokainen kone. Tätä suoran
+käskyttämisen heikkoutta pyrittiin korjaamaan mm. salaamalla liikenne ja
+viestit. Ajan saatossa liikenteen ohjaajat pystyttiin kuitenkin tunnistamaan ja
+poistamaan verkosta, jolloin hyökkäyksessä käytetty verkko hajosi [11].
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/ddos1.pdf}
+\caption{Perinteinen DDoS-verkosto}
+\label{ddos1}
+\end{figure}
+
+Nykyisin enää harva DDoS-hyökkäyksessä käytetty verkko käyttää kuvan \ref{ddos1}
+hierarkiaa sen heikon ohjattavuuden takia. Tämän tilalle on tullut
+epäsuoraan käskyttämiseen perustuvat verkot, jotka käyttävät viestien
+välittämiseen IRC-verkkoja (kuva \ref{ddos2}). IRC on reaaliaikaiseen viestittämiseen
+tarkoitettu palvelu, jonka kautta ihmiset pystyvät reaaliajassa kirjoittamaan
+ja lukemaan viestejä. IRC-verkot muodostuvat IRC-kanavista, joita on lukematon
+määrä, ja joihin käyttäjät liittyvät ennen kommunikointia. Samalla
+periaatteella toimivat myös saastuneet koneet. Jokainen kone liittyy usein
+salasanalla suojattuun IRC-kanavaan, jonka kautta hyökkääjä antaa käskyjä
+koneille. Tällä tavalla saadaan monia etuja verrattaessa suoraan käskyttämiseen.
+Ensinnäkin liikennettä ei pystytä enää tunnistamaan poikkeavaksi, koska se on
+normaalia IRC-liikennettä. Toisekseen käytettyä kanavaa voidaan vaihtaa
+lennosta, jolloin yhden kanavan sulkeminen ei pysäytä verkon toimintaa. Näiden
+syiden takia DDoS-hyökkäysten pysäyttäminen ennen niiden käynnistymistä on
+erittäin vaikeaa [11].
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/ddos2.pdf}
+\caption{Perinteinen DDoS-verkosto}
+\label{ddos2}
+\end{figure}
+
+Kuten yllä on jo tullut esille, on hajautetulta palvelunestohyökkäykseltä
+suojautuminen vaikea tehtävä riippumatta siitä onko verkko itse kohde vai
+käytetäänkö sitä vain hyökkäysten koordinointiin. Valmista ja yksityiskohtaista
+ratkaisua ei ole tarjolla, mutta seuraamalla joitakin yleisiä strategioita,
+voidaan vahinkoja rajoittaa. Nämä strategiat ovat suojautuminen, tunnistaminen
+ja reagoiminen, ja ne noudattavat yleistä vahinkoketjun elinkaarta [11].
+
+Ensinnäkin on tärkeää, että verkon ylläpitäjä tietää tarkoin kuinka verkko
+toimii, ja käytössä on verkon toimintaa seuraavia työkaluja. Näiden avulla
+verkon heikot kohdat pystytään tunnistamaan ja vahvistamaan. Käytössä tulee
+olla myös jonkinlainen suojausjärjestelmä, joka kirjaa ylös riittävän pitkältä
+ajalta ylös verkkoon tulevan ja lähtevän liikenteen, sillä aina hajautettu
+palvelunestohyökkäys ei kaada koko verkkoa. Tällöin on tärkeää, että tapahtunut
+pystytään tarkasti analysoimaan, ja löydetyt heikkoudet paikattua parhaalla
+mahdollisella tavalla [11].
+
+Kun hyökkäys on päällä, tulee käytetty hyökkäystapa tunnistaa mahdollisimman
+nopeasti. Useimmat hyökkäykset noudattavat tiettyä kaavaa, ja näiden
+tunnistamiseen on olemassa useita valmiita työkaluja. Tämä on tärkeää, koska
+tunnistamisen jälkeen voidaan rajata, mistä hyökkäys on peräisin ja tehdä
+tarvittavat toimenpiteet hyökkäyksen lopettamiseksi. Useimmissa tapauksissa
+tämä tarkoittaa yhteistyötä palveluntarjoajan ja viranomaisten kanssa.
+Viranomaisten mukaan tuominen on muutenkin tärkeää, koska vain tätä kautta
+voidaan käytettyä hyökkäysverkostoa lähteä tunnistamaan ja toivottavasti myös
+hajottamaan [11].
+
+Jotta nopea reagoiminen olisi mahdollista, tulee yrityksessä olla tehtynä
+toimintasuunnitelmat hyökkäyksen varalta. Ensimmäinen vaihtoehto lienee aina
+haitallisen liikenteen estäminen, mutta tätä varten tulee olla tehtynä tarkat
+prosessit kuinka toimitaan hyökkäyksen alettua. Tärkeää on sopia mitä
+dokumentoidaan ja kuinka asioista raportoidaan oikeille tahoille. Hyökkäyksen
+jälkeinen analyysi on myös riippuvainen sovituista käytännöistä. Tämä analyysi
+on erittäin tärkeää, sillä vain sitä kautta toimintasuunnitelmia voidaan
+kehittää oikeaan suuntaan [11].
+
+
 \section{Remote-to-Local}
 
 Remote-to-Local (lyh. R2L) on hyökkäystyyppi, jossa hyökkääjä pyrkii
@@ -248,35 +411,32 @@ pääkäyttäjän oikeudet, jolloin koneen ja verkon resurssit ovat täysin
 hyökkääjän käytössä.
 
 Onnistuneet R2L hyökkäykset ovat verkon ylläpitäjien kannalta pahimpia
-mahdollisia, sillä niiden mahdollistamat tuhot ja aiheuttamat
-kustannukset ovat muita hyökkäyksiä huomattavasti suuremmat
-[9]. Onnistunut R2L-hyökkäys saattaa myös muut verkon koneet vaaraan,
-sillä usein hyökkääjä pyrkii asentamaan koneisiin ohjelmistoja, joiden
-avulla hyökkääjä pystyy ottamaan koneen haltuun käyttäjän
-huomaamatta. Tällä tavoin osa aikaisemmin mainituista
-Zombie-verkostoista saa alkunsa.
+mahdollisia, sillä niiden mahdollistamat tuhot ja aiheuttamat kustannukset ovat
+muita hyökkäyksiä huomattavasti suuremmat [9]. Onnistunut R2L-hyökkäys saattaa
+myös muut verkon koneet vaaraan, sillä usein hyökkääjä pyrkii asentamaan
+koneisiin ohjelmistoja, joiden avulla hyökkääjä pystyy ottamaan koneen haltuun
+käyttäjän huomaamatta. Tällä tavoin osa aikaisemmin mainituista Zombie-
+verkostoista saa alkunsa.
 
-Käytetyimmät web-palvelinohjelmistot (Apache ja IIS) vastaavat noin
-85\% kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi
-BIND-ni\-mi\-pal\-ve\-lin\-oh\-jel\-mis\-tol\-la on markkinaenemmistö. Ohjelmistojen
-yleisyydestä johtuen yli puolet R2L-hyökkäyksen mahdollistavista
-heikkouksista onkin löydetty näille alustoille [8]. Useat
-haavoittuvaisuudet johtuvat ohjelmointivirheistä, joiden johdosta
-hyökkääjä pystyy aiheuttamaan sovellukseen muistin ylivuodon
-(engl. Buffer Overflow). Tämä usein kaataa sovelluksen tai saattaa sen
-sellaiseen tilaan, että hyökkääjä pystyy ajamaan omia komentoja
-koneella. Kattava listaus löydetyistä heikkouksista ja näiden
+Käytetyimmät web-palvelinohjelmistot (Apache ja IIS) vastaavat noin 85%
+kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi BIND-
+nimipalvelinohjelmistolla on markkinaenemmistö. Ohjelmistojen yleisyydestä
+johtuen yli puolet R2L-hyökkäyksen mahdollistavista heikkouksista onkin
+löydetty näille alustoille [8]. Useat haavoittuvaisuudet johtuvat
+ohjelmointivirheistä, joiden johdosta hyökkääjä pystyy aiheuttamaan
+sovellukseen muistin ylivuodon (engl. Buffer Overflow). Tämä usein kaataa
+sovelluksen tai saattaa sen sellaiseen tilaan, että hyökkääjä pystyy ajamaan
+omia komentoja koneella. Kattava listaus löydetyistä heikkouksista ja näiden
 korjauksista löytyy osoitteesta www.cve.mitre.org/cve [10].
 
-Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista
-sillä nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa
-tästä ensin sovelluksen kehittäjille, ennen kuin julkistaa
-tiedon. Siksi usein korjaus haavoittuvuuteen on olemassa ennen kuin
-sitä on mahdollista hyödyntää [9]. Vastuu jääkin verkon ylläpitäjälle,
-että pitää käytetyt sovellukset ajan tasalla sekä päivittää
-suojausjärjestelmät siten, että ne tunnistavat tällaiset
-hyökkäykset. Suurin osa onnistuneista hyökkäyksistä johtuukin siitä,
-että tunnettuja tietoturva-aukkoja ei ole korjattu.
+Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista sillä
+nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa tästä ensin
+sovelluksen kehittäjille, ennen kuin julkistaa tiedon. Siksi usein korjaus
+haavoittuvuuteen on olemassa ennen kuin sitä on mahdollista hyödyntää [9].
+Vastuu jääkin verkon ylläpitäjälle, että pitää käytetyt sovellukset ajan
+tasalla sekä päivittää suojausjärjestelmät siten, että ne tunnistavat tällaiset
+hyökkäykset. Suurin osa onnistuneista hyökkäyksistä johtuukin siitä, että
+tunnettuja tietoturva-aukkoja ei ole korjattu.
 
 \section{User-to-Root}
 
@@ -289,22 +449,13 @@ ylivuodon aiheuttamisen sekä odottamattomien syötteiden antamisen
 siten, että hyökkääjällä on jo valmiiksi pääsy koneelle normaalina
 käyttäjänä.
 
-\section{Tiedon urkkiminen ja datan muokkaaminen}
-
-Ennen kuin hyökkääjä pystyy murtautumaan verkkoon/koneeseen, tulee
-hänen selvittää mitä hänellä on vastassa. Tärkeitä tietoja ovat
-mm. mikä ohjelmisto ja mikä versio siitä on käytössä, mikä
-käyttöjärjestelmä ja minkälaiset suojausjärjestelmät kohteella on
-käytössä. Hyökkääjä, jolla on tarkka kuvaus verkon laitteista ja
-palveluista, voi käyttää tätä tietoa haavoittuvuuksien etsimiseen [8].
-
-[1] www.cert.org
-[2] Hacking Exposed
-[3] DDoS-Resilient …
-[4] \url{http://www.fbi.gov/wanted/fugitives/cyber/echouafni_s.htm viitattu 27.10.2009}
-[5] TCP/IP verkot
-[6] Hack the Stack
-[7] Web Security Basics
-[8] A Comparative Study of Techniques for Intrusion Detection
-[9] The Effect of Identifying Vulnerabilities and Patching Software on the Utility of Network Intrusion Detection
-[10] www.cve.mitre.org/cve. Viitattu 29.10.2009
+U2R-hyökkäykset ovat L2R-hyökkäysten ohella vaikeimpia torjua, jos kohteena
+oleva järjestelmä mahdollistaa näiden toteuttamisen. Tämä johtuu siitä, että
+usein hyökkäyksestä aiheutuva liikenne muistuttaa hyvin paljon normaalia
+liikennettä, jonka johdosta itsestään oppivat puolustusjärjestelmät eivät pysty
+riittävän tarkasti erottamaan haitallista liikennettä normaalista [16].
+Kehittyneimmilläkin järjestelmillä näiden hyökkäysten tunnistaminen on todella
+heikkoa. Tämän on osoittanut useat eri tutkimushankkeet, jotka ovat käyttäneet
+järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä, jonka sisältö
+on tarkkaan tiedossa. Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
+paikkeille, ja yleensä luku on jäänyt alle 10 prosenttiin.
