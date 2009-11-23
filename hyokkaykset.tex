@@ -1,6 +1,81 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
 \chapter{Katsaus yleisimpiin hyökkäyksiin}
+Nykyisin yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä,
+ja niiden aiheuttamilta ongelmilta. Näitä hyökkäyksiä on hyvin monenlaisia, ja
+ne voidaan jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
+mukaan. Uusia hyökkäystapoja myös kehitetään jatkuvasti, ja vanhat saavat uusia
+ominaisuuksia. Vaikka osaan hyökkäyksistä onkin olemassa suojautumistapoja, on
+näiltä kaikilta suojautuminen ylläpitäjälle mahdoton tehtävä. Verkon
+turvallisuuden kannalta on kuitenkin tärkeää, että näiden tuomat riskit
+tiedostetaan ja niihin pyritään puuttumaan mahdollisuuksien ja resurssien
+mukaan.
+
+\section{Tiedon urkinta ja väärentäminen}
+
+Ennen kuin hyökkääjä pystyy murtautumaan verkkoon tai koneeseen, tulee hänen
+selvittää kohteen mahdolliset heikkoudet. Haluttuja tietoja ovat mm. mitä
+käyttöjärjestelmiä koneisiin on asennettu, mitkä versiot ohjelmistoista on
+käytössä ja mikä on verkon rakenne ja tietoturvataso. Näiden tietojen
+selvittämiseksi hyökkääjää aloittaa verkkoa kohtaan joukon hyökkäyksiä, joita
+kutsutaan tiedusteluhyökkäyksiksi. (engl. Probe Attacks). Kyseiset hyökkäykset
+ovat hyökkäyksistä yleisimpiä, sillä niiden toteuttaminen ei vaadi hyökkääjältä
+usein kovinkaan syvällistä osaamista. Verkosta löytyy paljon valmiita työkaluja,
+joiden avulla hyökkääjä pystyy urkkimaan tarvittavat tiedot sekä mahdol-lisesti
+saman tien hyödyntämään löydettyjä heikkouksia. Hyökkääjä, jolla on tarkka
+kuvaus verkon laitteista ja palveluista, voikin käyttää tietoa
+haavoittuvuuksien etsimiseen ja järjestelmiin murtau-tumiseen [8].
+
+Kun hyökkääjällä on tietämys verkon eri komponenteista, voi hän aloittaa
+hyökkäysten suunnittelun. Yksi tapa pyrkiä murtautumaan IP-pohjaiseen verkkoon
+on hyödyntää protokollissa olevia heikkouksia. Tällaisia hyökkäyksiä kutsutaan
+spoofing-hyökkäyksiksi, ja niissä hakkeri pyrkii naamioimaan oman koneensa
+siten, että se näyttäisi kuuluvan kohteena olevan koneen kanssa samaan verkkoon.
+Tällöin hyökkääjä pystyy huijaamaan kohdekonetta jakamaan ja lähettämään
+arkaluontoista dataa, jota muuten vain jaettaisiin luotettujen kohteiden kesken.
+Hyökkäykset jaotellaan edelleen sokeisiin ja aktiivisiin hyökkäyksiin. Nämä
+eroavat siinä, että sokeassa hyökkäyksessä murtautujalla ei ole tarkkaa tietoa
+sen koneen IP:stä, jota hän yrittää esittää tai koneelta puuttuu tarvittavat
+oikeudet. Tällöin hyökkääjä joutuu tekemään hyökkäykset sokeana. Aktiivisessa
+hyökkäyksessä murtautujalla taas on tieto koneiden välisistä oikeuksista,
+jolloin tiedon korruptoiminen, muokkaaminen ja välittäminen toiseen verkkoon
+ovat mahdollista [7].
+
+\subsection{IP Spoofing}
+
+IP Spoofing on hyökkäystapa, jossa hyökkääjä pyrkii murtautumaan verkkoon
+käyttäen luotetun koneen IP:tä. Ensimmäisessä vaiheessa hyökkääjän selvittää
+luotetun kohteen IP:een käyttäen joko sokeaa tai aktiivistä hyökkäystapaa.
+Varsinainen hyökkäys tapahtuu, kun kohdekone yrittää muodostaa yhteyden
+koneeseen, jonka IP:een hakkeri on ottanut käyttöönsä. Tässä onnistuakseen
+hakkerin tulee ylläpitää tietoa luotetun koneen käyttämistä TCP:een
+kuittausnumeroista, joita käytetään kolmivaiheisessa yhteydenmuodostuksessa.
+Tämän tiedon avulla hakkeri pystyy muokkaamaan yhteyden vaatimia
+kuittausviestejä siten, että ne sisältävät oikeat kuittausnumerot. Nämä
+kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka takia tämä
+hyökkäystapa on monimutkainen toteuttaa [7].
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=10cm]{pics/spoofing.pdf}
+\caption[Conventional electrode positioning]{Conventional 10--20 electrode positions. Figure adapted from Sanei and Chambers}
+\label{ELECTRODE_POSITIONS}
+\end{figure}
+
+Vaikka IP spoofing hyökkäykset ovat vaikeita toteuttaa, ovat ne melko yleisiä,
+koska jokainen TCP/IP protokollaa käyttävä järjestelmä on sille altis. Tämä
+johtuu siitä, että TCP/IP-pino sallii pakettien käsin muokkaamisen. Tämä
+toiminto on sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
+käsin muokkaamaan pakettien sisältöä ennen lähettämistä. Tällaisia palveluita
+ovat mm. mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
+muutetaan toiseksi [11].
+
+IP spoofing hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain tapa on
+asettaa verkko siten, että se ei salli sellaisten pakettien kulkua, jotka
+väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulee verkkoon
+ulkopuolisesta liitännästä. Jos tämä kuitenkin halutaan sallia, niin jokainen
+sessio tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen tulisi
+pohjautua koko järjestelmän kattavaan salaukseen [7].
 
 \section{Denial Of Service}
 
