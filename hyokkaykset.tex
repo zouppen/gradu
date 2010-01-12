@@ -24,7 +24,8 @@ usein kovinkaan syvällistä osaamista. Verkosta löytyy paljon valmiita työkal
 joiden avulla hyökkääjä pystyy urkkimaan tarvittavat tiedot sekä mahdol-lisesti
 saman tien hyödyntämään löydettyjä heikkouksia. Hyökkääjä, jolla on tarkka
 kuvaus verkon laitteista ja palveluista, voikin käyttää tietoa
-haavoittuvuuksien etsimiseen ja järjestelmiin murtau-tumiseen [8].
+haavoittuvuuksien etsimiseen ja järjestelmiin
+mur\-tau\-tu\-mi\-seen\cite{intru}.
 
 Kun hyökkääjällä on tietämys verkon eri komponenteista, voi hän aloittaa
 hyökkäysten suunnittelun. Yksi tapa pyrkiä murtautumaan IP-pohjaiseen verkkoon
@@ -39,7 +40,7 @@ sen koneen IP:stä, jota hän yrittää esittää tai koneelta puuttuu tarvittav
 oikeudet. Tällöin hyökkääjä joutuu tekemään hyökkäykset sokeana. Aktiivisessa
 hyökkäyksessä murtautujalla taas on tieto koneiden välisistä oikeuksista,
 jolloin tiedon korruptoiminen, muokkaaminen ja välittäminen toiseen verkkoon
-ovat mahdollista [7].
+ovat mahdollista \cite{websecurity}.
 
 \subsection{IP Spoofing}
 
@@ -53,7 +54,7 @@ kuittausnumeroista, joita käytetään kolmivaiheisessa yhteydenmuodostuksessa.
 Tämän tiedon avulla hakkeri pystyy muokkaamaan yhteyden vaatimia
 kuittausviestejä siten, että ne sisältävät oikeat kuittausnumerot. Nämä
 kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka takia tämä
-hyökkäystapa on monimutkainen toteuttaa [7].
+hyökkäystapa on monimutkainen toteuttaa\cite{websecurity}.
 
 \begin{figure}[ht]
 \centering
@@ -68,18 +69,18 @@ johtuu siitä, että TCP/IP-pino sallii pakettien käsin muokkaamisen. Tämä
 toiminto on sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
 käsin muokkaamaan pakettien sisältöä ennen lähettämistä. Tällaisia palveluita
 ovat mm. mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
-muutetaan toiseksi [11].
+muutetaan toiseksi\cite{joku}.
 
 IP spoofing hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain tapa on
 asettaa verkko siten, että se ei salli sellaisten pakettien kulkua, jotka
 väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulee verkkoon
 ulkopuolisesta liitännästä. Jos tämä kuitenkin halutaan sallia, niin jokainen
 sessio tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen tulisi
-pohjautua koko järjestelmän kattavaan salaukseen [7].
+pohjautua koko järjestelmän kattavaan salaukseen\cite{websecurity}.
 
 \section{Denial Of Service}
 
-Yksi tietoturva-alan johtavista tutkimuskeskuksista CERT [1]
+Yksi tietoturva-alan johtavista tutkimuskeskuksista CERT\cite{cert}
 määrittelee palvelunestohyökkäyksen (engl. Denial of Service)
 sellaiseksi teoksi, jossa hyökkääjän tavoitteena on estää laillisia
 käyttäjiä käyttämästä heille kuuluvia/käytössä olevia
@@ -89,7 +90,7 @@ web-sovellukset. Hyökkäyksillä pyritään lamauttamaan palvelua tarjoava
 verkko tai palvelin siten, että oikeiden pyyntöjen vastaanottamiseen
 ei enää riitä resursseja. Keinoja tähän on monia, ja koska näistä
 lähes jokainen käyttää nykyisin hyväkseen eri protokollien sallittuja
-toimintoja, on hyökkäyksiä vastaan suojautuminen hyvin vaikeaa [2].
+toimintoja, on hyökkäyksiä vastaan suojautuminen hyvin vaikeaa\cite{hacking}.
 
 Palvelunestohyökkäykset voidaan jakaa kolmeen ryhmään näiden
 toteutustapojen ja tavoitteiden mukaan. Ensimmäiseen ryhmään kuuluvat
@@ -99,7 +100,7 @@ tai palvelin turhilla pyynnöillä. Toiseen ryhmään kuuluvat
 hyökkäykset, jotka pyrkivät joko tuhoamaan tai muuttamaan
 konfigurointitietoja siten, että kone tai verkko ei toimi enää
 ollenkaan. Viimeiseen ryhmään kuuluvat verkon komponenttien
-muokkaamiseen tai tuhoamiseen tähtäävät hyökkäykset [1]. Vaikka tässä
+muokkaamiseen tai tuhoamiseen tähtäävät hyökkäykset \cite{cert}. Vaikka tässä
 työssä keskitytään vain resursseihin kohdistuviin hyökkäyksiin, niin
 palvelun kokonaisturvallisuuden kannalta jokaiseen ryhmään tulee
 yrityksessä kiinnittää tasapuolisesti huomiota.
@@ -118,31 +119,31 @@ ohjelmisto, jonka avulla murtautuja pystyy hallitsemaan konetta
 käyttäjän tietämättä. Zombie-verkoston ei tarvitse edes olla kovinkaan
 suuri aiheuttaakseen tuhoa, sillä jo 3000 koneen verkosto, jossa
 jokainen kone tuottaa 25 Kbps liikennettä, aiheuttaa yhteensä 75 Mbps
-kuorman verkolle [2]. Palvelunestohyökkäyksen seuraamukset
+kuorman verkolle\cite{cert}. Palvelunestohyökkäyksen seuraamukset
 saattavatkin olla varautumattomalle taholle usein katastrofaaliset, ja
 pahimmillaan hyökkäys saattaa pysäyttää organisaation toiminnan
-useiksi päiviksi [1].
+useiksi päiviksi \cite{cert}.
 
 Viime vuosina palvelunestohyökkäykset ovat edelleen kehittyneet
 käsittämään verkkokerroksen raa’an voiman hyökkäysten lisäksi myös
 sovelluskerroksen hyökkäykset, joiden toteuttaminen vaatii usein
-hyökkääjältä vain vähän resursseja [2]. Nämä sovelluskerroksen
+hyökkääjältä vain vähän resursseja \cite{hacking}. Nämä sovelluskerroksen
 hyökkäykset ovat toteutukseltaan usein hyvin hienostuneita, ja ne
 jäävät yleensä huomaamatta yrityksen tietoturvaratkaisuilta, koska ne
 eivät poikkea normaalista liikenteestä. Hyökkääjä saattaa esimerkiksi
 pyytää sellaista resurssia palvelulta, jonka pyytäminen vie vain vähän
 hyökkääjän omia resursseja, mutta aiheuttaa palvelimelle suuren
-kuorman [3]. Tällaisen hyökkäyksen teho nähtiin jo vuonna 2004, kun
+kuorman \cite{ddos}. Tällaisen hyökkäyksen teho nähtiin jo vuonna 2004, kun
 MyDoom-viruksella saastuneet koneet kuormittivat suuresti yleisimpiä
 hakukoneita etsimällä näiden avulla uusia sähköpostiosoitteita, joihin
-lähettää saastunut sähköposti [2]. Sovelluskerroksen hyökkäyksen
+lähettää saastunut sähköposti \cite{hacking}. Sovelluskerroksen hyökkäyksen
 vaikutus voidaan kohdistaa myös haluttua palvelua kohti, jolloin
 vaikutukset ovat vieläkin suuremmat. Näin tapahtui, kun Yhdysvalloissa
 yrittäjä palkkasi ”DDoS mafian” kaatamaan kilpailijoidensa nettisivut
 HTTP-kutsuilla, jotka pyysivät ladattavaksi isoa kuvatiedostoa
-[3]. Tämä aiheutti kolmelle kilpailijalle arviolta jopa yhden
+\cite{ddos}. Tämä aiheutti kolmelle kilpailijalle arviolta jopa yhden
 miljoonan dollarin tappiot, ja pysäytti toiminnan lähes kahdeksi
-viikoksi [4].
+viikoksi\cite{fbi}.
 
 \subsection{SYN-hukuttaminen}
 
@@ -152,7 +153,7 @@ suunnittelussa ei osattu ottaa huomioon mahdollisia vihamielisiä
 käyttäjiä, jotka pyrkisivät häiritsemään muita käyttäjiä sen
 avulla. TCP/IP-protokollan käyttö kuitenkin levisi ja yleistyi
 arvaamattomasti, jonka johdosta suunnitteluvaiheessa tehdyt virheet
-periytyivät nyt käytössä olevaan IPv4-verkkorakenteeseen[2].
+periytyivät nyt käytössä olevaan IPv4-verkkorakenteeseen\cite{hacking}.
 
 Perityistä heikkouksista tunnetuin ja käytetyin lienee
 SYN-hukuttamiseksi kutsuttu hyökkäys, jossa hyökkääjä pyrkii
@@ -164,7 +165,7 @@ että kolmiosaisessa yhteydenmuodostusvaiheessa kone lähettää
 palvelimelle SYN-paketin, jonka johdosta palvelin varaa tulevalle
 yhteydelle resursseja ja lähettämänsä SYN/ACK-viestin jälkeen jää
 odottamaan yhteyden muodostamista. Tähän koneen kuuluu vastata
-ACK-viestillä, jonka jälkeen yhteys muodostetaan [2].
+ACK-viestillä, jonka jälkeen yhteys muodostetaan\cite{hacking}.
 
 Tähän toimintamalliin perustuu mm. HTTP-protokollan toiminta, ja sen
 avulla web-palvelimet pystyvät nopeasti palvelemaan käyttäjiä. Koska
@@ -178,7 +179,7 @@ tekaistu IP-osoite. Koska palvelimen lähettämä SYN/ACK-viesti ei
 koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta,
 jolloin TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan
 kunnes määritetty raja yhteyden aikakatkaisulle tulee vastaan
-[6]. Hyökkääjälle riittää, että tämä toiminta automatisoidaan ja
+\cite{hackthestack}. Hyökkääjälle riittää, että tämä toiminta automatisoidaan ja
 koneina käytetään esimerkiksi jo aikaisemmin mainittuja
 zombie-koneista muodostettuja verkostoja.
 
@@ -187,17 +188,18 @@ toteuttaa heijastettu hyökkäys (engl. reflective attack), joka on
 muunnos SYN-hukuttamisesta. Tässä hyökkäyksessä väärennetyissä
 SYN-viesteissä on lähettäjäksi merkitty haluttu kohde. Lähettämällä
 suuri määrä näitä SYN-viestejä esimerkiksi web-palvelimelle, aiheutuu
-vastaustulvasta ongelmia kohteelle [6].
+vastaustulvasta ongelmia kohteelle\cite{hackthestack}.
 
 Koska harvalla yrityksellä on mahdollista pitää ylimääräisiä
 resursseja SYN-hu\-kut\-ta\-mi\-sen varalta, joudutaan ratkaisua hakemaan
 muilla keinoin. Yksi alkeellinen keino on rajoittaa puoliavonaisten
 yhteyksien määrää, jolloin rajan ylittyessä aletaan yhteyksiä pudottaa
-[5]. Toinen käytetty keino on reitittimiltä verkkoon päin tulevan
+\cite{tcpip}. Toinen käytetty keino on reitittimiltä verkkoon päin tulevan
 liikennemäärän seuraaminen, ja liikennepiikkeihin
 reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua liikenteen
 seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla
-[6]. Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin
+\cite{hackthestack}. Täydellistä turvaa nämä eivät kuitenkaan tarjoa,
+sillä hyvin
 toteutettua hyökkäystä vastaan on vaikea suojautua ilman, että
 sallittuja yhteyksiä ei tiputettaisi.
 
@@ -211,12 +213,12 @@ echo-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
 hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet vastaavat,
 jolloin kohdekoneen kaista ja resurssit loppuvat. Fraggle on hyvä
 esimerkki vahvistetusta hyökkäyksestä, jossa verkon laitteiden määrä
-vaikuttaa siihen, kuinka vakava hyökkäys on [7]. Vastaavanlainen
+vaikuttaa siihen, kuinka vakava hyökkäys on\cite{websecurity}. Vastaavanlainen
 hyökkäys voidaan myös toteuttaa kahden koneen välillä, jos kummassakin
 on sallittuna UDP echo-viestit. Tällöin hyökkääjä väärentää viestiin
 lähettäjän osoitteen ja halutun kohdeportin. Vastaanottaja vastaa
 tähän viestiin omalla echo-viestillä, ja näin kahden koneen välille on
-muodostunut ikuinen silmukka [5].
+muodostunut ikuinen silmukka \cite{tcpip}.
 
 \subsection{Smurf}
 
@@ -227,7 +229,7 @@ puolesta yleislähetyksenä verkolle ICMP ECHO-paketin, johon verkon
 laitteet vastaavat, jos ECHO-viestit on sallittuja verkossa. Jo 100
 konetta verkossa pystyy aiheuttamaan 14Mbps kuorman kohdekoneelle,
 joten pienikin väärin konfiguroitu verkko pystyy aiheuttamaan kuorman,
-jota harva linkki pystyy pitkään kestämään [2].
+jota harva linkki pystyy pitkään kestämään\cite{hacking}.
 
 Jos hyökkäys on päässyt käyntiin, ei tälle ole paljoa muuta tehtävissä
 kuin poistaa kohteena olevat koneet pois verkosta. Paras vastatoimi
@@ -235,7 +237,7 @@ Fragglen ja Smurffin kaltaisille hyökkäyksille onkin konfiguroida
 verkon laitteet alusta asti oikein. Yleislähetysten kieltämisellä ja
 ECHO-viestien tuen poistamisella verkon laitteilta pääsee jo
 pitkälle. Samoin ICMP-protokollan käyttöä kannattaa verkossa rajoittaa
-[2].
+\cite{hacking}.
 
 \section{Remote-to-Local}
 
@@ -243,14 +245,14 @@ Remote-to-Local (lyh. R2L) on hyökkäystyyppi, jossa hyökkääjä pyrkii
 saamaan koneelle sellaiset oikeudet, joita hänellä ei muuten
 olisi. Tämä tapahtuu useimmiten käyttäen hyväksi järjestelmässä olevia
 heikkouksia, joiden avulla hyökkääjä pääsee verkon yli murtautumaan
-koneelle [8]. Pahimmassa tapauksessa hyökkääjä saa hankittua koneelle
+koneelle\cite{intru}. Pahimmassa tapauksessa hyökkääjä saa hankittua koneelle
 pääkäyttäjän oikeudet, jolloin koneen ja verkon resurssit ovat täysin
 hyökkääjän käytössä.
 
 Onnistuneet R2L hyökkäykset ovat verkon ylläpitäjien kannalta pahimpia
 mahdollisia, sillä niiden mahdollistamat tuhot ja aiheuttamat
 kustannukset ovat muita hyökkäyksiä huomattavasti suuremmat
-[9]. Onnistunut R2L-hyökkäys saattaa myös muut verkon koneet vaaraan,
+\cite{effect}. Onnistunut R2L-hyökkäys saattaa myös muut verkon koneet vaaraan,
 sillä usein hyökkääjä pyrkii asentamaan koneisiin ohjelmistoja, joiden
 avulla hyökkääjä pystyy ottamaan koneen haltuun käyttäjän
 huomaamatta. Tällä tavoin osa aikaisemmin mainituista
@@ -260,19 +262,19 @@ Käytetyimmät web-palvelinohjelmistot (Apache ja IIS) vastaavat noin
 85\% kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi
 BIND-ni\-mi\-pal\-ve\-lin\-oh\-jel\-mis\-tol\-la on markkinaenemmistö. Ohjelmistojen
 yleisyydestä johtuen yli puolet R2L-hyökkäyksen mahdollistavista
-heikkouksista onkin löydetty näille alustoille [8]. Useat
+heikkouksista onkin löydetty näille alustoille \cite{intru}. Useat
 haavoittuvaisuudet johtuvat ohjelmointivirheistä, joiden johdosta
 hyökkääjä pystyy aiheuttamaan sovellukseen muistin ylivuodon
 (engl. Buffer Overflow). Tämä usein kaataa sovelluksen tai saattaa sen
 sellaiseen tilaan, että hyökkääjä pystyy ajamaan omia komentoja
 koneella. Kattava listaus löydetyistä heikkouksista ja näiden
-korjauksista löytyy osoitteesta www.cve.mitre.org/cve [10].
+korjauksista löytyy osoitteesta www.cve.mitre.org/cve \cite{cve}.
 
 Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista
 sillä nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa
 tästä ensin sovelluksen kehittäjille, ennen kuin julkistaa
 tiedon. Siksi usein korjaus haavoittuvuuteen on olemassa ennen kuin
-sitä on mahdollista hyödyntää [9]. Vastuu jääkin verkon ylläpitäjälle,
+sitä on mahdollista hyödyntää\cite{effect}. Vastuu jääkin verkon ylläpitäjälle,
 että pitää käytetyt sovellukset ajan tasalla sekä päivittää
 suojausjärjestelmät siten, että ne tunnistavat tällaiset
 hyökkäykset. Suurin osa onnistuneista hyökkäyksistä johtuukin siitä,
@@ -285,7 +287,7 @@ koneelle pääkäyttäjän oikeudet. Tämä tapahtuu käyttäen järjestelmäss�
 olevia haavoittuvaisuuksia, joita ei ole paikattu. Useimmiten
 hyökkäykset pohjautuvat koodausvirheisiin, jotka mahdollistavat
 ylivuodon aiheuttamisen sekä odottamattomien syötteiden antamisen
-[8]. Käyttäjästä pääkäyttäjäksi hyökkäys eroaa R2L hyökkäyksestä
+\cite{intru}. Käyttäjästä pääkäyttäjäksi hyökkäys eroaa R2L hyökkäyksestä
 siten, että hyökkääjällä on jo valmiiksi pääsy koneelle normaalina
 käyttäjänä.
 
@@ -296,15 +298,5 @@ hänen selvittää mitä hänellä on vastassa. Tärkeitä tietoja ovat
 mm. mikä ohjelmisto ja mikä versio siitä on käytössä, mikä
 käyttöjärjestelmä ja minkälaiset suojausjärjestelmät kohteella on
 käytössä. Hyökkääjä, jolla on tarkka kuvaus verkon laitteista ja
-palveluista, voi käyttää tätä tietoa haavoittuvuuksien etsimiseen [8].
+palveluista, voi käyttää tätä tietoa haavoittuvuuksien etsimiseen \cite{intru}.
 
-[1] www.cert.org
-[2] Hacking Exposed
-[3] DDoS-Resilient …
-[4] \url{http://www.fbi.gov/wanted/fugitives/cyber/echouafni_s.htm viitattu 27.10.2009}
-[5] TCP/IP verkot
-[6] Hack the Stack
-[7] Web Security Basics
-[8] A Comparative Study of Techniques for Intrusion Detection
-[9] The Effect of Identifying Vulnerabilities and Patching Software on the Utility of Network Intrusion Detection
-[10] www.cve.mitre.org/cve. Viitattu 29.10.2009

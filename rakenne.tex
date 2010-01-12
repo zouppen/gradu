@@ -17,6 +17,7 @@
 \usepackage{pdfpages} % For inclusion of the article
 
 \usepackage{hyperref}
+\usepackage{cite}
 
 % Optional 1,5 point line spacing
 %\usepackage{setspace}
@@ -99,10 +100,9 @@
 \include{analysointi}
 \include{johtopaatokset}
 
-%\include{tuomo_intro}
-%\include{tuomo_toka}
-
-\include{lahteet}
+\bibliography{lahteet}{}
+%\bibliographystyle{finplain}
+\bibliographystyle{ieeetr}
 
 \appendix
 
