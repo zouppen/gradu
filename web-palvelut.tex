@@ -194,7 +194,7 @@ sen, että hyökkääjä pystyy piilottamaan annettuun hakuun ohjelmatason käsk
 hyökkääjän haluamaan suuntaan \cite{WEB2}. Normaaleilla toimenpiteillä tällaisen hyökkäysten tunnistaminen on hankalaa, sillä
 yritysten tietoturvasta vastaavat palomuurit toimivat OSI-mallin kolmannella, neljännellä ja viidennellä kerroksella, eivätkä ne tunnista
 ylimmän tason eli ohjelmistotason kautta tulevia hyökkäyksiä. Tämän lisäksi useimmat palomuurit eivät ymmärrä protokollien
-kuten HTTP:n tarkkaa sisältöä \cite{SQL SS}.    
+kuten HTTP:n tarkkaa sisältöä \cite{SQLSS}.    
 
 Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessaä vaiheessa hyökkääjän tulee tunnistaa 
 web-sovelluksessa käytetyt teknologiat. Tämä onnistuu mm. tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
@@ -215,48 +215,47 @@ hyökkääjä joutuu usein etsimään sokeasti, mutta syötteet kuten
 \item ' OR 1=1 "{-}{-}
 \item ') OR 1=1 "{-}{-}
 \end {itemize}
-\linebreak
 toimivat hyvin usein \cite{WEB2}. Virheellisestä hausta aiheutuvat virheilmoitukset antavat myös erittäin paljon
-hyödyllistä tietoa hyökkääjälle \cite{SQL SS}. Koska suurin osa SQL-tietokannoista mahdollistaa useamman perättäisen syötteen 
+hyödyllistä tietoa hyökkääjälle \cite{SQLSS}. Koska suurin osa SQL-tietokannoista mahdollistaa useamman perättäisen syötteen 
 antamisen, kunhan syntaksi pysyy oikeana, voidaan näiden avulla katkaista ohjelman normaali toiminta. Otetaan esimerkiksi SQL-haku
-\begin{center}\tt
+\begin{tt}
+\begin{center}
 String query= ``SELECT id FROM user\_table WHERE `` + \\
 ``username = ' `` + username + ``' AND `` + \\
 ``password = PASSWORD(' `` + password + ``')''; \\
 \end{center}
 \end{tt}
-\linebreak
 Antamalla käyttäjänimeksi arvon
 
-\begin{center}\tt
+\begin{tt}
+\begin{center}
 ' OR 1=1; DROP TABLE user\_table;"{-}{-}
 \end{center}
 \end{tt}
-\linebreak
 muuttuu tietokannalle ohjautuva kysely muotoon
 
-\begin{center}\tt
+\begin{tt}
+\begin{center}
 String query= ``SELECT id FROM user\_table WHERE username=' ' OR 1=1; DROP TABLE
 user\_table; "{-}{-} ' AND password = PASSWORD ('x');
 \end{center}
 \end{tt}
-\linebreak
 SQL-kielessä kaksi perättäistä viivaa tarkoittaa, että kaikki siitä oikealla puolella oleva on kommenttia. 
 Näin ollen lopullinen SQL-haku on 
 
-\begin{center}\tt
+\begin{tt}
+\begin{center}
 String query= ``SELECT id FROM user\_table WHERE \\username=' ' OR 1=1; DROP TABLE
 user\_table;
 \end{center}
 \end{tt}
-\linebreak
 Näin muodostettu haku on syntaktisesti täysin oikea, ja se tyhjentää tietokannassa olevan user\_table tiedoston, joka pitää
 sisällään järjestelmään tallennetut käyttäjät \cite{WEB2}. 
 
 Vastaavanlaisia tekniikoita käyttäen hyökkääjä pystyy tekemään kaiken sen, joka pystytään esittämään SQL-kyselynä, ja johon ajettavalla
 sovelluksella on riittävät oikeudet. Mielivaltaisten käskyjen antaminen, DLL tiedostojen luominen ja ajaminen ja tietokannan
 sisällön lähettäminen jollekin toiselle internetissä olevalle palvelimelle ovat vain muutamia esimerkkejä toiminnoista, joita
-onnistunut hyökkäys voi aiheuttaa \cite{SQL SS}.
+onnistunut hyökkäys voi aiheuttaa \cite{SQLSS}.
 
 Injektiohyökkäykset eivät rajoitu pelkästään SQL-kieleen, sillä useat eri tekniikat kuten XPath ja LDAP sisältävät vastaavanlaisia 
 heikkouksia \cite{WEB2}. SQL-kieleen pohjautuvat hyökkäykset ovat kuitenkin kaikista yleisimpiä johtuen sen levinneisyydestä. SQL-kieleen
@@ -267,7 +266,7 @@ pohjautuvat ratkaisut sisältävät usein myös osan seuraavista ominaisuuksista
 \item Mahdollisuus suorittaa useita hakuja yhdellä kertaa käyttäen puolipistettä.
 \item SQL-palvelimen antamat tarkat virheilmoitukset
 \item Syötteen tyypin ehdoton kääntäminen -- kokonaisluvut käännetään mahdollisuuksien mukaan merkkijonoksi, jolloin hyökkääjän
-             on helpompi arvata oikea syöte \cite{SQL SS}.
+             on helpompi arvata oikea syöte \cite{SQLSS}.
 \end{itemize}
 
 Esille tulleiden asioiden valossa on selvää, että SQL-kieleen pohjautuvat haavoittuvaisuudet ovat todellinen uhka yritysten tietoturvalle.
@@ -282,7 +281,7 @@ ja huonon syötteen riisuminen tai pois tiputtaminen. Näistä tavoista ensimmä
 merkki tarkistetaan, ja jos se ei ole sallittujen merkkien joukossa niin koko haku hylätään. Huonojen syötteiden riisuminen on myös vaikea
 toteuttaa, koska harvoin pystytään määrittelemään mikä haku on huono ja mikä hyvä. Yksi hyväksi todettu tapa onkin rajoittaa tiettyjen
 merkkien käyttöä siten, että merkin ollessa haussa mukana tämä muutetaan toiseen muotoon. Tämäkään ratkaisu ei ole täysin ongelmaton, ja siksi
-viisainta onkin vain hylätä koko syöte, jos se ei vastaa odotettua syötettä \cite{SQL SS}.
+viisainta onkin vain hylätä koko syöte, jos se ei vastaa odotettua syötettä \cite{SQLSS}.
 
 Palvelinpuolella tulee myös ottaa huomioon muutamia asioita, joita seuraamalla voidaan huomattavasti parantaa yrityksen tietoturvaa.
 Palvelinpuolen ratkaisuilla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
@@ -293,7 +292,7 @@ Seuraava lista ei ole millään tavalla täydellinen ratkaisu ongelmaan, mutta s
 \item Sallia tallennettujen proseduurien ajaminen ainoastaan järjestelmän ylläpitäjille
 \item Linkitettyjen palvelimien yksinkertaisten tunnistusten poistaminen
 \item Määrittää palomuuri siten, että ainoastaan luotetut käyttäjät saavat ottaa yhteyden SQL-palvelimeen. Usein ainoat, joiden yhteydet 
-      tulee sallia, ovat ylläpitäjät ja web-palvelut, joita tietokanta palvelee \cite{SQL SS}.
+      tulee sallia, ovat ylläpitäjät ja web-palvelut, joita tietokanta palvelee \cite{SQLSS}.
 \end{itemize}
 
 \subsection{Cross-site Scripting}
