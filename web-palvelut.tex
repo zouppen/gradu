@@ -32,18 +32,18 @@ joissa käyttäjät pystyvät tekemään useita asioita saman aikaisesti saumatt
 yhdestä paikasta käsin. Toinen kantava voima  muutokselle on ollut markkinoiden
 tuoma paine, johon yritykset ovat pyrkineet mukautumaan niin kuluttajapuolella kuin myös
 yrityspuolella. Tätä varten yritykset ovat kehittäneeet entistä suurempia ja 
-monimutkaisempia kokonaisuuksia uusilla teknologioilla, joiden käyttöä ei aina hallita
-riittävästi. Tähän kun lisätään kiire päästä markkinoilla ensimmäisten
+monimutkaisempia kokonaisuuksia uusilla teknologioilla, joiden käyttöä ei aina riittävästi hallita. 
+Tähän kun vielä lisätään kiire päästä markkinoilla ensimmäisten
 joukossa, niin tietoturva jää usein taka-alalle \cite{WEB2b}.
 
 Tietoturvan kannalta teknologiat, jotka luetaan kuuluvan osaksi Web 2.0
-teknologiaperhettä, ovat jatkuvan huomion kohteena. Nämä teknologiat
+teknologiaperhettä, ovat jatkuvan huomion ja kehityksen kohteena. Nämä teknologiat
 muodostavat sen voiman, joka mahdollistaa siirtymisen interaktiivisiin
-sovelluksiin kuten Google Maps, ja yritysten toiminnan siirtymisen verkkoon.
+sovelluksiin kuten Google Maps ja yritysten toiminnan siirtymisen verkkoon.
 Teknologiat kuten Asynchronous JavaScript (AJAX), Cascading Style Sheet (CSS),
 Flash, ActiveX ja XML voidaan kaikki laskea kuuluvan osaksi Web 2.0-perhettä.
 Osa näistä teknologioista on ollut jo pidemmän aikaa käytössä, kun taas osaa on
-vasta nyt alettu hyödyntämään siihen, mihin ne alun perin oli suunniteltu \cite{WEB2}.
+vasta nyt alettu hyödyntämään siihen, mihin ne on alun perin suunniteltu \cite{WEB2}.
 Kuvassa \ref{web} on nähtävillä näiden yleisimpien teknologioiden ja protokollien
 väliset suhteet.
 
@@ -92,7 +92,7 @@ joutuneet itse huolehtimaan mm. sovellusten ajan tasalla pitämisestä ja
 palvelimien ylläpitämisestä \cite{WEB2}. Muutos on luonut myös tarpeen löytää yhä
 tehokkaampia kehitysmalleja ja tapoja toteuttaa entistä monimutkaisempia ja
 vaativimpia sovelluksia suuryritysten tarpeisiin. Yksi tapa hallita tätä
-muutosta on perustaa tehdyt ohjelmistosuunnitelman ratkaisut palvelukeskeisen
+muutosta on perustaa tehdyt ohjelmistosuunnittelun ratkaisut palvelukeskeisen
 arkkitehtuurin malliin.
 
 Puhuttaessa web-palveluista palvelukeskeinen arkkitehtuuri lähtee siitä
@@ -106,7 +106,7 @@ alustojen ja toimittajien väliset yhteistoiminnot ovat olleet usein mahdottomia
 toteuttaa. Yhä useamman sovelluksen ja palvelun siirtyessä verkkoon tästä
 halutaan nyt päästä eroon, ja tähän ongelmaan palvelukeskeinen arkkitehtuuri
 pyrkii tuomaan ratkaisun. Käytännössä tämä tarkoittaa sitä, että arkkitehtuurin
-tulee tarjota sovelluksille mahdollisimman joustavan sekä sijainnista ja
+tulee tarjota sovelluksille mahdollisimman joustava sekä sijainnista ja
 protokollasta riippumattoman alusta \cite{SOA}. Tämän avulla loppukäyttäjälle
 voidaan tarjota palveluita monesta eri paikasta yhtä aikaa siten, ettei hän ole
 edes tietoinen tästä. Kyseessä on sama ajattelumalli johon Web 2.0 sovellukset
@@ -176,8 +176,12 @@ Nämä erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa k
 \item Palvelmiin asennetut lisäosat
 \item Syötteen tarkistaminen \cite{Hacking}.
 \end{itemize}
+Tässä yhteydessä kanonisoinnilla tarkoitetaan sääntöjen mukaisen syötteen väärinkäyttöä. Hyökkäys pohjautuu siihen,
+että useimpia palveluita ja resursseja voidaan kutsua monin eri tavoin. Esimerkiksi tiedostoa C:\textbackslash text.txt voidaan 
+kutsua syntaksilla ..\textbackslash text.txt. Sovellukset, jotka tekevät tietoturvapäätökset käyttäen hyödyksi resurssinimeä,
+voidaan helposti huijata suorittamaan odottamattomia toimintoja \cite{Hacking}.
 
-Näiltä suojautuminen on melko yksinkertaista, kunhan muistaa noudattaa muutamaa pääperiaatetta. Ensinnäkin tuotannossa 
+Listatuilta asioilta suojautuminen on melko yksinkertaista, kunhan muistaa noudattaa muutamaa pääperiaatetta. Ensinnäkin tuotannossa 
 olevilla palvelimilla ei tulisi koskaan olla asennettuna tai käytettynä tiedostoja, joiden turvallisuudesta ei ole
 takeita. Näihin tiedostoihin kuuluvat mm. paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
 lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
@@ -192,15 +196,9 @@ enemmän erilaisia tietokantapohjaisia ratkaisuja kuten MySQL. Nämä hyökkäyk
 sovelluksista ei tee selkeää eroa käyttäjän antaman syötteen ja ohjelmalle annettavien ohjeiden välillä. Tämä mahdollistaa
 sen, että hyökkääjä pystyy piilottamaan annettuun hakuun ohjelmatason käskyjä, jotka muokkaavat sovelluksen toimintaa
 hyökkääjän haluamaan suuntaan \cite{WEB2}. Normaaleilla toimenpiteillä tällaisen hyökkäysten tunnistaminen on hankalaa, sillä
-<<<<<<< HEAD:web-palvelut.tex
 yritysten tietoturvasta vastaavat palomuurit toimivat OSI-mallin kolmannella, neljännellä ja viidennellä kerroksella, eivätkä ne tunnista
 ylimmän tason eli ohjelmistotason kautta tulevia hyökkäyksiä. Tämän lisäksi useimmat palomuurit eivät ymmärrä protokollien
 kuten HTTP:n tarkkaa sisältöä \cite{SQLSS}.    
-=======
-yritysten tietoturvasta vastaavat palomuurit toimivat OSI-mallin kolmannella, neljännellä ja viidennellä kerroksella, eivätkä
-näin ollen tunnista ylimmän tason eli ohjelmistotason kautta tulevia hyökkäyksiä. Tämän lisäksi useimmat palomuurit eivät ymmärrä protokollien
-kuten HTTP:n tarkkaa sisältöä \cite{SQL SS}.    
->>>>>>> dfaaee88e3a52a85f69f31ad6b8235dc857497ea:web-palvelut.tex
 
 Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessaä vaiheessa hyökkääjän tulee tunnistaa 
 web-sovelluksessa käytetyt teknologiat. Tämä onnistuu mm. tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
@@ -413,12 +411,12 @@ sovelluksen kehittäjälle ja ylläpitäjälle.
 \section{Web-palveluiden turvaaminen}
 
 Web-palveluiden tietoturvasta vastaaminen on tarkkuutta ja aikaa vaativaa työtä, joka edellyttää omien tietojen jatkuvaa päivittämistä sekä ja liikenteen ja palveluiden
-seuraamista. Jo pelkästään yleisimpien tietoturvariskien tunnistaminen ja korjaaminen osoittautuu usein käsin tehtynä ylivoimaiseksi tehtäväksi palveluiden
-muuttuessa entistä monimutkaisemmaksi. Onneksi työn helpottamiseksi on saatavilla useita erilaisia työkaluja, joiden avulla sekä kehittäjät että ylläpitäjät voivat
-etsiä sovelluksista tunnetuimpia tietoturva-aukkoja. Osa näistä pohjautuu vapaaseen lähdekoodiin, mutta tarjolla on myös kaupallisia sovelluksia, jotka ainakin 
+seuraamista. Jo pelkästään yleisimpien tietoturvariskien tunnistaminen ja korjaaminen osoittautuu usein käsin tehtynä ylivoimaiseksi tehtäväksi verkkojen ja palveluiden
+muuttuessa entistä monimutkaisemmiksi. Onneksi työn helpottamiseksi on saatavilla useita erilaisia työkaluja, joiden avulla sekä kehittäjät että ylläpitäjät voivat
+etsiä sovelluksista ja verkoista tunnetuimpia tietoturva-aukkoja. Osa näistä pohjautuu vapaaseen lähdekoodiin, mutta tarjolla on myös kaupallisia sovelluksia, jotka ainakin 
 paperilla lupaavat parempia ominaisuuksia. Näiden lisäksi myös palvelinpuolella on tarjolla erilaisia lisäosia, jotka lisäävät web-palveluiden tietoturvaa. 
-Mikään sovellus ei tietenkään voi löytää kaikkia mahdollisia heikkouksia, joten pelkästään näiden varaan ei sovelluksen turvallisuutta voi laittaa. Näiden avulla 
-saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus on mahdollisesti alttiina ja kuinka turvallisuutta voitaisiin parantaa. Koska samat 
+Mikään sovellus ei tietenkään voi löytää kaikkia mahdollisia heikkouksia, joten pelkästään näiden varaan ei voi tietoturvaa rakentaa. Näiden avulla 
+saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus on mahdollisesti alttiina ja kuinka verkon turvallisuutta voitaisiin parantaa. Koska samat 
 sovellukset on myös hyökkääjien käytössä, niin ainakin virheet, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
 
 Web Application Security Consortium (lyh. WASC) on vuonna 2004 perustettu avoin kansainvälinen ryhmittymä, joka koostuu tietoturva-alan asiantuntijoista sekä eri 
@@ -438,18 +436,44 @@ Nikto \cite{Nikto} on avoimeen lähdekoodiin perustuva ilmainen web-skanneri, jo
 yli 3500 tunnettua haavoittuvuutta sekä yli 900 eri web-alustoihin liittyvää heikkoutta. Nikto on koodattu käyttäen Perliä, ja se pyrkii skannaamaan palvelimen 
 mahdollisimman lyhyessä ajassa. Tästä syystä sen aiheuttama liikenne on helppo havaita logeista. Tämän kiertämiseksi Niktoon on lisätty mahdollisuus käyttää Whiskerin
 tarjoamaa libWhisker kirjastoa, joka pyrkii ohittamaan käytössä olevat suojausjärjestelmät. Nikto on erittäin tehokas ja käytetty työkalu perusturvallisuuden 
-varmistamiseen, ja esimerkiksi vuonna 2006 tehdyn tutkimuksen mukaan se valittiin parhaimmaksi web--haavoittuvaisuuksia skannaavaksi sovellukseksi \cite{INS}.
-Niktoa ei ole enää hetkeen päivitetty, joten se ei tunnista kaikista uusimpia hyökkäyksiä. Tästä huolimatta se on erittäin tehokas työkalu tietoturvan tarkistamiseen.
+varmistamiseen, ja vuonna 2006 tehdyn tutkimuksen mukaan se valittiin parhaimmaksi web--haavoittuvaisuuksia skannaavaksi sovellukseksi \cite{INS}.
+Nikton tietokantoja ei ole enää hetkeen päivitetty, joten nykyisellään se ei tunnista kaikista uusimpia hyökkäyksiä. Tästä huolimatta se on erittäin tehokas työkalu 
+tietoturvan parantamiseen.
 
 \subsection{Nessus}
 
-
+Nessus \cite{Nessus} oli alunperin vapaaseen lähdekoodiin perustuva ilmainen tietoturvaskanneri, joka muuttui maksulliseksi vuonna 2008. 1200 dollarin vuosimaksua vastaan
+saa kuitenkin yhden parhaimmista UNIX- ja Windows-alustoilla toimivista tietoturvaskannereista \cite{NST}. Se sisältää yli 20000 erillistä lisäosaa,
+ja sen avulla on mahdollista suorittaa mm. reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri vekko-osien skannausta. Maksullisuuden 
+ansiosta Nessus pystytään pitämään ajantasalla uusimmista hyökkäyksistä, ja se soveltuukin erinomaisesti suurten ja monimutkaisten verkkojen turvaamiseen\cite{Nessus}. 
 
 \subsection{Paros Proxy}
 
+
+
 \subsection{Whisker}
+
+
 
 \subsection{ModSecurity}
 
+Koska nykyisistä hyökkäyksistä yhä useampi kohdistuu verkon laitteiden ja resurssien sijasta web-palveluihin ja -sovelluksiin \cite{WASCb} \cite{SYM}, eivät perinteiset
+tietoturvaratkaisut pysty enää tarjoamaan riittävää tietoturvatasoa. Tästä syystä sovelluskehittäjät ja ylläpitäjät ovat joutuneet etsimään uusia ja entistä tehokkaampia 
+tapoja hyökkäysten tunnistamiseen ja torjumiseen. Yksi mahdollinen ratkaisu on lisätä erillinen, web-sovelluksia varten suunniteltu palomuuri, käyttäjän ja palvelimen 
+välille, jolloin palvelulle tulevat pyynnöt kulkevat tämän palomuurin kautta. Tällä tavoin saapuva liikenne voidaan tutkia ja suodattaa käyttäen haluttuja määrityksiä. 
+
+ModSecurity \cite{Mod}on Apachelle suunniteltu, vapaaseen lähdekoodiin pohjautuva palomuuri, joka tarjoaa kattavan suojan web-palveluihin kohdistuvilta hyökkäyksiltä. 
+Se mahdollistaa mm. HTTP liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassaolevaan arkkitehtuuriin.
+ModSecuritystä on saatavilla myös kaupallisia lisenssejä sekä eri asteisia tukipalveluita, mutta sovelluksen käyttämät säännöt ovat ilmaiseksi ladattavissa \cite{Mod}.
+
+ModSecurityn parhaimpiin ominaisuuksiin kuuluu mahdollisuus ylläpitää täydellistä logia koko HTTP-tapahtuman ajalta, jolloin sekä pyynnöt että vastaukset pystytään analysoimaan.
+Tämän ansiosta myös tulevien POST pyyntöjen sisältö ja rakenne voidaan tutkia. Nämä pyynnöt jäävät normaalisti logittamatta, ja tästä syystä iso osa hyökkäyksistä toteutetaankin 
+nykyisin näitä käyttämällä. Se, mitä halutaan logittaa, voidaan myös tarkkaan määrittää. Salattu ja pakattu liikenne ei myöskään aiheuta ongelmia, sillä logitus tapahtuu sillä tasolla,
+jossa pyynnöt ovat valmiiksi puretussa muodossa \cite{Mod}.
+
+Liikenteen kirjaamisen ohella ModSecurity voidaan asettaa estämään tulevia hyökkäyksiä, jonka lisäksi sen avulla pystytään nopeasti paikkaamaan löydetyt haavoittuvaisuudet. 
+Ensinnäkin kaikki tulevat paketit voidaan pisteyttää halutulla tavalla, ja tietyn pisterajan ylittäneet paketit voidaan esimerkiksi pudottaa pois. Toinen mahdollisuus on sallia vain 
+tietynlaiset pyynnöt. ModSecurityn käyttämä säännöstökieli mahdollistaa myös palveluiden nopean suojaamisen uusilta hyökkäyksiltä ilman, että palvelun omaan koodiin tarvitsee koskea.
+Tämä on erityisen hyödyllistä niissä tilanteissa, joissa päivitysten tuominen tuotantoon vie aikaa. 
 
 
