@@ -1,0 +1,108 @@
+% -*- mode: LaTeX; coding: utf-8; -*-
+
+\chapter{Web 2.0 teknologiat}
+
+\section{Yleistä}
+
+Internet on aina ollut ja tulee aina olemaan vihamielinen paikka, jossa sivustolla vierailevan motiiveja sivustoa ja palvelua kohtaan on mahdoton ennustaa. Tästä syystä 
+useimmat kehittäjät ja ylläpitäjät ovat noudattaneet periaatetta, että kehenkään ei voi täysin luottaa. Sivustojen ja palveluiden kehittyessä entistä monimutkaisemmiksi
+Web 2.0:n myötä, on tämän periaatteen noudattaminen noussut entistä tärkeämmäksi. Tämä ei tarkoita sitä, että Web 2.0:n takana olevat teknologiat olisivat normaalia 
+heikompia tai että ne sisältäisivät helposti hyödynnettäviä haavoittuvaisuuksia. Web 2.0 mahdollistaa vain aikaisempaa joustavamman alustan toteuttaa interaktiivisia ja
+normaaleja työpöytäsovelluksia muistuttavia palveluita, joita käyttäjät voivat ajaa suoraan web-selaimesta. Varsinainen ongelma piilee siinä, että tällaiset palvelut ovat 
+aikaisempaa monimutkaisempia toteuttaa. Niissä hyödynnetään useita eri teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä virheitä kasvaa verrattaessa
+vanhoihin ratkaisuihin. Itse käytetyt teknologiat eivät siis ole syynä heikentyneeseen tietoturvatasoon, vaan syynä on kehittäjien huolimattomuus ja/tai tietämättömyys 
+niistä mahdollisuuksista, joita huonosti koodatut palvelut avaavat hyökkääjille. Tämän luvun tarkoitus onkin lyhyesti esitellä tärkeimmät Web 2.0:n takana olevat teknologiat, 
+ja tuoda esille osa niistä riskeistä, joita huonosti toteutetut sovellukset voivat aiheuttavat. 
+
+\section {AJAX}
+
+Jos joku Web 2.0 teknologiosta halutaan nostaa kehitystä eniten eteenpäin vieväksi voimaksi, niin vahvin ehdokas tähän on AJAX.  Asynchronous JavaScript and XML (lyh. AJAX)
+itsessään ei ole mikään yksi tietty teknologia, vaan se on usean eri teknologian yhdistelmä, joita käyttämällä web-sovellukset pystytään muuttamaan nopeasti reagoiviksi
+ja käyttökokemukset tuomaan lähemmäksi perinteisiä työpöytäsovelluksia \cite{AJAX}. AJAX koostuu seuraavista teknologioista:
+
+\begin{itemize}
+\item HTML ja CSS rakentavat web-selaimella näytettävän sivun.
+\item DOM mahdollistaa käytön aikaisen dynaamisen sisällön tuottamisen.
+\item XML ja Extensible Stylesheet Language Transformation (lyh. XSLT) muodostavat tiedonsiirtoon tarvittavan kerroksen.
+\item JavaScript helpottaa eri komponenttien integroimisen sekä näiden ohjelmoimisen.
+\item XMLHttpRequest (lyh. XHR) objekti helpottaa serverien välistä kommunikointia \cite{WEB2b}.
+\end{itemize}
+
+Suurin AJAXin tuoma muutos perinteisiin web-sivuihin on mahdollisuus päivittää sivun sisältöä asynkronisesti. Yksinkertaistettuna tämä tarkoittaa sitä, että sivun sisällöstä
+pystytään päivittämään ainoastaan halutut osat käyttäen XHR-kanavia. Aikaisemmin tällainen ei ole ollut mahdollista, sillä vanhat web-sivut ovat toimineet pelkästään synkronisesti, jolloin 
+erillisiä kutsuja ei ole voitu tehdä. Tämän takia koko sivu on täytynyt päivittää kerralla. Tämä on hidastanut käyttökokemusta, sillä päivityksen nopeus on riippunut siitä, 
+kuinka nopeasti palvelin ja selain ovat pystynyt päivittämään sivut. XHR sisältää kaikki perinteiset HTTP metodit mukaanlukien GET, POST, HEAD ja DELETE, joten sen avulla pystytään suorittamaan
+kaikki yleisimmät käyttäjän toiminnot \cite{WEB2}. Kuvassa \ref{synkroninen} on esitetty tilanne, jossa sama palvelu on toteutettu käyttäen synkronisia ja asynkronisia 
+kutsuja. Kuvasta näkee, että Web 2.0 mahdollistaa useamman yhtäaikaisen kutsun tekemisen, jolloin myös palvelun käyttäminen on nopeampaa.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/synkroninen.pdf}
+\caption{Synkroninen ja asynkroninen kommunikointi}
+\label{synkroninen}
+\end{figure}
+
+AJAXiin kohdistuvat hyökkäykset eivät eroa kauheasti vanhoista murtautumismenetelmistä. Hyökkääjät pyrkivät edelleen hyödyntämään syötteen puutteellista suodattamista, muokkaamaan ulostulevaa
+dataa, murtamaan salauksia ja hankkimaan istuntonkohtaisia tietoja esimerkiksi evästeitä varastamalla. Se, mikä erottaa AJAXin vanhemmista tekniikoista ja tekee siitä samalla kiinnostavan
+kohteen hyökkääjille, on sen tapa luottaa entistä enemmän asiakaspuolen JavaScripteihin. Asiakaspuoleen ei voida koskaan luottaa, ja JavaScriptien huolimaton käyttö avaa hyökkääjille monia
+tapoja murtaa asetetut suojaukset. Nämäkään eivät ole uusia asioita, mutta kiinnostuksen siirtyessä AJAXiin, ovat myös hyökkääjät alkaneet kiinnittämään näihin enemmän huomiota \cite{AJAX}.
+Monet käytetyistä AJAX-ympäristöistä sisältävät myös eriasteisia tietoturvariskejä, joita hyökkääjät voivat hyödyntää \cite{JSH}.
+
+\subsection{JavaScript}
+
+JavaScript on Netscapen suunnittelema skriptikieli, joka tunnettiin aluksi nimellä LiveScript. Sun Microsystemsin kehittämän Java-ohjelmointikielen yleistyessä Netscape päättii muuttaa 
+sen nimen JavaScriptiksi, toivoen sen käytön yleistyvän Javan menestyksen myötä. JavaScriptillä kirjoitetut skriptit tunnistaa HTML tagista <script>, ja toimiakseen se tarvitsee ympäristön,
+josta löytyy tuki JavaScriptille. JavaScript on tehokas työkalu, joka  mahdollistaa monen muun toiminnon ohella mm. dynaamisten web-sivujen tekemisen, viestien kirjoittamisen selaimen 
+tila-palkkiin, uusien ikkunoiden avaamisen ja interaktiivisten lomakkeiden luomisen. Skriptien toiminta rajoittuu kuitenkin web-selaimen toimintoihin, eikä sitä käyttäen voida esimerkiksi 
+kirjoittaa levylle ja levyn lukeminen rajoittuu pelkästään evästeisiin \cite{JavaScript}. Näistä rajoituksista huolimatta JavaScript mahdollistaa erittäin monipuolisten toimintojen 
+toteuttamisen web-ympäristössä.
+
+Suurin osa web-sivuilla olevista skripteistä toimii siten, että ne ladataan ensiksi käyttäjän koneelle ja vasta tämän jälkeen ne ajetaan selaimessa. Koska skriptit sijaitsevat käyttäjien 
+koneilla, ei niiden sisältöä ja toimintaperiaatetta ole vaikea hyökkääjän selvittää. Asiaa pystytään kuitenkin vaikeuttamaan muutamalla eri tavalla. Näistä yksinkertaisin on poistaa koodista
+kommentointi ja tyhjät rivivälit, jolloin koodin lukeminen on vaikeampaa. Seuraava askel on koodin muuttujien ja objektien uudelleennimeäminen, jolloin hyökkääjän on vaikeampi päätellä näistä
+skriptin toimintaperiaate. Nimet voidaan muuttaa esimerkiksi binäärikoodiksi, mutta tämän haittapuolena on tiedoston koon kasvaminen. Nämä keinot ovat kuitenkin vain hidasteita osaavalle 
+hyökkääjälle. Paras keino sisällön peittämiselle on käyttää jonkinlaista salausmenetelmää, ja osa selaimista sisältääkin suoraan tällaisen mahdollisuuden. Tämäkään ei takaa suojaa täydellistä
+turvaa, mutta pieni suojaus on kuitenkin parempi kuin ei suojausta ollenkaan \cite{AJAX}.
+
+Koneelle ladatut skriptit ajetaan oletuksena hyvin rajatussa tilassa, jossa niillä on pääsy vain kyseistä sivua käsittävään dataan tai siihen hyvin läheisesti kuuluviin dokumentteihin. 
+JavaScript noudattaa myös jo edellisessä kappaleessa esitetty \emph{saman alkuperän} periaatetta, joka rajoittaa skriptien toimimisen vain sen domainin sisällä, josta sitä on kutsuttu.  
+Tällä tavoin estetään hyökkäyksen tekeminen käyttäen toiselta sivulta ladattua haitallista skriptiä, jonka avulla voitaisiin esimerkiksi varastaa evästeitä ja urkkia näppäimistön painallukset.
+Aikaisemmin selaimet ovat sallineet joitain poikkeuksia tähän periaatteeseen, mutta tietoturvasyistä nämä on kuitenkin poistettu. Liian tiukat tietoturvasäännöt eivät kuitenkaan toimi
+nykyaikaisten web-palveluiden kanssa, ja tästä syystä \emph{saman alkuperän} periaatetta on mahdollista löysentää. Esimerkiksi ulkoiset linkit, jotka osoittavat toisella sivustolla olevaan
+skriptiin, ohittavat \emph{saman alkuperän}, sillä vaikka itse skripti sijaitsee toisella sivustolla niin se lasketaan kuuluvan siihen sivustoon, josta kutsu tehtiin. Näin ollen 
+kutsutulla skriptillä on pääsy sellaisiin evästeisiin ja tiedostoihin, joihin sillä ei välttämättä tarvitsisi olla oikeuksia. Sivustojen ja palveluiden hakiessa tulevaisuudesa
+entistä useammasta osoitteesta tarvittavia resursseja, voi tämä aiheuttaa riskitilanteita, jos joku näistä resursseista on altistettu hyökkäykselle \cite{AJAX}.
+
+\subsection{AJAXiin liittyvät tietoturvariskit}
+
+Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan niin on itsestään selvää, että hyökkääjät pyrkivät hyödyntämään tätä seikkaa. Se tarjoaa hyökkääjille tehokkaan työkalun,
+jonka avulla käyttäjän asettamaa luottamusta voidaan väärinkäyttää. Asiaa ei auta se, että suurin osa sivustoista on jollakin asteella alttiina XSS-hyökkäyksille \cite{WEB2c} johtuen huonosti
+toteutetusta syötteen suodatuksesta. Asetettuja suodatuksia pystytään myös kiertämään käyttäen esimerkiksi kuvalinkkejä ja erilaisia tageja, joiden avulla ajettava skripti voidaan 
+hukuttaa muun syötteen joukkoon. Juuri tästä syystä pelkästään tiettyjen merkkijonojen suodattaminen ei takaa suojaa JavaScript-pohjaisilta hyökkäyksiltä. Tehokkain ja yksinkertaisin keino
+onkin muuttaa kaikki tagit HTML merkeiksi, jolloin esimerkiksi < merkistä tulee \emph{&lt;} ja > merkistä \emph{&gt;}. Monet ympäristöt mahdollistavat myös suoraan tagien poistamisen käyttäjien
+jättämistä viesteistä \cite{AJAX}.
+
+Kasvaneella JavaScriptin käytöllä on suora vaikutus myös XSS-hyökkäysten yleistymiseen. JavaScript pääsee helposti evästeisiin käsiksi käyttäen \emph{document.cookie} kutsua, ja vaikka sen 
+käyttö on rajoitettu ainoastaan sen domainin evästeeseen, josta kutsu on tehty, voidaan tämä rajoitus ohittaa melko helposti. Hyökkääjälle riittää, että käyttäjä vierailee esimerkiksi sellaisessa
+foorumissa tai blogissa, jossa viesteissä sallitaan XHTML:n käyttö. Tämä mahdollistaa haitallisten skriptien lähettämisen sivustolle ja pahaa aavistamaton käyttäjä, joka vierailee tällä
+sivulla, joutuu tietämättään hyökkäyksen kohteeksi. Yksi tapa suojautua evästeiden varastamiselta on käyttää HTTP-Only evästeitä, jolloin asiakaspuolen evästeitä ei pystytä lukemaan. Näiden
+evästeiden tukeminen on kuitenkin selainkohtaista, joten tämä ratkaisu ei aina välttämättä ole mahdollista toteuttaa. XSS-hyökkäykset eivät myöskään rajoitu pelkästään evästeiden varastamiseen,
+ja yhtä helposti hyökkääjä voi esimerkiksi luoda skriptin, joka lukee näppäimistön painallukset ja lähettää ne haluttuun osoitteeseen. HTTP-Only evästeiden käyttö ei myöskään täysin suojaa 
+evästeitä, jos käytetään XHR-kutsuja. Tällöin hyökkääjän on mahdollista lukea suoraan otsaketiedoista asetettuja arvoja, jos hyökkääjä onnistuu kaappaamaan XHR objekteja. Jotkut XHR objekteihin
+liittyvät haavoittuvaisuudet ovat myös niin syvällä XHMLHttpRequest objekteissa, että kaikki nykyisin käytössä olevat toteutukset ovat niille jollain asteella vielä alttiina. Kaapattujen XHR 
+objektien tunnistaminen ei myöskään vielä ole mahdollista \cite{AJAX}. Näistä syistä johtuen AJAX tarjoaa nyt ja tulevaisuudessa hyökkääjille monia mahdollisuuksia murtaa asetettuja suojauksia.
+
+Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON), joka on kielestä riippumaton ja näin ollen useimmat serveripuolella käytetyistä kielistä 
+pystyvät lukemaan sen sisällön. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: objekteista ja taulukoista \cite{JSON}. Formaatin heikkous piilee siinä, että 
+taulukko itsessään on validi JavaScript-syöte, jonka sisältö on mahdollista kaapata \cite{AJAX}. Termi \emph{JavaScript Hijacking} kuvaa tällaista tilannetta, jossa hyökkääjä ohittaa 
+\emph{saman alkuperän} periaatteen silloin, kun JavaScriptiä käytetään arkaluontoisen tiedon lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes jokainen käytetty AJAX-ympäristö
+on alttiina tällaisilla hyökkäyksille. Käyttäen CSRF-hyökkäystä hyökkääjä pystyykin väärinkäyttämään JSON-formaattia ja varastamaan ja muokkaamaan toiselle sivustolle lähtettäviä paketteja. 
+Tämä voidaan toteuttaa useilla eri tavoilla mukaanlukien <script> tagia, ja koska pyyntö tulee selaimen luottamasta lähteestä, voidaan tällä tavoin ohittaa esimerkiksi SLL-suojaus \cite{AJAX}.
+Suojautumin tämän tyyppisiltä hyökkäyksiltä voidaan toteuttaa monella eri tapaa, ja paras tulos saadaan yhdistelemällä näitä. Koska CSRF-hyökkäyksessä hyökkääjä joutuu toimimaan osittain 
+sokeasti, voidaan jokaiseen pyyntöön lisätä parametri, jota hyökkääjän on vaikea arvata. Palvelin voidaan myös asettaa tarkistamaan HTTP Referer-kenttä, jolla voidaan varmistaa, että pyyntö
+tulee sallitulta taholta. Toinen tapa on muokata vastaanottopäässä paketteja siten, että hyökkääjä ei pysty ajamaan lähettämissään pyynnöissä skriptejä \cite{JSH}
+
+\section{Flash}
+
+\section{ActiveX}
+

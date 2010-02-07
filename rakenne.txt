@@ -9,8 +9,8 @@ Otsikko:
 Syksy 2009: n. 50-80 sivua
 -----------
 
-1) Johdanto
-2) WWW-palvelun arkkitehtuuri
+*) Johdanto
+*) WWW-palvelun arkkitehtuuri
 
  - käytetyt palvelinohjelmistoyhdistelmät
    - LAMP (Linux + Apache + MySQL + PHP)
@@ -27,7 +27,17 @@ Syksy 2009: n. 50-80 sivua
 
  Joel kirjoittaa pohjan.
 
-3) Palveluita vastaan kohdistuvat hyökkäykset
+*) Web 2.0 -teknologiat
+
+ - AJAX (JavaScript / ECMAScript ja XML)
+ - Cascading Style Sheet (CSS)
+ - Flash
+ - ActiveX
+ - XML
+
+ Kristian kirjoittaa pohjan, Joel täydentää.
+
+*) Palveluita vastaan kohdistuvat hyökkäykset
 
  - yleisimmät tietoturva-aukot eri palvelinohjelmistoyhdistelmiin.
 
@@ -45,7 +55,7 @@ Syksy 2009: n. 50-80 sivua
 
  Kristian kirjoittaa pohjan tälle luvulle.
 
-4) Hyökkäysten torjunta (ja ennustaminen)
+*) Hyökkäysten torjunta (ja ennustaminen)
 
  - Sääntöpohjaiset IDS:t
    - SNORT
@@ -55,12 +65,12 @@ Syksy 2009: n. 50-80 sivua
  - Heuristiset IDS:t (?)
    - Onko näitä olemassa?
 
-5) Aiempi tutkimus
+*) Aiempi tutkimus
 
 Kevät 2010: n. 30-50 sivua
 -----------
 
-6) Tiedon keruu
+*) Tiedon keruu
 
  - Mistä data on peräisin?
  - Millaista data on?
@@ -69,13 +79,13 @@ Kevät 2010: n. 30-50 sivua
  - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
  - Miten dataa on käsiteltu ja suodatettu?
 
-7) Analysointi
+*) Analysointi
 
  - Amirin algoritmit
  - Muut poikkeavuuksien tunnistusjärjestelmät
  - Sääntöpohjaiset IDS
  - Vertailu näiden välillä (esim ristiintaulukointia?)
 
-8) Johtopäätökset
+*) Johtopäätökset
 
 *) Lähteet
