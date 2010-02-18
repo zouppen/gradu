@@ -1,14 +1,17 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
 \chapter{Katsaus yleisimpiin hyökkäyksiin}
-Nykyisin yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä,
-ja niiden aiheuttamilta ongelmilta. Nämä hyökkäykset ovat hyvin monimuotoisia, ja
-ne voidaan jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
+
+\section{Yleistä}
+
+Nykyisin yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä
+ja niiden aiheuttamilta ongelmilta. Useimmat hyökkäyksistä ovat hyvin monimuotoisia, ja
+ne voidaankin jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
 mukaan. Uusia hyökkäystapoja myös kehitetään jatkuvasti lisää, ja vanhat saavat uusia
 ominaisuuksia. Vaikka osaan hyökkäyksistä onkin olemassa suojautumistapoja, on
 näiltä kaikilta suojautuminen ylläpitäjälle lähes mahdoton tehtävä. Verkon
-turvallisuuden kannalta on kuitenkin tärkeää, että näiden tuomat riskit
-tiedostetaan ja niihin pyritään vaikuttamaan  mahdollisuuksien ja resurssien
+turvallisuuden kannalta on kuitenkin tärkeää, että niiden tuomat riskit
+tiedostetaan ja niihin pyritään puuttumaan  mahdollisuuksien ja resurssien
 mukaan.
 
 \section{Tiedon urkinta ja väärentäminen}
@@ -72,8 +75,8 @@ muutetaan toiseksi \cite{DDOS}.
 
 IP spoofing hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain tapa on
 asettaa verkko siten, että se ei salli sellaisten pakettien kulkua, jotka
-väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulee verkkoon
-ulkopuolisesta liitännästä. Jos tämä kuitenkin halutaan sallia, niin jokainen
+väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulevat verkkoon
+ulkopuolisista liitännöistä. Jos tämä kuitenkin halutaan sallia, niin jokainen
 sessio tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen tulisi
 pohjautua koko järjestelmän kattavaan salaukseen \cite{WEBS}.
 
@@ -109,7 +112,7 @@ staattista ARP-taulua \cite{WEBS}.
 Yksi tietoturva-alan johtavista tutkimuskeskuksista CERT \cite{CERT}
 määrittelee palvelunestohyökkäyksen (engl. Denial of Service)
 sellaiseksi teoksi, jossa hyökkääjän tavoitteena on estää laillisia
-käyttäjiä käyttämästä heille kuuluvia/käytössä olevia
+käyttäjiä käyttämästä heille kuuluvia tai käytössä olevia
 palveluita. Tällaisia palveluita voivat olla esimerkiksi verkon
 resurssien käyttö sekä verkon yli käytettävät
 web-sovellukset. Hyökkäyksillä pyritään lamauttamaan palvelua tarjoava
@@ -149,7 +152,7 @@ vaikutukset ovat vieläkin suuremmat. Näin tapahtui, kun Yhdysvalloissa
 yrittäjä palkkasi ”DDoS mafian” kaatamaan kilpailijoidensa nettisivut
 HTTP-kutsuilla, jotka pyysivät ladattavaksi isoa kuvatiedostoa
 \cite{DDOSb}. Tämä aiheutti kolmelle kilpailijalle arviolta jopa yhden
-miljoonan dollarin tappiot, ja pysäytti toiminnan lähes kahdeksi
+miljoonan dollarin tappiot, ja pysäytti heidän toimintansa lähes kahdeksi
 viikoksi \cite{FBI}.
 
 \subsection{SYN-hukuttaminen}

@@ -5,14 +5,14 @@
 Toimivan ja ennen kaikkea turvallisen web-pohjaisen palvelun tarjoaminen vaatii
 nykyisin todella paljon aikaa ja huolellisuutta niin palvelun kehittäjältä kuin myös
 palvelun tarjoajalta ja ylläpitäjältä. Ajat ovat muuttuneet huomattavasti siitä,
-jolloin käyttäjät selailivat pääasiassa vain staattisia web-sivuja, ja käyttivät tarjotuista
+jolloin käyttäjät selailivat pääasiassa vain staattisia web-sivuja ja käyttivät tarjotuista
 palveluista korkeintaan sähköpostia. Kehitys kulkee kovaa vauhtia eteenpäin, ja
 tämän päivän suurimpia trendejä ovat ominaisuudet kuten interaktiivisuus,
 sosiaalisuus ja yksilöllisyys, joiden avustuksella verkon käytöstä pyritään tekemään
 käyttäjille entistä henkilökohtaisempi kokemus. Palvelut kuten MySpace,
 Facebook ja YouTube ovat edelleen vahvistaneet näitä käyttäjätottumuksia, ja
 markkinoille onkin syntynyt kova kilpailu siitä, kuka kehittää seuraavan
-hittipalvelun. Nykyisin puhutaankin internetin seuraavasta evoluutiosta Web 2.0:
+menestyspalvelun. Nykyisin puhutaankin internetin seuraavasta evoluutiosta Web 2.0:
 n muodossa, joita myös edellä mainitut palvelut edustavat. Uudet teknologiat ja
 kiire tuovat kuitenkin aina mukanaan joukon uusia heikkouksia, joita hyökkääjät
 pyrkivät hyödyntämään. Suunnittelijan ja ylläpitäjien kannalta onkin tärkeää, että 
@@ -23,7 +23,7 @@ kehityksen tuomiin haasteisiin pyritään vastaamaan mahdollisimman nopeasti ja 
 Web 2.0 on termi, jota käytetään hyvin monessa eri tarkoituksessa ja
 asiayhteydessä. Se yhdistetään usein uusiin web-teknologioihin ja internet-
 aikakauden tuotteiden/palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
-on se, että ne pyrkivät esittämään sitä muutosta, jota internet pitää tällä
+on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota internet pitää tällä
 hetkellä sisällään. Tämä muutos on lähtöisin siitä, että kuluttajatottumukset
 ovat kehittyneet kohti interaktiivisia palvelumalleja, joissa käyttäjillä on
 entistä suurempi mahdollisuus vaikuttaa siihen, mitä informaatiota esitetään ja kuinka se esitetään.
@@ -56,8 +56,8 @@ väliset suhteet.
 
 Mitä Web 2.0 sitten tarkoittaa tietoturvan kannalta? Ensinnäkin se tuo mukanaan
 samat vanhat haavoittuvuudet kuin mitä Web 1.0 sisälsi. Näiden lisäksi
-hyökkäykset kuten Cross-site Scripting (XSS) ja Cross-site Request Forgery (
-CSRF) ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
+hyökkäykset kuten Cross-site Scripting (XSS) ja Cross-site Request Forgery (CSRF) 
+ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
 rikkaamman ympäristön, jonka kautta murtautua järjestelmiin \cite{WEB2}. Web 2.0
 sovellukset antavat myös loppukäyttäjälle ja takana oleville ohjelmille enemmän
 valtaa, jonka johdosta loppukäyttäjä ei välttämättä edes huomaa joutuessaan
@@ -66,8 +66,8 @@ sivujen tietojen päivittämisen käyttäen asynkronisia kutsuja. Näiden ansios
 käyttäjä pystyy tekemään kutsuja palvelimille ja päivittämään osan sivun
 tiedoista niin, ettei koko sivua tarvitse päivittää. Tästä suurin osa tapahtuu
 käyttäjältä piilossa, joten hän ei todennäköisesti huomaa, jos selain lataa
-haitallisia ohjelmia koneelle käyttäen jotain tunnettua haavoittuvuutta. Joidenkin
-arvidoiden mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
+haitallisia skriptejä koneelle käyttäen jotain tunnettua haavoittuvuutta. Joidenkin
+arvioiden mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
 Ajaxia \cite{WEB2c}.
 
 Palvelinpuolella muutokset eivät rajoitu vain Web 2.0 tuomiin
@@ -99,8 +99,8 @@ Puhuttaessa web-palveluista palvelukeskeinen arkkitehtuuri lähtee siitä
 ajatuksesta, että palveluiden toiminnot ja prosessit pyritään suunnittelemaan
 toimimaan mahdollisimman itsenäisesti ja avoimesti siten, että niitä pystytään
 kutsumaan joustavasti eri sovellusten välillä käyttäen standardoitua rajapintaa.
-Tähän ratkaisuun on ajanut pyrkimys laskea IT-kustannuksia ja maksimoida jo
-käytössä olevien ratkaisujen uudelleenkäyttöä. Aikaisemmin tämän toteuttaminen
+Tähän ratkaisuun ovat ajaneet pyrkimys laskea IT-kustannuksia ja jo käytössä olevien 
+ratkaisujen uudelleenkäytön maksimointi. Aikaisemmin tämän toteuttaminen
 on ollut vaikeaa sovellusten heterogeenisyyden takia, jonka johdosta eri
 alustojen ja toimittajien väliset yhteistoiminnot ovat olleet usein mahdottomia
 toteuttaa. Yhä useamman sovelluksen ja palvelun siirtyessä verkkoon tästä
@@ -186,7 +186,9 @@ olevilla palvelimilla ei tulisi koskaan olla asennettuna tai käytettynä tiedos
 takeita. Näihin tiedostoihin kuuluvat mm. paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
 lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
 on asennettu viimeisimmät päivitykset, sillä ne yleensä korjaavat tunnetut heikkoudet \cite{Hacking}. Jo pelkästään näillä 
-toimilla pystytään suurimmaksi osaksi estämään palvelmiin kohdistuvat hyökkäykset. 
+toimilla pystytään suurimmaksi osaksi estämään sellaiset hyökkäykset, jotka kohdistuvat itse käytettyyn palvelinalustaan.
+Palvelunesto- ja spoofing-hyökkäyksiltä nämä eivät kuitenkaan suojaa, ja tästä syystä resursseihin kohdistuville hyökkäyksille
+tuleekin olla erilliset suojausmenetelmät.
 
 \subsection{SQL injektio}
 
@@ -444,16 +446,15 @@ tietoturvan parantamiseen.
 
 Nessus \cite{Nessus} oli alunperin vapaaseen lähdekoodiin perustuva ilmainen tietoturvaskanneri, joka muuttui maksulliseksi vuonna 2008. 1200 dollarin vuosimaksua vastaan
 saa kuitenkin yhden parhaimmista UNIX- ja Windows-alustoilla toimivista tietoturvaskannereista \cite{NST}. Se sisältää yli 20000 erillistä lisäosaa,
-ja sen avulla on mahdollista suorittaa mm. reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri vekko-osien skannausta. Maksullisuuden 
+ja sen avulla on mahdollista suorittaa mm. reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri verkko-osien skannausta. Maksullisuuden 
 ansiosta Nessus pystytään pitämään ajantasalla uusimmista hyökkäyksistä, ja se soveltuukin erinomaisesti suurten ja monimutkaisten verkkojen turvaamiseen\cite{Nessus}. 
 
 \subsection{Paros Proxy}
 
-
-
-\subsection{Whisker}
-
-
+Paros Proxy \cite{Paros} on Javalla kirjoitettu web proxy, jonka avulla voidaan arvioida web-sovelluksen turvallisuutta. Se mahdollistaa kokonaisten sivustojen indeksoimisen,
+jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP ja HTTPS liikennettä mukaanlukien evästeitä. Sen mukana tulee
+myös skanneri yleisimpien web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-ammattilaisten
+parissa, jotka etsivät sivustoilta haavoittuvuuksia.
 
 \subsection{ModSecurity}
 
