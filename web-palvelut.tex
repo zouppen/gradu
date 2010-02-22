@@ -465,7 +465,9 @@ välille, jolloin palvelulle tulevat pyynnöt kulkevat tämän palomuurin kautta
 
 ModSecurity \cite{Mod}on Apachelle suunniteltu, vapaaseen lähdekoodiin pohjautuva palomuuri, joka tarjoaa kattavan suojan web-palveluihin kohdistuvilta hyökkäyksiltä. 
 Se mahdollistaa mm. HTTP liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassaolevaan arkkitehtuuriin.
-ModSecuritystä on saatavilla myös kaupallisia lisenssejä sekä eri asteisia tukipalveluita, mutta sovelluksen käyttämät säännöt ovat ilmaiseksi ladattavissa \cite{Mod}.
+ModSecuritystä on saatavilla kaupallisia lisenssejä sekä eri asteisia tukipalveluita, mutta sovelluksen käyttämät perussäännöt ovat ilmaiseksi ladattavissa, vaikkakin näitä
+ei ole hetkeen päivitetty. ModSecurityn käyttämä säännöstä mahdollistaa kuitenkin uusien sääntöjen kirjoittamisen omien tarpeiden mukaan, joten käytetyt säännöt voidaan räätälöidä 
+omien tarpeiden mukaan \cite{Mod}. 
 
 ModSecurityn parhaimpiin ominaisuuksiin kuuluu mahdollisuus ylläpitää täydellistä logia koko HTTP-tapahtuman ajalta, jolloin sekä pyynnöt että vastaukset pystytään analysoimaan.
 Tämän ansiosta myös tulevien POST pyyntöjen sisältö ja rakenne voidaan tutkia. Nämä pyynnöt jäävät normaalisti logittamatta, ja tästä syystä iso osa hyökkäyksistä toteutetaankin 
