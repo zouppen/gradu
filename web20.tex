@@ -38,7 +38,7 @@ ja käyttökokemukseltaan muistuttamaan perinteisiä työpöytäsovelluksia
 \cite{AJAX}. AJAX koostuu seuraavista teknologioista:
 
 \begin{itemize}
-\item HTML ja CSS rakentavat web-selaimella näytettävän sivun.
+\item HTML ja CSS rakentavat WWW-selaimella näytettävän sivun.
 \item DOM mahdollistaa ajonaikaisen sisällön tuottamisen.
 \item XML ja Extensible Stylesheet Language Transformation (lyh. XSLT)
   mahdollistavat eri komponenttien välisen tiedonsiirron.
@@ -58,13 +58,13 @@ erillisiä kutsuja ei ole voitu tehdä. Tällöin koko sivu on täytynyt
 päivittää kerralla. Tämä on hidastanut käyttökokemusta, sillä
 päivityksen nopeus on riippunut siitä, kuinka nopeasti palvelin ja
 selain ovat pystynyt käsittelemään koko sivun sisällön. XHR sisältää
-kaikki perinteiset HTTP metodit mukaanlukien GET, POST, HEAD ja
+kaikki perinteiset HTTP-metodit mukaanlukien GET, POST, HEAD ja
 DELETE, joten sen avulla pystytään suorittamaan kaikki yleisimmät
 käyttäjän toiminnot \cite{WEB2}. Kuvassa \ref{synkroninen} on esitetty
 tilanne, jossa sama palvelu on toteutettu käyttäen synkronisia ja
-asynkronisia kutsuja. Kuvasta voi havaita, että Web 2.0 mahdollistaa
-useamman samanaikaisen kutsun tekemisen, jolloin myös palvelun viiveet
-voidaan pitää lyhyinä.
+asynkronisia kutsuja. Kuvasta voi havaita, että dynaamisuus, ns. Web
+2.0, mahdollistaa useamman samanaikaisen kutsun tekemisen, jolloin
+myös palvelun viiveet voidaan pitää lyhyinä.
 
 \begin{figure}[htp]
 \centering
@@ -135,7 +135,7 @@ jossa niillä on pääsy vain kyseistä sivun sisältämään dataan tai
 siihen hyvin läheisesti kuuluviin dokumentteihin. JavaScript noudattaa
 myös \ifdefined\seminaari \relax \else edellisessä luvussa esitettyä
 \fi \emph{saman alkuperän} periaatetta, joka estää skriptien
-suorittamisen muista Internet-domainista kuin siitä, josta skripti on
+suorittamisen muista In\-ter\-net-do\-mai\-nis\-ta kuin siitä, josta skripti on
 ladattu. Näin vaikeutetaan hyökkäyksen tekemistä käyttäen
 toiselta sivulta ladattua haitallista skriptiä, jonka avulla
 voitaisiin esimerkiksi varastaa evästeitä ja urkkia näppäimistön
@@ -143,8 +143,8 @@ painallukset.  Aikaisemmin selaimet ovat sallineet joitain poikkeuksia
 tähän periaatteeseen, mutta tietoturvasyistä nämä on kuitenkin
 poistettu.
 
-Liian tiukat tietoturvasäännöt eivät kuitenkaan toimi nykyaikaisten
-web-palveluiden kanssa, ja tästä syystä \emph{saman alkuperän}
+Liian tiukat tietoturvasäännöt eivät kuitenkaan toimi nykyaikaisten\\
+WWW-palveluiden kanssa, ja tästä syystä \emph{saman alkuperän}
 periaatetta on mahdollista löysentää. Esimerkiksi ulkoiset linkit,
 jotka osoittavat toisella sivustolla olevaan skriptiin, ohittavat
 \emph{saman alkuperän}, sillä vaikka itse skripti sijaitsee toisella
@@ -162,16 +162,16 @@ Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan,
 niin on itsestään selvää, että hyökkääjät pyrkivät väärinkäyttämään
 käyttäjän antamaa luottamusta JavaScriptin avulla.  Asiaa ei auta se,
 että suurin osa sivustoista on jollakin asteella alttiina
-XSS-hyökkäyksille \cite{WEB2c} johtuen huonosti toteutetusta syötteen
+XSS-hyök\-käyk\-sil\-le \cite{WEB2c} johtuen huonosti toteutetusta syötteen
 suodatuksesta. Asetettuja suodatuksia pystytään myös kiertämään
 käyttäen esimerkiksi kuvalinkkejä ja erilaisia HTML-elementtejä,
 joiden avulla ajettava skripti voidaan hukuttaa muun syötteen
 joukkoon. Juuri tästä syystä pelkästään tiettyjen merkkijonojen
 suodattaminen ei takaa suojaa JavaScript-pohjaisilta
 hyökkäyksiltä. Tehokkain ja yksinkertaisin keino onkin poistaa kaikki
-HTML-elementteihin kuuluvat merkit, jolloin esimerkiksi \texttt{<}-merkistä tulee
+HTML-e\-le\-ment\-tei\-hin kuuluvat merkit, jolloin esimerkiksi \texttt{<}-merkistä tulee
 \texttt{\&lt;} ja \texttt{>}-merkistä \texttt{\&gt;}. Monet ympäristöt
-mahdollistavat myös suoraan HTML-elementtien poistamisen käyttäjien
+mahdollistavat myös suoraan HTML-e\-le\-ment\-ti\-en poistamisen käyttäjien
 jättämistä viesteistä \cite{AJAX}. Tälloin esimerkiksi WWW-foorumeilla
 toisten käyttäjien lähettämistä viesteistä saadaan poistettua
 mm. niiden sisältämä JavaScript-ohjelmakoodi.
@@ -179,7 +179,7 @@ mm. niiden sisältämä JavaScript-ohjelmakoodi.
 \subsubsection{Evästeiden kaappaaminen}
 
 Kasvaneella JavaScriptin käytöllä on suora vaikutus myös
-XSS-hyökkäysten yleistymiseen. JavaScriptillä pääsee helposti
+XSS-hyök\-käys\-ten yleistymiseen. JavaScriptillä pääsee helposti
 evästeisiin käsiksi käyttäen \emph{document.cookie}-oliota. Vaikka sen
 käyttö onkin rajoitettu ainoastaan sen Internet-domainin evästeeseen,
 josta kutsu on tehty, voidaan tämä rajoitus ohittaa melko
@@ -189,14 +189,14 @@ sallitaan XHTML:n käyttö. Tämä mahdollistaa haitallisten skriptien
 lähettämisen sivustolle ja pahaa aavistamaton käyttäjä, joka vierailee
 tällä sivulla, joutuu tietämättään hyökkäyksen kohteeksi.
 
-Yksi tapa suojautua evästeiden varastamiselta on käyttää HTTP-Only
--evästeitä, jolloin asiakaspuolen evästeitä ei pystytä
+Yksi tapa suojautua evästeiden varastamiselta on käyttää
+HTTP-only~-evästeitä, jolloin asiakaspuolen evästeitä ei pystytä
 lukemaan. Näiden evästeiden tukeminen on kuitenkin selainkohtaista,
 joten tämä ratkaisu ei aina välttämättä ole mahdollista
-toteuttaa. XSS-hyökkäykset eivät myöskään rajoitu pelkästään
+toteuttaa. XSS-hyök\-käyk\-set eivät myöskään rajoitu pelkästään
 evästeiden varastamiseen, ja yhtä helposti hyökkääjä voi esimerkiksi
 luoda skriptin, joka lukee näppäimistön painallukset ja lähettää ne
-haluttuun osoitteeseen. HTTP-Only evästeiden käyttö ei myöskään täysin
+haluttuun osoitteeseen. HTTP-only evästeiden käyttö ei myöskään täysin
 suojaa evästeitä, jos käytetään XHR-kutsuja. Tällöin hyökkääjän on
 mahdollista lukea suoraan otsaketiedoista asetettuja arvoja.
 
@@ -223,14 +223,14 @@ silloin, kun JavaScriptiä käytetään arkaluontoisen tiedon
 lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes
 jokainen käytetty AJAX-ympäristö on alttiina tällaisilla
 hyökkäyksille. Käyttäen CSRF-hyökkäystä hyökkääjä pystyy
-väärinkäyttämään JSON-formaattia, ja varastamaan sekä muokkaamaan
+väärinkäyttämään JSON-for\-maat\-ti\-a, ja varastamaan sekä muokkaamaan
 toiselle sivustolle lähetettäviä paketteja.  Tälläinen hyökkäys
 voidaan toteuttaa useilla eri tavoilla mukaanlukien käyttäen
 \texttt{script}-elementtiä, ja koska pyyntö tulee selaimen luottamasta
 lähteestä, voidaan tällä tavoin ohittaa esimerkiksi SSL-suojaus
 \cite{AJAX}. Suojautuminen tämän tyyppisiltä hyökkäyksiltä voidaan
 toteuttaa monella eri tapaa, ja paras tulos saadaan yhdistelemällä
-näitä. Koska CSRF-hyökkäyksessä hyökkääjä joutuu toimimaan osittain
+näitä. Koska CSRF-hyök\-käyk\-ses\-sä hyökkääjä joutuu toimimaan osittain
 sokeasti, voidaan jokaiseen pyyntöön lisätä parametri, jota hyökkääjän
 on vaikea arvata. Palvelin voidaan myös asettaa tarkistamaan HTTP
 Referer -kenttä, jolla voidaan varmistaa, että pyyntö tulee sallitulta
@@ -245,9 +245,9 @@ AJAXin ohella Macromedian suunnittelema ja nykyisin Adoben kehittämä
 Flash on ollut yksi niistä merkittävistä tekniikoista, joita käyttämällä
 YouTuben ja MySpacen kaltaiset menestyspalvelut ovat olleet
 mahdollisia toteuttaa. Flashia käyttämällä kehittäjät ovat jo pitkään
-pystyneet luomaan interaktiivista ja rikasta web-sisältöä
+pystyneet luomaan interaktiivista ja rikasta WWW-sisältöä
 yksinkertaisista animaatioista aina monimutkaisiin peleihin ja
-valikoihin asti. Suurin osa WWW-sivustoilla olevista mainoksista on
+valikoihin asti. Suurin osa WWW-si\-vus\-toil\-la olevista mainoksista on
 myös toteutettu käyttäen Flashia. Näistä syistä johtuen Flash Player
 on yksi ohjelmistoalan de facto-alustoista, jonka käyttöaste yritys-
 ja kuluttajapuolella on lähes 100 prosenttia \cite{Flash}.
@@ -255,7 +255,7 @@ ja kuluttajapuolella on lähes 100 prosenttia \cite{Flash}.
 Flashin käyttämä ActionScript-skriptikieli muistuttaa läheisesti
 JavaScriptiä, ja sitä käyttäen on mahdollista mm. luoda uusia
 TCP-yhteyksiä, ajaa JavaScriptiä selaimessa ja luoda sallittuihin
-domaineihin HTTP-pyyntöjä. Flashin käyttämä tietoturvamalli noudattaa
+domaineihin HTTP-pyyn\-tö\-jä. Flashin käyttämä tietoturvamalli noudattaa
 paljolti saman alkuperän periaatetta, jolla rajoitetaan eri
 domaineissa sijaitsevien sovellusten kommunikointia. Domainien välinen
 kommunikointi on kuitenkin sallittua, ja käytetty tietoturvapolitiikka
