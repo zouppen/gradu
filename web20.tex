@@ -1,6 +1,11 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
+% Testaa, onko tämä gradu vai seminaari (purkkaviritys)
+\ifdefined\seminaari
+\relax
+\else
 \chapter{Dynaamiset web-teknologiat}
+\fi
 
 \section{Yleistä}
 
@@ -79,7 +84,7 @@ Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan niin on itses
 jonka avulla käyttäjän asettamaa luottamusta voidaan väärinkäyttää. Asiaa ei auta se, että suurin osa sivustoista on jollakin asteella alttiina XSS-hyökkäyksille \cite{WEB2c} johtuen huonosti
 toteutetusta syötteen suodatuksesta. Asetettuja suodatuksia pystytään myös kiertämään käyttäen esimerkiksi kuvalinkkejä ja erilaisia tageja, joiden avulla ajettava skripti voidaan 
 hukuttaa muun syötteen joukkoon. Juuri tästä syystä pelkästään tiettyjen merkkijonojen suodattaminen ei takaa suojaa JavaScript-pohjaisilta hyökkäyksiltä. Tehokkain ja yksinkertaisin keino
-onkin muuttaa kaikki tagit HTML merkeiksi, jolloin esimerkiksi < merkistä tulee \emph{&lt;} ja > merkistä \emph{&gt;}. Monet ympäristöt mahdollistavat myös suoraan HTML-elementtien
+onkin muuttaa kaikki tagit HTML merkeiksi, jolloin esimerkiksi < merkistä tulee \emph{\&lt;} ja > merkistä \emph{\&gt;}. Monet ympäristöt mahdollistavat myös suoraan HTML-elementtien
 poistamisen käyttäjien jättämistä viesteistä \cite{AJAX}.
 
 Kasvaneella JavaScriptin käytöllä on suora vaikutus myös XSS-hyökkäysten yleistymiseen. JavaScript pääsee helposti evästeisiin käsiksi käyttäen \emph{document.cookie} kutsua, ja vaikka sen 
@@ -132,6 +137,9 @@ mm. roskapostin lähettämiseen ja palvelunestohyökkäyksiin. Haitallista koodi
 Tällaiset haitalliset mainokset eivät ole pelkästään vain pienten sivustojen ongelma, sillä vuonna 2009 suuret sivustot kuten \emph{guardian.co.uk} sisälsivät mainoksia, jotka olivat luonteeltaan 
 haitallisia \cite{FlashAdd}. 
 
-\section{Google Web Toolkit}
-
-Mahdollisia lähteitä: http://code.google.com/intl/fi-FI/webtoolkit/articles/security_for_gwt_applications.html ja muut täältä löytyvät: http://code.google.com/intl/fi-FI/webtoolkit/articles.html
+%\section{Google Web Toolkit}
+%
+% Mahdollisia lähteitä:
+% http://code.google.com/intl/fi-FI/webtoolkit/articles/security_for_gwt_applications.html}
+% ja muut täältä löytyvät:
+% http://code.google.com/intl/fi-FI/webtoolkit/articles.html
