@@ -163,27 +163,7 @@ resursseja entistä useammasta lähteestä eri palvelimilta, voi tämä
 aiheuttaa riskitilanteita, jos jonkin lähteen tietoturva on
 vaarantunut \cite{AJAX}.
 
-\subsection{AJAXiin liittyvät tietoturvariskit}
-
-Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan,
-niin on itsestään selvää, että hyökkääjät pyrkivät väärinkäyttämään
-ensisijaisesti JavaScriptin haavoittuvaisuuksia.  Asiaa ei auta se,
-että suurin osa sivustoista on jollakin tavalla alttiina
-XSS-hyök\-käyk\-sil\-le \cite{WEB2c} johtuen huonosti toteutetusta syötteen
-suodatuksesta. Asetettuja suodatuksia pystytään myös kiertämään
-käyttäen esimerkiksi kuvalinkkejä ja monia HTML-elementtejä,
-joiden avulla ajettava skripti voidaan hukuttaa muun syötteen
-joukkoon. Tästä syystä pelkästään tiettyjen merkkijonojen
-suodattaminen ei takaa suojaa JavaScript-pohjaisilta
-hyökkäyksiltä. Tehokkain ja yksinkertaisin keino onkin poistaa kaikki
-HTML-e\-le\-ment\-tei\-hin kuuluvat merkit, jolloin esimerkiksi \texttt{<}-merkistä tulee
-\texttt{\&lt;} ja \texttt{>}-merkistä \texttt{\&gt;}. Monet ympäristöt
-mahdollistavat myös suoraan HTML-e\-le\-ment\-ti\-en poistamisen käyttäjien
-jättämistä viesteistä \cite{AJAX}. Tällöin esimerkiksi WWW-foo\-ru\-meil\-la
-toisten käyttäjien lähettämistä viesteistä saadaan estettyä
-niiden mahdollisesti sisältämän JavaScript-ohjelmakoodin suorittaminen.
-
-\subsubsection{Evästeiden kaappaaminen}
+\subsection{Evästeiden kaappaaminen}
 
 Kasvaneella JavaScriptin käytöllä on suora vaikutus myös
 XSS-hyök\-käys\-ten yleistymiseen. JavaScriptillä pääsee helposti
@@ -214,7 +194,7 @@ XHR-objektien tunnistaminen ei myöskään vielä ole mahdollista
 \cite{AJAX}. Näistä syistä johtuen AJAX tarjoaa nyt ja tulevaisuudessa
 hyökkääjille monia mahdollisuuksia murtaa asetettuja suojauksia.
 
-\subsubsection{JSON}
+\subsection{JSON}
 
 Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript
 Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja
@@ -245,6 +225,26 @@ taholta, vaikkakin Referer-kentän sisältö voidaan helposti
 muuttaa. Toinen tapa on muokata vastaanottopäässä paketteja siten,
 että hyökkääjä ei pysty ajamaan lähettämissään pyynnöissä skriptejä
 \cite{JSH}.
+
+\subsection{Suojautuminen}
+
+Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan,
+niin on itsestään selvää, että hyökkääjät pyrkivät väärinkäyttämään
+ensisijaisesti JavaScriptin haavoittuvaisuuksia.  Asiaa ei auta se,
+että suurin osa sivustoista on jollakin tavalla alttiina
+XSS-hyök\-käyk\-sil\-le \cite{WEB2c} johtuen huonosti toteutetusta syötteen
+suodatuksesta. Asetettuja suodatuksia pystytään myös kiertämään
+käyttäen esimerkiksi kuvalinkkejä ja monia HTML-elementtejä,
+joiden avulla ajettava skripti voidaan hukuttaa muun syötteen
+joukkoon. Tästä syystä pelkästään tiettyjen merkkijonojen
+suodattaminen ei takaa suojaa JavaScript-pohjaisilta
+hyökkäyksiltä. Tehokkain ja yksinkertaisin keino onkin poistaa kaikki
+HTML-e\-le\-ment\-tei\-hin kuuluvat merkit, jolloin esimerkiksi \texttt{<}-merkistä tulee
+\texttt{\&lt;} ja \texttt{>}-merkistä \texttt{\&gt;}. Monet ympäristöt
+mahdollistavat myös suoraan HTML-e\-le\-ment\-ti\-en poistamisen käyttäjien
+jättämistä viesteistä \cite{AJAX}. Tällöin esimerkiksi WWW-foo\-ru\-meil\-la
+toisten käyttäjien lähettämistä viesteistä saadaan estettyä
+niiden mahdollisesti sisältämän JavaScript-ohjelmakoodin suorittaminen.
 
 \section{Flash}
 
