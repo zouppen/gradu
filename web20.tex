@@ -7,6 +7,11 @@
 \chapter{Dynaamiset WWW-teknologiat}
 \fi
 
+% Tähän lukuun toivottiin seminaarissa selkeämpää mainintaa, että
+% kyseessä on ylläpitäjän ja kehittäjän tietoturva eikä käyttäjän.
+% Toisaalta gradun osana varmaan käy ilmi, joten ei välttämättä
+% tarvitse? Vai? -Joel
+
 \section{Yleistä}
 
 Internet on aina ollut ja tulee aina olemaan vihamielinen paikka, jossa sivustolla vierailevan motiiveja sivustoa ja palvelua kohtaan on mahdotonta ennustaa. Tästä syystä 
@@ -29,7 +34,7 @@ sovellukset voivat aiheuttaa.
 
 \section {AJAX}
 
-Jos jokin dynaamisista WWW-teknologiosta halutaan nostaa kehitystä
+Jos jokin dynaamisista WWW-teknologioista halutaan nostaa kehitystä
 eniten eteenpäin vieväksi voimaksi, niin vahvin ehdokas tähän on AJAX.
 Asynchronous JavaScript and XML (lyh. AJAX) itsessään ei ole mikään
 yksi tietty teknologia, vaan se on usean eri teknologian yhdistelmä,
@@ -87,7 +92,7 @@ ns. asiakaspuoleen, ei voi kuitenkaan koskaan luottaa.
 JavaScriptien huolimaton käyttö avaakin hyökkääjille lukuisia tapoja
 murtautua palveluihin. Kyseessä on sinänsä pitkään tunnettu ongelma,
 mutta kehittäjien kiinnostuksen siirtyessä AJAXiin ovat myös
-hyökkääjät alkaneet kiinnittämään asiaan enemmän huomiota \cite{AJAX}.
+hyökkääjät alkaneet kiinnittää asiaan enemmän huomiota \cite{AJAX}.
 Monet käytetyistä AJAX-ympäristöistä sisältävät myös eriasteisia
 tietoturvariskejä, joita hyökkääjät voivat hyödyntää \cite{JSH}.
 
@@ -103,6 +108,8 @@ erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta,
 jollainen kuitenkin löytyy miltei jokaisesta WWW-selaimesta, mukaanlukien
 yleisimmät mobiililaitteet.
 
+% TODO: Ylläolevaan lukuun toivottiin viitettä LiveScriptin historiaan.
+
 JavaScript on tehokas työkalu, joka mahdollistaa monen muun toiminnon
 ohella mm. dynaamisten WWW-sivujen tekemisen, viestien kirjoittamisen
 selaimen tilariville, uusien ikkunoiden avaamisen ja interaktiivisten
@@ -114,7 +121,7 @@ mahdollistaa erittäin monipuolisten toimintojen toteuttamisen
 WWW-ympäristössä.
 
 Suurin osa WWW-sivuilla olevista skripteistä toimii siten, että ne
-ladataan aluksi käyttäjän koneelle, jonka jälkeen ne suoritetaan
+ladataan aluksi käyttäjän koneelle, minkä jälkeen ne suoritetaan
 selaimessa. Skriptit sijaitsevat ja ne suoritetaan käyttäjien
 koneilla, joten toimintaperiaatten selvittäminen ei ole hyökkääjälle
 vaikeaa. Asiaa pystytään kuitenkin vaikeuttamaan muutamalla eri
@@ -131,7 +138,7 @@ selaimessa suoritettaisiin ainoastaan sellainen laskenta, joissa
 käsitellään käyttäjää itseään koskevaa dataa.
 
 Koneelle ladatut skriptit ajetaan oletuksena hyvin rajatussa tilassa,
-jossa niillä on pääsy vain kyseistä sivun sisältämään dataan tai
+jossa niillä on pääsy vain kyseisen sivun sisältämään dataan tai
 siihen hyvin läheisesti kuuluviin dokumentteihin. JavaScript noudattaa
 myös \ifdefined\seminaari \relax \else edellisessä luvussa esitettyä
 \fi \emph{saman alkuperän} periaatetta, joka estää skriptien
@@ -172,7 +179,7 @@ hyökkäyksiltä. Tehokkain ja yksinkertaisin keino onkin poistaa kaikki
 HTML-e\-le\-ment\-tei\-hin kuuluvat merkit, jolloin esimerkiksi \texttt{<}-merkistä tulee
 \texttt{\&lt;} ja \texttt{>}-merkistä \texttt{\&gt;}. Monet ympäristöt
 mahdollistavat myös suoraan HTML-e\-le\-ment\-ti\-en poistamisen käyttäjien
-jättämistä viesteistä \cite{AJAX}. Tälloin esimerkiksi WWW-foo\-ru\-meil\-la
+jättämistä viesteistä \cite{AJAX}. Tällöin esimerkiksi WWW-foo\-ru\-meil\-la
 toisten käyttäjien lähettämistä viesteistä saadaan estettyä
 niiden mahdollisesti sisältämän JavaScript-ohjelmakoodin suorittaminen.
 
@@ -190,13 +197,13 @@ lähettämisen sivustolle ja pahaa aavistamaton käyttäjä, joka vierailee
 tällä sivulla, joutuu tietämättään hyökkäyksen kohteeksi.
 
 Yksi tapa suojautua evästeiden varastamiselta on käyttää
-HTTP-only~-evästeitä, jolloin asiakaspuolen evästeitä ei pystytä
+HTTP-only-evästeitä, jolloin asiakaspuolen evästeitä ei pystytä
 lukemaan. Näiden evästeiden tukeminen on kuitenkin selainkohtaista,
 joten tämä ratkaisu ei aina välttämättä ole mahdollista
 toteuttaa. XSS-hyök\-käyk\-set eivät myöskään rajoitu pelkästään
 evästeiden varastamiseen, ja yhtä helposti hyökkääjä voi esimerkiksi
 luoda skriptin, joka lukee näppäimistön painallukset ja lähettää ne
-haluttuun osoitteeseen. HTTP-only evästeiden käyttö ei myöskään täysin
+haluttuun osoitteeseen. HTTP-only-evästeiden käyttö ei myöskään täysin
 suojaa evästeitä, jos käytetään XHR-kutsuja. Tällöin hyökkääjän on
 mahdollista lukea suoraan otsaketiedoissa asetettuja arvoja.
 
@@ -221,10 +228,10 @@ kelvollinen JavaScript-ohjelma, jonka sisältö on mahdollista kaapata
 tilannetta, jossa hyökkääjä ohittaa \emph{saman alkuperän} periaatteen
 silloin, kun JavaScriptiä käytetään arkaluontoisen tiedon
 lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes
-jokainen käytetty AJAX-ympäristö on alttiina tällaisilla
+jokainen käytetty AJAX-ympäristö on alttiina tällaisille
 hyökkäyksille. Käyttäen CSRF-hyökkäystä hyökkääjä pystyy
 väärinkäyttämään JSON-for\-maat\-ti\-a, ja varastamaan sekä muokkaamaan
-toiselle sivustolle lähetettäviä paketteja.  Tälläinen hyökkäys
+toiselle sivustolle lähetettäviä paketteja.  Tällainen hyökkäys
 voidaan toteuttaa useilla eri tavoilla mukaanlukien käyttäen
 \texttt{<script>}-elementtiä, ja koska pyyntö tulee selaimen luottamasta
 lähteestä, voidaan tällä tavoin ohittaa esimerkiksi SSL-suojaus
@@ -270,7 +277,7 @@ toteuttaa esimerkiksi käyttämällä vihamielistä RSS-syötettä tai
 luomalla tiedosto, joka sisältää uuden XML-tiedoston. Yksi tällaisista
 hyökkäyksistä on Stefan Esserin luoma GIF-tiedosto, jonka kommenttiin
 on piilotettu uusi tietoturvapolitiikka. Hyökkääjälle riittää, että
-kohdekone vain mahdollistaa tiedoston lataamisen palvelimelle, jonka
+kohdekone vain mahdollistaa tiedoston lataamisen palvelimelle, minkä
 jälkeen vanha sisältö voidaan korvata GIF-tiedostoon piilotetulla
 \cite{WEB2}.
 
@@ -307,6 +314,7 @@ mainokset eivät ole pelkästään vain pienten sivustojen ongelma, sillä
 vuonna 2009 suuret sivustot kuten \emph{guardian.co.uk} sisälsivät
 mainoksia, jotka olivat luonteeltaan haitallisia \cite{FlashAdd}.
 
+\ifdefined\seminaari \relax \else % Graduseminaarissa ei tätä lukua.
 \section{Google Web Toolkit}
 
 
@@ -315,6 +323,8 @@ mainoksia, jotka olivat luonteeltaan haitallisia \cite{FlashAdd}.
 % http://code.google.com/intl/fi-FI/webtoolkit/articles/security_for_gwt_applications.html}
 % ja muut täältä löytyvät:
 % http://code.google.com/intl/fi-FI/webtoolkit/articles.html
+
+\fi
 
 \section{Yhteenveto}
 
@@ -329,7 +339,7 @@ WWW-selaimesta.
 
 Varsinainen ongelma piilee siinä, että dynaamiset WWW-palvelut ovat
 aikaisempaa monimutkaisempia toteuttaa. Niissä hyödynnetään useita eri
-teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä
+teknologioita ja rajapintoja, minkä johdosta mahdollisuus tehdä
 virheitä kasvaa verrattaessa vanhoihin ratkaisuihin. Käytetyt
 teknologiat eivät siis ole syynä heikentyneeseen tietoturvatasoon,
 vaan syynä on kehittäjien huolimattomuus tai tietämättömyys niistä
