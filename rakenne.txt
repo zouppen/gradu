@@ -65,7 +65,11 @@ Syksy 2009: n. 50-80 sivua
  - Heuristiset IDS:t (?)
    - Onko näitä olemassa?
 
-*) Aiempi tutkimus
+*) Aiempi tutkimus (n. 4 sivua)
+
+ - IDS-järjestelmät
+ - Anomalia
+ - XSS ym.
 
 Kevät 2010: n. 30-50 sivua
 -----------
