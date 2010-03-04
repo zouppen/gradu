@@ -6,14 +6,22 @@
 
 Internet on aina ollut, ja tulee myös jatkossa olemaan, vihamielinen paikka, jossa sivustolla vierailevan motiiveja sivustoa ja palvelua kohtaan on mahdotonta ennustaa. Tästä syystä 
 useimmat kehittäjät ja ylläpitäjät ovat noudattaneet periaatetta, että keneenkään ei voi täysin luottaa. Sivustojen ja palveluiden kehittyessä entistä monimutkaisemmiksi, on tämän 
-ns. luottamattomuusperiaatteen noudattaminen noussut entistä tärkeämmäksi. Webin teknisen monimutkaistumisen taustalla on dynaamisuuden lisääntyminen. Paljon sellaisia tehtäviä, jotka
+ns. luottamattomuusperiaatteen noudattaminen noussut entistä tärkeämmäksi.
+
+Webin teknisen monimutkaistumisen taustalla on dynaamisuuden lisääntyminen. Paljon sellaisia tehtäviä, jotka
 aiemmin olivat palvelimen vastuulla, on siirretty käyttäjän selaimessa suoritettavaksi. Lisäksi WWW-sivujen sisältö ei ole enää staattista, vaan uutta sisältöä voidaan ladata sivulle
-käyttäen useitakin eri teknologioita. Näistä dynaamisista WWW-teknologioista käytetään usein nimitystä \emph{Web 2.0}. Vaikka kasvava määrä tietoturvahyökkäyksistä tapahtuukin 
+käyttäen useitakin eri teknologioita. Näistä dynaamisista WWW-teknologioista käytetään usein nimitystä \emph{Web 2.0}.
+
+Vaikka kasvava määrä tietoturvahyökkäyksistä tapahtuukin 
 dynaamisten WWW-teknologioiden avulla, se ei kuitenkaan tarkoita sitä, että ne olisivat tietoturvan kannalta normaalia heikompia tai että ne sisältäisivät helposti hyödynnettäviä 
 haavoittuvaisuuksia. Dynaamisuus vain mahdollistaa aikaisempaa joustavamman alustan toteuttaa interaktiivisia ja normaalien työpöytäsovelluksien kaltaisia palveluita, joita käyttäjät 
-voivat ajaa suoraan WWW-selaimesta. Varsinainen ongelma piilee siinä, että dynaamiset WWW-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä hyödynnetään useita eri
+voivat ajaa suoraan WWW-selaimesta.
+
+Varsinainen ongelma piilee siinä, että dynaamiset WWW-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä hyödynnetään useita eri
 teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä virheitä kasvaa verrattaessa vanhoihin ratkaisuihin. Käytetyt teknologiat eivät siis ole syynä heikentyneeseen 
-tietoturvatasoon, vaan syynä on kehittäjien huolimattomuus tai tietämättömyys niistä mahdollisuuksista, joita huonosti suunnitellut ja toteutetut palvelut avaavat hyökkääjille. Tämän
+tietoturvatasoon, vaan syynä on kehittäjien huolimattomuus tai tietämättömyys niistä mahdollisuuksista, joita huonosti suunnitellut ja toteutetut palvelut avaavat hyökkääjille.
+
+Tämän
 luvun tarkoitus onkin lyhyesti esitellä joitakin Web 2.0:n takana olevia teknologioita, ja tuoda esille niitä riskejä, joita huonosti toteutetut palvelut voivat aiheuttaa.
 
 \section {AJAX}
@@ -74,7 +82,9 @@ WWW-palvelimella. Tällöin käyttäjän selaimessa suoritettaisiin ainoastaan s
 Koneelle ladatut skriptit ajetaan oletuksena hyvin rajatussa tilassa, jossa niillä on pääsy vain kyseistä sivun sisältämään dataan tai siihen hyvin läheisesti kuuluviin dokumentteihin. 
 JavaScript noudattaa myös  edellisessä luvussa esitettyä \emph{saman alkuperän} periaatetta, joka estää skriptien suorittamisen muista Internetdomaineista kuin siitä, josta skripti on
 ladattu. Näin vaikeutetaan hyökkäyksen tekemistä käyttäen toiselta sivulta ladattua haitallista skriptiä, jonka avulla voitaisiin esimerkiksi varastaa evästeitä ja urkkia näppäimistön
-painallukset.  Aikaisemmin selaimet ovat sallineet joitain poikkeuksia tähän periaatteeseen, mutta tietoturvasyistä nämä on kuitenkin poistettu. Liian tiukat tietoturvasäännöt eivät 
+painallukset.  Aikaisemmin selaimet ovat sallineet joitain poikkeuksia tähän periaatteeseen, mutta tietoturvasyistä nämä on kuitenkin poistettu.
+
+Liian tiukat tietoturvasäännöt eivät 
 kuitenkaan toimi nykyaikaisten WWW-palveluiden kanssa, ja tästä syystä \emph{saman alkuperän} periaatetta on mahdollista löysentää. Esimerkiksi ulkoiset linkit, jotka osoittavat toisella
 sivustolla olevaan skriptiin, ohittavat \emph{saman alkuperän}, sillä vaikka itse skripti sijaitsee toisella palvelimella niin se lasketaan kuuluvan siihen sivuun, jossa viittaus
 lähdekooditiedostoon on.  Näin kutsutulla skriptillä on pääsy sellaisiin evästeisiin ja tiedostoihin, joihin sillä ei välttämättä tarvitsisi olla oikeuksia. Sivustojen ja palveluiden 
