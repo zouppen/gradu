@@ -79,15 +79,13 @@ käyttäessä resursseja entistä useammasta lähteestä eri palvelimilta, voi t
 
 \subsection{AJAXiin liittyvät tietoturvariskit}
 
-Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan, niin on itsestään selvää, että hyökkääjät pyrkivät väärinkäyttämään ensisijaisesti JavaScriptin haavoittuvaisuuksia.  
+Koska AJAXin toiminta perustuu hyvin pitkälti JavaScriptin varaan, on itsestään selvää, että hyökkääjät pyrkivät väärinkäyttämään ensisijaisesti JavaScriptin haavoittuvaisuuksia.  
 Asiaa ei auta se, että suurin osa sivustoista on jollakin tavalla alttiina XSS-hyökkäyksille \cite{WEB2c} johtuen huonosti toteutetusta syötteen suodatuksesta. Asetettuja suodatuksia 
 pystytään myös kiertämään käyttäen esimerkiksi kuvalinkkejä ja monia HTML-elementtejä, joiden avulla ajettava skripti voidaan hukuttaa muun syötteen joukkoon. Tästä syystä pelkästään 
 tiettyjen merkkijonojen suodattaminen ei takaa suojaa JavaScript-pohjaisilta hyökkäyksiltä. Tehokkain ja yksinkertaisin keino onkin poistaa kaikki HTML-elementteihin kuuluvat merkit, 
 jolloin esimerkiksi \texttt{<}-merkistä tulee \texttt{\&lt;} ja \texttt{>}-merkistä \texttt{\&gt;}. Monet ympäristöt mahdollistavat myös suoraan HTML-elementtien poistamisen käyttäjien
 jättämistä viesteistä \cite{AJAX}. Tälloin esimerkiksi WWW-foorumeilla toisten käyttäjien lähettämistä viesteistä saadaan estettyä niiden mahdollisesti sisältämän JavaScript-ohjelmakoodin
 suorittaminen.
-
-\subsubsection{Evästeiden kaappaaminen}
 
 Kasvaneella JavaScriptin käytöllä on suora vaikutus myös XSS-hyökkäysten yleistymiseen. JavaScriptillä pääsee helposti evästeisiin käsiksi käyttäen \emph{document.cookie}-oliota. 
 Vaikka sen käyttö onkin rajoitettu ainoastaan sen Internet-domainin evästeeseen, josta kutsu on tehty, voidaan tämä rajoitus ohittaa melko helposti. Hyökkääjälle riittää, että käyttäjä 
@@ -97,25 +95,21 @@ aavistamaton käyttäjä, joka vierailee tällä sivulla, joutuu tietämättää
 Yksi tapa suojautua evästeiden varastamiselta on käyttää HTTP-only~-evästeitä, jolloin asiakaspuolen evästeitä ei pystytä lukemaan. Näiden evästeiden tukeminen on kuitenkin selainkohtaista,
 joten tämä ratkaisu ei aina välttämättä ole mahdollista toteuttaa. XSS-hyökkäykset eivät myöskään rajoitu pelkästään evästeiden varastamiseen, ja yhtä helposti hyökkääjä voi esimerkiksi
 luoda skriptin, joka lukee näppäimistön painallukset ja lähettää ne haluttuun osoitteeseen. HTTP-only evästeiden käyttö ei myöskään täysin suojaa evästeitä, jos käytetään XHR-kutsuja. 
-Tällöin hyökkääjän on mahdollista lukea suoraan otsaketiedoissa asetettuja arvoja.
+Tällöin hyökkääjän on mahdollista lukea suoraan otsaketiedoissa asetettuja arvoja. Jotkut XHR-objekteihin liittyvät haavoittuvuudet ovat myös niin syvällä XHMLHttpRequest-objekteissa, että 
+kaikki nykyisin käytössä olevat toteutukset ovat niille jossakin määrin alttiina. Kaapattujen XHR-objektien tunnistaminen ei myöskään vielä ole mahdollista \cite{AJAX}. Näistä syistä johtuen 
+AJAX tarjoaa nyt ja tulevaisuudessa hyökkääjille monia mahdollisuuksia murtaa asetettuja suojauksia.
 
-Jotkut XHR-objekteihin liittyvät haavoittuvuudet ovat myös niin syvällä XHMLHttpRequest-objekteissa, että kaikki nykyisin käytössä olevat toteutukset ovat niille jossakin määrin alttiina. 
-Kaapattujen XHR-objektien tunnistaminen ei myöskään vielä ole mahdollista \cite{AJAX}. Näistä syistä johtuen AJAX tarjoaa nyt ja tulevaisuudessa hyökkääjille monia mahdollisuuksia murtaa 
-asetettuja suojauksia.
+Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja laajasti tuettu WWW-palvelimella käytetty 
+työkalu. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}. Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen 
+JavaScript-ohjelma, jonka sisältö on mahdollista kaapata \cite{AJAX}. Termi \emph{JavaScript Hijacking} kuvaa tällaista tilannetta, jossa hyökkääjä ohittaa \emph{saman alkuperän} periaatteen silloin,
+kun JavaScriptiä käytetään arkaluontoisen tiedon lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes jokainen käytetty AJAX-ympäristö on alttiina tällaisilla hyökkäyksille. Käyttäen 
+CSRF-hyökkäystä hyökkääjä pystyy väärinkäyttämään JSON-formaattia, ja varastamaan sekä muokkaamaan toiselle sivustolle lähetettäviä paketteja.  Tälläinen hyökkäys voidaan toteuttaa useilla eri 
+tavoilla mukaanlukien käyttäen \texttt{<script>}-elementtiä, ja koska pyyntö tulee selaimen luottamasta lähteestä, voidaan tällä tavoin ohittaa esimerkiksi SSL-suojaus\cite{AJAX}.
 
-\subsubsection{JSON}
-
-Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja laajasti tuettu WWW-palvelimella käytetyissä 
-työkaluissa. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}.
-
-Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen JavaScript-ohjelma, jonka sisältö on mahdollista kaapata \cite{AJAX}. Termi \emph{JavaScript Hijacking} kuvaa 
-tällaista tilannetta, jossa hyökkääjä ohittaa \emph{saman alkuperän} periaatteen silloin, kun JavaScriptiä käytetään arkaluontoisen tiedon lähettämiseen. Aiheesta tehdyn tutkimuksen 
-\cite{JSH} mukaan lähes jokainen käytetty AJAX-ympäristö on alttiina tällaisilla hyökkäyksille. Käyttäen CSRF-hyökkäystä hyökkääjä pystyy väärinkäyttämään JSON-formaattia, ja varastamaan 
-sekä muokkaamaan toiselle sivustolle lähetettäviä paketteja.  Tälläinen hyökkäys voidaan toteuttaa useilla eri tavoilla mukaanlukien käyttäen \texttt{<script>}-elementtiä, ja koska pyyntö 
-tulee selaimen luottamasta lähteestä, voidaan tällä tavoin ohittaa esimerkiksi SSL-suojaus\cite{AJAX}. Suojautuminen tämän tyyppisiltä hyökkäyksiltä voidaan toteuttaa monella eri tapaa, ja
-paras tulos saadaan yhdistelemällä näitä. Koska CSRF-hyökkäyksessä hyökkääjä joutuu toimimaan osittain sokeasti, voidaan jokaiseen pyyntöön lisätä parametri, jota hyökkääjän on vaikea 
-arvata. Palvelin voidaan myös asettaa tarkistamaan HTTP Referer -kenttä, jolla voidaan varmistaa, että pyyntö tulee sallitulta taholta, vaikkakin Referer-kentän sisältö voidaan helposti
-muuttaa. Toinen tapa on muokata vastaanottopäässä paketteja siten, että hyökkääjä ei pysty ajamaan lähettämissään pyynnöissä skriptejä \cite{JSH}.
+Suojautuminen tämän tyyppisiltä hyökkäyksiltä voidaan toteuttaa monella eri tapaa, ja paras tulos saadaan yhdistelemällä näitä. Koska CSRF-hyökkäyksessä hyökkääjä joutuu toimimaan osittain sokeasti, 
+voidaan jokaiseen pyyntöön lisätä parametri, jota hyökkääjän on vaikea arvata. Palvelin voidaan myös asettaa tarkistamaan HTTP Referer -kenttä, jolla voidaan varmistaa, että pyyntö tulee sallitulta 
+taholta, vaikkakin Referer-kentän sisältö voidaan helposti muuttaa. Toinen tapa on muokata vastaanottopäässä paketteja siten, että hyökkääjä ei pysty ajamaan lähettämissään pyynnöissä skriptejä 
+\cite{JSH}.
 
 \section{Flash}
 
