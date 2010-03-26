@@ -5,22 +5,22 @@
 Toimivan ja ennen kaikkea turvallisen web-pohjaisen palvelun tarjoaminen vaatii
 nykyisin todella paljon aikaa ja huolellisuutta niin palvelun kehittäjältä kuin myös
 palvelun tarjoajalta ja ylläpitäjältä. Ajat ovat muuttuneet huomattavasti siitä,
-jolloin käyttäjät selailivat pääasiassa vain staattisia web-sivuja ja käyttivät tarjotuista
+jolloin käyttäjät selailivat pääasiassa vain staattisia web-sivuja, ja käyttivät tarjotuista
 palveluista korkeintaan sähköpostia. Kehitys kulkee kovaa vauhtia eteenpäin, ja
 tämän päivän suurimpia trendejä ovat interaktiivisuus, sosiaalisuus ja yksilöllisyys, 
-joiden avustuksella verkon käytöstä pyritään tekemään
+joiden avustuksella verkon käytöstä on pyritty tekemään
 käyttäjille entistä henkilökohtaisempi kokemus. Palvelut kuten MySpace,
 Facebook ja YouTube ovat vahvistaneet näitä käyttäjätottumuksia, ja
-markkinoille onkin syntynyt kova kilpailu siitä, kuka kehittää seuraavan
+markkinoille on syntynyt kova kilpailu siitä, kuka kehittää seuraavan
 menestyspalvelun. Nykyisin puhutaankin internetin seuraavasta evoluutiosta Web 2.0:n 
 muodossa, joita myös edellä mainitut palvelut edustavat. Uudet teknologiat ja
 kiire tuovat kuitenkin aina mukanaan joukon uusia heikkouksia, joita hyökkääjät
 pyrkivät hyödyntämään. Suunnittelijoiden ja ylläpitäjien kannalta onkin tärkeää, että 
 kehityksen tuomiin haasteisiin pyritään vastaamaan mahdollisimman nopeasti ja tehokkaasti.
 
-\section{Mitä tarkoittaa Web 2.0?}
+\section{Web 2.0}
 
-Web 2.0 on termi, jota käytetään hyvin monessa eri tarkoituksessa ja
+Web 2.0 on termi, jota käytetään hyvin monessa eri merkityksessä ja
 asiayhteydessä. Se yhdistetään usein uusiin web-teknologioihin ja internet-
 aikakauden tuotteiden/palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
 on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota internet pitää tällä
@@ -37,7 +37,7 @@ Tähän kun lisätään kiire päästä markkinoilla ensimmäisten
 joukossa, niin tietoturva-asiat jäävät usein taka-alalle \cite{WEB2b}.
 
 Tietoturvan kannalta teknologiat, jotka luetaan kuuluvan osaksi Web 2.0
-teknologiaperhettä, ovat jatkuvan huomion ja kehityksen kohteena. Nämä teknologiat
+teknologiaperhettä, ovat jatkuvan huomion ja kehityksen keskipisteenä. Nämä teknologiat
 muodostavat sen voiman, joka mahdollistaa siirtymisen dynaamisiin
 sovelluksiin kuten Google Maps, ja yritysten toimintojen ohjaamisen verkkoon.
 Teknologiat kuten Asynchronous JavaScript (AJAX), Cascading Style Sheet (CSS),
@@ -49,25 +49,25 @@ väliset suhteet.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{pics/web.pdf}
+\includegraphics[width=12cm]{pics/web_ymparisto.pdf}
 \caption{Web 2.0 teknologiaperhe}
 \label{web}
 \end{figure}
 
-Mitä Web 2.0 sitten tarkoittaa tietoturvan kannalta? Ensinnäkin se tuo mukanaan
-samat vanhat tietoturvariskit kuin mitä Web 1.0 sisälsi. Näiden lisäksi
+Tietoturvan kannalta Web 2.0 tuo mukanaan joukon uusia haasteita. Ensinnäkin
+samat vanhat tietoturvariskit, jotka vaivasivat jo Web 1.0 aikoihin, ovat edelleen voimassa. Näiden lisäksi
 hyökkäykset kuten Cross-Site Scripting (XSS) ja Cross-Site Request Forgery (CSRF) 
 ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
 monipuolisemman ympäristön, jonka kautta murtautua järjestelmiin \cite{WEB2}. Dynaamiset
 WWW-sovellukset antavat myös loppukäyttäjille ja takana oleville ohjelmille enemmän
 valtaa, jonka johdosta loppukäyttäjä ei välttämättä edes huomaa joutuessaan
-tietomurron kohteeksi. Hyvä esimerkki on Ajax-teknologia, joka mahdollistaa
+tietomurron kohteeksi. Tästä hyvänä esimerkkinä Ajax-teknologia, joka mahdollistaa
 sivujen tietojen päivittämisen käyttäen asynkronisia kutsuja. Tekniikan ansiosta
-käyttäjä pystyy tekemään kutsuja palvelimille ja päivittämään osan sivun
+käyttäjä pystyy tekemään kutsuja palvelimille, ja päivittämään osan sivun
 tiedoista niin, ettei koko sivua tarvitse päivittää. Tästä suurin osa tapahtuu
 käyttäjältä piilossa, joten hän ei todennäköisesti huomaa, jos selain lataa
-haitallisia skriptejä koneelle käyttäen jotain tunnettua tietoturva-aukkoa. Joidenkin
-arvioiden mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
+haitallisia skriptejä koneelle käyttäen jotain tunnettua tietoturva-aukkoa. Yhden
+arvion mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
 Ajaxia \cite{WEB2c}.
 
 Palvelinpuolella muutokset eivät rajoitu vain Web 2.0:n tuomiin
@@ -77,15 +77,15 @@ joukon muutoksia, jotka tulee ottaa huomioon tietoturvan suunnittelussa.
 Palvelukeskeinen arkkitehtuuri (engl. Service Oriented Architecture, SOA) on
 yksi näistä kehysmalleista, joka on kasvattanut suosiotaan Web 2.0:n
 vanavedessä. SOA-arkkitehtuurilla onkin nykyisin tärkeä rooli palvelujen
-välisen kommunikoinnin kehittämisessä. Siksi onkin tärkeää ymmärtää mistä
+välisen kommunikoinnin kehittämisessä. Siksi on tärkeää ymmärtää, mistä
 palasista SOA-arkkitehtuuriin perustuvat palvelut koostuvat, ja mitä tämä
-tarkoittaa tietoturvan kannalta.
+merkitsee tietoturvan kannalta.
 
 \section{Palvelukeskeinen arkkitehtuuri}
 
 Web-pohjaiset sovellukset ovat saamassa yhä suurempaa huomiota yrityspuolen
 tuotekehityksessä. Tätä muutosta on ollut ohjaamassa teknologioiden
-kehittyminen siihen pisteeseen, jossa yritykset pystyvät tarjoamaan aikaisemmin
+kehittyminen siihen pisteeseen, missä yritykset pystyvät tarjoamaan aikaisemmin
 asiakas-serveri sovelluksia verkon välityksellä luotettavasti ja nopeasti. Tämä
 ratkaisu on tuonut mukanaan rahallisia säästöjä yrityksille, jotka ovat ennen
 joutuneet itse huolehtimaan mm. sovellusten ajan tasalla pitämisestä ja
@@ -95,11 +95,11 @@ vaativimpia sovelluksia suuryritysten tarpeisiin. Yksi tapa hallita tätä
 muutosta on perustaa tehdyt ohjelmistosuunnittelun ratkaisut palvelukeskeisen
 arkkitehtuurin malliin.
 
-Puhuttaessa dynaamisista web-palveluista palvelukeskeinen arkkitehtuuri lähtee siitä
+Puhuttaessa dynaamisista web-palveluista, palvelukeskeinen arkkitehtuuri lähtee siitä
 ajatuksesta, että palveluiden toiminnot ja prosessit pyritään suunnittelemaan
 toimimaan mahdollisimman itsenäisesti ja avoimesti siten, että niitä pystytään
 kutsumaan joustavasti eri sovellusten välillä käyttäen standardoitua rajapintaa.
-Tähän ratkaisuun ovat ajaneet pyrkimys laskea IT-kustannuksia sekä jo käytössä olevien 
+Tähän ratkaisuun ovat ajaneet pyrkimys laskea IT-kustannuksia, sekä jo käytössä olevien 
 ratkaisujen uudelleenkäytön maksimointi. Aikaisemmin tämän toteuttaminen
 on ollut vaikeaa sovellusten heterogeenisyyden takia, jonka johdosta eri
 alustojen ja toimittajien väliset yhteistoiminnot ovat olleet usein mahdottomia
@@ -109,40 +109,42 @@ pyrkii tuomaan ratkaisun. Käytännössä tämä tarkoittaa sitä, että arkkite
 tulee tarjota sovelluksille mahdollisimman joustava sekä sijainnista ja
 protokollasta riippumattoman alusta \cite{SOA}. Tämän avulla loppukäyttäjälle
 voidaan tarjota palveluita monesta eri paikasta yhtä aikaa siten, ettei hän ole
-edes tietoinen tästä. Kyseessä on sama ajattelumalli johon Web 2.0 sovellukset
-pohjautuvat, ja siksi palvelukeskeinen arkkitehtuuri onkin saanut paljon
+edes tietoinen tästä. Kyseessä on sama ajattelumalli, johon Web 2.0 sovellukset
+pohjautuvat, ja siksi palvelukeskeinen arkkitehtuuri on saanut paljon
 nostetta Web 2.0:n myötä.
 
 Palvelukeskeisen arkkitehtuurin tuomat edut eivät rajoitu pelkästään
 kustannussäästöihin. Sen tuomiin etuihin kuuluvat myös mm. uusien toimintojen
-helpompi integrointi jo käytössä oleviin järjestelmiin sekä monimutkaisten
+helpompi integrointi jo käytössä oleviin järjestelmiin, sekä monimutkaisten
 kokonaisuuksien sujuvampi hallinta. Organisaatioille on myös tärkeää, että tällä
 tavalla suunniteltuihin palvelumalleihin on nopeampi tehdä haluttuja muutoksia, jolloin 
 reagointi markkinamuutoksiin voidaan toteuttaa nopeassa aikataulussa \cite{WEB2c}. Tämä on
 erityisen tärkeää, koska markkinoille on ilmestynyt monia uusia tekniikoita,
 jotka mahdollistavat web-palveluiden integroinnin jo käytössä oleviin
 palveluihin. Vuonna 2008 web-pohjaisten palveluiden kehittämiseen
-käytettiinkin jo arviolta yli 11 miljardia dollaria, ja osa fokuksesta on siirtynyt
+käytettiinkin arviolta yli 11 miljardia dollaria, ja osa fokuksesta on jo siirtynyt
 kohti keskikokoisia ja pieniä yrityksiä. Web-pohjaisten palveluiden merkityksen
-uskotaankin entisestään kasvavan ja yritykset, jotka reagoivat hitaasti tähän
-muutokseen, huomaavat tulevaisuudessa olevansa epäsuotuisassa asemassa \cite{WEB2b}.
+uskotaan entisestään kasvavan ja yritykset, jotka reagoivat hitaasti tähän
+muutokseen, huomaavat tulevaisuudessa olevansa muita huonommassa asemassa \cite{WEB2b}.
 
-Palvelinpuolelle tapahtuva muutos tarkoittaa sopeutumista uudenlaiseen
+Palvelinpuolella tapahtuvat muutokoset tarkoittavat sopeutumista uudenlaiseen
 ajattelumalliin, jossa palvelut on hajautettu ympäri verkkoa, ja joista osa ei
 välttämättä ole saman ylläpitäjän hallinnassa. Kuvan \ref{soa} mukainen ratkaisu
 tulee olemaan tulevaisuudessa arkipäivää, ja se tuo mukanaan uusia rajapintoja,
 joiden kautta hyökkääjä voi pyrkiä murtautumaan järjestelmään tai jopa
 yrityksen sisäiseen verkkoon. Koska palveluiden välinen kommunikointi perustuu
 tässä mallissa luottamussuhteen luomiseen, tulee erityistä kiinnittää huomiota
-siihen kuinka salaukset ja tunnistautuminen hoidetaan web-palveluita tarjoavien
+siihen, kuinka salaukset ja tunnistautuminen hoidetaan web-palveluita tarjoavien
 osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{pics/soa.pdf}
+\includegraphics[width=12cm]{pics/soa_arkkitehtuuri.pdf}
 \caption{SoA-arkkitehtuuri}
 \label{soa}
 \end{figure}
+
+\newpage
 
 \section{Web-palveluiden tietoturva}
 

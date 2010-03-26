@@ -215,13 +215,13 @@ hyökkäystä on vaikea torjua.
 
 \subsection{UDP Echo}
 
-Myös UDP-protokolla mahdollistaa hyökkäysten tekemisen. Nämä
+Myös UDP-protokollan käyttö mahdollistaa hyökkäysten tekemisen. Nämä
 hyökkäykset käyt\-tä\-vät hyväkseen UDP:n ECHO-toimintaa, jos sen käyttö
 on vain sallittu verkossa. Näistä hyökkäyksistä tunnetuin on Fraggleksi
 nimetty hyökkäys, joka nykyisinkin aiheuttaa väärin konfiguroidussa verkossa isoja ongelmia.
-Fraggle toimii siten, että hyökkääjä lähettää UDP echo-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
+Fraggle toimii siten, että hyökkääjä lähettää UDP ECHO-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
 hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet pyrkivät vastaamaan,
-jolloin kohdekoneen kaista ja resurssit joudutaan varaamaan viestien vastaanottamiseen (kuva \ref{echo}). 
+jolloin kohdekoneen kaista ja resurssit joudutaan varaamaan viestien vastaanottamiseen (kuva \ref{fraggle}). 
 Fraggle on hyvä esimerkki vahvistetusta hyökkäyksestä, jossa verkon laitteiden määrä
 vaikuttaa siihen, kuinka vakava hyökkäys on \cite{WEBS}. Vastaavanlainen
 hyökkäys voidaan myös toteuttaa kahden koneen välillä, jos kummassakin
@@ -229,12 +229,12 @@ on sallittuna UDP ECHO-viestit. Tällöin hyökkääjä väärentää viestiin
 lähettäjän osoitteen ja halutun kohdeportin. Vastaanottaja vastaa
 tähän viestiin omalla echo-viestillä, ja näin kahden koneen välille on
 muodostunut ikuinen silmukka \cite{TCP}.
-
+\newpage
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{pics/echo.pdf}
-\caption{UDP Echo hyökkäys}
-\label{echo}
+\includegraphics[width=12cm]{pics/fraggle.pdf}
+\caption{Vahvistettu UDP ECHO hyökkäys}
+\label{fraggle}
 \end{figure}
 
 \subsection{Smurf}
@@ -271,7 +271,7 @@ ohjelmisto, jonka avulla murtautuja pystyy hallitsemaan konetta käyttäjän
 tietämättä. Zombie-verkoston ei tarvitse edes olla kovinkaan suuri
 aiheuttaakseen tuhoa, sillä jo 3000 koneen verkosto, jossa jokainen kone
 tuottaa 25 Kbps liikennettä, aiheuttaa yhteensä 75 Mbps kuorman verkolle \cite{Hacking}.
-Palvelunestohyökkäyksen seuraamukset saattavatkin olla varautumattomalle
+Palvelunestohyökkäyksen seuraamukset ovat varautumattomalle
 taholle usein katastrofaaliset, ja pahimmillaan hyökkäys saattaa pysäyttää
 organisaation toiminnan useiksi päiviksi \cite{CERT}.
 
@@ -316,7 +316,7 @@ poistamaan verkosta, jolloin hyökkäyksessä käytetty verkko hajosi \cite{DDOS
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=12cm]{pics/ddos1.pdf}
+\includegraphics[width=12cm]{pics/perinteinen_ddos.pdf}
 \caption{Perinteinen DDoS-verkosto}
 \label{ddos1}
 \end{figure}
@@ -337,15 +337,15 @@ lennosta, jolloin yhden kanavan sulkeminen ei pysäytä verkon toimintaa. Näide
 syiden takia DDoS-hyökkäysten pysäyttäminen ennen niiden käynnistymistä on
 erittäin vaikeaa \cite{DDOS}.
 
-\begin{figure}[htp]
+\begin{figure}[t]
 \centering
-\includegraphics[width=12cm]{pics/ddos2.pdf}
-\caption{Nykyaikainen DDoS-verkosto}
+\includegraphics[width=12cm]{pics/ddos_uusi.pdf}
+\caption{Nykyisin käytetty DDoS-verkosto}
 \label{ddos2}
 \end{figure}
 
 Kuten yllä on jo tullut esille, on hajautetulta palvelunestohyökkäykseltä
-suojautuminen vaikea tehtävä riippumatta siitä onko verkko itse kohde vai
+suojautuminen vaikea tehtävä riippumatta siitä, onko verkko itse kohde vai
 käytetäänkö sitä vain hyökkäysten koordinointiin. Valmista ja yksityiskohtaista
 ratkaisua ei ole tarjolla, mutta seuraamalla joitakin yleisiä strategioita,
 voidaan vahinkoja rajoittaa. Nämä strategiat ovat suojautuminen, tunnistaminen
