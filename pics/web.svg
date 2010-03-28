@@ -132,8 +132,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="410.89545"
-     inkscape:cy="474.3693"
+     inkscape:cx="275.39545"
+     inkscape:cy="594.3693"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1920"
@@ -162,7 +162,7 @@
      id="layer1"
      transform="translate(-126.87153,-53.177851)">
     <rect
-       style="fill:none;stroke:#000000;stroke-width:1.41732287;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#f2f2f2;stroke:#000000;stroke-width:1.41732287000000000;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2858"
        width="146.68137"
        height="172.02423"
@@ -174,7 +174,7 @@
        height="174.43553"
        width="175.25565"
        id="rect2862"
-       style="fill:none;stroke:#000000;stroke-width:1.4809103;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#f2f2f2;stroke:#000000;stroke-width:1.48091029999999990;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.41732287;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2864"
@@ -232,7 +232,7 @@
        d="M 715.24145,223.77065 L 739.81633,223.77065"
        style="fill:none;stroke:#000000;stroke-width:4.30511808;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#TriangleInS);marker-end:url(#TriangleOutS);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
-       style="fill:none;stroke:#000000;stroke-width:1.74695396;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ececec;stroke:#000000;stroke-width:1.74695395999999990;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2898"
        width="207.60341"
        height="19.637466"
@@ -260,9 +260,10 @@
        sodipodi:nodetypes="cc" />
     <g
        id="g2453"
-       transform="translate(0,32.384009)">
+       transform="translate(0,32.384009)"
+       style="fill:#f2f2f2">
       <rect
-         style="fill:none;stroke:#000000;stroke-width:1.41732287;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#f2f2f2;stroke:#000000;stroke-width:1.41732287000000000;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect2894"
          width="80.636353"
          height="19.199131"
@@ -272,7 +273,7 @@
          id="text3016"
          y="195.5582"
          x="470.9025"
-         style="font-size:16.90743637px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
+         style="font-size:16.90743636999999900px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#f2f2f2;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
          xml:space="preserve"><tspan
            y="195.5582"
            x="470.9025"
@@ -281,19 +282,20 @@
     </g>
     <g
        id="g2448"
-       transform="translate(0,36.000024)">
+       transform="translate(0,36.000024)"
+       style="fill:#f2f2f2">
       <rect
          y="207.73775"
          x="430.5802"
          height="19.199131"
          width="80.636353"
          id="rect2896"
-         style="fill:none;stroke:#000000;stroke-width:1.41732287;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="fill:#f2f2f2;stroke:#000000;stroke-width:1.41732287000000000;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <text
          id="text3020"
          y="221.68089"
          x="470.7663"
-         style="font-size:16.90743637px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
+         style="font-size:16.90743636999999900px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#f2f2f2;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
          xml:space="preserve"><tspan
            y="221.68089"
            x="470.7663"
@@ -302,19 +304,20 @@
     </g>
     <g
        id="g2458"
-       transform="translate(0,28.000007)">
+       transform="translate(0,28.000007)"
+       style="fill:#f2f2f2">
       <rect
          y="154.74815"
          x="430.5802"
          height="19.199131"
          width="80.636353"
          id="rect2892"
-         style="fill:none;stroke:#000000;stroke-width:1.41732287;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="fill:#f2f2f2;stroke:#000000;stroke-width:1.41732287000000000;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <text
          id="text3024"
          y="169.30209"
          x="471.16669"
-         style="font-size:16.90743637px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
+         style="font-size:16.90743637px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#f2f2f2;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
          xml:space="preserve"><tspan
            y="169.30209"
            x="471.16669"
@@ -491,7 +494,7 @@
            height="162"
            x="156"
            y="262.09448" /></flowRegion><flowPara
-         id="flowPara2485"></flowPara></flowRoot>    <flowRoot
+         id="flowPara2485" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot2487"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:16"><flowRegion
@@ -501,7 +504,7 @@
            height="162"
            x="160"
            y="322.09448" /></flowRegion><flowPara
-         id="flowPara2493"></flowPara></flowRoot>    <text
+         id="flowPara2493" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        x="635.87152"
@@ -526,5 +529,35 @@
          x="655.78741"
          y="395.83667"
          id="tspan2503">         ympäristö</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="453.43256"
+       y="197.27303"
+       id="text2468"><tspan
+         sodipodi:role="line"
+         id="tspan2470"
+         x="453.43256"
+         y="197.27303">AJAX</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="451.51849"
+       y="227.85329"
+       id="text2472"><tspan
+         sodipodi:role="line"
+         id="tspan2474"
+         x="451.51849"
+         y="227.85329">HTML</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="453.67181"
+       y="258.26605"
+       id="text2476"><tspan
+         sodipodi:role="line"
+         id="tspan2478"
+         x="453.67181"
+         y="258.26605">Flash</tspan></text>
   </g>
 </svg>

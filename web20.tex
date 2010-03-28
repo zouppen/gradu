@@ -8,21 +8,16 @@ Internet on aina ollut, ja tulee myös jatkossa olemaan, vihamielinen paikka, jo
 useimmat kehittäjät ja ylläpitäjät ovat noudattaneet periaatetta, että keneenkään ei voi täysin luottaa. Sivustojen ja palveluiden kehittyessä entistä monimutkaisemmiksi, on tämän 
 ns. luottamattomuusperiaatteen noudattaminen noussut entistä tärkeämmäksi.
 
-Webin teknisen monimutkaistumisen taustalla on dynaamisuuden lisääntyminen. Paljon sellaisia tehtäviä, jotka
-aiemmin olivat palvelimen vastuulla, on siirretty käyttäjän selaimessa suoritettavaksi. Lisäksi WWW-sivujen sisältö ei ole enää staattista, vaan uutta sisältöä voidaan ladata sivulle
-käyttäen useitakin eri teknologioita. Näistä dynaamisista WWW-teknologioista käytetään usein nimitystä \emph{Web 2.0}.
+Webin teknisen monimutkaistumisen taustalla on dynaamisuuden lisääntyminen. Paljon sellaisia tehtäviä, jotka aiemmin olivat palvelimen vastuulla, on siirretty käyttäjän selaimessa 
+suoritettavaksi. Lisäksi WWW-sivujen sisältö ei ole enää staattista, vaan uutta sisältöä voidaan ladata sivulle käyttäen useitakin eri teknologioita. Näistä dynaamisista WWW-teknologioista
+käytetään usein nimitystä \emph{Web 2.0}.
 
-Vaikka kasvava määrä tietoturvahyökkäyksistä tapahtuukin 
-dynaamisten WWW-teknologioiden avulla, se ei kuitenkaan tarkoita sitä, että ne olisivat tietoturvan kannalta normaalia heikompia tai että ne sisältäisivät helposti hyödynnettäviä 
-haavoittuvaisuuksia. Dynaamisuus vain mahdollistaa aikaisempaa joustavamman alustan toteuttaa interaktiivisia ja normaalien työpöytäsovelluksien kaltaisia palveluita, joita käyttäjät 
-voivat ajaa suoraan WWW-selaimesta.
-
-Varsinainen ongelma piilee siinä, että dynaamiset WWW-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä hyödynnetään useita eri
-teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä virheitä kasvaa verrattaessa vanhoihin ratkaisuihin. Käytetyt teknologiat eivät siis ole syynä heikentyneeseen 
+Vaikka kasvava määrä tietoturvahyökkäyksistä tapahtuukin dynaamisten WWW-teknologioiden avulla, se ei kuitenkaan tarkoita sitä, että ne olisivat tietoturvan kannalta normaalia heikompia 
+tai että ne sisältäisivät helposti hyödynnettäviä haavoittuvaisuuksia. Dynaamisuus vain mahdollistaa aikaisempaa joustavamman alustan toteuttaa interaktiivisia ja normaalien työpöytäsovelluksien 
+kaltaisia palveluita, joita käyttäjät voivat ajaa suoraan WWW-selaimesta. Varsinainen ongelma piilee siinä, että dynaamiset WWW-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä 
+hyödynnetään useita eri teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä virheitä kasvaa verrattaessa vanhoihin ratkaisuihin. Käytetyt teknologiat eivät siis ole syynä heikentyneeseen 
 tietoturvatasoon, vaan syynä on kehittäjien huolimattomuus tai tietämättömyys niistä mahdollisuuksista, joita huonosti suunnitellut ja toteutetut palvelut avaavat hyökkääjille.
-
-Tämän
-luvun tarkoitus onkin lyhyesti esitellä joitakin Web 2.0:n takana olevia teknologioita, ja tuoda esille niitä riskejä, joita huonosti toteutetut palvelut voivat aiheuttaa.
+Tämän luvun tarkoitus onkin lyhyesti esitellä joitakin Web 2.0:n takana olevia teknologioita, ja tuoda esille niitä riskejä, joita huonosti toteutetut palvelut voivat aiheuttaa.
 
 \section {AJAX}
 
@@ -66,7 +61,7 @@ hyökkääjät voivat hyödyntää \cite{JSH}.
 
 JavaScript on Netscapen suunnittelema skriptikieli, joka tunnettiin aluksi nimellä LiveScript. Sun Microsystemsin kehittämän Java-ohjelmointikielen yleistyessä Netscape päättii muuttaa
 sen nimen JavaScriptiksi, toivoen sen käytön yleistyvän Javan menestyksen myötä. JavaScriptillä kirjoitetut skriptit sijoitetaan HTML:n \texttt{<script>}-elementin sisään, josta voi 
-olla myös viite erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta, jollainen kuitenkin löytyy miltei jokaisesta WWW-selaimesta, mukaanlukien yleisimmät mobiililaitteet.
+olla myös viite erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta, jollainen kuitenkin löytyy miltei jokaisesta WWW-se\-lai\-mes\-ta, mukaanlukien yleisimmät mobiililaitteet.
 
 JavaScript on tehokas työkalu, joka mahdollistaa monen muun toiminnon ohella mm. dynaamisten WWW-sivujen tekemisen, viestien kirjoittamisen selaimen tilariville, uusien ikkunoiden
 avaamisen ja interaktiivisten lomakkeiden luomisen. Skriptien toiminta rajoittuu kuitenkin WWW-selaimen toimintoihin, eikä sitä käyttäen voida esimerkiksi kirjoittaa levylle ja levyn 
@@ -85,7 +80,7 @@ ladattu. Näin vaikeutetaan hyökkäyksen tekemistä käyttäen toiselta sivulta
 painallukset.  Aikaisemmin selaimet ovat sallineet joitain poikkeuksia tähän periaatteeseen, mutta tietoturvasyistä nämä on kuitenkin poistettu.
 
 Liian tiukat tietoturvasäännöt eivät 
-kuitenkaan toimi nykyaikaisten WWW-palveluiden kanssa, ja tästä syystä \emph{saman alkuperän} periaatetta on mahdollista löysentää. Esimerkiksi ulkoiset linkit, jotka osoittavat toisella
+kuitenkaan toimi nykyaikaisten WWW-pal\-ve\-lui\-den kanssa, ja tästä syystä \emph{saman alkuperän} periaatetta on mahdollista löysentää. Esimerkiksi ulkoiset linkit, jotka osoittavat toisella
 sivustolla olevaan skriptiin, ohittavat \emph{saman alkuperän}, sillä vaikka itse skripti sijaitsee toisella palvelimella niin se lasketaan kuuluvan siihen sivuun, jossa viittaus
 lähdekooditiedostoon on.  Näin kutsutulla skriptillä on pääsy sellaisiin evästeisiin ja tiedostoihin, joihin sillä ei välttämättä tarvitsisi olla oikeuksia. Sivustojen ja palveluiden 
 käyttäessä resursseja entistä useammasta lähteestä eri palvelimilta, voi tämä aiheuttaa riskitilanteita, jos jonkin lähteen tietoturva on vaarantunut \cite{AJAX}.
@@ -113,9 +108,7 @@ kaikki nykyisin käytössä olevat toteutukset ovat niille jossakin määrin alt
 AJAX tarjoaa nyt ja tulevaisuudessa hyökkääjille monia mahdollisuuksia murtaa asetettuja suojauksia.
 
 Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja laajasti tuettu WWW-palvelimella käytetty 
-työkalu. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}. 
-
-Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen 
+työkalu. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}. Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen 
 JavaScript-ohjelma, jonka sisältö on mahdollista kaapata \cite{AJAX}. Termi \emph{JavaScript Hijacking} kuvaa tällaista tilannetta, jossa hyökkääjä ohittaa \emph{saman alkuperän} periaatteen silloin,
 kun JavaScriptiä käytetään arkaluontoisen tiedon lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes jokainen käytetty AJAX-ympäristö on alttiina tällaisilla hyökkäyksille. Käyttäen 
 CSRF-hyökkäystä hyökkääjä pystyy väärinkäyttämään JSON-formaattia, ja varastamaan sekä muokkaamaan toiselle sivustolle lähetettäviä paketteja.  Tälläinen hyökkäys voidaan toteuttaa useilla eri 

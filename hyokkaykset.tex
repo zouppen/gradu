@@ -405,18 +405,17 @@ johtuen yli puolet R2L-hyökkäyksen mahdollistavista heikkouksista onkin
 löydetty näille alustoille \cite{IDS}. Useat haavoittuvaisuudet johtuvat
 ohjelmointivirheistä, joiden johdosta hyökkääjä pystyy aiheuttamaan
 sovellukseen muistin ylivuodon (engl. Buffer Overflow). Tämä usein kaataa
-sovelluksen tai saattaa sen sellaiseen tilaan, että hyökkääjä pystyy ajamaan
+sovelluksen tai saattaa sen sellaiseen tilaan, jossa hyökkääjä pystyy ajamaan
 omia komentoja koneella. Kattava listaus löydetyistä heikkouksista ja näiden
 korjauksista löytyy osoitteesta www.cve.mitre.org/cve \cite{CVE}.
 
-Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista sillä
-nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa tästä ensin
-sovelluksen kehittäjille, ennen kuin julkistaa tiedon. Siksi usein korjaus
-haavoittuvuuteen on olemassa ennen kuin sitä on mahdollista hyödyntää \cite{IDSb}.
-Vastuu jääkin verkon ylläpitäjälle, että pitää käytetyt sovellukset ajan
-tasalla sekä päivittää suojausjärjestelmät siten, että ne tunnistavat tällaiset
-hyökkäykset. Suurin osa onnistuneista hyökkäyksistä johtuukin siitä, että
-tunnettuja tietoturva-aukkoja ei ole korjattu.
+Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista, sillä
+nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa siitä ensin
+sovelluksen kehittäjille ennen julkista ilmoitusta. Siksi usein korjaus
+haavoittuvuuteen on olemassa, ennen kuin sitä on mahdollista hyödyntää \cite{IDSb}.
+Vastuu jääkin verkon ylläpitäjälle, että käytetyt sovellukset ja 
+suojausjärjestelmät pidetään ajan tasalla, sillä suurin osa onnistuneista hyökkäyksistä 
+johtuu siitä, että tunnettuja tietoturva-aukkoja ei ole korjattu.
 
 \section{User-to-Root}
 
@@ -438,4 +437,4 @@ Kehittyneimmilläkin järjestelmillä näiden hyökkäysten tunnistaminen on tod
 heikkoa. Tämän on osoittanut useat eri tutkimushankkeet, jotka ovat käyttäneet
 järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä, jonka sisältö
 on tarkkaan tiedossa. Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
-paikkeille, ja yleensä luku on jäänyt alle 10 prosenttiin.
+paikkeille.
