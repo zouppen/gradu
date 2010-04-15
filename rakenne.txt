@@ -6,90 +6,80 @@ torjunta.
 
 Otsikko:
 
-Syksy 2009: n. 50-80 sivua
------------
+1) Johdanto
 
-*) Johdanto
-*) WWW-palvelun arkkitehtuuri
+2) Web-palveluiden "maailma" (FIXME) (10 sivua?)
 
  - käytetyt palvelinohjelmistoyhdistelmät
    - LAMP (Linux + Apache + MySQL + PHP)
-   - Zope / Plone
- - keskitetyt "välimuistilliset" palvelut
-   - Yksi palvelin, monta välimuistia
-   - Esimerkiksi Wikipedia
+   - Zope / Plone, Tomcat, ym. eksoottisemmat lyhyesti
  - hajautetut palvelut
+   - pyynnön ohjaaminen usealle palvelimelle (reverse proxy)
    - hyödyt verrattuna keskitettyyn
-   - Esimerkkejä arkkitehtuurista, esim Google, Facebook, ...
- - eri arkkitehtuurit vertailtuna
-   - tietoturvan kannalta
-   - tiedon keräämisen kannalta IDS:lle
+ - Välimuistipalvelut:
+   - "talon sisällä" olevat välimuistit
+   - Akamai ym. "ulkoiset" välimuistit (ei luovuta esim. IP-osoitteita)
+ - tiedon keräämisen kannalta IDS:lle (minkälaiset logitukset?)
 
- Joel kirjoittaa pohjan.
+ Joel kirjoittaa 28.4. mennessä.
 
-*) Web 2.0 -teknologiat
+3) Perinteiset tietoturvahyökkäykset (13 sivua, valmis)
 
- - AJAX (JavaScript / ECMAScript ja XML)
- - Flash
- - ActiveX
- - XML
+4) Web-palveluiden haasteet (FIXME) (19 sivua, valmis)
 
- Kristian kirjoittaa pohjan, Joel täydentää.
+ - lisää Snort, BRO
 
-*) Palveluita vastaan kohdistuvat hyökkäykset
+5) Dynaamiset Web-teknologiat (10 sivua, valmis)
 
- - yleisimmät tietoturva-aukot eri palvelinohjelmistoyhdistelmiin.
+6) Hyökkäysten torjunta ja ennustaminen
 
- - hyökkäystavat
-   - DOS
-   - Hajautetut hyökkäykset (esim. DDOS)
-   - Spoofing
-   - L2R (Local to Root)
-   - R2L (Remote to Local)
-   - data injection (tiedon ruiskutus :-D)
-     - "AJAX-hyökkäykset"
-     - SQL-hyökkäykset)
-   - OSI-mallin kerroksille <7 kohdistuvat hyökkäykset
-     - Käsitellään tosi lyhyesti, koska tästä on jo gradu
+ - Tarvitaanko tätä tällaisenaan? Mitä tilalle?
 
- Kristian kirjoittaa pohjan tälle luvulle.
+7) Aiheeseen liittyvä tutkimus (5 sivua, valmis, hienosäätöä)
 
-*) Hyökkäysten torjunta (ja ennustaminen)
+8) Tutkimusasetelma ( >10 sivua? )
 
- - Anomaly detection & Misuse detection -jako
- - Sääntöpohjaiset IDS:t
-   - SNORT
-   - BRO
- - Jako kerrosten <7 ja 7 torjuntakeinoihin. Käsitellään 7 paremmin.
- - Poikkeavuuksien havaitsemiseen (anomaly detection) perustuvat IDS:t
- - Heuristiset IDS:t (?)
-   - Onko näitä olemassa?
+ - Yksinkertainen selvitys alkutilanteesta (datan alkuperä ym.)
+ - Mitä tutkitaan, miksi ja miten
+   - Moniulotteisen datan dimensioiden vähentäminen
+ - Menetelmät
+   - n-grammit
+   - Random Projection
+   - Diffuusiokuvaus
 
-*) Aiempi tutkimus (n. 4 sivua)
+Kristian kirjoittaa pohjan 29.4. mennessä.
 
- - IDS-järjestelmät
- - Anomalia
- - XSS ym.
-
-Kevät 2010: n. 30-50 sivua
------------
-
-*) Tiedon keruu ja esikäsittely (15 sivua}
+9) Tiedon keruu ja esikäsittely (15 sivua}
 
  - Mistä data on peräisin?
+    - Palvelun rakenteen kuvaus
  - Millaista data on?
    - HTTP
    - Apachen logit
  - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
+ - Mitä työkaluja on käytetty (Haskell ja PhasefulSplitter)
  - Miten dataa on käsiteltu ja suodatettu?
 
-*) Analysointi (15 sivua)
+Joel kirjoittaa 28.4. mennessä rungon.
+
+10) Tiedon analysointi (15 sivua)
 
  - Tuomon ja Juhon "mylly"?
- - Amirin algoritmit
- - Muut poikkeavuuksien tunnistusjärjestelmät?
- - Vertailu näiden välillä (esim ristiintaulukointia?)
+ - Paljon kuvia!
+ - Poikkeavuuksien (outliers) läpikäynti, joita on löydetty
+    - luokittelu käsin tietomurron yrityksiin, vääriin hälytyksiin
+       (jos on) ja muuhun poikkeukselliseen toimintaan.
 
-*) Johtopäätökset (5 sivua)
+Kirjoitetaan toukokuun aikana.
+
+11) Johtopäätökset (5 sivua)
 
 *) Lähteet
+
+Muut aikataulut
+==========
+
+Uusi datamöykky n-grammeilla ym. 23.4. mennessä Juholle ja Tuomolle.
+
+Työ valmis 31.5. mennessä. Tarvittaessa odotetaan julkaisun valmistumista ennen
+lopullista gradun hyväksymistä. Maisteriksi 1.8.2010.
