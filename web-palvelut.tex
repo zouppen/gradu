@@ -435,13 +435,13 @@ sovelluksen kehittäjälle ja ylläpitäjälle.
 
 \section{Web-palveluiden turvaaminen}
 
-Web-palveluiden tietoturvasta vastaaminen on tarkkuutta ja aikaa vaativaa työtä, joka edellyttää omien tietojen jatkuvaa päivittämistä sekä ja liikenteen ja palveluiden
+Web-palveluiden ja verkon tietoturvasta vastaaminen on tarkkuutta ja aikaa vaativaa työtä, joka edellyttää omien tietojen jatkuvaa päivittämistä sekä ja liikenteen ja palveluiden
 seuraamista. Jo pelkästään yleisimpien tietoturvariskien tunnistaminen ja korjaaminen osoittautuu usein käsin tehtynä ylivoimaiseksi tehtäväksi verkkojen ja palveluiden
-muuttuessa entistä monimutkaisemmiksi. Työn helpottamiseksi on saatavilla useita erilaisia työkaluja, joiden avulla sekä kehittäjät että ylläpitäjät voivat
+muuttuessa entistä monimutkaisemmiksi. Työn helpottamiseksi on saatavilla useita työkaluja, joiden avulla sekä kehittäjät että ylläpitäjät voivat
 etsiä sovelluksista ja verkoista tunnetuimpia tietoturva-aukkoja. Osa näistä pohjautuu vapaaseen lähdekoodiin, mutta tarjolla on myös kaupallisia sovelluksia, jotka ainakin 
-paperilla lupaavat parempia ominaisuuksia. Näiden lisäksi myös palvelinpuolella on tarjolla erilaisia lisäosia, jotka lisäävät web-palveluiden tietoturvaa. 
+paperilla lupaavat parempia ominaisuuksia. Näiden lisäksi palvelinpuolella on tarjolla erilaisia lisäosia, jotka lisäävät web-palveluiden tietoturvaa. 
 Mikään sovellus ei tietenkään voi löytää kaikkia mahdollisia heikkouksia, joten pelkästään näiden varaan ei voida tietoturvaa rakentaa. Näiden avulla 
-saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus on mahdollisesti alttiina ja kuinka verkon turvallisuutta voidaan parantaa. Koska samat 
+saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus on mahdollisesti alttiina, ja kuinka verkon turvallisuutta voidaan parantaa. Koska samat 
 sovellukset on myös hyökkääjien käytössä, niin ainakin virheet, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
 
 Web Application Security Consortium (lyh. WASC) on vuonna 2004 perustettu avoin kansainvälinen ryhmittymä, joka koostuu tietoturva-alan asiantuntijoista sekä eri 
@@ -455,14 +455,36 @@ ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet ol
 osoitti sen, että XSS-hyökkäykset olivat SQL injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
 kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta. 
 
+\subsection{Snort}
+
+Tietoturvahyökkäysten siirtyessä hiljalleen verkkokerrokselta sovelluskerrokselle, eivät perinteiset palomuurit pysty enää yksin takaamaan riittävää tietoturvatasoa. Tästä syystä näiden
+rinnalle on kehitetty erilaisia tietoturvasovelluksia, joista yleisimpiä ovat IDS- ja IPS-järjestelmät. Näistä tunnetuin ja käytetyin on vapaaseen lähdekoodiin perustuva Snort \cite{Snort}, jolla 
+on rekisteröityneitä käyttäjiä lähes kolmesataatuhatta. Snortia on ladattua miljoonia kertoja, ja sitä käyttävät niin yksityiset tahot kuin myös suuret yritykset ja eri valtioiden virastot. Suuren
+levinneisyyden takia Snortia kutsutaan usein IPS-järjestelmien alan de facto standardiksi.
+
+Snort on pohjimmiltaan sääntöpohjainen IDS-järjestelmä eli se pyrkii tunnistamaan hyökkäykset vertaamalla tulevaa liikennettä ennalta kirjoitettuihin sääntöihin. Tämä tunnistaminen toteutetaan
+verkkotasolla tutkimalla jokainen tuleva paketti. Suuren käyttäjämääränsä ansiosta Snortin käyttämät säännöstöt ovat hyvin kattavat, ja yleisimpiin hyökkäyksiin kirjoitetaan
+nopeasti uudet säännöt. Snortiin on myös saatavilla useita lisäosia, joiden avulla on mm. mahdollista estää tietystä ip:stä tuleva liikenne sekä tallentaa ja analysoida haluttu liikenne. 
+
+Koska Snortin lähdekoodi on vapaasti saatavilla, on tämän pohjalta kirjoitettu uusia järjestelmiä, joiden avulla pystytään mm. luomaan uusia sääntöjä automaattisesti verkkoliikenteestä 
+\cite{SnortRule} ja tutkimaan verkkoliikennettä erillisinä tapahtumaketjuina \cite{SnortSet}. Näitä järjestelmiä kutsutaan usein hybridi IDS-järjestelmiksi, ja tällaisia löytyy useita erilaisia. 
+Näitä ja muita sääntöpohjaisia IDS-järjestelmiä vaivaa kuitenkin sama ongelma, eli ne ovat täysin riippuvaisia oikeanlaisesta säännöstöstä. Jos tehtyyn hyökkäykseen ei löydy suoraan sääntöä, 
+ei järjestelmä pysty tätä havaitsemaan. Hyökkäysten muuttuessa yhä monimutkaisemmiksi, on tästä muodostunut todellinen ongelma sääntöpohjaisille järjestelmille. Toinen ongelma IDS-järjestelmillä
+on niiden tapa luoda isoilla datamäärillä suhteellisen paljon virheellisia tunnistuksia. Näistä rajoituksista huolimatta sääntöpohjaiset IDS-järjestelmät ovat tällä hetkellä suosituin tapa
+suojautua verkkohyökkäyksiltä. 
+
+\subsection{Bro}
+
+TODO
+
 \subsection{Nikto}
 
-Nikto \cite{Nikto} on avoimeen lähdekoodiin perustuva ilmainen web-skanneri, joka etsii sivustoilta haavoittuvia CGI skriptejä ja tiedostoja. Sen tietokanta käsittää
+Nikto \cite{Nikto} on avoimeen lähdekoodiin perustuva ilmainen web-skanneri, joka etsii web-sivustoilta haavoittuvia CGI skriptejä ja tiedostoja. Sen tietokanta käsittää
 yli 3500 tunnettua haavoittuvuutta sekä yli 900 eri web-alustoihin liittyvää heikkoutta. Nikto on koodattu käyttäen Perliä, ja se pyrkii skannaamaan palvelimen 
 mahdollisimman lyhyessä ajassa. Tästä syystä sen aiheuttama liikenne on helppo havaita logeista. Tämän kiertämiseksi Niktoon on lisätty mahdollisuus käyttää Whiskerin
 tarjoamaa libWhisker kirjastoa, joka pyrkii ohittamaan käytössä olevat suojausjärjestelmät. Nikto on erittäin tehokas ja käytetty työkalu perusturvallisuuden 
-varmistamiseen, ja vuonna 2006 tehdyn tutkimuksen mukaan se valittiin parhaimmaksi web--haavoittuvaisuuksia skannaavaksi sovellukseksi \cite{INS}.
-Nikton tietokantoja ei ole enää hetkeen päivitetty, joten nykyisellään se ei tunnista kaikista uusimpia hyökkäyksiä. Tästä huolimatta se on erittäin tehokas työkalu 
+varmistamiseen, ja vuonna 2006 tehdyssä tutkimuksessa se valittiin parhaimmaksi web--haavoittuvaisuuksia skannaavaksi sovellukseksi \cite{INS}.
+Nikton tietokantoja päivitetään hyvin satunnaisesti, joten nykyisellään se ei tunnista kaikista uusimpia hyökkäyksiä. Tästä huolimatta se on erittäin tehokas työkalu 
 tietoturvan parantamiseen.
 
 \subsection{Nessus}
@@ -501,11 +523,3 @@ Liikenteen kirjaamisen ohella ModSecurity voidaan asettaa estämään tulevia hy
 Ensinnäkin kaikki tulevat paketit voidaan pisteyttää halutulla tavalla, ja tietyn pisterajan ylittäneet paketit voidaan esimerkiksi pudottaa pois. Toinen mahdollisuus on sallia vain 
 tietynlaiset pyynnöt. ModSecurityn käyttämä säännöstökieli mahdollistaa myös palveluiden nopean suojaamisen uusilta hyökkäyksiltä ilman, että palvelun omaan koodiin tarvitsee koskea.
 Tämä on erityisen hyödyllistä niissä tilanteissa, joissa päivitysten tuominen tuotantoon vie aikaa. 
-
-\subsection{Snort}
-
-TODO.
-
-\subsection{Bro}
-
-TODO.

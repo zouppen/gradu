@@ -7,9 +7,9 @@
 Viime vuosina web-sovellukset ovat kasvattaneet suuresti suosiota, ja nykyisin yhä useampi palvelu, jossa tietoturvan ja saatavuuden takaaminen on elintärkeää, on siirtynyt osittain tai kokonaan 
 verkon puolelle. Tämä on vaikuttanut suuresti siihen, mihin tietoturvahyökkäykset nykyisin kohdistuvat ja kuinka niitä pyritään toteuttamaan. Hyökkäysten muuttuessa yhä hienostuneimmiksi, 
 eivät perinteiset tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun ylläpitäjiä. Tästä syystä erilaisten tietoturvaratkaisuiden ympärillä käy kova kuhina, ja aihepiiri 
-onkin herättänyt suurta kiinnostusta tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty selvittämään aikaisemmissa luvuissa esitettyjä tietoturvahyökkäyksiä ja näiden 
-mukana tulleita haasteita, on lukematon määrä. Seuraavaksi esitellyt tutkimukset edustavat vain pientä osaa koko tutkimuskentästä, mutta näistä käy kuitenkin jo ilmi se, millaisiin ratkaisumalleihin
-nykyisin pyritään.
+on herättänyt suurta kiinnostusta tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty selvittämään aikaisemmissa luvuissa esitettyjä tietoturvahyökkäyksiä ja näiden 
+mukana tulleita haasteita, on lukematon määrä. Seuraavaksi esitellyt tutkimukset edustavat vain pientä osaa koko tutkimuskentästä, mutta jo näistä käy ilmi se, millaisia ratkaisumalleja
+nykyisin etsitään.
 
 Hyökkäysten tunnistaminen toimii siten, että analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään viitteitä tapahtuvista hyökkäyksistä. Tunnistamiseen pohjautuvat menetelmät jaetaan usein
 kahteen eri tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen (eng. anomaly detection) ja väärinkäytösten tunnistamiseen (eng. misuse detection). Näistä anomalioiden tunnistamiseen perustuvat
@@ -20,7 +20,7 @@ ja asiakaspohjaisiksi (eng. host based).
 
 \section{Väärinkäytösten tunnistaminen}
 
-Väärinkäytökseen perustuvat järjestelmät ovat pitkään olleet suosituin lähestymistapa hyökkäysten torjumisessa. Nämä järjestelmät on voitu jakaa kahteen erilliseen osaan, jossa tilattomassa 
+Väärinkäytökseen perustuvat järjestelmät ovat pitkään olleet suosituin lähestymistapa hyökkäysten torjumiseen. Nämä järjestelmät on voitu jakaa kahteen erilliseen osaan, jossa tilattomassa 
 järjestelmässä jokaista tulevaa tapahtumaa käsitellään itsenäisesti, kun taas tilallisessa järjestelmässä tutkitaan tapahtumien välisiä suhteita. Web-pohjaisten hyökkäysten tutkimisessa tietolähteinä 
 on käytetty mm. palvelimien tuottamaa lokia \cite{LightTool} ja IDS-järjestelmien \cite{Snort}\cite{Bro} tapauksessa analysoimalla verkkokerroksen liikennettä. Ensimmäisessä ratkaisussa ongelmana
 on, että itse palvelimiin kohdistuvia hyökkäyksiä ei pystytä havaitsemaan ainoastaan lokitietoa tarkkailemalla. Samoin hyökkäyksiä, jotka koostuvat monista eri vaiheesta, on mahdotonta mallintaa. 
