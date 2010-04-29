@@ -32,7 +32,7 @@ ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää
 syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttu data verrataan opetettuun malliin, jolloin poikkeava
 liikenne voidaan tunnistaa.
 
-Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt kuin myös palvelimelle 
+Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt, kuin myös palvelimelle 
 välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi kirjautumisessa käytetyt tiedot, ja tietokannalle välitetyt kyselyt. Staattiset sivunlatauspyynnöt ja parametreja sisältävät pyynnöt erottaa
 resurssipolun jälkeisestä kysymysmerkistä. Kysymysmerkin jälkeinen kyselyosuus koostuu avain-arvo-pareista, joista ensimmäinen on kutsuttu parametri, ja jälkimmäinen tämän arvo (kuva \ref{CLF2}). Riippuen
 palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotettuna.
@@ -46,7 +46,31 @@ palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotet
 
 \section{Käytettyjen menetelmien yleinen kuvaus}
 
-Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten käyttöön, joiden avulla on mahdollista tunnistaa poikkeavuudet normaalin liikenteen joukosta. 
+Ongelmia lokin analysoimisessa aiheuttaa sen suuri määrä ja käytössä olevat parametrit. Näistä osa on luokka-asteikollisia ja osa taas numeroasteikollisia, joten tietynlaisten toimintamallien etsiminen näistä
+ei suoraan onnistu. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten muuttujien 
+piirteet. Seuraavaksi esitetään yleisellä tasolla käytetyt tekniikat, ja sitä seuraa näiden tarkempi matemaattinen kuvaus.
+
+Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten ja diffuusioetäisyyksien käyttöön, jotka tarjoavat tehokkaan tavan löytää merkittäviä geometrisia rakenteita datasta. Näiden
+käyttämistä moniulotteisen datan esittämisessä on esitelty \cite{diff} \cite{diff2}. Menetelmien tehokkuus perustuu siihen, että diffuusiokuvausten avulla pystytään vähentämään analysoitavan datan dimensioita
+säilyttäen kuitenkin sen rakenne. Periaatteessa dimensioiden vähentäminen tarkoittaa sitä, että datajoukko esitetään toisella datajoukolla, jonka dimensio on pienempi. Tällöin sen analysoiminen ja esittäminen
+graafisesti on helpompaa.
+
+Dimensioiden vähentäminen tapahtuu laskemalla diffuusioetäisyydet eli keskimääräiset arvot kaikista kahden pisteen välisistä poluista ts. todennäköisyydet kulkea satunnaiskululla pisteestä toiseen kiinteällä
+askelmäärällä. Tällä tavoin lasketut etäisyydet ovat vähemmän herkkiä topologiamuutoksille, joita dimensioiden vähennys aiheuttaa. Diffuusioetäisyydet saadaan myös nopeasti laskettua vektorien ominaisarvoista, 
+joten menetelmää voidaan käyttää reaaliajassa riittävän pienellä viiveellä. 
+
+Analysoitavan datan luonteesta johtuen pelkkä dimensioiden vähentäminen ei tuo esille poikkeavuuksia, vaan tätä varten tarvitaan parametreja, jotka kuvaavat HTTP-pyynnön sisältöä tarkemmin. Suurimmasta osasta kyselyn
+sisältämistä parametreista kuten IP-osoitteesta, ajasta tai käytetystä selaimesta tämä ei käy ilmi. Toki näistä voidaan tunnistaa esimerkiksi hyökkäykset, joissa yritetään kuluttaa palvelimen resurssit loppuun
+hakemalla samaa tiedostoa yhä uudestaan tai pommittamalla uusia yhteysyrityksiä. Web-palveluihin kohdistuvat hyökkäykset ovat kuitenkin usein paljon hienovaraisempia. Parhaiten näitä voidaan yrittää tunnistaa
+tutkimalla tarkemmin GET-parametrin jälkeistä osaa, josta käy ilmi parametrit, joita hyökkääjä välittää palvelimelle. 
+
+Tietoturvahyökkäyksissä hyökkääjä pyrkii aina ohittamaan jollakin tavalla asetetut suojaukset. Usein tämä tarkoittaa sitä, että palvelimelle välitetyt pyynnöt muodostuvat pitkistä merkkijonoista, ja niissä käytetyt
+merkit poikkeavat normaalisti käytetyistä merkeistä. Useiden peräkkäisten avain-arvo parien määrä myös saattaa kasvaa reilusti normaalia suuremmaksi. Näiden tunnistamista varten käytämme analyysissa n-gram analyysiksi
+kutsuttua menetelmää, jossa selvitetään käytettyjen merkkien normaali jakauma ja järjestys. Analyysi voidaan tehdä esimerkiksi koko kyselylle, avain-arvo pareille tai pelkästään tietylle resurssille. 
+
+N-gram analyysin tuottamat matriisit ovat tässä tapauksessa niin moniulotteisia, että dimensioiden määrä tulee pystyä jollakin tavalla vähentämään. Tämä onnistuu satunnaisprojektion avulla, joka on dimensioiden
+vähentämiseen tarkoitettu tekniikka. Satunnaisprojektiossa moniulotteinen data heijastetaan pienempi ulotteiseen aliavaruuteen käyttäen satunnaisesti luotua matriisia. Näin syntynyt uusi matriisi on laskennallisesti
+tehokas, ja se on riittävän tarkka menetelmä dimensioiden vähentämisessä. 
 
 \subsection{Diffuusiokuvaus}
 
