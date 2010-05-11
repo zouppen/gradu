@@ -1,14 +1,14 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
-\chapter{WWW-palvelun arkkitehtuuri}
+\chapter{Web-palvelut}
 
-WWW-palveluilla tarkoitetaan järjestelmiä, jotka kommunikoivat
+Web-palveluilla tarkoitetaan järjestelmiä, jotka kommunikoivat
 keskenään käyttäen vakiintuneita Web-tekniikoita. Web-palvelimet eivät
 ole riippuvaisia mistään tietystä laitteisto- tai
-käyttöjärjestelmäarkkitehtuurista. WWW-palveluiden käyttämät
+käyttöjärjestelmäarkkitehtuurista. Web-palveluiden käyttämät
 teknologiat eivät sinänsä ole erityisen vallankumouksellisia, mutta
-tiedonvaihdon helpottuminen standardien protokollien ja WWW:n
-hajautetun rakenteen ansiosta on tehnyt WWW-palveluista
+tiedonvaihdon helpottuminen standardien protokollien ja Web:n
+hajautetun rakenteen ansiosta on tehnyt Web-palveluista
 mielenkiintoisia niin kehittäjien kuin käyttäjienkin
 näkökulmasta\cite{javaweb}.
 
@@ -23,4 +23,82 @@ esimerkiksi tietyn organisaation lähiverkkoon. Myös osia
 WWW-palveluista sijaitsee usein fyysisesti eri paikoissa ja ne
 kommunikoivat keskenään Internetin välityksellä.
 
+Tässa luvussa käsitellään komponentteja, joista tämänhetkiset
+Web-palvelut koostuvat. Erityistä huomiota on kiinnitetty seikkoihin,
+jotka vaikuttavat palvelun tietoturvaan.
+
+\section{Palvelinohjelmistot}
+
+Web-palveluiden toteuttajan näkökulmasta lähin komponentti on
+palvelinohjelmisto. Se käsittelee HTTP-kyselyt ja lähettää vastauksina
+käyttäjän selaimessa näytettäviä ja prosessoitavia osia, kuten
+hypertekstiä, kuvia ja komentosarjoja.
+
+Web-palvelinohjelmisto ei useinkaan kommunikoi suoraan palvelun
+käyttäjän tietokoneen kanssa vaan välissä on usein välimuistipalvelu,
+joka vähentää palvelimelle kohdistuvaa rasistusta säilyttämällä
+harvoin muuttuvaa sisältöä välimuistissa ja välittämällä tätä suoraan
+käyttäjille. Muuttuva tai välimuistille uusi sisältö pyydetään
+palvelinohjelmistolta.
+
+Internet-tietoturvapalveluita tarjoavan Netcraftin\cite{netcraft}
+raportista huhtikuulta 2010 käy ilmi, että kaksi suurinta
+Web-palvelinalustaa ovat Apache (53.93\% suosituimmista sivuista),
+Microsoft (24.97\%). Näiden jälkeen tulevat Google ja nginx kumpikin 6\%
+osuudella.
+
+Tuloksia voi vääristää jonkin verran se, että joissakin tapauksissa
+edustalla suoritetaan välimuistipalveluna toista palvelinohjelmistoa,
+esimerkiksi Apachea tai nginx:ä, joka välittää kyselyt eteenpäin
+varsinaiselle Web-palvelinohjelmistolle. Tämä selittää esimerkiksi
+sen, miksi Zope puuttuu kokonaan suosituimpien palvelinten
+joukosta. Esimerkiksi Jyväskylän yliopiston Web-palvelimena näkyy
+tilastoinnissa Apache, vaikka Web-palvelu on toteutettu
+Zope-palvelinohjelmiston päällä suoritettavalla Plonella. Samoin on
+käynyt Tomcat-palvelimella ajettavalle Korppi-opintotietojärjestelmälle.
+
+\subsection{Apache}
+
+Suosituimpana palvelinalustana Apache on luonnollisesti suosittu kohde
+myös tietomurtojen yrityksille. Apachesta itsestään on kuitenkin
+löydetty verrattain vähän
+tietoturva-aukkoja.~\cite{apachetietoturva}. Suurin osa tietomurroista
+keskittyykin murtamaan varsinaista Web-palvelua palvelinalustan sijaan.
+
+Apache pystyy suorittamaan komentosarjoja perinteisen CGI-rajapinnan
+lisäksi myös palvelinlaajennosten avulla, jolloin saavutetaan
+tiiviimpi integraatio ja enemmän suorituskykyä verrattuna
+CGI-rajapintaan~\cite{cginopeus}.
+
+Apachea voidaan suorittaa lukuisissa eri käyttöjärjestelmissä, joista
+Linux on ylesiin~\cite{apachemarket}. Suosittuja Apache-alustalla
+käytettäviä ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä
+ympäristössä käytettäviä Web-palveluita ovat mm. Wikipediassa
+käytettävä MediaWiki ja lukuisilla selainkäyttöisillä
+keskustelupalstoilla käytettävä phpBB.
+
+TODO LAMP (Linux + Apache + MySQL + PHP)
+
+\subsection{Zope}
+
++Plone. TODO
+
+\subsection{Tomcat}
+
+TODO
+
+\subsection{IIS}
+
 TODO.
+
+\section{Hajautetut palvelut}
+
+TODO Pyynnön ohjaaminen usealle palvelimelle (reverse proxy), Hyödyt verrattuna keskitettyyn
+
+\section{Välimuistipalvelut}
+
+TODO 
+- "talon sisällä" olevat välimuistit
+ - Akamai ym. "ulkoiset" välimuistit (ei luovuta esim. IP-osoitteita)
+ - tiedon keräämisen kannalta IDS:lle (minkälaiset logitukset?)
+
