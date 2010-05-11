@@ -34,18 +34,18 @@ palvelinohjelmisto. Se käsittelee HTTP-kyselyt ja lähettää vastauksina
 käyttäjän selaimessa näytettäviä ja prosessoitavia osia, kuten
 hypertekstiä, kuvia ja komentosarjoja.
 
-Web-palvelinohjelmisto ei useinkaan kommunikoi suoraan palvelun
-käyttäjän tietokoneen kanssa vaan välissä on usein välimuistipalvelu,
+Web-palvelinohjelmisto ei välttämättä kommunikoi suoraan palvelun
+käyttäjän tietokoneen kanssa vaan välissä käytetään usein välimuistipalvelua,
 joka vähentää palvelimelle kohdistuvaa rasistusta säilyttämällä
 harvoin muuttuvaa sisältöä välimuistissa ja välittämällä tätä suoraan
 käyttäjille. Muuttuva tai välimuistille uusi sisältö pyydetään
 palvelinohjelmistolta.
 
-Internet-tietoturvapalveluita tarjoavan Netcraftin\cite{netcraft}
-raportista huhtikuulta 2010 käy ilmi, että kaksi suurinta
-Web-palvelinalustaa ovat Apache (53.93\% suosituimmista sivuista),
-Microsoft (24.97\%). Näiden jälkeen tulevat Google ja nginx kumpikin 6\%
-osuudella.
+Internet-tietoturvapalveluita tarjoavan Netcraftin raportista
+huhtikuulta 2010~\cite{netcraft} käy ilmi, että kaksi suurinta
+Web-palvelinalustaa ovat \textit{Apache} (53.93~\% suosituimmista sivuista),
+\textit{Microsoft} (24.97~\%). Näiden jälkeen tulevat \textit{Google} ja \textit{nginx} kumpikin
+6~\% osuudella.
 
 Tuloksia voi vääristää jonkin verran se, että joissakin tapauksissa
 edustalla suoritetaan välimuistipalveluna toista palvelinohjelmistoa,
@@ -55,23 +55,24 @@ sen, miksi Zope puuttuu kokonaan suosituimpien palvelinten
 joukosta. Esimerkiksi Jyväskylän yliopiston Web-palvelimena näkyy
 tilastoinnissa Apache, vaikka Web-palvelu on toteutettu
 Zope-palvelinohjelmiston päällä suoritettavalla Plonella. Samoin on
-käynyt Tomcat-palvelimella ajettavalle Korppi-opintotietojärjestelmälle.
+käynyt Tomcat-palvelimella ajettavalle Korppi-o\-pin\-to\-tie\-to\-jär\-jes\-tel\-mäl\-le.
 
 \subsection{Apache}
 
 Suosituimpana palvelinalustana Apache on luonnollisesti suosittu kohde
 myös tietomurtojen yrityksille. Apachesta itsestään on kuitenkin
 löydetty verrattain vähän
-tietoturva-aukkoja.~\cite{apachetietoturva}. Suurin osa tietomurroista
-keskittyykin murtamaan varsinaista Web-palvelua palvelinalustan sijaan.
+tietoturva-aukkoja. Suurin osa tietomurroista
+keskittyykin murtamaan varsinaista Web-palvelua palvelinalustan
+sijaan. (tämä on oletus, FIXME etsi lähde tai poista)
 
 Apache pystyy suorittamaan komentosarjoja perinteisen CGI-rajapinnan
 lisäksi myös palvelinlaajennosten avulla, jolloin saavutetaan
 tiiviimpi integraatio ja enemmän suorituskykyä verrattuna
 CGI-rajapintaan~\cite{cginopeus}.
 
-Apachea voidaan suorittaa lukuisissa eri käyttöjärjestelmissä, joista
-Linux on ylesiin~\cite{apachemarket}. Suosittuja Apache-alustalla
+Apachea voidaan suorittaa lukuisissa eri käyttöjärjestelmissä,
+mukaanlukien Linux ja Windows. Suosittuja Apache-alustalla
 käytettäviä ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä
 ympäristössä käytettäviä Web-palveluita ovat mm. Wikipediassa
 käytettävä MediaWiki ja lukuisilla selainkäyttöisillä
