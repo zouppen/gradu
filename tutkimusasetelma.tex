@@ -46,20 +46,20 @@ palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotet
 
 \section{Käytettyjen menetelmien yleinen kuvaus}
 
-Ongelmia lokin analysoimisessa aiheuttaa datan suuri määrä ja lokissa esiintyvien parametrien tyypit. Näistä osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien etsiminen näistä on haastavaa. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten muuttujien piirteet. Seuraavaksi esitetään yleisellä tasolla käytetyt tekniikat, ja sitä seuraa näiden tarkempi matemaattinen kuvaus.
+Ongelmia lokin analysoimisessa aiheuttaa datan suuri määrä, ja lokissa esiintyvien parametrien tyypit. Näistä osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien 
+etsiminen näistä on haastavaa. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten muuttujien 
+piirteet. Seuraavaksi esitetään yleisellä tasolla käytetyt tekniikat, ja sitä seuraa näiden tarkempi matemaattinen kuvaus.
 
 Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten ja diffuusioetäisyyksien käyttöön, jotka tarjoavat tehokkaan tavan löytää merkittäviä geometrisia rakenteita datasta. Näiden
 käyttämistä moniulotteisen datan esittämisessä on esitelty \cite{diff} \cite{diff2}. Menetelmien tehokkuus perustuu siihen, että diffuusiokuvausten avulla pystytään vähentämään analysoitavan datan dimensioita
-säilyttäen kuitenkin sen rakenne. Periaatteessa dimensioiden vähentäminen tarkoittaa sitä, että datajoukko esitetään toisella datajoukolla, jonka dimensio on pienempi. Tällöin sen analysoiminen ja esittäminen
-graafisesti on helpompaa.
+säilyttäen kuitenkin sen rakenne. Periaatteessa dimensioiden vähentäminen tarkoittaa sitä, että datajoukko esitetään toisella datajoukolla, jonka dimensio on pienempi. Tällöin sen klusteroiminen sekä 
+analysoiminen ja esittäminen graafisesti on helpompaa.
 
 Dimensioiden vähentäminen tapahtuu laskemalla diffuusioetäisyydet eli keskimääräiset arvot kaikista kahden pisteen välisistä poluista ts. todennäköisyydet kulkea satunnaiskululla pisteestä toiseen kiinteällä
-askelmäärällä. Tällä tavoin lasketut etäisyydet ovat vähemmän herkkiä topologiamuutoksille, joita dimensioiden vähennys aiheuttaa. Diffuusioetäisyydet saadaan laskettua nopeasti vektorien ominaisarvoista, 
-joten menetelmää voidaan käyttää reaaliajassa riittävän pienellä viiveellä. 
-
-% Tuomo haluaa täsmennystä (tai lähdeviitteen) tuohon topologiamuutokseen liittyen: 
-% <zipola> Onko tuo revitty suoraan jostain. Jotenkin epäilyttää, pitääkö paikkansa.
-% mitä "laskettua nopeasti" tarkoittaa? Vakioaikaisuuttako?
+askelmäärällä. Ennen tätä analysoitava data tulee muuttaa kategoriseksi, sillä muuten erilaisten parametrityyppien välisiä etäisyyksiä ei pystyä laskemaan. Osa parametreista on jo valmiiksi kategorisessa 
+muodossa, mutta numeerinen data tulee erikseen kategorisoida. Numeerisen datan automaattinen kategorisointi tapahtuu klusteroimalla yhtä ominaisuutta, ja laskemalla klusteroinnin hyvyysarvo. Tätä jatketaan niin pitkään,
+kunnes optimaalinen klusterointi on saavutettu. Prosessi toistetaan vaihtaen kategorioiden lukumäärää jokaisessa iteraatiossa, ja se luku, joka tuottaa parhaimman arvon, valitaan optimaaliseksi kategorioiden 
+määräksi.
 
 Datan luonteesta johtuen pelkkä dimensioiden vähentäminen ei tuo esille poikkeavuuksia, vaan tätä varten tarvitaan parametreja, jotka kuvaavat HTTP-pyynnön sisältöä tarkemmin. Suurimmasta osasta kyselyn
 sisältämistä parametreista kuten IP-osoitteesta, ajasta tai käytetystä selaimesta tämä ei käy ilmi. Toki näistä voidaan tunnistaa esimerkiksi hyökkäykset, joissa yritetään kuluttaa palvelimen resurssit loppuun
@@ -76,11 +76,40 @@ tehokas, ja se säilyttää tässä tapauksessa riittävän määrän informaati
 
 \subsection{Diffuusiokuvaus}
 
-\subsection{n-gram analyysi}
+\subsection{n-gram -analyysi}
+
+
 
 \subsection{Satunnaisprojektio}
 
+Satunnaisprojektiossa alkuperäinen $N$-ulotteinen data heijastetaan $k$-ulotteiseen $(k \ll N)$ aliavaruuteen käyttäen satunnaista $k \times N$ matriisia $R$ \cite{Random}. Olkoot meillä esimerkiksi matriisi 
+$X_{m\times N}$, jossa $m$ on havaintojen määrä, ja $N$ on datan alkuperäinen dimensio. Olkoot  $k$  sitten uusi haluttu dimensioiden määrä. Uuden matriisin laskemiseksi luodaan satunnainen matriisi 
+$R_{n \times k}$, jossa jokaisen sarakkeen arvot ovat satunnaisesti jakautuneet. Kertomalla nämä keskenään saadaan matriisi $X_{m \times k}^{RP}$, joka on esitys alkuperäisestä datasta $X$ heijastettuna $k$-ulotteiseen 
+aliavaruuteen:
 
+\begin{equation}
+X_{m \times k}^{RP} = X_{m \times N} \cdot R_{n \times k}.
+\label{RP}
+\end{equation}
+
+Satunnaisprojektion idea on lähtöisin Johnson-Lindenstrauss lemmasta: jos vektoriavaruudessa olevat pisteet heijastetaan satunnaisesti valittuun aliavaruuteen jossa on sopiva määrä ulottuvuuksia, säilyvät pisteiden
+väliset etäisyydet riittävällä tarkkuudella. $X_{m \times N} \cdot R_{n \times k}.$ laskemisen aikavaativuus on $O(dkN)$, ja jos matriisi $X$ sisältää pääasiallisesti nollia ja rivissä on keskimääräisesti $c$ kappaletta arvoja 
+$(c \ll N)$, on aikavaativuus $O(ckN)$.
+
+Satunnaisesti luotu matriisi $R$ voidaan valita monella eri tapaa. Useimmiten matriisin $R$ elementit $r_{ij}$ noudattavat Gaussin jakaumaa, mutta se voidaan muodostaa myös muulla tavoin kuten esimerkiksi
+
+\begin{equation}
+r_{ij} = \sqrt{3}\cdot 
+\begin{cases}
+ +1 &\text{todennäköisyydellä $\frac{1}{6}$} \\
+ 0 &\text{todennäköisyydellä $\frac{2}{3}$} \\
+ -1 &\text{todennäköisyydellä $\frac{1}{6}$} \\
+\end{cases}
+\label{RPChoice}
+\end{equation}
+
+Tällaisen jakauman käyttäminen vähentää entisestään laskenta-aikaa, sillä laskenta voidaan suorittaa käyttäen kokonaislukuja. Yllä olevan jakauman tapauksessa laskenta on vieläkin nopeampaa, sillä operaatioista
+tarvitaan vain kolmasosa, sillä luotu matriisi sisältää suurimmaksi osaksi nollia \cite{Random}.
 
 %- mistä lähtökohdista lähdetään tutkimaan eli mitä materiaalia on käytössä
 %- mitä voidaan etsiä käytössä olevasta materiaalista
