@@ -3,3 +3,66 @@
 \chapter{Tiedon keruu ja esikäsittely}
 
 TODO.
+
+ % - Mistä data on peräisin?
+ %    - Palvelun rakenteen kuvaus
+ % - Millaista data on?
+ %   - HTTP
+ %   - Apachen logit
+ % - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
+ %   - Yleisellä tasolla
+ % - Mitä työkaluja on käytetty (Haskell ja PhasefulSplitter)
+ % - Miten dataa on käsiteltu ja suodatettu?
+
+\section{Tiedon keruu}
+
+Luvussa \ref{sec:lahtokohta} kuvailtiin tutkittavien lokitiedostojen
+alkuperää ja tiedostomuotoa.
+
+Lokitiedostot on jaoteltu vuorokausien mukaan ja ne on pakattu
+yleisellä \texttt{gzip}-pakkausohjelmalla.
+
+\section{Tiedon rakenne}
+
+\section{Analysoinnin vaiheet}
+
+Analysointi koostuu kolmesta vaiheesta.
+
+Toisessa vaiheessa tekstimuotoiset lokitiedostot luetaan ja
+käsitellään koneellisesti helpommin analysoitavaan
+muotoon. Tätä työtä varten kehitetyssä tiedonkäsittelijässä
+lokitiedoston eri kentät palastellaan ja tieto tallennetaan
+relaatiotietokantaan. Lopuksi eri kenttien numeeriset ja
+luokka-asteikolliset arvot klusteroidaan.
+
+Kolmannessa vaiheessa tapahtuu varsinainen analysointi. Käytetty
+anomalia-analyysi edellyttää, että aineiston muuttujat ovat
+luokka-asteikollisia ja tästä johtuen tieto on klusteroitu edeltävässä vaiheessa.
+
+\subsection{Tiedon keruu}
+
+TODO.
+
+\subsection{Esikäsittely}
+
+Sopivaa yksivaiheista parseria käyttämällä olisi mahdollista käsitellä
+lähtödata suoraan analyysissä käytettävään muotoon. Käytännössä kuitenkin datan
+esikäsittely kannattaa hoitaa useammassa vaiheessa, jotta datassa
+olevat puuttuvat tai poikkeavat arvot tulee huomioitua
+asianmukaisesti. Monivaiheinen esikäsittely helpottaa myös saman
+lähtödatan käyttämisen useaan eri analyysiin.
+
+Tiedon käsittelyn helpottamiseksi tässä työssä käytetään esikäsittelyn
+välivaiheiden ja lopputuloksen tallentamiseen
+relaatiotietokantaa. Relaatiotietokanta mahdollistaa useiden
+esikäsittelyn vaiheiden suorittamisen vähäisellä ohjelmoinnilla ja
+helposti ymmärrettävästi.
+
+Tässä työssä käsiteltävää aineistoa varten on kehitetty ``PhasefulSplitter
+'' -sovellus esikäsittelyä varten.
+
+TODO.
+
+\subsection{Kategorisointi}
+
+TODO.

@@ -49,7 +49,7 @@ Otsikko:
 
 Kristian kirjoittaa pohjan 29.4. mennessä.
 
-9) Tiedon keruu ja esikäsittely (15 sivua}
+9) Tiedon keruu ja esikäsittely (5--15 sivua}
 
  - Mistä data on peräisin?
     - Palvelun rakenteen kuvaus
@@ -57,6 +57,7 @@ Kristian kirjoittaa pohjan 29.4. mennessä.
    - HTTP
    - Apachen logit
  - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
+   - Yleisellä tasolla
  - Mitä työkaluja on käytetty (Haskell ja PhasefulSplitter)
  - Miten dataa on käsiteltu ja suodatettu?
 
@@ -65,6 +66,7 @@ Joel kirjoittaa 28.4. mennessä rungon.
 10) Tiedon analysointi (15 sivua)
 
  - Tuomon ja Juhon "mylly"?
+    - Erityispiirteitä, jos on?
  - Paljon kuvia!
  - Poikkeavuuksien (outliers) läpikäynti, joita on löydetty
     - luokittelu käsin tietomurron yrityksiin, vääriin hälytyksiin

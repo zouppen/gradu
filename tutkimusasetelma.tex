@@ -7,23 +7,30 @@ turvallista ympäristöä on mahdoton rakentaa. Yleensä tämä ei ole edes tiet
 välillä. Liian raskaat menetelmät aiheuttavat ylimääräistä viivettä palvelun tai verkon saatavuuteen, ja liian kevyet ratkaisut jättävät ne avoimiksi yleisimmille hyökkäyksille. 
 
 \section{Lähtökohta}
+\label{sec:lahtokohta}
 
-Tämän Pro gradu-tutkielman tavoitteena on pyrkiä tunnistamaan web-palveluihin kohdistuvia poikkeavuuksia analysoimalla palvelimien tallentamaa tapahtumalokia. Analysoitava data on Apache-palvelimien 
-tuottamaa lokia, joka sisältää web-palveluille kohdistuvia HTTP-pyyntöjä. Loki noudattaa CLF-formaattia (Common Log Format), jota web-palvelimet käyttävät lokitiedon tallentamiseen. Se on standardoitu 
-formaatti, jossa jokaisella rivillä on tietynlainen syntaksi. Kuvassa \ref{CLF} on esitetty yhdestä HTTP-pyynnöstä syntyvä lokirivi. 
+Tämän Pro gradu -tutkielman tavoitteena on pyrkiä tunnistamaan Web-palveluihin kohdistuvia poikkeavuuksia analysoimalla palvelimien tallentamaa tapahtumalokia.
 
-Analysoitava loki on saatu Ixonos Oy:ltä, joka tarjoaa muiden palveluiden ohella hosting-palveluita suuryrityksille. Kyseinen loki on peräisin tuotannosta jo poistetuilta palvelimilta, jotka ovat olleet
-vastuussa muutaman suuren palvelukokonaisuuden pyörittämisestä. Lokia on yhteensä ?? gigatavua, ja se sisältää yli ?? miljardia sivupyyntöä, joista ??? on tullut uniikista IP-osoitteesta. Loki on kerätty
-noin 10 kuukauden ajanjaksolta.
+Tässä tutkielmassa käytettävä data on peräisin Ixonos Oyj:ltä, joka tarjoaa muiden palveluidensa ohella hosting-palveluita suuryrityksille. Lokitiedostot ovat peräisin kolmelta tuotannosta jo poistetuilta palvelimilta, jotka ovat olleet vastuussa muutaman suuren palvelukokonaisuuden pyörittämisestä.
 
-\vspace{3mm}
+Analysoitava data on Apache-palvelimien tuottamaa lokia, joka sisältää
+web-palveluille kohdistuvia HTTP-pyyntöjä. Lokia on yhteensä 24
+gigatavua, ja se sisältää yli ?? miljardia sivupyyntöä, joista ??? on
+tullut uniikista IP-osoitteesta. Lokia on kerätty noin 10 kuukauden
+ajanjaksolta. 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=15cm]{pics/logi.pdf}
-\caption{Esimerkki web-palvelimen tuottamasta logista}
-\label{CLF}
-\end{figure}
+Loki on tallennettu \textit{Combined Log Format} -muodossa,
+joka on yleinen Apache-palvelimen käyttämä lokitiedoston
+muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
+
+\begin{framed}
+\begin{verbatim*}
+130.234.49.2 - - [10/May/2009:15:53:01 +0300]
+"GET /scripts/access.pl?user=matti&passwd=admin HTTP/1.1"
+200 2680 "http://www.jyu.fi/a.html"
+"Mozilla/5.0 (SymbianOS/9.2;...)"
+\end{verbatim*}
+\end{framed}
 
 Web-palvelimien tuottama loki sisältää paljon tietoa mm. palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Niitä analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä, sekä
 hyökkäyksen jo tapahduttua tutkia siihen johtaneita vaiheita. Pienillä sivustoilla lokin läpikäyminen jälkikäteen käsin on vielä mahdollista, mutta puhuttaessa palveluista, joilla on miljoonia käyttäjiä 
