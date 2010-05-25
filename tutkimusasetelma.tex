@@ -70,15 +70,104 @@ Tietoturvahyökkäyksissä hyökkääjä pyrkii aina ohittamaan jollakin tavalla
 merkit poikkeavat tyypillisesti käytetyistä merkeistä. Useiden peräkkäisten avain-arvo parien määrä myös saattaa kasvaa reilusti tavallista suuremmaksi. Näiden tunnistamista varten käytämme analyysissa n-gram -analyysiksi
 kutsuttua menetelmää. Menetelmällä lasketaan datassa esiintyvien peräkkäisten merkkien tai sanasten esiintyvyystiheyksiä. Analyysi voidaan tehdä esimerkiksi koko kyselylle, avain-arvo -pareille tai avainten nimille. 
 
-N-gram -analyysin tuottamien vektoreiden ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-gram -sarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, jolloin $n=2$ ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain nollia. Tästäkin huolimatta vektorit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavalla vähentämään. Tämä onnistuu satunnaisprojektion avulla, joka on ulottuvuuksien
-vähentämiseen tarkoitettu menetelmä. Satunnaisprojektiossa moniulotteinen data heijastetaan pienempiulotteiseen aliavaruuteen käyttäen satunnaisesti luotua matriisia. Näin syntynyt uusi matriisi on laskennallisesti
-tehokas, ja se säilyttää tässä tapauksessa riittävän määrän informaatiota.
+Suurilla tietomassoilla n-gram -analyysi tuottaa isoja matriiseja, joiden käsitteleminen on hidasta. Tehokkuuden takia matriisien ulottuvuuksia tulee pystyä jollakin tavalla vähentämään. Tämä onnistuu satunnaisprojektion 
+avulla, joka on ulottuvuuksien vähentämiseen tarkoitettu menetelmä. Satunnaisprojektiossa moniulotteinen data heijastetaan pienempiulotteiseen aliavaruuteen käyttäen satunnaisesti luotua matriisia. Näin syntynyt uusi 
+matriisi on laskennallisesti tehokas, ja se säilyttää tässä tapauksessa riittävän määrän informaatiota. 
 
 \subsection{Diffuusiokuvaus}
 
-\subsection{n-gram -analyysi}
+Moniulotteisen datan analysoiminen on aina haasteellinen tehtävä johtuen suuresta parametrimäärästä. Tämän takia käytämme tässä työssä hyödyksi diffuusiokuvauksia, jotka ovat tehokas tapa vähentää analysoitavan datan
+ulottuvuuksia säilyttäen kuitenkin datan rakenne. Tämän jälkeen sen klusterointi ja visualisointi pienempiulotteisessa avaruudessa on helpompaa.
 
+Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan normaali käyttätyminen. Tämä tapahtuu käyttäen opetusmateriaalia, joka on osa analysoitavaa dataa. Olkoot tämä opetusmateriaali 
+$\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessa data muodostaa $N \times n$ matriisin, jossa 
+rivit pitävät sisällään yksittäiset kyselyt, ja sarakkeet ovat näiden analysoitavat parametrit.
 
+Aluksi luodaan matriisi, joka kuvaa pisteiden välisiä etäisyyksiä käyttäen gaussin jakaumaa. Naapureiden samankaltaisuutta kuvaa $\epsilon$. 
+
+\begin{equation}
+W_{ij} = e^{-\frac{||x_i - x_j||^2}{\epsilon}}
+\label{KERNEL}
+\end{equation}
+
+Matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
+
+\begin{equation}
+D_{ii} = \sum_{j=1}^{N} W_{ij}
+\label{ROWSUM}
+\end{equation}
+
+Nyt jokaisen rivin summa on 1. Tätä normalisointia eli todennäköisyyttä siirtyä tilasta toiseen kuvatkoot $P$
+
+\begin{equation}
+P = D^{-1} W
+\label{PROB}
+\end{equation}
+
+$P$:n ominaisvektorit ovat samat kuin konjugaattimatriisin, joka on esitetty yhtälössä \ref{SYMM}. 
+
+\begin{equation}
+\tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}}
+\label{SYMM}
+\end{equation}
+
+Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Tämä matriisi säilyttää ominaisvektorit, ja sitä kutsutaan
+normalisoiduksi Laplace muunnokseksi.
+
+\begin{equation}
+\tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}} = D^{\frac{1}{2}} D^{-1} W D^{-\frac{1}{2}} = D^{-\frac{1}{2}} W D^{-\frac{1}{2}}
+\label{NGL}
+\end{equation}
+
+Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen SVD:tä (engl. Singular Value Decomposition). Koska $\tilde{P}$ on normaali matriisi, spektriteoria (spectral theorem) sanoo, että tällainen matriisin 
+hajoitelma on yhtälön \ref{SVD} mukainen.  
+
+\begin{equation}
+\tilde{P} = U \Lambda U^*
+\label{SVD}
+\end{equation}
+
+Matriisin $\Lambda$ diagonaalilla olevat arvot ovat samat kuin matriisissa $\tilde{P}$, koska ne ovat symmetrisia. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisvektorit 
+
+Matriisin $U = [ u_1, u_2, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
+saamme ne matriisin $V$ sarakkeina  $V = [v_1, v_2, \dots, v_k]$.  
+
+\begin{equation}
+V = D^{-\frac{1}{2}} U
+\label{EIGENVECTORS}
+\end{equation}
+
+Nyt datan koordinaatit pienennetyssä ulottuvuudessa ovat yhtälön \ref{MAP_COORDINATES} matriisissa $\Psi$. 
+
+\begin{equation}
+\Psi = V \Lambda
+\label{MAP_COORDINATES}
+\end{equation}
+
+Käyttämällä sopivaa $\epsilon$ spektrin hajoaminen on nopeaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $V_0$ on vakio, joten se voidaan jättää pois.
+Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksessa on esitetty yhtälössä \ref{DM}.
+
+\begin{equation}
+\Psi_d : x_i \to \left[ \lambda_1 V_{i1}, \lambda_2 V_{i2}, \dots, \lambda_d V_{id} \right]
+\label{DM}
+\end{equation}
+
+Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $n$ vanhan $d$ sijaan.
+
+TODO: Ja sit kun vielä ymmärtäisi mitä tuossa lukee, ja kuinka pahasti raiskasin tekstiä=) Taitaa olla vielä hiukan vajaa selityskin. Help Sipola Help!
+
+\subsection{$N$-gram -analyysi}
+
+Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. $N$-gram -analyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
+peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti mm. tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
+
+Meidän tapauksessa tutkittavat yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-gram lasketaan käyttäen $n$ pituista liukuvaa ikkunaa. Esimerkiksi sanan ``automaatti'' 2-gram 
+saadaan aloittamalla analyysi ensimmäisestä kirjaimesta ja liuttumalla ikkunaa yhden kirjaimen verran. Tässä tapauksessa syntynyt merkkijakauma on ``au'', ``ut'', ``to'', ``om'', ``ma'', ``aa'', ``at'', ``tt'', ``ti''. 
+Käyttäen tällä tavoin syntynyttä sarjaa saadaan rakennettua matriisi, joka sisältää tiedon merkkien jakaantumisesta.
+
+$N$-gram -analyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-gram -sarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
+jolloin $n=2$ ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain nollia.
+Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
 
 \subsection{Satunnaisprojektio}
 
