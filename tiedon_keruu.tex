@@ -88,11 +88,98 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 
 \section{Esikäsittely}
 
-Esikäsittely jakaantuu karkeasti ?? osaan. Aluksi 
+Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa käytetty
+\textit{Combined Log Format} -muoto. Tiedosto on tekstimuotoinen,
+joten se ei sellaisenaan sovellu analyysivaiheeseen, jossa käsitellään
+klustereita. Osa palvelinlokin sisällöstä on myös analyysin kannalta
+tarpeetonta ja nämä osat tulee suodattaa pois. Lisäksi yhteen
+Web-palveluun liittyvät kyselyt ovat lisäksi jakautuneet useaan eri
+tiedostoon eri palvelinten ja vuorokausien mukaisesti.
 
-Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa
-käytetty \textit{Combined Log Format} -muoto. Se ei sellaisenaan
-sovellu 
+Esikäsittely jakaantuu seuraaviin vaiheisiin:
+
+\begin{enumerate}
+\item tiedostolistan luonti
+\item rivien parsiminen ja jakaminen binaaritiedostoihin
+\item binaaritiedostojen jatkokäsittely
+\end{enumerate}
+
+\begin{comment}
+Tiedostolistan luonti
+---------------------
+
+Tiedostolistan esikäsittely on täysin riippuvainen siitä, miten
+logitiedostot on nimetty. Mitään suoraa ohjetta tähän on vaikea
+antaa. Tässä käytetään ns. Ixonos-nimeämistä eli muotoa
+'/polku/palvelimennimi/palvelunnimi.YYYY-MM-DD.gz'. Palvelut ovat
+toisistaan irrallisia (ainakin analyysin mielekkyyden kannalta). Yksi
+palvelu koostuu useammalla palvelimesta ja näillä oleva sisältö on
+identtistä.
+
+Luokittelussa tarvitaan palvelinten nimet. Ne asetetaan tiedostoon
+'server.map' seuraavan esimerkin mukaisesti:
+
+$ cp server_map.txt.example server_map.txt
+$ emacs server_map.txt  # or nano, vim ...
+
+Tehdään tiedostolista käyttämällä esimerkiksi findiä:
+
+$ find /path/to/log -iname '*.gz' >tiedostolista.txt
+
+Suoritetaan luokittelija, joka jakaa tiedostot eri palveluiden mukaan
+ja tallentaa ne levylle hakemistoon 'lists'
+
+$ mkdir lists
+$ ./classifier tiedostolista.txt lists/
+
+Voit myös antaa tiedostolistan syötteenä näin:
+
+$ find ... | ./classifier lists/
+
+Jakaminen binaaritiedostoihin
+-----------------------------
+
+xargs-komennolla voi nätisti ajaa rinnakkain eri ytimillä tiedostojen
+esikäsittelyn ohjelman omaan .pf.gz -muotoon. Allaolevassa esimerkissä
+esikäsitellään lists-hakemistosta löytyvät tiedostolistat ja
+kirjoitetaan ne hakemiston data alle. Tiedostolistat esikäsitellään 8
+ytimellä ja kirjoitetaan 8 eri tiedostoon kukin. Jako mahdollistaa
+tehokkaan jälkikäsittelyn, koska tiedostojen sisältöä on mahdollista
+käsitellä myöhemmin samanaikaisesti.
+
+$ ls lists/*| xargs -n 1 -I{} -P 8 ./apache2data 8 {} data/
+
+N-grammianalyysi
+----------------
+
+N-grammianalyysissä ensin kerätään tiedot niistä n-grammeista, jotka
+esiintyvät datassa. ParameterAnalyzer.hs:ssä on kiinteästi määritelty
+2-grammien laskeminen, mutta tätä vakiota voi helposti muuttaa.
+N-grammien esiintyvyyskartan laatiminen on välttämätöntä muistin
+säästämiseksi. Muutoin muodostuisi 256^n kokoinen vektori, kun
+käsiteltävät merkkijonot koostuvat Word8-tyypeistä (8-bittinen tavu).
+
+N-grammilistoja muodostuu yhtä paljon kuin on eri resurssien
+get-parametreja. Tämä vaihtelee runsaasti eri Web-palveluissa.
+Lopputulos on kuitenkin vain murto-osa alkuperäisen datamassan
+suuruudesta.
+
+Muodostetaan yhdelle palvelulle 2-grammit. Mene hakemistoon, jossa
+palvelun datatiedostot ovat (eli sinne, josta löytyy mm. 1.pf.gz:
+
+$ parameter_analyzer *.pf.gz +RTS -N
+
+Hakemistoon muodostuu ajon seurauksena tiedostot 'ngrams.out' ja
+'ngrams_raw.txt'. Näistä ensimmäinen on binaarimuodossa ja sisältää
+datan jatkokäsittelyä varten. Toisessa tiedostossa on tekstimuodossa
+(Haskellin show-muodossa) eri resurssien ja n-grammien
+esiintymistiheydet. Sitä voi käyttää apuna selvittäessä, mitä
+kannattaisi tuttkia. Tutkiminen kannattaa keskittää palveluihin,
+joissa on runsaasti parametreja.
+
+TODO
+\end{comment}
+
 
 \section{Analysoinnin vaiheet}
 
