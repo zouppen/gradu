@@ -2,7 +2,17 @@
 
 \chapter{Tiedon keruu ja esikäsittely}
 
-TODO.
+Luvussa \ref{sec:lahtokohta} kuvailtiin tutkittavien lokitiedostojen
+alkuperää ja tiedostomuotoa. Tässä luvussa tutustutaan
+seikkaperäisemmin siihen, miten Ixonokselta saamamme palvelinloki on
+järjestetty tiedostoihin ja millä tavoin tietoa on esikäsitelty
+analyysiä silmällä pitäen. Käytetyt menetelmät soveltuvat pienin
+muutoksin myös muiden Web-hotellien palvelinlokien esikäsittelyyn,
+mikäli arkistointikäytänteet eivät suuresti poikkea tässä esitellystä
+tavasta.
+
+Esimerkeissä käytetyt palvelinten ja palveluiden nimet ovat
+kuvitteellisia, mutta rakenne vastaa tutkittua ympäristöä.
 
  % - Mistä data on peräisin?
  %    - Palvelun rakenteen kuvaus
@@ -16,14 +26,13 @@ TODO.
 
 \section{Tiedon rakenne}
 
-Luvussa \ref{sec:lahtokohta} kuvailtiin tutkittavien lokitiedostojen
-alkuperää ja tiedostomuotoa.
-
-Web-hotelli on toteutettu siten, että yksittäiset palvelut on
+Ixonoksen Web-hotelli on toteutettu siten, että yksittäiset palvelut on
 sijoitettu jokaiselle palvelimelle. Ratkaisun taustalla on
 kuormituksen tasaaminen. Erillinen järjestelmä huolehtii siitä, että
 Internetistä tulevat kyselyt ohjataan tasaisesti eri
-palvelimille. Taulukossa \ref{nimet} on esimerkki palveluiden ja
+palvelimille. 
+
+Taulukossa \ref{nimet} on esimerkki palveluiden ja
 palvelinten nimeämisestä.
 
 % Ei kannata ottaa esimerkkiä tästä taulukosta, tämä on vähän mutkikas.
@@ -62,8 +71,28 @@ feisty & rex & 30.7.2009 & \texttt{feisty/rex.http.2009-07-30.gz}\\
 \label{tiedostot}
 \end{table}
 
+Tässä mainittujen palvelinten lisäksi käytössä on ulkoinen
+välimuistipalvelu. Mikäli pyydettyä resurssia ei löydy
+välimuistipalvelusta, se tekee kyselyn yhteen Web-hotellin
+palvelimista ja välittää vastauksen edelleen
+asiakkaalle. Välimuistipalvelun käyttö ei kuitenkaan muilta osin
+vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
+\ref{palvelinrakenne}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/palvelinrakenne.pdf}
+\caption{Web-palvelun rakenne.}
+\label{palvelinrakenne}
+\end{figure}
 
 \section{Esikäsittely}
+
+Esikäsittely jakaantuu karkeasti ?? osaan. Aluksi 
+
+Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa
+käytetty \textit{Combined Log Format} -muoto. Se ei sellaisenaan
+sovellu 
 
 \section{Analysoinnin vaiheet}
 
