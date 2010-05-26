@@ -14,15 +14,56 @@ TODO.
  % - Mitä työkaluja on käytetty (Haskell ja PhasefulSplitter)
  % - Miten dataa on käsiteltu ja suodatettu?
 
-\section{Tiedon keruu}
+\section{Tiedon rakenne}
 
 Luvussa \ref{sec:lahtokohta} kuvailtiin tutkittavien lokitiedostojen
 alkuperää ja tiedostomuotoa.
 
-Lokitiedostot on jaoteltu vuorokausien mukaan ja ne on pakattu
-yleisellä \texttt{gzip}-pakkausohjelmalla.
+Web-hotelli on toteutettu siten, että yksittäiset palvelut on
+sijoitettu jokaiselle palvelimelle. Ratkaisun taustalla on
+kuormituksen tasaaminen. Erillinen järjestelmä huolehtii siitä, että
+Internetistä tulevat kyselyt ohjataan tasaisesti eri
+palvelimille. Taulukossa \ref{nimet} on esimerkki palveluiden ja
+palvelinten nimeämisestä.
 
-\section{Tiedon rakenne}
+% Ei kannata ottaa esimerkkiä tästä taulukosta, tämä on vähän mutkikas.
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+Palvelin && Palvelu \\
+\cline{1-1}\cline{3-3}
+dapper && buzz \\
+edgy && rex \\
+feisty && potato \\
+&& hamm \\
+&& slink \\
+\end{tabular}
+\caption{Palvelinten ja palveluiden nimeäminen.}
+\label{nimet}
+\end{table}
+
+Lokitiedostot on sijoitettu hakemistorakenteeseen, jossa juuressa ovat
+palvelinten nimien mukaiset hakemistot, joiden sisällä sijaitsevat
+lokitiedostot, jotka on nimetään yhdistämällä palvelun nimi
+päivämääräleimaan. Tiedostot on pakattu
+\texttt{gzip}-pakkausohjelmalla. Taulukossa \ref{tiedostot}
+havainnollistetaan tiedostonnimien muodostumista.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+Palvelin & Palvelu & Päivämäärä & Tiedostonnimi \\
+\hline
+edgy & buzz & 14.6.2009 & \texttt{edgy/buzz.http.2009-06-14.gz}\\ 
+dapper & potato & 2.7.2009 & \texttt{dapper/potato.http.2009-07-02.gz}\\
+feisty & rex & 30.7.2009 & \texttt{feisty/rex.http.2009-07-30.gz}\\
+\end{tabular}
+\caption{Tiedostojen nimeäminen.}
+\label{tiedostot}
+\end{table}
+
+
+\section{Esikäsittely}
 
 \section{Analysoinnin vaiheet}
 
