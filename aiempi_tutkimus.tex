@@ -5,7 +5,7 @@
 \section{Yleistä}
 
 Viime vuosina web-sovellukset ovat kasvattaneet suuresti suosiota, ja nykyisin yhä useampi palvelu, jossa tietoturvan ja saatavuuden takaaminen on elintärkeää, on siirtynyt osittain tai kokonaan 
-verkon puolelle. Tämä on vaikuttanut suuresti siihen, mihin tietoturvahyökkäykset nykyisin kohdistuvat ja kuinka niitä pyritään toteuttamaan. Hyökkäysten muuttuessa yhä hienostuneimmiksi, 
+verkon puolelle. Tämä on vaikuttanut suuresti siihen, mihin tietoturvahyökkäykset nykyisin kohdistuvat, ja kuinka niitä pyritään toteuttamaan. Hyökkäysten muuttuessa yhä hienostuneimmiksi, 
 eivät perinteiset tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun ylläpitäjiä. Tästä syystä erilaisten tietoturvaratkaisuiden ympärillä käy kova kuhina, ja aihepiiri 
 on herättänyt suurta kiinnostusta tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty selvittämään aikaisemmissa luvuissa esitettyjä tietoturvahyökkäyksiä ja näiden 
 mukana tulleita haasteita, on lukematon määrä. Seuraavaksi esitellyt tutkimukset edustavat vain pientä osaa koko tutkimuskentästä, mutta jo näistä käy ilmi se, millaisia ratkaisumalleja
@@ -13,7 +13,7 @@ nykyisin etsitään.
 
 Hyökkäysten tunnistaminen toimii siten, että analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään viitteitä tapahtuvista hyökkäyksistä. Tunnistamiseen pohjautuvat menetelmät jaetaan usein
 kahteen eri tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen (eng. anomaly detection) ja väärinkäytösten tunnistamiseen (eng. misuse detection). Näistä anomalioiden tunnistamiseen perustuvat
-järjestelmät luovat malleja järjestelmän, käyttäjän tai verkon normaalista käyttäytymisestä, ja vertaamalla tapahtumia näin muodostettuihin kuvauksiin voidaan poikkeavuudet tunnistaa. Väärinkäytösten 
+järjestelmät luovat malleja järjestelmän, käyttäjän tai verkon normaalista käyttäytymisestä, ja vertaamalla tapahtumia näin muodostettuihin kuvauksiin, voidaan poikkeavuudet tunnistaa. Väärinkäytösten 
 tunnistamiseen tarkoitetut järjestelmät taas sisältävät joukon kuvauksia eli signatuureja tunnetuista hyökkäyksistä. Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin kuvauksia vastaavat
 hyökkäykset voidaan tunnistaa. Joissakin tapauksissa jaottelu on myös tehty sen mukaan, mistä tutkittava liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon pohjautuviksi (eng. network based)
 ja asiakaspohjaisiksi (eng. host based). 
@@ -22,13 +22,13 @@ ja asiakaspohjaisiksi (eng. host based).
 
 Väärinkäytökseen perustuvat järjestelmät ovat pitkään olleet suosituin lähestymistapa hyökkäysten torjumiseen. Nämä järjestelmät on voitu jakaa kahteen erilliseen osaan, jossa tilattomassa 
 järjestelmässä jokaista tulevaa tapahtumaa käsitellään itsenäisesti, kun taas tilallisessa järjestelmässä tutkitaan tapahtumien välisiä suhteita. Web-pohjaisten hyökkäysten tutkimisessa tietolähteinä 
-on käytetty mm. palvelimien tuottamaa lokia \cite{LightTool} ja IDS-järjestelmien \cite{Snort}\cite{Bro} tapauksessa analysoimalla verkkokerroksen liikennettä. Ensimmäisessä ratkaisussa ongelmana
+on käytetty mm. palvelimien tuottamaa lokia \cite{LightTool}, ja IDS-järjestelmien \cite{Snort}\cite{Bro} tapauksessa analysoimalla verkkokerroksen liikennettä. Ensimmäisessä ratkaisussa ongelmana
 on, että itse palvelimiin kohdistuvia hyökkäyksiä ei pystytä havaitsemaan ainoastaan lokitietoa tarkkailemalla. Samoin hyökkäyksiä, jotka koostuvat monista eri vaiheesta, on mahdotonta mallintaa. 
 Verkkokerroksella toimivia järjestelmiä taas pystytään harhauttamaan muokkaamalla hyökkäyksiä, ja näistä harvat mahdollistavat tilallisen analyysin. 
 
-Esitettyjä ongelmia on pyritty ratkaisemaan lisäämällä havaittavien tapahtumien määrää ja keräämällä informaatiota eri lähteistä. Esimerkiksi asentamalla sovellustasolle erillinen tiedonkeruuseen 
+Esitettyjä ongelmia on pyritty ratkaisemaan lisäämällä havaittavien tapahtumien määrää, ja keräämällä informaatiota eri lähteistä. Esimerkiksi asentamalla sovellustasolle erillinen tiedonkeruuseen 
 tarkoitettu komponentti \cite{Application} on saatu hyviä tuloksia. Tässä tapauksessa tiedonkeruu tapahtui Apache-palvelimelle asennetun komponentin välityksellä, joka tarkkaile lokitiedon lisäksi
-mm. pyyntöjen tulkitsemiseen ja toteuttamiseen menevää aikaa. Tämän ratkaisun etuna on myös se, että tutkittava data on salaamattomassa muodossa ja sessioiden uudelleenrakentaminen on mahdollista. 
+mm. pyyntöjen tulkitsemiseen ja toteuttamiseen menevää aikaa. Tämän ratkaisun etuna on myös se, että tutkittava data on salaamattomassa muodossa, ja sessioiden uudelleenrakentaminen on mahdollista. 
 Tällä tasolla toimiva IDS-järjestelmä voi myös toimia ennaltaehkäisevästi eli haitalliseksi havaittu liikenne voidaan tiputtaa pois ennen kuin se käsitellään palvelimella. Suurimpana haittapuolena on, 
 että tietylle sovellukselle suunniteltua komponenttia ei voida sellaisenaan käyttää muilla alustoilla. 
 
