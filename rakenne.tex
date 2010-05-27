@@ -22,10 +22,14 @@
 \usepackage{cite}
 \usepackage{framed}
 \usepackage{verbatim} % Multi-line commenting.
+\usepackage{rotating} % Vertical text used in temporary comments.
 
 % Optional 1,5 point line spacing
 %\usepackage{setspace}
 %\onehalfspace
+
+% Todo-tags help the examiner's work
+\newcommand{\todo}[1]{\marginpar{\begin{framed}\begin{sideways}\textbf{TODO}: #1\end{sideways}\end{framed}}}
 
 % Define our own abbreviations list
 \newenvironment{abbrlist}[1]{
