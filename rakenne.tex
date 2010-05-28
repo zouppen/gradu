@@ -23,6 +23,8 @@
 \usepackage{framed}
 \usepackage{verbatim} % Multi-line commenting.
 \usepackage{rotating} % Vertical text used in temporary comments.
+\usepackage{listings} % Source code
+
 
 % Optional 1,5 point line spacing
 %\usepackage{setspace}
@@ -30,6 +32,12 @@
 
 % Todo-tags help the examiner's work
 \newcommand{\todo}[1]{\marginpar{\begin{framed}\begin{sideways}\textbf{TODO}: #1\end{sideways}\end{framed}}}
+
+% Source code listings. Annotation can be done between [ and ] in Bash.
+\lstset{frame=single,captionpos=b}
+\renewcommand{\lstlistingname}{Listaus}
+\lstdefinelanguage{bashshell}{language=bash,moredelim=[is][\itshape]{[[}{]]},morekeywords={mkdir,find,classifier},aboveskip=0.5cm}
+\lstdefinelanguage{MyHaskell}{language=Haskell,morekeywords={ByteString,URL,UTCTime}}
 
 % Define our own abbreviations list
 \newenvironment{abbrlist}[1]{
@@ -78,6 +86,8 @@
 
 \def\termlistname{Lyhenteet}
 \termlist
+
+\todo{Lyhenneluettelo puuttuu vielä.}
 
 \begin{abbrlist}{ANOVA}
 \item[OMG] Oh my god

@@ -90,7 +90,7 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 
 \section{Esikäsittely}
 
-\todo{Tästä puuttuu vielä tekstiä!}
+\todo{Tästä luvusta puuttuu vielä tekstiä!}
 
 Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa käytetty
 \textit{Combined Log Format} -muoto. Tiedosto on tekstimuotoinen,
@@ -111,10 +111,21 @@ mukaan) myöhemmän version ehtojen mukaisesti. Esikäsittelijä on
 ladattavissa Internetistä osoitteesta \\
 \url{http://iki.fi/zouppen/repo/phasefulsplitter.git}.
 
-Esikäsittelijä on jaettu useaan itsenäiseen osaan, mikä helpottaa
-datan käsittelyä jälkikäteen erilaisin menetelmin. Lisäksi
-sarjallistetut tietorakenteet voidaan tarvittaessa anonymisoida,
-jolloin dataa voidaan luovuttaa myös ulkopuoliseen käyttöön.
+Sopivaa yksivaiheista parseria käyttämällä olisi mahdollista käsitellä
+lähtödata suoraan analyysissä käytettävään muotoon. Käytännössä
+kuitenkin datan esikäsittely kannattaa hoitaa useammassa vaiheessa,
+jotta datassa olevat puuttuvat tai poikkeavat arvot voidaan huomioida
+ja esikäsittelijää voidaan korjata suorittamatta koko ajoa uudelleen
+alusta lähtien. Monivaiheinen esikäsittely helpottaa myös datan
+käsittelyä jälkikäteen erilaisin menetelmin. Lisäksi sarjallistetut
+tietorakenteet voidaan tarvittaessa anonymisoida, jolloin dataa
+voidaan luovuttaa myös ulkopuoliseen käyttöön.
+
+Tiedon käsittelyn helpottamiseksi tässä työssä käytetään esikäsittelyn
+välivaiheet ja lopputulokset tallennetaan väliaikaistiedostoihin.
+Relaatiotietokantaa ei käytetä, koska tietokantakyselyiden
+rinnakkaistaminen osoittautui hyvin vaikeaksi verrattuna suoraan
+tiedostoja käsittelevään toteutukseen.
 
 Esikäsittely jakaantuu seuraavaat kolmeen vaiheeseen:
 
@@ -126,16 +137,89 @@ Esikäsittely jakaantuu seuraavaat kolmeen vaiheeseen:
 
 \subsection{Tiedostolistan muodostaminen}
 
-TODO
+Tekstipohjainen tiedostolista luetaan
+\textit{PhasefulSplitter}-ohjelman ymmärtämään muotoon, jolloin
+tiedostonnimet ryhmitellään palveluiden nimien perusteella. 
+
+Luokittelun yhteydessä palvelinten nimet korvataan numeerisilla
+viitteillä. Tätä varten asetetaan tiedestoon \texttt{server.map}
+palvelinten nimet ja niitä vastaavat numeeriset viitteet. Viitteitä
+voidaan hyödyntää myöhemmin, jos halutaan muuntaa analyysivaiheessa
+kiinnostava havainto takaisin Apache-lokin riviksi. Tässä luvun
+esimerkissä käytettävän tiedoston sisältö on esitelty listauksessa
+\ref{servermap}
+
+\begin{lstlisting}[language=MyHaskell,float=h,caption=Tiedoston server.map sisältö.,label=servermap,aboveskip=1cm]
+[
+      ("dapper",1)
+    , ("edgy",2)
+    , ("feisty",3)
+]
+\end{lstlisting}
+
+Tiedostolista voidaan muodostaa
+Linux-järjestelmässä seuraavalla tavalla:
+
+\begin{lstlisting}[language=bashshell]
+mkdir lists
+find [[polku]] -iname '*.gz' | classifier lists/
+\end{lstlisting} 
+
+Ajon yhteydessä muodostuu hakemiston \texttt{lists} alle palveluiden
+mukaan nimetyt tiedostot, joiden sisällä on palveluun kuuluvat
+tiedostonnimet. Tiedostot ovat tekstimuotoon sarjallistettuja.
 
 \subsection{Muuntaminen tietorakenteeksi}
 
 Toisessa vaiheessa tekstimuotoiset lokitiedostot luetaan ja
-käsitellään koneellisesti helpommin analysoitavaan
-muotoon. Tätä työtä varten kehitetyssä tiedonkäsittelijässä
-lokitiedoston eri kentät palastellaan ja kyselyt sarjallistetaan tiedostoihin.
+käsitellään koneellisesti helpommin analysoitavaan muotoon. Tätä työtä
+varten kehitetyssä tiedonkäsittelijässä lokitiedoston rivin eri kentät
+palastellaan ja kyselyt sarjallistetaan tiedostoihin. Tietorakenne on
+esitelty listauksessa \ref{entry}.
 
-TODO
+\lstset{language=MyHaskell}
+
+\begin{lstlisting}[float=h,caption=Yhden lokirivin säilövä tietorakenne.,label=entry,aboveskip=1cm]
+data Entry = Entry {
+      info      :: LineInfo
+    , ip        :: ByteString
+    , date      :: UTCTime
+    , method    :: ByteString
+    , url       :: URL
+    , protocol  :: ByteString
+    , response  :: Integer
+    , bytes     :: Integer
+    , referer   :: ByteString
+    , browser   :: ByteString
+} deriving (Show,Eq)
+\end{lstlisting}
+
+Koska jatkokäsittely voidaan hoitaa säikeistettynä useammalle
+prosessorille tai ytimelle, tässä vaiheessa sovellukselle tulee
+ilmoittaa säikeiden määrä. Tiedon perusteella sovellus jakaa yhteen
+palveluun liittyvän datan haluttuun määrään erillisiä tiedostoja. Jako
+mahdollistaa tehokkaan jälkikäsittelyn, koska tiedostojen sisältöä on
+mahdollista käsitellä myöhemmin samanaikaisesti.
+
+Linuxin \texttt{xargs}-komennolla voidaan myös tämän vaihe suorittaa
+rinnakkaistettuna, jolloin eri palveluihin kuuluva data voidaan
+muuntaa samanaikaisesti. Mikäli eri palveluihin kuuluvien lokien datamäärä
+vaihtelee, ei rinnakkaistamisesta kuitenkaan saavuteta täyttä hyötyä.
+
+Alla olevassa esimerkissä esikäsitellään \texttt{lists}-hakemistosta
+löytyvät tiedostolistat ja kirjoitetaan ne hakemiston \texttt{data}
+alle. Korvaa listauksessa esiintyvä N tietokoneen prosessorien tai
+ytimien määrällä. 
+
+\begin{lstlisting}[language=bashshell]
+ls lists/*| xargs -n 1 -I{} -P [[N]] ./apache2data [[N]] {} data/
+\end{lstlisting}
+
+Suoritusaika riippuu luonnollisesti koneen suorituskyvystä ja
+lokitiedostojen määrästä. Tämän tutkimuksen yhteydessä suoritetussa 24
+gigatavun ajossa 2,5 gigahertsin Intel Xeon -prosessorilla varustetussa
+tietokoneessa tämän vaiheen suoritus kesti useita
+prosessorivuorokausia.
 
 \subsection{Jatkokäsittely}
 
@@ -145,49 +229,12 @@ luokka-asteikolliset arvot klusteroidaan.
 TODO
 
 \begin{comment}
-Tiedostolistan luonti
----------------------
 
-Tiedostolistan esikäsittely on täysin riippuvainen siitä, miten
-logitiedostot on nimetty. Mitään suoraa ohjetta tähän on vaikea
-antaa. Tässä käytetään ns. Ixonos-nimeämistä eli muotoa
-'/polku/palvelimennimi/palvelunnimi.YYYY-MM-DD.gz'. Palvelut ovat
-toisistaan irrallisia (ainakin analyysin mielekkyyden kannalta). Yksi
-palvelu koostuu useammalla palvelimesta ja näillä oleva sisältö on
-identtistä.
 
-Luokittelussa tarvitaan palvelinten nimet. Ne asetetaan tiedostoon
-'server.map' seuraavan esimerkin mukaisesti:
-
-$ cp server_map.txt.example server_map.txt
-$ emacs server_map.txt  # or nano, vim ...
-
-Tehdään tiedostolista käyttämällä esimerkiksi findiä:
-
-$ find /path/to/log -iname '*.gz' >tiedostolista.txt
-
-Suoritetaan luokittelija, joka jakaa tiedostot eri palveluiden mukaan
-ja tallentaa ne levylle hakemistoon 'lists'
-
-$ mkdir lists
-$ ./classifier tiedostolista.txt lists/
-
-Voit myös antaa tiedostolistan syötteenä näin:
-
-$ find ... | ./classifier lists/
 
 Jakaminen binaaritiedostoihin
 -----------------------------
 
-xargs-komennolla voi nätisti ajaa rinnakkain eri ytimillä tiedostojen
-esikäsittelyn ohjelman omaan .pf.gz -muotoon. Allaolevassa esimerkissä
-esikäsitellään lists-hakemistosta löytyvät tiedostolistat ja
-kirjoitetaan ne hakemiston data alle. Tiedostolistat esikäsitellään 8
-ytimellä ja kirjoitetaan 8 eri tiedostoon kukin. Jako mahdollistaa
-tehokkaan jälkikäsittelyn, koska tiedostojen sisältöä on mahdollista
-käsitellä myöhemmin samanaikaisesti.
-
-$ ls lists/*| xargs -n 1 -I{} -P 8 ./apache2data 8 {} data/
 
 N-grammianalyysi
 ----------------
@@ -219,37 +266,6 @@ joissa on runsaasti parametreja.
 
 TODO
 \end{comment}
-
-
-\section{Analysoinnin vaiheet}
-
-Kolmannessa vaiheessa tapahtuu varsinainen analysointi. Käytetty
-anomalia-analyysi edellyttää, että aineiston muuttujat ovat
-luokka-asteikollisia ja tästä johtuen tieto on klusteroitu edeltävässä vaiheessa.
-
-\subsection{Tiedon keruu}
-
-TODO.
-
-\subsection{Esikäsittely}
-
-Sopivaa yksivaiheista parseria käyttämällä olisi mahdollista käsitellä
-lähtödata suoraan analyysissä käytettävään muotoon. Käytännössä kuitenkin datan
-esikäsittely kannattaa hoitaa useammassa vaiheessa, jotta datassa
-olevat puuttuvat tai poikkeavat arvot tulee huomioitua
-asianmukaisesti. Monivaiheinen esikäsittely helpottaa myös saman
-lähtödatan käyttämisen useaan eri analyysiin.
-
-Tiedon käsittelyn helpottamiseksi tässä työssä käytetään esikäsittelyn
-välivaiheiden ja lopputuloksen tallentamiseen
-relaatiotietokantaa. Relaatiotietokanta mahdollistaa useiden
-esikäsittelyn vaiheiden suorittamisen vähäisellä ohjelmoinnilla ja
-helposti ymmärrettävästi.
-
-Tässä työssä käsiteltävää aineistoa varten on kehitetty ``PhasefulSplitter
-'' -sovellus esikäsittelyä varten.
-
-TODO.
 
 \subsection{Kategorisointi}
 
