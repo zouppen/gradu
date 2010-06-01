@@ -88,6 +88,10 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 \label{palvelinrakenne}
 \end{figure}
 
+\section{Tavoite}
+
+
+
 \section{Esikäsittely}
 
 \todo{Tästä luvusta puuttuu vielä tekstiä!}
@@ -212,7 +216,7 @@ alle. Korvaa listauksessa esiintyvä N tietokoneen prosessorien tai
 ytimien määrällä. 
 
 \begin{lstlisting}[language=bashshell]
-ls lists/*| xargs -n 1 -I{} -P [[N]] ./apache2data [[N]] {} data/
+ls lists/*| xargs -n 1 -I{} -P [[N]] apache2data [[N]] {} data/
 \end{lstlisting}
 
 Suoritusaika riippuu luonnollisesti koneen suorituskyvystä ja
@@ -221,52 +225,65 @@ gigatavun ajossa 2,5 gigahertsin Intel Xeon -prosessorilla varustetussa
 tietokoneessa tämän vaiheen suoritus kesti useita
 prosessorivuorokausia.
 
-\subsection{Jatkokäsittely}
+\subsection{Parametrien N-grammianalyysi}
+
+Palvelinlokissa olevista kyselyistä muodostetaan tietorakenne, jossa
+yksi osa on kyselyn URL. Tässä vaiheessa tutkitaan URL-osoitetta
+tarkemmin. Mikäli URL:n osana on parametreja, muodostetaan jokaisesta
+parametrin arvosta 2-grammilistaus. Näin saadut 2-grammikartat
+muodostetaan ja lopuksi ne tallennetaan matriisina tekstimuotoon
+jatkokäsittelyä varten. Tiedostossa \texttt{ParameterAnalyzer.hs} on
+määritelty vakiona, että lasketaan nimenomaisesti 2-grammit. Tätä
+vakiota voi kuitenkin tarvittaessa muuttaa.
+
+Ensimmäisessä ajossa selvitetään, mitkä mahdollisista 2-grammeista
+ylipäätään esiintyvät aineistossa. Mahdollisia N-grammeja on yhteensä
+$2^{8n}$ kappaletta, koska käsiteltävät merkkijonot koostuvat
+Word8-tyypeistä (8-bittinen tavu). Säästääkseme muistia
+analyysivaiheessa, selvitetään aluksi, millaisia 2-grammeja
+aineistossa esiintyy ja jätetään taulukoimatta sellaiset 2-grammit,
+jotka eivät esiinny lainkaan.
+
+Jokaiselle resurssille muodostuu oma N-grammilistansa. Datan määrä
+luonnollisesti riippuu käytettävästä aineistosta. Käyttämällämme
+datalla taulukon kooksi muodostuu muutamia megatavuja (FIXME täsmällisesti).
+Lopputulos on kuitenkin vain murto-osa alkuperäisen datamassan
+suuruudesta.
+
+N-grammianalyysin ensimmäinen vaihe suoritetaan menemällä halutun
+palvelun mukaiseen hakemistoon ja suorittamalla seuraavan komennon:
+
+\begin{lstlisting}[language=bashshell]
+parameter_analyzer *.pf.gz +RTS -N
+\end{lstlisting} 
+
+Hakemistoon muodostuu ajon seurauksena tiedostot \texttt{ngrams.out}
+ja \texttt{grams\_raw.txt}. Näistä ensimmäinen on binaarimuodossa ja
+sisältää toisessa vaiheessa tarvittavan datan
+binaarimuodossa. Toisessa tiedostossa on tekstimuodossa (Haskellin
+show-muodossa) eri resurssien ja 2-grammien
+esiintymistiheydet. Tekstimuotoista tiedostoa voidaan käyttää apuna
+arvioitaessa, mihin resursseihin ja parametreihin kannattaa kiinnittää
+jatkossa huomiota.
+
+Tämän jälkeen voidaan suorittaa n-grammianalyysin toinen vaihe koko
+palvelun sisältämälle datalle. Suoritetaan seuraava komento samassa
+hakemistossa, missä ensimmäinen vaihekin suoritettiin:
+
+\begin{lstlisting}[language=bashshell]
+TODO
+\end{lstlisting} 
+
+Käyttämässämme datassa olevat kyselyiden parametrit sisältävät hyvin
+samantyyppisiä arvoja, joten niistä muodostuu kohtuullisen
+pieniulotteisia 2-grammitaulukoita. TODO kuinka pieniä? Tämän vuoksi
+matriiseihin ei sovelleta satunnaisprojektiota.
+
+TODO.
+
+\section{Jatkokäsittely}
 
 Lopuksi eri kenttien numeeriset ja
 luokka-asteikolliset arvot klusteroidaan.
 
 TODO
-
-\begin{comment}
-
-
-
-Jakaminen binaaritiedostoihin
------------------------------
-
-
-N-grammianalyysi
-----------------
-
-N-grammianalyysissä ensin kerätään tiedot niistä n-grammeista, jotka
-esiintyvät datassa. ParameterAnalyzer.hs:ssä on kiinteästi määritelty
-2-grammien laskeminen, mutta tätä vakiota voi helposti muuttaa.
-N-grammien esiintyvyyskartan laatiminen on välttämätöntä muistin
-säästämiseksi. Muutoin muodostuisi 256^n kokoinen vektori, kun
-käsiteltävät merkkijonot koostuvat Word8-tyypeistä (8-bittinen tavu).
-
-N-grammilistoja muodostuu yhtä paljon kuin on eri resurssien
-get-parametreja. Tämä vaihtelee runsaasti eri Web-palveluissa.
-Lopputulos on kuitenkin vain murto-osa alkuperäisen datamassan
-suuruudesta.
-
-Muodostetaan yhdelle palvelulle 2-grammit. Mene hakemistoon, jossa
-palvelun datatiedostot ovat (eli sinne, josta löytyy mm. 1.pf.gz:
-
-$ parameter_analyzer *.pf.gz +RTS -N
-
-Hakemistoon muodostuu ajon seurauksena tiedostot 'ngrams.out' ja
-'ngrams_raw.txt'. Näistä ensimmäinen on binaarimuodossa ja sisältää
-datan jatkokäsittelyä varten. Toisessa tiedostossa on tekstimuodossa
-(Haskellin show-muodossa) eri resurssien ja n-grammien
-esiintymistiheydet. Sitä voi käyttää apuna selvittäessä, mitä
-kannattaisi tuttkia. Tutkiminen kannattaa keskittää palveluihin,
-joissa on runsaasti parametreja.
-
-TODO
-\end{comment}
-
-\subsection{Kategorisointi}
-
-TODO.
