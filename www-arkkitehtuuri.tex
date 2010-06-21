@@ -82,6 +82,26 @@ TODO LAMP (Linux + Apache + MySQL + PHP)
 
 \todo{Nämä tulevat viikolla 22.}
 
+\subsection{IIS}
+
+Apachen jälkeen toiseksi suurinta markkinaosuutta web-palvelinalustoista pitää Microsoftin kehittämä Internet Information Services (lyh. IIS). Ensimmäisen versio sovelluksesta
+julkaistiin NT-käyttöjärjestelmälle vuona 1996, ja vuonna 2008 julkaistiin IIS 7 Windows Server 2008 palvelinjakelun yhteydessä. Uusin virallinen versio sovelluksesta on tällä hetkellä   
+IIS 7.5, ja siitä on ladattavissa 180-päivän ilmainen kokeiluversio Windows Server 2008 alustalle Microsoftin sivuilta \cite{IIS}.
+
+Aikaisemmista IIS-versioista on löydetty paljon eri tasoisia tietoturvariskejä, joista tunnetuin on Code Red Wormiksi nimetty hyökkäys, joka saastutti yli kolmesataatuhatta web-sivustoa.
+Hyökkäys pohjautui puskuriylivuotoon, johon Microsoft oli julkaissut päivityksen kuukausi takaperin, mutta jota osa palveluita ylläpitävistä tahoista ei ollut asentanut. Tämän hyökkäyksen
+johdosta yleinen käsitys IIS-sovellusten tietoturvasta on vähintäänkin kyseenalainen. Uusimmista versioista ei ole kuitenkaan löydetty vastaavanlaisia tietoturvariskejä, ja Secunian
+ylläpitämän listan mukaan uusimmasta versiosta ei löydy yhtään paikkaamatonta tietoturvariskiä \cite{Secunia}.
+
+Suurin muutos uusimmissa versioissa verrattaessa vanhoihin on siirtyminen modulaariseen arkkitehtuuriin. Tämä mahdollistaa uusien komponenttien nopean lisäämisen ja poistamisen, jonka lisäksi  
+monipuolinen API-rajapinta tarjoaa mahdollisuuden tehdä yksilöllisiä komponentteja omiin tarpeisiin. Modulaarinen rakenne parantaa myös sovelluksen tietoturvaa pienentämällä asennettavien 
+osien määrää ainoastaan niihin, joita ylläpitäjä tarvitsee. Tietoturvaan ja skaalautuvuuteen on muutenkin kiinnitetty enemmän huomiota alusta asti, joiden lisäksi monet Apachen ominaisuuksista
+kuten URL-osoitteiden uudelleenkirjoitus on otettu käyttöön \cite{IIS}. IIS:n suurimpana haittapuolena nykyisin sen onkin sidonnaisuus Windows-maailmaan, sillä muille alustoille sitä ei ole 
+saatavilla. Tästä huolimatta IIS on nykyisin varteenotettava vaihtoehto Apachelle tietynlaisessa ympäristössä. 
+
+
+
+
 \subsection{Zope}
 
 +Plone. TODO
@@ -90,9 +110,7 @@ TODO LAMP (Linux + Apache + MySQL + PHP)
 
 TODO
 
-\subsection{IIS}
 
-TODO.
 
 \section{Hajautetut palvelut}
 
