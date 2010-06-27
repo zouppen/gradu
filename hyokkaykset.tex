@@ -2,10 +2,8 @@
 
 \chapter{Perinteiset tietoturvahyökkäykset}
 
-\section{Yleistä}
-
-Nykyisin yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä
-ja niiden tuomilta ongelmilta. Useimmat hyökkäykset ovat hyvin monimuotoisia, ja
+Tietoyhteiskunnassa yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä,
+ja niiden mukana tulevilta ongelmilta. Hyökkäykset ovat nykyisin myös hyvin monimuotoisia, ja
 ne voidaan jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
 mukaan. Uusia hyökkäystapoja kehitetään jatkuvasti lisää, ja vanhat saavat uusia
 ominaisuuksia. Vaikka osaan hyökkäyksistä on olemassa erilaisia suojautumistapoja, 
@@ -17,28 +15,27 @@ mukaan.
 \section{Tiedon urkinta ja väärentäminen}
 
 Ennen kuin hyökkääjä pystyy murtautumaan verkkoon tai koneeseen, tulee hänen
-selvittää kohteen mahdolliset heikkoudet. Haluttuja tietoja ovat mm. mitä
-käyttöjärjestelmiä koneisiin on asennettu, mitkä versiot ohjelmistoista on
-käytössä ja mikä on verkon rakenne ja tietoturvataso. Näiden tietojen
-selvittämiseksi hyökkääjää aloittaa verkkoa kohtaan joukon hyökkäyksiä, joita
-kutsutaan tiedusteluhyökkäyksiksi (engl. Probe Attacks). Kyseiset hyökkäykset
-ovat hyökkäyksistä yleisimpiä, sillä niiden toteuttaminen ei vaadi hyökkääjältä
-kovinkaan syvällistä osaamista. Verkosta löytyy paljon valmiita työkaluja,
+selvittää kohteen mahdolliset heikkoudet. Haluttuja tietoja ovat esimerkiksi
+asennetut käyttöjärjstelmät, ohjelmistojen versiotiedot ja verkon yleinen
+rakenne ja tietoturvataso. Näiden tietojen selvittämiseksi hyökkääjää aloittaa verkkoa 
+kohtaan joukon hyökkäyksiä, joita kutsutaan tiedusteluhyökkäyksiksi (engl. Probe Attacks). 
+Tällaiset hyökkäykset ovat hyökkäyksistä yleisimpiä, sillä niiden toteuttaminen ei vaadi hyökkääjältä
+kovin syvällistä osaamista. Verkosta löytyy paljon valmiita työkaluja,
 joiden avulla hyökkääjä pystyy urkkimaan tarvittavat tiedot, sekä mahdollisesti
 saman tien hyödyntämään löydettyjä heikkouksia. Hyökkääjä, jolla on tarkka
-kuvaus verkon laitteista ja palveluista, voikin käyttää tietoa
-haavoittuvuuksien etsimiseen ja järjestelmiin murtautumiseen \cite{IDS}.
+kuvaus verkon laitteista ja palveluista, voi käyttää näitä tietoja
+haavoittuvuuksien etsimiseen ja järjestelmien murtautumiseen \cite{IDS}.
 
-Kun hyökkääjällä on tietämys verkon eri komponenteista, voi hän aloittaa
+Kun hyökkääjällä on riittävä tietämys verkon eri komponenteista, voi hän aloittaa
 hyökkäyksen suunnittelun. Yksi tapa murtautua IP-pohjaiseen verkkoon
 on hyödyntää protokollissa olevia heikkouksia. Tällaisia hyökkäyksiä kutsutaan
 spoofing- eli kalasteluhyökkäyksiksi, ja niissä murtautuja pyrkii naamioimaan oman koneensa
 siten, että se näyttäa kuuluvan kohteena olevan koneen kanssa samaan verkkoon.
 Tällöin hyökkääjä pystyy huijaamaan kohdekonetta jakamaan ja lähettämään
-arkaluontoista tietoa, jota jaettaisiin muuten vain luotettavien osapuolien kesken.
-Tällaiset hyökkäyset jaotellaan sokeisiin tai aktiivisiin hyökkäyksiin sen mukaan, 
+arkaluontoista tietoa, jota jaettaisiin muuten vain luotettujen osapuolien kesken.
+Tällaiset hyökkäyset jaotellaan edelleen sokeisiin tai aktiivisiin hyökkäyksiin sen mukaan, 
 kuinka paljon tietoa hyökkääjällä on verkosta. Sokeassa hyökkäyksessä kohdekoneen
-lähettämiä vastauksia ei pystytä seuraamaan, koska usein murtautujan oikeudet ovat puutteellisia
+lähettämiä vastauksia ei pystytä seuraamaan, koska  murtautujan oikeudet ovat puutteellisia
 ja koneen käyttämä IP, joksi hyökkääjä haluaa naamioitua, on harvoin tiedossa.
 Aktiivisessa hyökkäyksessä murtautujalla taas on tieto koneiden välisistä oikeuksista,
 jolloin tiedon korruptoiminen, muokkaaminen ja välittäminen toiseen verkkoon
@@ -46,7 +43,7 @@ on helppo toteuttaa \cite{WEBS}.
 
 \subsection{IP Spoofing}
 
-IP Spoofing on hyökkäystapa, jossa pyritään murtautumaan verkkoon ja hankkimaan
+IP Spoofing on hyökkäys, jossa pyritään murtautumaan verkkoon ja hankkimaan
 arkaluontoista tietoa väärentämällä lähetettäviin paketteihin luotetun koneen
 IP-osoite. Hyökkäykset jaotellaan sokeisiin ja aktiivisiin hyökkäyksiin sen mukaan,
 mistä hyökkäys toteutetaan. Hyökkäykset toimivat siten, että kolmivaiheisen yhteydenmuodostuksen aikana
@@ -54,7 +51,7 @@ hyökkääjä tekeytyy koneeksi, johon halutulla kohteella on luottamussuhde. T�
 muokkaamalla lähetettävien pakettien otsaketietoja ja kuittausnumeroita. Tässä onnistuakseen
 hyökkääjän tulee pystyä vastaamaan oikeilla kuittausnumeroilla kohteen lähettämiin
 paketteihin. Nämä kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka takia tämä
-hyökkäystapa on vaikea toteuttaa \cite{WEBS}. Niin kutsuttu ``Man in The Middle'' hyökkäys, jossa hyökkääjä 
+hyökkäystapa on vaikea toteuttaa \cite{WEBS}. Niin kutsuttu Man in The Middle -hyökkäys, jossa hyökkääjä 
 kaappaa kahden koneen välisen yhteyden, perustuu myös IP-osoitteen väärinkäyttöön (kuva \ref{Man}).
 
 \begin{figure}[ht]
@@ -65,11 +62,11 @@ kaappaa kahden koneen välisen yhteyden, perustuu myös IP-osoitteen väärinkä
 \end{figure}
 
 Vaikka IP-osoitteen varastamiseen perustuvat hyökkäykset ovat vaikeita toteuttaa,
-ovat ne melko yleisiä, koska jokainen TCP/IP protokollaa käyttävä järjestelmä on sille altis. Tämä
+ovat ne melko yleisiä, sillä jokainen TCP/IP protokollaa käyttävä järjestelmä on niille alttiina. Tämä
 johtuu siitä, että TCP/IP-pino sallii pakettien käsin muokkaamisen. Tämä
 toiminto on sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
 käsin muokkaamaan pakettien sisältöä ennen lähettämistä. Tällaisia palveluita
-ovat mm. mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
+ovat esimerkiksi mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
 muutetaan toiseksi \cite{DDOS}.
 
 IP spoofing hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain tapa on
@@ -108,7 +105,7 @@ staattista ARP-taulua \cite{WEBS}.
 
 \section{Denial Of Service}
 
-Yksi tietoturva-alan johtavista tutkimuskeskuksista CERT \cite{CERT}
+CERT \cite{CERT}, joka on yksi tietoturva-alan johtavista tutkimuskeskuksista, 
 määrittelee palvelunestohyökkäyksen (engl. Denial of Service)
 sellaiseksi teoksi, jossa hyökkääjän tavoitteena on estää laillisia
 käyttäjiä käyttämästä heille kuuluvia tai käytössä olevia
@@ -118,13 +115,13 @@ web-sovellukset. Hyökkäyksillä pyritään lamauttamaan palvelua tarjoava
 verkko tai palvelin siten, että oikeiden pyyntöjen vastaanottamiseen
 ei enää riitä resursseja. Keinoja tähän on monia, ja koska näistä
 lähes jokainen käyttää nykyisin hyväkseen eri protokollien sallittuja
-toimintoja, on hyökkäyksiä vastaan suojautuminen hyvin vaikeaa \cite{Hacking}.
+toimintoja, on hyökkäyksiltä suojautuminen hyvin vaikeaa \cite{Hacking}.
 
 Palvelunestohyökkäykset voidaan jakaa kolmeen ryhmään näiden
-toteutustapojen ja tavoitteiden mukaisesti. Ensimmäiseen ryhmään kuuluvat
+toteutustapojen ja tavoitteiden mukaan. Ensimmäiseen ryhmään kuuluvat
 hyökkäykset, joiden tarkoitus on rajoitettujen resurssien loppuun
-kuluttaminen. Tämä voidaan toteuttaa esimerkiksi kuormittamalla verkko
-tai palvelin turhilla pyynnöillä. Toiseen ryhmään kuuluvat
+kuluttaminen. Tämä voidaan toteuttaa esimerkiksi kuormittamalla verkoa
+tai palvelinta turhilla pyynnöillä. Toiseen ryhmään kuuluvat
 hyökkäykset, jotka pyrkivät joko tuhoamaan tai muuttamaan
 konfigurointitietoja siten, että kone tai verkko ei toimi enää
 ollenkaan. Viimeiseen ryhmään kuuluvat verkon komponenttien
@@ -173,8 +170,8 @@ johdosta palvelin varaa tulevalle yhteydelle resursseja ja lähettämänsä SYN 
 ACK-viestin jälkeen jää odottamaan yhteyden muodostamista. Tähän koneen kuuluu
 vastata ACK-viestillä, jonka jälkeen yhteys muodostetaan \cite{Hacking}.
 
-Tähän toimintamalliin perustuu mm. HTTP-protokollan toiminta, ja sen avulla web-
-palvelimet pystyvät nopeasti palvelemaan useita yhtäaikaisia käyttäjiä.
+Tähän toimintamalliin perustuu muun muassa HTTP-protokollan toiminta, ja sen avulla 
+web-palvelimet pystyvät nopeasti palvelemaan useita yhtäaikaisia käyttäjiä.
 Koska TCP-protokolla pyrkii aina varmistamaan yhteyden muodostumisen, ja tarvittaessa 
 lähettämään SYN/ACK-viestin uudestaan SYN-paketin lähettäneelle koneelle, pystyy hyökkääjä
 käyttämään tätä ominaisuutta hyväkseen. Riittää, että hyökkääjä nuuskii
@@ -185,7 +182,7 @@ viesti ei koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta,
 jolloin TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan kunnes
 määritetty raja yhteyden aikakatkaisulle tulee vastaan \cite{STACK}. Hyökkääjälle
 riittää, että tämä toiminta automatisoidaan, ja koneina käytetään esimerkiksi
-saastuneista koneista muodostettuja verkostoja. Tällä tavoin saadaan aikaiseksi
+saastuneista koneista muodostettua verkostoa. Tällä tavoin saadaan aikaiseksi
 kuvan \ref{syn} mukainen tilanne, jossa usean koneen avulla hyökkääjä häiritsee
 kohteen toimintaa turhilla yhteydenottopyynnöillä.
 
@@ -197,20 +194,20 @@ kohteen toimintaa turhilla yhteydenottopyynnöillä.
 \end{figure}
 
 SYN-hukuttamisen mahdollistavan mekanismin avulla voidaan myös toteuttaa
-heijastettu hyökkäys (engl. reflective attack), joka on muunnos SYN-
-hukuttamisesta. Tässä hyökkäyksessä väärennetyissä SYN-viesteissä on
-lähettäjäksi merkitty haluttu kohde. Lähettämällä suuri määrä näitä SYN-
-viestejä esimerkiksi web-palvelimelle, aiheutuu vastaustulvasta ongelmia
+heijastettu hyökkäys (engl. reflective attack), joka on muunnos 
+SYN-hukuttamisesta. Tässä hyökkäyksessä väärennetyissä SYN-viesteissä on
+lähettäjäksi merkitty haluttu kohde. Lähettämällä suuri määrä näitä SYN-viestejä 
+esimerkiksi web-palvelimelle, aiheutuu vastaustulvasta ongelmia
 kohteelle \cite{STACK}.
 
 Koska harvalla yrityksellä on mahdollista pitää ylimääräisiä resursseja SYN-
-hukuttamisen varalta, joudutaan ratkaisua hakemaan muilla tavoin. Yksi
+hukuttamisen varalta, joudutaan ratkaisua hakemaan muualta. Yksi
 alkeellinen keino on rajoittaa puoliavonaisten yhteyksien määrää, jolloin rajan
 ylittyessä yhteyksiä aletaan pudottamaan \cite{TCP}. Toinen käytetty keino on
 reitittimiltä verkkoon päin tulevan liikennemäärän seuraaminen, ja
 liikennepiikkeihin reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua
 liikenteen seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla \cite{STACK}.
-Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin toteutettua
+Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin toteutettuna
 hyökkäystä on vaikea torjua.
 
 \subsection{UDP Echo}
@@ -218,7 +215,7 @@ hyökkäystä on vaikea torjua.
 Myös UDP-protokollan käyttö mahdollistaa hyökkäysten tekemisen. Nämä
 hyökkäykset käyt\-tä\-vät hyväkseen UDP:n ECHO-toimintaa, jos sen käyttö
 on vain sallittu verkossa. Näistä hyökkäyksistä tunnetuin on Fraggleksi
-nimetty hyökkäys, joka nykyisinkin aiheuttaa väärin konfiguroidussa verkossa isoja ongelmia.
+nimetty hyökkäys, joka nykyisinkin aiheuttaa väärin konfiguroidussa verkossa suuria ongelmia.
 Fraggle toimii siten, että hyökkääjä lähettää UDP ECHO-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
 hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet pyrkivät vastaamaan,
 jolloin kohdekoneen kaista ja resurssit joudutaan varaamaan viestien vastaanottamiseen (kuva \ref{fraggle}). 
@@ -227,8 +224,8 @@ vaikuttaa siihen, kuinka vakava hyökkäys on \cite{WEBS}. Vastaavanlainen
 hyökkäys voidaan myös toteuttaa kahden koneen välillä, jos kummassakin
 on sallittuna UDP ECHO-viestit. Tällöin hyökkääjä väärentää viestiin
 lähettäjän osoitteen ja halutun kohdeportin. Vastaanottaja vastaa
-tähän viestiin omalla echo-viestillä, ja näin kahden koneen välille on
-muodostunut ikuinen silmukka \cite{TCP}.
+tähän viestiin omalla ECHO-viestillä, ja näin kahden koneen välille
+muodostuu ikuinen silmukka \cite{TCP}.
 \newpage
 \begin{figure}[htp]
 \centering
@@ -250,7 +247,7 @@ jota harva linkki pystyy pitkään kestämään \cite{Hacking}.
 
 Jos hyökkäys on päässyt käyntiin, ei tälle ole paljoa muuta tehtävissä
 kuin poistaa kohteena olevat koneet pois verkosta. Paras vastatoimi
-Fragglen ja Smurffin kaltaisille hyökkäyksille onkin konfiguroida
+Fragglen ja Smurffin kaltaisille hyökkäyksille on konfiguroida
 verkon laitteet alusta asti oikein. Yleislähetysten kieltämisellä ja
 ECHO-viestien tuen poistamisella verkon laitteilta pääsee jo
 pitkälle. Samoin ICMP-protokollan käyttöä kannattaa verkossa rajoittaa
@@ -281,14 +278,14 @@ konetta. Otetaan esimerkiksi vaikka web-palveluita tarjoava palvelin, jota
 vastaan halutaan tehdä palvelunestohyökkäys. Tällaisella palvelimella on
 käytössä huomattavasti suurempi määrä resursseja (kaista, muisti,
 prosessointiteho) kuin mitä yhdellä tavallisella koneella on. Tekemällä
-hyökkäyksen yhtäaikaisesti useammalla koneella, pystyy hakkeri kuluttamaan
-suuretkin resurssit loppuun melko lyhyessä ajassa. Yhdeltä koneelta tuleva
+hyökkäyksen yhtäaikaisesti useammalla koneella, pystyy hyökkääjä kuluttamaan
+suuretkin resurssit loppuun lyhyessä ajassa. Yhdeltä koneelta tuleva
 palvelunestohyökkäys on myös helppo tunnistaa ja estää verkon ylläpitäjän
 toimesta. Hyökkääjien määrän kasvaessa tehtävä vaikeutuu huomattavasti, koska
 suurin osa koneista pitää tunnistaa ja liikennöinti pysäyttää, jotta tästä olisi
-jonkinlaista hyötyä. Jos nämä koneet ovat vielä levitetty ympäri internetiä, on
+jonkinlaista hyötyä. Jos nämä koneet on vielä levitetty ympäri internetiä, on
 hyökkäysten pysäyttäminen ilman palvelun kärsimistä mahdoton tehtävä käsin
-tehtynä. Tällaista hyökkäysliikennettä on vaikea erottaa tavallisesta
+tehtynä. Tällaista hyökkäysliikennettä on myös vaikea erottaa tavallisesta
 liikenteestä, koska se tulee palvelimelle eri reittejä pitkin \cite{DDOS}.
 
 Nopeiden yhteyksien ja verkossa olevien koneiden räjähdysmäinen kasvu on tehnyt
@@ -304,13 +301,13 @@ haltuunoton vaatimatta sen suurempaa tietämystä \cite{DDOS}.
 
 Hyökkäyksessä käytetyt koneet voidaan jakaa agentteihin (engl. agents) ja
 liikenteen ohjaajiin (engl. handlers) riippuen näiden rooleista. Näistä
-koneista hyökkääjä käskyttää suoraan liikenteen ohjaajia, jotka sitten ohjaavat
+koneista hyökkääjä käskyttää suoraan liikenteen ohjaajia, jotka ohjaavat edelleen
 annetut käskyt agenteille hyökkäyksen alettua \cite{WEBS}\cite{DDOS}. Ensimmäisissä DDoS-
 verkoissa nämä ohjausviestit olivat salaamattomia, ja kuka tahansa pystyi
-kaappaamaan niitä. Tämä oli ongelmallista, koska liikenteen ohjaajat joutuivat
-pitämään yllä IP-listaa agenteista, jolloin liikenteen välittäjän joutuessa
+kaappaamaan näitä. Tämä oli ongelmallista, koska liikenteen ohjaajat joutuivat
+ylläpitämään IP-listaa agenteista, jolloin liikenteen välittäjän joutuessa
 vastahyökkäyksen kohteeksi, paljastui verkon jokainen kone. Tätä suoran
-käskyttämisen heikkoutta pyrittiin korjaamaan mm. salaamalla liikenne ja
+käskyttämisen heikkoutta pyrittiin korjaamaan muun muassa salaamalla liikenne ja
 viestit. Ajan saatossa liikenteen ohjaajat pystyttiin kuitenkin tunnistamaan ja
 poistamaan verkosta, jolloin hyökkäyksessä käytetty verkko hajosi \cite{DDOS}.
 
@@ -349,7 +346,7 @@ suojautuminen vaikea tehtävä riippumatta siitä, onko verkko itse kohde vai
 käytetäänkö sitä vain hyökkäysten koordinointiin. Valmista ja yksityiskohtaista
 ratkaisua ei ole tarjolla, mutta seuraamalla joitakin yleisiä strategioita,
 voidaan vahinkoja rajoittaa. Nämä strategiat ovat suojautuminen, tunnistaminen
-ja reagoiminen, ja ne noudattavat yleistä vahinkoketjun elinkaarta \cite{DDOS}.
+ja reagoiminen, ja ne noudattavat vahinkoketjun yleistä elinkaarta \cite{DDOS}.
 
 Ensinnäkin on tärkeää, että verkon ylläpitäjä tietää tarkoin kuinka verkko
 toimii, ja käytössä on verkon toimintaa seuraavia työkaluja. Näiden avulla

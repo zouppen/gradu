@@ -99,18 +99,22 @@ osien määrää ainoastaan niihin, joita ylläpitäjä tarvitsee. Tietoturvaan 
 kuten URL-osoitteiden uudelleenkirjoitus on otettu käyttöön \cite{IIS}. IIS:n suurimpana haittapuolena nykyisin sen onkin sidonnaisuus Windows-maailmaan, sillä muille alustoille sitä ei ole 
 saatavilla. Tästä huolimatta IIS on nykyisin varteenotettava vaihtoehto Apachelle tietynlaisessa ympäristössä. 
 
-
-
-
 \subsection{Zope}
 
-+Plone. TODO
+Vaikka Apachen ja Microsoft IIS:n markkinaosuudet kattavat suurimman osan käytetyistä web-alustoista, on markkinoilla suuri määrä pienempiä ratkaisuja, joille löytyy oma käyttäjäkuntansa. Yksi 
+näistä on vapaaseen lähdekoodiin pohjautuva Zope \cite{Zope}. Zope tulee sanoista ``Z Object Publishing Environment'', ja se on kirjoitettu pääosin käyttäen Pythonia. Zope on ensimmäinen
+web-sovellusten suunnitteluun tarkoitettu oliopohjainen julkaisujärjestelmä, ja sen mukana tulee erillinen tietokantasovellus ja web-palvelinalusta. Zopesta on olemassa useita eri jakeluita, ja 
+näistä käytetyin on Zope2. 
 
-\subsection{Tomcat}
+Vaikka Zope itsessään sisältää web-palvelimen, voidaan sitä käyttää myös rinnakkain muiden palvelimien kanssa. Tällaiseen ratkaisuun voidaan päätyä, jos halutaan esimerkiksi ylläpitää samalla
+palvelimella sekä Zopella että muilla työkaluilla tuotettua sisältöä, tai jos halutaan käyttää palveluita kuten Apachen SSL. Monissa tehtävissä muut alustat toimivat myös nopeammin ja 
+turvallisemmin kuin Zope. Zopen käyttö ei myöskään sulje perinteisen tietokantaratkaisun käyttöä, ja sen tukemiin tietokantoihin kuuluu mm. Oracle, PostgreSQL ja MySQL. Usein eri 
+tietokantoja käytetään myös rinnakkain, jolloin Zopen objektit voidaan tallentaa ZODB-oliotietokantaan ja muu data perinteisiin relaatiotietokantoihin. 
 
-TODO
-
-
+Zopen yksi suurimmista vahvuuksista on sille tehdyt lisäosat, joita löytyy lukematon määrä. Näistä tunnetuin on Zopen päälle rakennettu Plone \cite{Plone}, joka on pitkälle kehitetty 
+sisällönhallintajärjestelmä. Sitä voidaan käyttää kaikenlaisen web-sisällön kuten blogien ja sisäisten ja ulkoisten web-sivustojen hallitsemiseen. Se on helppo asentaa ja ottaa käyttöön, 
+jonka lisäksi se on käännetty yli 40 kielelle. Helppokäyttöisyys, joustavuus ja laajennettavuus ovat niitä tekijöitä, jotka ovat tehneet Plonesta suositun. Plonelle löytyvä ohjeistus
+on myös hyvin kattavaa, ja se on yksi tuetuimmista avoimen lähdekoodin projekteista. Ilmaista web-sovellusalustaa etsivälle Zope ja Plone tarjoavatkin parasta mahdollista.
 
 \section{Hajautetut palvelut}
 
