@@ -1,27 +1,26 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
-\chapter{Web-palveluiden haasteet}
+\chapter{Web-palveluiden tulevaisuus}
 
-Toimivan ja ennen kaikkea turvallisen web-pohjaisen palvelun tarjoaminen vaatii
-nykyisin todella paljon aikaa ja huolellisuutta niin palvelun kehittäjältä kuin myös
-palvelun tarjoajalta ja ylläpitäjältä. Ajat ovat muuttuneet huomattavasti siitä,
-jolloin käyttäjät selailivat pääasiassa vain staattisia web-sivuja, ja käyttivät tarjotuista
+Toimivan ja turvallisen web-pohjaisen palvelun tarjoaminen vaatii
+nykyisin todella paljon aikaa ja huolellisuutta sekä palvelun kehittäjältä että
+palvelun tarjoajalta ja ylläpitäjältä. Ajat ovat muuttuneet siitä,
+jolloin käyttäjät selailivat pääasiassa staattisia web-sivuja, ja käyttivät tarjotuista
 palveluista korkeintaan sähköpostia. Kehitys kulkee kovaa vauhtia eteenpäin, ja
 tämän päivän suurimpia trendejä ovat interaktiivisuus, sosiaalisuus ja yksilöllisyys, 
-joiden avustuksella verkon käytöstä on pyritty tekemään
+joiden avustuksella verkon käytöstä on pyritään tekemään
 käyttäjille entistä henkilökohtaisempi kokemus. Palvelut kuten MySpace,
 Facebook ja YouTube ovat vahvistaneet näitä käyttäjätottumuksia, ja
 markkinoille on syntynyt kova kilpailu siitä, kuka kehittää seuraavan
 menestyspalvelun. Nykyisin puhutaankin internetin seuraavasta evoluutiosta Web 2.0:n 
 muodossa, joita myös edellä mainitut palvelut edustavat. Uudet teknologiat ja
 kiire tuovat kuitenkin aina mukanaan joukon uusia heikkouksia, joita hyökkääjät
-pyrkivät hyödyntämään. Suunnittelijoiden ja ylläpitäjien kannalta onkin tärkeää, että 
-kehityksen tuomiin haasteisiin pyritään vastaamaan mahdollisimman nopeasti ja tehokkaasti.
+pyrkivät hyödyntämään. 
 
 \section{Web 2.0}
 
-Web 2.0 on termi, jota käytetään hyvin monessa eri merkityksessä ja
-asiayhteydessä. Se yhdistetään usein uusiin web-teknologioihin ja internet-
+Web 2.0 on termi, jota käytetään monessa eri merkityksessä ja
+asiayhteydessä. Se yhdistetään usein uusiin dynaamisiin web-teknologioihin ja internet-
 aikakauden tuotteiden/palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
 on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota internet pitää tällä
 hetkellä sisällään. Tämä muutos on lähtöisin siitä, että kuluttajatottumukset
@@ -37,7 +36,7 @@ Tähän kun lisätään kiire päästä markkinoilla ensimmäisten
 joukossa, niin tietoturva-asiat jäävät usein taka-alalle \cite{WEB2b}.
 
 Tietoturvan kannalta teknologiat, jotka luetaan kuuluvan osaksi Web 2.0
-teknologiaperhettä, ovat jatkuvan huomion ja kehityksen keskipisteenä. Nämä teknologiat
+teknologiaperhettä, ovat jatkuvan huomion ja kehityksen kohteena. Nämä teknologiat
 muodostavat sen voiman, joka mahdollistaa siirtymisen dynaamisiin
 sovelluksiin kuten Google Maps, ja yritysten toimintojen ohjaamisen verkkoon.
 Teknologiat kuten Asynchronous JavaScript (AJAX), Cascading Style Sheet (CSS),
@@ -54,12 +53,12 @@ väliset suhteet.
 \label{web}
 \end{figure}
 
-Tietoturvan kannalta Web 2.0 tuo mukanaan joukon uusia haasteita. Ensinnäkin
+Tietoturvan kannalta dynaamiset web-teknologiat tuovat mukanaan joukon uusia haasteita. Ensinnäkin
 samat vanhat tietoturvariskit, jotka vaivasivat jo Web 1.0 aikoihin, ovat edelleen voimassa. Näiden lisäksi
 hyökkäykset kuten Cross-Site Scripting (XSS) ja Cross-Site Request Forgery (CSRF) 
 ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
 monipuolisemman ympäristön, jonka kautta murtautua järjestelmiin \cite{WEB2}. Dynaamiset
-WWW-sovellukset antavat myös loppukäyttäjille ja takana oleville ohjelmille enemmän
+web-sovellukset antavat myös loppukäyttäjille ja takana oleville ohjelmille enemmän
 valtaa, jonka johdosta loppukäyttäjä ei välttämättä edes huomaa joutuessaan
 tietomurron kohteeksi. Tästä hyvänä esimerkkinä Ajax-teknologia, joka mahdollistaa
 sivujen tietojen päivittämisen käyttäen asynkronisia kutsuja. Tekniikan ansiosta
@@ -70,7 +69,7 @@ haitallisia skriptejä koneelle käyttäen jotain tunnettua tietoturva-aukkoa. Y
 arvion mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
 Ajaxia \cite{WEB2c}.
 
-Palvelinpuolella muutokset eivät rajoitu vain Web 2.0:n tuomiin
+Palvelinpuolella muutokset eivät rajoitu vain dynaamisten web-teknologioiden tuomiin
 tietoturvariskeihin, sillä uudenlainen ajattelu vaatii myös uudenlaista
 palveluarkkitehtuuria. Uusi arkkitehtuuriratkaisu tuo aina mukanaan suuren
 joukon muutoksia, jotka tulee ottaa huomioon tietoturvan suunnittelussa.
@@ -83,12 +82,12 @@ merkitsee tietoturvan kannalta.
 
 \section{Palvelukeskeinen arkkitehtuuri}
 
-Web-pohjaiset sovellukset ovat saamassa yhä suurempaa huomiota yrityspuolen
+Web-pohjaiset sovellukset ovat saaneet yhä suurempaa huomiota yrityspuolen
 tuotekehityksessä. Tätä muutosta on ollut ohjaamassa teknologioiden
 kehittyminen siihen pisteeseen, missä yritykset pystyvät tarjoamaan aikaisemmin
 asiakas-serveri sovelluksia verkon välityksellä luotettavasti ja nopeasti. Tämä
 ratkaisu on tuonut mukanaan rahallisia säästöjä yrityksille, jotka ovat ennen
-joutuneet itse huolehtimaan mm. sovellusten ajan tasalla pitämisestä ja
+joutuneet itse huolehtimaan muun muassa sovellusten ajan tasalla pitämisestä ja
 palvelimien ylläpitämisestä \cite{WEB2}. Muutos on luonut myös tarpeen löytää yhä
 tehokkaampia kehitysmalleja ja tapoja toteuttaa entistä monimutkaisempia ja
 vaativimpia sovelluksia suuryritysten tarpeisiin. Yksi tapa hallita tätä
@@ -109,13 +108,13 @@ pyrkii tuomaan ratkaisun. Käytännössä tämä tarkoittaa sitä, että arkkite
 tulee tarjota sovelluksille mahdollisimman joustava sekä sijainnista ja
 protokollasta riippumattoman alusta \cite{SOA}. Tämän avulla loppukäyttäjälle
 voidaan tarjota palveluita monesta eri paikasta yhtä aikaa siten, ettei hän ole
-edes tietoinen tästä. Kyseessä on sama ajattelumalli, johon Web 2.0 sovellukset
+edes tästä tietoinen. Kyseessä on sama ajattelumalli, johon dynaamiset web-sovellukset
 pohjautuvat, ja siksi palvelukeskeinen arkkitehtuuri on saanut paljon
 nostetta Web 2.0:n myötä.
 
 Palvelukeskeisen arkkitehtuurin tuomat edut eivät rajoitu pelkästään
-kustannussäästöihin. Sen tuomiin etuihin kuuluvat myös mm. uusien toimintojen
-helpompi integrointi jo käytössä oleviin järjestelmiin, sekä monimutkaisten
+kustannussäästöihin. Sen tuomiin etuihin kuuluu myös muun muassa uusien toimintojen
+helpompi integrointi jo käytössä oleviin järjestelmiin sekä monimutkaisten
 kokonaisuuksien sujuvampi hallinta. Organisaatioille on myös tärkeää, että tällä
 tavalla suunniteltuihin palvelumalleihin on nopeampi tehdä haluttuja muutoksia, jolloin 
 reagointi markkinamuutoksiin voidaan toteuttaa nopeassa aikataulussa \cite{WEB2c}. Tämä on
@@ -125,7 +124,7 @@ palveluihin. Vuonna 2008 web-pohjaisten palveluiden kehittämiseen
 käytettiinkin arviolta yli 11 miljardia dollaria, ja osa fokuksesta on jo siirtynyt
 kohti keskikokoisia ja pieniä yrityksiä. Web-pohjaisten palveluiden merkityksen
 uskotaan entisestään kasvavan ja yritykset, jotka reagoivat hitaasti tähän
-muutokseen, huomaavat tulevaisuudessa olevansa muita huonommassa asemassa \cite{WEB2b}.
+muutokseen, huomaavat tulevaisuudessa olevansa epäsuotuisassa asemassa \cite{WEB2b}.
 
 Palvelinpuolella tapahtuvat muutokoset tarkoittavat sopeutumista uudenlaiseen
 ajattelumalliin, jossa palvelut on hajautettu ympäri verkkoa, ja joista osa ei
@@ -150,9 +149,9 @@ osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 
 Internetin kehittyessä myös web-palveluihin kohdistuvat hyökkäykset ovat saaneet
 uusia ilmenemismuotoja. Aikaisemmin ``web hakkerointia'' käytettiin kuvaamaan
-hyökkäyksiä, jotka kohdistuivat palveluita tarjoaviin alustoihin kuten Apache, 
-Microsoft IIS ja LAMP. Nämä hyökkäykset perustuivat tunnettujen haavoittuvaisuuksien
-hyödyntämiseen, ja oikeille työkaluilla varustautunut hyökkääjä pystyikin kaatamaan haavoittuvan
+hyökkäyksiä, jotka kohdistuivat palveluita tarjoaviin alustoihin kuten Apache ja 
+Microsoft IIS. Nämä hyökkäykset perustuivat tunnettujen haavoittuvaisuuksien
+hyödyntämiseen, ja oikeille työkaluilla varustautunut hyökkääjä pystyi kaatamaan haavoittuvan
 palvelun muutamassa minuutissa. Esimerkiksi tunnetuimpien internet-matojen Code Redin ja Nimdan toiminta
 perustui Microsoft IIS:sä olevan haavoittuvuuden hyödyntämiseen \cite{Hacking}. 
 
@@ -160,11 +159,11 @@ Tämänlaiset hyökkäykset ovat kuitenkin menettäneet suurimman tehonsa, koska
 haavoittuvaisuuksiin reagoidaan entistä nopeammin, yhä useampi alusta on konfiguroitu oikein ja saatavilla on työkaluja, joiden
 avulla pystytään nopeasti ja helposti havaitsemaan yleisimmät tietoturvariskit \cite{Hacking}. Näistä seikoista johtuen
 hyökkääjät ovat alkaneet kiinnittämään entistä enemmän huomiota itse alustalla pyöritettäviin palveluihin pyrkien 
-murtautumaan järjestelmiin näiden kautta. Web 2.0:n myötä tämän tyyppiset hyökkäykset ovat saaneet
-enemmän huomiota, sillä se on tarjonnut hakkereille entistä monipuolisemman hyökkäyspinnan. Tietoturvan 
+murtautumaan järjestelmiin näiden kautta. Dynaamisten web-teknologioiden myötä tämän tyyppiset hyökkäykset ovat saaneet
+enemmän huomiota, sillä se tarjoaa hakkereille entistä monipuolisemman hyökkäyspinnan. Tietoturvan 
 kannalta onkin tärkeää, että kumpaankin hyökkäystapaan kiinnitetään huomiota.
 
-\subsection{Web-palvelimien turvaaminen}
+\subsection{Web-alustojen turvaaminen}
 
 Yllä mainitut seikat eivät tarkoita sitä, että web-palveluita pyörittävät alustat olisivat
 turvassa hyökkäyksiltä. Onnistuneet hyökkäykset ovat edelleen yhtä tuhoisa, jos niihin ei varauduta ennalta.
@@ -184,7 +183,7 @@ voidaan helposti huijata suorittamaan odottamattomia toimintoja \cite{Hacking}.
 
 Listatuilta asioilta suojautuminen on melko yksinkertaista, kunhan noudattaa muutamia perussääntöjä. Ensinnäkin tuotannossa 
 olevilla palvelimilla ei tulisi koskaan olla asennettuna tai käytettynä tiedostoja, joiden turvallisuudesta ei ole
-takeita. Näihin tiedostoihin lukeutuvat mm. paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
+takeita. Näihin tiedostoihin lukeutuvat muun muassa paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
 lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
 on asennettu viimeisimmät päivitykset, sillä ne yleensä korjaavat tunnetut heikkoudet \cite{Hacking}. Jo pelkästään näillä 
 toimilla pystytään suurimmaksi osaksi estämään sellaiset hyökkäykset, jotka kohdistuvat itse käytettyyn palvelinalustaan.
@@ -195,9 +194,9 @@ tulee olla erilliset suojausmenetelmät.
 \subsection{SQL injektio}
 
 Virheelliseen syöttötietoon perustuvat hyökkäykset ovat jo pidemmän aikaa vaivanneet web-pohjaisia sovelluksia.
-Web 2.0:n myötä hyökkäykset ovat entisestään yleistyneet, sillä monimutkaisten sovellusten takana käytetään entistä
+Dynaamisten web-sovellusten myötä hyökkäykset ovat entisestään yleistyneet, sillä monimutkaisten sovellusten takana käytetään entistä
 enemmän erilaisia tietokantapohjaisia ratkaisuja kuten MySQL. Nämä hyökkäykset hyödyntävät sitä seikkaa, että suurin osa
-sovelluksista ei tee selkeää eroa käyttäjän antaman syötteen, ja ohjelmalle annettavien käskyjen välillä. Tämä mahdollistaa
+sovelluksista ei tee selkeää eroa käyttäjän antaman syötteen ja ohjelmalle annettavien käskyjen välillä. Tämä mahdollistaa
 sen, että hyökkääjä pystyy piilottamaan annettuun hakuun ohjelmatason käskyjä, jotka muokkaavat sovelluksen toimintaa
 hyökkääjän haluamaan suuntaan \cite{WEB2}. Normaaleilla toimenpiteillä tällaisen hyökkäysten tunnistaminen on hankalaa, sillä
 yritysten tietoturvasta vastaavat palomuurit toimivat OSI-mallin kolmannella, neljännellä ja viidennellä kerroksella, eivätkä ne tunnista
@@ -205,7 +204,7 @@ ylimmän tason eli ohjelmistotason kautta tulevia hyökkäyksiä. Tämän lisäk
 kuten HTTP:n tarkkaa sisältöä \cite{SQLSS}.    
 
 Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessaä vaiheessa hyökkääjän tulee tunnistaa 
-web-sovelluksessa käytetyt teknologiat. Tämä onnistuu mm. tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
+web-sovelluksessa käytetyt teknologiat. Tämä onnistuu muun muassa tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
 sivun lähdekoodia, ja käyttämällä tätä varten tehtyjä työkaluja kuten Nessusta ja Nmapin. Osaavalla hyökkääjälle tämä vaihe on melko triviaali, 
 mutta hyökkäyksen kannalta tiedot ovat elintärkeitä, sillä injektiohyökkäyksen onnistuminen on täysin riippuvainen 
 käytetystä alustasta. Kun tarvittavat tiedot on saatu kerättyä, voidaan varsinaista hyökkäystä alkaa suunnittelemaan.
@@ -279,7 +278,7 @@ pohjautuvat ratkaisut sisältävät usein myös osan seuraavista ominaisuuksista
 
 Esille tulleiden asioiden valossa on selvää, että SQL-kieleen pohjautuvat haavoittuvuudet ovat todellinen uhka yritysten tietoturvalle.
 Tästä johtuen on tärkeää, että sovellusten turvallisuus pyritään takaamaan kaikin mahdollisin tavoin. Täysin turvallisen sovelluksen 
-suunnitteleminen on kuitenkin lähes mahdoton tehtävä, mutta noudattamalla muutamia perusperiaatteita voidaan riskiä vähentää huomattavasti.
+suunnitteleminen on kuitenkin mahdoton tehtävä, mutta noudattamalla muutamia perusperiaatteita voidaan riskiä vähentää huomattavasti.
 Vastaavasti myös palvelinpuolella SQL-injektiohyökkäykset tulee ottaa huomioon suunniteltaessa verkon tietoturvaratkaisuja.
 
 Koska injektiohyökkäykset pyrkivät hyödyntämään syötteiden virheellistä tulkintaa, voi hyväksyttävien syötteiden rajoittaminen tuntua
@@ -289,7 +288,7 @@ ja huonon syötteen riisuminen tai pois tiputtaminen. Näistä tavoista ensimmä
 merkki tarkistetaan, ja jos se ei ole sallittujen merkkien joukossa, niin koko haku hylätään. Huonojen syötteiden riisuminen on myös vaikea
 toteuttaa, koska harvoin pystytään määrittelemään, mikä haku on huono ja mikä hyvä. Yksi hyväksi todettu tapa onkin rajoittaa tiettyjen
 merkkien käyttöä siten, että merkin ollessa haussa mukana tämä muutetaan toiseen muotoon. Tämäkään ratkaisu ei ole täysin ongelmaton, ja siksi
-viisainta on vain hylätä koko syöte, jos se ei vastaa odotettua syötettä \cite{SQLSS}.
+usein vain hylätään koko syöte, jos se ei vastaa odotettua syötettä \cite{SQLSS}.
 
 Palvelinpuolella tulee myös ottaa huomioon muutamia asioita, joita seuraamalla voidaan huomattavasti parantaa yrityksen tietoturvaa.
 Palvelinpuolen ratkaisuilla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
@@ -307,12 +306,12 @@ Seuraava lista ei ole millään tavalla täydellinen ratkaisu ongelmaan, mutta s
 Nykyisin yhä useampi yritys on tietoinen verkon tarjoamista mahdollisuuksista, ja sen mukana tulevista vaaroista. Yritykset ovat tämän johdosta
 alkaneet panostamaan entistä enemmän tietoturvaan, ja niistä harva toimii enää ilman kunnollista suojausta. Palomuurit ja hyökkäysten tunnistamiseen
 ja estämiseen erikoistuneet sovellukset ovat myös kehittyneet viime vuosina niin paljon, että enää harva perinteinen hyökkäys toimii ilman
-suuria muutoksia sen toteutustapaan. Tästä johtuen hakkerit ovat omaksunett  yhä salamyhkäisempiä hyökkäystapoja, jotka pyrkivät kokonaan
-ohittamaan perinteiset palomuurit. Web-pohjaiset sovellukset tarjoavat tähän erinomaisen alustan, ja dynaamisten WWW-tekniikoiden myötä mahdollisuudet 
-ovat vain kasvaneet entisestään.
+suuria muutoksia sen toteutustapaan. Tästä johtuen hyökkääjät ovat omaksuneet yhä salamyhkäisempiä murtautumistekniikoita, jotka pyrkivät kokonaan
+ohittamaan perinteiset palomuurit. Web-pohjaiset sovellukset tarjoavat tähän erinomaisen alustan, ja dynaamisten web-tekniikoiden myötä mahdollisuudet 
+ovat vain entisestään kasvaneet.
 
 Cross-Site Scripting eli XSS-hyökkäykset eivät ole millään tapaa uusi hyökkäystyyppi, ja joidenkin arvioiden mukaan kahdeksan kymmenestä sivustosta on 
-sille jollakin asteella alttiina. XSS-hyökkäykset ovat kuitenkin viime vuosina keränneet suurempaa huomiota hyökkääjien keskuudessa, sillä dynaamisten web- sovellusten
+sille jollakin asteella alttiina. XSS-hyökkäykset ovat kuitenkin viime vuosina keränneet suosiota hyökkääjien keskuudessa, sillä dynaamisten web-sovellusten
 myötä yhä useampi näistä käyttää erilaisia tiedonlähteitä sisällön keräämiseen. RSS-feedit, widgetit, mashupit ja erilaiset JavaScript-pohjaiset komponentit 
 tarjoavat kaikki hyökkääjille monta mahdollisuutta, johon iskeä. Tähän kun lisätään se, että sovelluksista monet päivittävät tietoja käyttäjän tietämättä, 
 niin tilanteesta muodostuu entistä vaarallisempi \cite{WEB2b}. Tästä johtuen XSS-hyökkäykset muodostavat nyt ja tulevaisuudessa erittäin suuren riskin
@@ -322,15 +321,15 @@ Painotuksen siirtyminen kohti web-pohjaisia hyökkäyksiä on ollut selkeästi h
 yritys Symantec julkisti raportin, jonka  mukaan vuoden 2007 viimeisen kuuden kuukauden aikana raportoiduista haavoittuvaisuuksista 11,253
 oli sivustokohtaisia XSS tietoturva-aukkoja. Tätä lukua kun vertaa muihin löydettyihin riskeihin, joita oli 2,134, niin 
 yli 80 prosenttia löydetyistä tietoturva-aukoista oli web-pohjaisia \cite{SYM}. Vuonna 2009 julkistetussa raportissa tilanne oli lähes yhtä paha, 
-sillä 63 prosenttia haavoittuvaisuuksista kohdistui Web-sovelluksiin \cite{SYM2}.
+sillä 63 prosenttia haavoittuvaisuuksista kohdistui web-sovelluksiin \cite{SYM2}.
 
 Kuten aikaisemmin on tullut esille, niin injektiohyökkäykset eivät rajoitu pelkästään tietokantasovelluksiin. Myös XSS-hyökkäykset ovat eräänlaisia 
 injektiohyökkäyksiä sillä erotuksella, että hyökkääjä ei suoraan toteuta injektiota vaan uhri tekee sen itse. Tähän hyökkääjällä on useita eri 
-keinoja, ja harvoin käyttäjä edes huomaa joutuneensa hyökkäyksen kohteeksi. Hyökkäyksen onnistuessa web-sivujen käyttämä ``saman alkuperän'' periaate 
-voidaan kiertää, jolloin hyökkääjän on mahdollista ajaa kohteen selaimessa haluamaansa koodia ja skriptejä. Tämä ``saman alkuperän'' periaate on web-selainten 
-yksi tärkeimmistä suojausmenetelmistä, ja se estää mm. skriptien lataamisen yhdestä lähteestä hakemalla tai asettamalla määrityksiä toisesta lähteestä \cite{WEB2}.
+keinoja, ja harvoin käyttäjä edes huomaa joutuneensa hyökkäyksen kohteeksi. Hyökkäyksen onnistuessa web-sivujen käyttämä Same Origin -periaate 
+voidaan kiertää, jolloin hyökkääjän on mahdollista ajaa kohteen selaimessa haluamaansa koodia ja skriptejä. Tämä saman alkuperän periaate on web-selainten 
+yksi tärkeimmistä suojausmenetelmistä, ja se estää muun muassa skriptien lataamisen yhdestä lähteestä hakemalla tai asettamalla määrityksiä toisesta lähteestä \cite{WEB2}.
 
-XSS-hyökkäykset jaetaan usein heijastettuihin ja tallennettuihin hyökkäyksiin sen mukaan, kuinka hyökkäys on toteutettu. Tallennetussa hyökkäyksessä haavoittuvalle 
+XSS-hyökkäykset jaetaan heijastettuihin ja tallennettuihin hyökkäyksiin sen mukaan, kuinka hyökkäys on toteutettu. Tallennetussa hyökkäyksessä haavoittuvalle 
 web-sivustolle asennetaan pysyvästi vihamielinen skripti, joka ajetaan sivun vierailun yhteydessä \ref{tallennettu}. Tällaiset skriptit on yleensä kirjoitettu JavaScriptillä,
 ja ne voidaan tallentaa esimerkiksi web-palvelimen tietokantaan, kommenttikenttiin tai foorumin viesteihin. Koska selain luottaa siihen, 
 että sivuston sisältö on luotettavasta lähteestä, pystyy hyökkääjä tämän jälkeen lukemaan ja muokkaamaan selaimen arkaluontoista sisältöä. Evästeet, jotka ovat web-sovellusten 
@@ -348,7 +347,7 @@ ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia.
 \newpage
 Heijastettu hyökkäys eroaa tallennetusta hyökkäysestä siten, että haitallista skriptiä ei tallenneta minnekään pystyvästä. Hyökkäyksen kohteeksi käyttäjä joutuu, kun 
 hänet huijataan esimerkiksi painamaan vihamielistä linkkiä, joka tekee käyttäjän puolesta kyselyn haavoittuvalle sivustolle. Haavoittuva sivusto heijastaa kyselyn tuloksen 
-takaisin käyttäjälle esimerkiksi virheviestin tai hakutuloksen muodossa, ja näin toimitettu koodi sitten suoritetaan käyttäjän selaimessa, koska se tulee selaimen luottamalta
+takaisin käyttäjälle esimerkiksi virheviestin tai hakutuloksen muodossa, ja näin toimitettu koodi suoritetaan käyttäjän selaimessa, koska se tulee selaimen luottamalta
 osapuolelta \ref{heijastettu} \cite{WEB2}.
 
 \begin{figure}[htp]
@@ -372,7 +371,7 @@ saastuneella sivulla, saastui myös hänen oma MySpace sivunsa. 24 tunnissa mato
 MySpace joutui sulkemaan väliaikaisesti sivustonsa. Hyökkäyksen vahingot eivät rajoittuneet tähän, vaan seuraavina viikkoina useista tunnetuista sivustoista
 kuten Googlesta ja Yahoosta löytyi vastaavanlaisia tietoturva-aukkoja \cite{WEB2b}.
 
-Tärkein asia XSS-hyökkäysten estämiseksi on olla hyvin tarkkana sen suhteen, kuinka käyttäjien tarjoama sisältö välitetään toisille käyttäjille.
+Tärkein asia XSS-hyökkäysten estämiseksi on olla tarkkana sen suhteen, kuinka käyttäjien tarjoama sisältö välitetään toisille käyttäjille.
 Tärkeää on myös muokata käyttäjän antama syöte aina sellaiseen muotoon, että kun palvelin lähettää esimerkiksi virhesanomassa käyttäjän antaman syötteen
 takaisin, niin ei tätä voida käyttää sellaisenaan hyökkäyksen toteuttamiseen. Tiettyjen merkkien poistamisella voidaan hyökkäyksi vähentää,
 mutta usein merkkien kuten heittomerkin (') poistaminen ei tule kyseeseen. Suunnittelijoiden avuksi on myös olemassa suuri määrä sovelluksia, jotka
@@ -384,21 +383,21 @@ Näyttääkin siltä, että yritykset ymmärtävät asian vakavuuden vasta sitte
 
 \subsection{Cross-Site Request Forgery}
 
-Dynaamisten web- sovellusten yksi keskeisimmistä asiakaspuolen ratkaisuista on Document Object Modeliksi (lyh. DOM) nimetty rakenne, joka on vastuussa siitä
-kuinka web-sivun sisältöä käsitellään, ja kuinka eri objektit kommunikoivat keskenään. Tämä rakenne vastaa siitä, että ainoastaan saman domainin 
+Dynaamisten web-sovellusten yksi keskeisimmistä asiakaspuolen ratkaisuista on Document Object Modeliksi (lyh. DOM) nimetty rakenne, joka on vastuussa siitä,
+kuinka web-sivun sisältöä käsitellään ja kuinka eri objektit kommunikoivat keskenään. Tämä rakenne vastaa siitä, että ainoastaan saman domainin 
 sisäinen kommunikointi ja sisällön muokkaaminen on sallittu. Tämä ratkaisu poistaa sen mahdollisuuden, että web-sivun DOM:ia voitaisiin muokata toisen
-domainin kautta. Tämä vastaa ``saman alkuperän'' periaatetta, jolla pyritään estämään web-sivuihin ja käyttäjiin kohdistuvia vihamielisiä toimia.
+domainin kautta. Tämä vastaa saman alkuperän periaatetta, jolla pyritään estämään web-sivuihin ja käyttäjiin kohdistuvia vihamielisiä toimia.
 Webin muuttuessa entistä interaktiivisemmaksi, ovat sivustot kuitenkin alkaneet sallia yhä enemmän domainien välistä kommunikointia. Tällaisia 
 toimia ovat esimerkiksi hyperlinkkien käyttäminen sisällön näyttämisessä, kuvien ja objektien lataaminen sekä toisessa domainissa olevien 
 JavaScriptien ajaminen. Nämä ja monet muut toimet ovat mahdollistaneet entistä monipuolisempien web-palveluiden suunnittelun, mutta huonosti toteutettuna 
 ne jättävät palvelut hyvin haavoittuviksi. Tämä johtuu siitä, että käyttäjän tarkoituksella tekemiä toimia ei pystytä erottamaan niistä toimista, jotka tehdään 
 automaattisesti käyttäjän vieraillessa sivustolla \cite{WEB2}.
 
-XSS-hyökkäysten tapaan myös Cross-Site Request Forgery (lyh. CSRF) hyökkäykset ovat jo pidemmän aikaan olleet olemassa, mutta vasta Web 2.0:n myötä ne
+XSS-hyökkäysten tapaan myös Cross-Site Request Forgery (lyh. CSRF) hyökkäykset ovat jo pidemmän aikaan olleet olemassa, mutta vasta viime vuosina ne
 ovat yleistyneet. Ero näiden kahden hyökkäyksen välillä on siinä, että missä XSS skripti suoritetaan käyttäjän selaimessa, niin CSRF hyökkäyksessä käytetyt
 käskyt ja skriptit kohdistetaan web-palveluihin, joiden kanssa selaimella on luottamussuhde. CSRF toteutetaan siten, että hyökkääjä asettaa jollekin sivulle
-vihamielisiä tageja, joiden avulla voidaan luoda mielivaltaisia HTTP pyyntöjä. Nämä pyynnöt kohdistetaan johonkin toiseen domainiin, ja ne ajetaan käyttäjän 
-vieraillessa kyseisellä sivustolla. Jos käyttäjän selaimella on sitten esimerkiksi tähän domainiin liittyvä eväste voimassa, voidaan HTTP pyynnöillä pyytää mm.  
+vihamielisiä tageja, joiden avulla voidaan luoda haitallisia HTTP pyyntöjä. Nämä pyynnöt kohdistetaan johonkin toiseen domainiin, ja ne ajetaan käyttäjän 
+vieraillessa kyseisellä sivustolla. Jos käyttäjän selaimella on sitten esimerkiksi tähän domainiin liittyvä eväste voimassa, voidaan HTTP pyynnöillä pyytää muun muassa
 salasanan vaihtoa tai sähköpostin lähettämistä käyttäjän nimissä \cite{WEB2b}. Hyökkääjä pystyy tällä tavoin myös ottamaan yhteyttä sellaisiin koneisiin ja palveluihin,
 joihin hänellä ei muuten olisi oikeuksia johtuen esimerkiksi palomuurista tai IP-osoitteiden suodatuksesta \cite{CSRF}.
 
@@ -407,14 +406,14 @@ HTTP pyynnöt niin riittää, että hyökkääjä pääsee niihin käsiksi taval
 jopa useita viikkoja, jolloin sama eväste on pitkään käytössä. Monien sovellusten ja pyyntöjen rakenne on myös hyvin ennalta arvattavissa, jolloin hyökkääjän
 on helpompi arvata käskyjen ja parametrien oikea muoto \cite{WEB2}.
 
-CSRF hyökkäykset eivät rajoitu pelkästään perinteisiin web-tekniikoihin, sillä suurin osa Web 2.0:n mukana tuomista teknologioista on sille jollakin 
+CSRF hyökkäykset eivät rajoitu pelkästään perinteisiin web-tekniikoihin, sillä suurin osa dynaamisista teknologioista ovat sille jollakin 
 tavalla alttiina. Erityisesti AJAX ja JavaScript ovat tuoneet mukanaan suuren joukon uusia haasteita, jotka suunnittelijoiden tulee ottaa huomioon uusien
 sovelluksien suunnittelussa. \cite{WEB2b}. Täydellinen suojautuminen CSRF hyökkäyksiltä vaatiikin sellaista syvällistä osaamista käytetyistä tekniikoista ja 
 tietämystä eri komponenttien välisistä toimininnoista, jota harvalta löytyy. Siksi iso osa sivustoista ja palveluista onkin haavoittuvaisia eri asteisille
 CSRF-hyökkäyksille. Tästä hyvänä esimerkkinä tunnettu sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF hyökkäyksen mahdollistava heikkous. Tämän avulla
 hyökkääjän oli mahdollista luoda Gmailiin sellainen suodatus, joka ohjasi tulevat postit toiseen osoitteeseen \cite{CSRF}. 
 
-CSRF hyökkäyksiltä suojautumiseen on käytössä kolme hyvin yleistä tekniikkaa. Näistä käytetyin on sisällyttää jokaiseen serveripuolen dataa muokkaavaan
+CSRF hyökkäyksiltä suojautumiseen on käytössä kolme hyvin yleistä tekniikkaa. Näistä käytetyin on sisällyttää jokaiseen palvelinpuolen dataa muokkaavaan
 GET/POST pyyntöön mukaan salattu tokeni, jonka avulla jokainen pyyntö voidaan yksilöidä ja tunnistaa kuuluvan oikeaan istuntoon. Tämä salattu tokeni tekee
 käyttäjän syötteestä arvaamattoman muotoisen, jonka johdosta CSRF-hyökkäyksen toteuttaminen on hyvin vaikeaa \cite{WEB2}. Yksinkertaisin suojausmenetelmä on 
 taas tunnistaa HTTP pyynnön Referer otsake, ja hyväksyä vain sellaiset pyynnöt, jotka tulevat luotettavista lähteistä. Kolmas menetelmä on tehdä kustomoituja
@@ -429,8 +428,8 @@ joka rajoittaa tiettyjen palveluiden käyttöä \cite{CSRF}.
 
 Näiden ja monien muiden syiden takia tutkimustyö CSRF hyökkäysten parissa on kasvattanut suosiotaan. Yhdessä tutkimuksessa ehdotettiin erillisen Origin
 otsakkeen lisäämistä pyyntöön, joka korjaisi Referer kentän heikkoudet \cite{CSRF}. Toisessa tutkimuksessa taas pyrittiin kasvattamaan web-selaimen turvallisuutta
-lisäämällä selaimeen mekanismi, joka pyrki arvioimaan vastasiko tehdyt pyynnöt käyttäjän toimia \cite{CSRFb}. Näistä kahdesta ratkaisusta on kuitenkin nähtävissä se,
-että tutkimuskenttä CSRF hyökkäysten ympärillä on vielä hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jääkin vielä tällä hetkellä 
+lisäämällä selaimeen mekanismi, joka pyrki arvioimaan vastasiko tehdyt pyynnöt käyttäjän toimia \cite{CSRFb}. Näistä kahdesta erilaisesta ratkaisusta on nähtävissä se,
+että tutkimuskenttä CSRF hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
 sovelluksen kehittäjälle ja ylläpitäjälle.
 
 \section{Web-palveluiden turvaaminen}
@@ -440,18 +439,18 @@ seuraamista. Jo pelkästään yleisimpien tietoturvariskien tunnistaminen ja kor
 muuttuessa entistä monimutkaisemmiksi. Työn helpottamiseksi on saatavilla useita työkaluja, joiden avulla sekä kehittäjät että ylläpitäjät voivat
 etsiä sovelluksista ja verkoista tunnetuimpia tietoturva-aukkoja. Osa näistä pohjautuu vapaaseen lähdekoodiin, mutta tarjolla on myös kaupallisia sovelluksia, jotka ainakin 
 paperilla lupaavat parempia ominaisuuksia. Näiden lisäksi palvelinpuolella on tarjolla erilaisia lisäosia, jotka lisäävät web-palveluiden tietoturvaa. 
-Mikään sovellus ei tietenkään voi löytää kaikkia mahdollisia heikkouksia, joten pelkästään näiden varaan ei voida tietoturvaa rakentaa. Näiden avulla 
+Mikään sovellus ei tietenkään voi löytää jokaista tietoturvariskiä, joten pelkästään näiden varaan ei voida tietoturvaa rakentaa. Näiden avulla 
 saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus on mahdollisesti alttiina, ja kuinka verkon turvallisuutta voidaan parantaa. Koska samat 
-sovellukset on myös hyökkääjien käytössä, niin ainakin virheet, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
+sovellukset on myös hyökkääjien käytössä, niin ainakin aukot, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
 
 Web Application Security Consortium (lyh. WASC) on vuonna 2004 perustettu avoin kansainvälinen ryhmittymä, joka koostuu tietoturva-alan asiantuntijoista sekä eri 
-yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön ``best-practice'' malleja ja standardeja turvallisesta internetistä. Se julkaisee
-erilaisia artikkeleita, esitysmateriaaleja ja tietoturvalinjauksia, joita käytetään hyvin laajalti ohjenuorina yritysmaailmassa sekä tuotekehityksessä \cite{WASC}.
-WASC:n tämän hetkisiin projekteihin kuuluvat mm. web-sovellusten turvallisuuden tutkimiseen käytettävien ohjelmistojen arviointikriteerien laatiminen sekä tilastointi
+yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön best practice - malleja ja standardeja turvallisesta internetistä. Se julkaisee
+erilaisia artikkeleita, esitysmateriaaleja ja tietoturvalinjauksia, joita käytetään hyvin laajasti ohjenuorina yritysmaailmassa sekä tuotekehityksessä \cite{WASC}.
+WASC:n tämän hetkisiin projekteihin kuuluvat web-sovellusten turvallisuuden tutkimiseen käytettävien ohjelmistojen arviointikriteerien laatiminen sekä tilastointi
 web-sovellusten turvallisuudesta. Viimeisimmän WASC:n tekemän raportin mukaan tutkituista sivustoista, joita oli yhteensä 12186 kappaletta ja joista löytyi 97554 
 eri asteista tietoturvariskiä, 13 prosenttia pystyttiin murtamaan täysin automaattisesti, ja noin 49 prosenttia web-sovelluksista sisälsi helposti havaittavia vakavia 
 tietoturvariskejä. Tämä luku kasvoi jopa 96 prosenttiin, kun sivuston tutki tietoturva-alan asiantuntija. Huomattavaa oli myös se, että sivustoista 99 prosenttia
-ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet olivat 20 prosenttia yleisempiä kuin sovellusten kehittäjien tekemät. Tutkimus myös 
+ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet olivat 20 prosenttia yleisempiä kuin sovelluskehittäjien tekemät. Tutkimus myös 
 osoitti sen, että XSS-hyökkäykset olivat SQL injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
 kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta. 
 
@@ -460,13 +459,13 @@ kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta.
 Tietoturvahyökkäysten siirtyessä hiljalleen verkkokerrokselta sovelluskerrokselle, eivät perinteiset palomuurit pysty enää yksin takaamaan riittävää tietoturvatasoa. Tästä syystä näiden
 rinnalle on kehitetty erilaisia tietoturvasovelluksia, joista yleisimpiä ovat IDS- ja IPS-järjestelmät. Näistä tunnetuin ja käytetyin on vapaaseen lähdekoodiin perustuva Snort \cite{Snort}, jolla 
 on rekisteröityneitä käyttäjiä lähes kolmesataatuhatta. Snortia on ladattua miljoonia kertoja, ja sitä käyttävät niin yksityiset tahot kuin myös suuret yritykset ja eri valtioiden virastot. Suuren
-levinneisyyden takia Snortia kutsutaan usein IPS-järjestelmien alan de facto standardiksi.
+levinneisyyden takia Snortia kutsutaan usein IPS-järjestelmien alan de facto sovellukseksi.
 
 Snort on pohjimmiltaan sääntöpohjainen IDS-järjestelmä eli se pyrkii tunnistamaan hyökkäykset vertaamalla tulevaa liikennettä ennalta kirjoitettuihin sääntöihin. Tämä tunnistaminen toteutetaan
 verkkotasolla tutkimalla jokainen tuleva paketti. Suuren käyttäjämääränsä ansiosta Snortin käyttämät säännöstöt ovat hyvin kattavat, ja yleisimpiin hyökkäyksiin kirjoitetaan
-nopeasti uudet säännöt. Snortiin on myös saatavilla useita lisäosia, joiden avulla on mm. mahdollista estää tietystä ip:stä tuleva liikenne sekä tallentaa ja analysoida haluttu liikenne. 
+nopeasti uudet säännöt. Snortiin on myös saatavilla useita lisäosia, joiden avulla on esimerkiksi mahdollista estää tietystä osoitteesta tuleva liikenne sekä tallentaa ja analysoida haluttu liikenne. 
 
-Koska Snortin lähdekoodi on vapaasti saatavilla, on tämän pohjalta kirjoitettu uusia järjestelmiä, joiden avulla pystytään mm. luomaan uusia sääntöjä automaattisesti verkkoliikenteestä 
+Koska Snortin lähdekoodi on vapaasti saatavilla, on tämän pohjalta kirjoitettu uusia järjestelmiä, joiden avulla pystytään muun muassa luomaan uusia sääntöjä automaattisesti verkkoliikenteestä 
 \cite{SnortRule} ja tutkimaan verkkoliikennettä erillisinä tapahtumaketjuina \cite{SnortSet}. Näitä järjestelmiä kutsutaan usein hybridi IDS-järjestelmiksi, ja tällaisia löytyy useita erilaisia. 
 Näitä ja muita sääntöpohjaisia IDS-järjestelmiä vaivaa kuitenkin sama ongelma, eli ne ovat täysin riippuvaisia oikeanlaisesta säännöstöstä. Jos tehtyyn hyökkäykseen ei löydy suoraan sääntöä, 
 ei järjestelmä pysty tätä havaitsemaan. Hyökkäysten muuttuessa yhä monimutkaisemmiksi, on tästä muodostunut todellinen ongelma sääntöpohjaisille järjestelmille. Toinen ongelma IDS-järjestelmillä
@@ -487,13 +486,13 @@ tietoturvan parantamiseen.
 
 Nessus \cite{Nessus} oli alunperin vapaaseen lähdekoodiin perustuva ilmainen tietoturvaskanneri, joka muuttui maksulliseksi vuonna 2008. 1200 dollarin vuosimaksua vastaan
 saa kuitenkin yhden parhaimmista UNIX- ja Windows-alustoilla toimivista tietoturvaskannereista \cite{NST}. Se sisältää yli 20000 erillistä lisäosaa,
-ja sen avulla on mahdollista suorittaa mm. reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri verkko-osien skannausta. Maksullisuuden 
+ja sen avulla on mahdollista suorittaa muun muassa reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri verkko-osien skannausta. Maksullisuuden 
 ansiosta Nessus pystytään pitämään ajantasalla uusimmista hyökkäyksistä, ja se soveltuukin erinomaisesti suurten ja monimutkaisten verkkojen turvaamiseen\cite{Nessus}. 
 
 \subsection{Paros Proxy}
 
 Paros Proxy \cite{Paros} on Javalla kirjoitettu web proxy, jonka avulla voidaan arvioida web-sovelluksen turvallisuutta. Se mahdollistaa kokonaisten sivustojen indeksoimisen,
-jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP ja HTTPS liikennettä mukaanlukien evästeitä. Sen mukana tulee
+jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP- ja HTTPS-liikennettä mukaanlukien evästeitä. Sen mukana tulee
 myös skanneri yleisimpien web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-ammattilaisten
 parissa, jotka etsivät sivustoilta haavoittuvuuksia.
 
@@ -505,13 +504,13 @@ tapoja hyökkäysten tunnistamiseen ja torjumiseen. Yksi mahdollinen ratkaisu on
 välille, jolloin palvelulle tulevat pyynnöt kulkevat tämän palomuurin kautta. Tällä tavoin saapuva liikenne voidaan tutkia ja suodattaa käyttäen haluttuja määrityksiä. 
 
 ModSecurity \cite{Mod} on Apachelle suunniteltu, vapaaseen lähdekoodiin pohjautuva palomuuri, joka tarjoaa kattavan suojan web-palveluihin kohdistuvilta hyökkäyksiltä. 
-Se mahdollistaa mm. HTTP liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassaolevaan arkkitehtuuriin.
+Se mahdollistaa HTTP-liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassaolevaan arkkitehtuuriin.
 ModSecuritystä on saatavilla kaupallisia lisenssejä sekä eri asteisia tukipalveluita, mutta sovelluksen käyttämät perussäännöt ovat ilmaiseksi ladattavissa, tosin näitä
 ei ole hetkeen päivitetty. ModSecurityn käyttämä säännöstä mahdollistaa kuitenkin uusien sääntöjen kirjoittamisen omien tarpeiden mukaan, joten käytetyt säännöt voidaan räätälöidä 
 tilannekohtaisesti \cite{Mod}. 
 
 ModSecurityn parhaimpiin ominaisuuksiin kuuluu mahdollisuus ylläpitää täydellistä logia koko HTTP-tapahtuman ajalta, jolloin sekä pyynnöt että vastaukset pystytään analysoimaan.
-Tämän ansiosta myös tulevien POST pyyntöjen sisältö ja rakenne voidaan tutkia. Nämä pyynnöt jäävät normaalisti logittamatta, ja tästä syystä iso osa hyökkäyksistä toteutetaankin 
+Tämän ansiosta myös tulevien POST-pyyntöjen sisältö ja rakenne voidaan tutkia. Nämä pyynnöt jäävät normaalisti logittamatta, ja tästä syystä iso osa hyökkäyksistä toteutetaankin 
 nykyisin näitä käyttämällä. Se, mitä halutaan logittaa, voidaan myös tarkkaan määrittää. Salattu ja pakattu liikenne ei myöskään aiheuta ongelmia, sillä logitus tapahtuu sillä tasolla,
 jossa pyynnöt ovat valmiiksi puretussa muodossa \cite{Mod}.
 
