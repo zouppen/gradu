@@ -64,7 +64,7 @@ myös tietomurtojen yrityksille. Apachesta itsestään on kuitenkin
 löydetty verrattain vähän
 tietoturva-aukkoja. Suurin osa tietomurroista
 keskittyykin murtamaan varsinaista Web-palvelua palvelinalustan
-sijaan. (tämä on oletus, FIXME etsi lähde tai poista)
+sijaan.  % tämä on oletus, FIXME etsi lähde tai poista
 
 Apache pystyy suorittamaan komentosarjoja perinteisen CGI-rajapinnan
 lisäksi myös palvelinlaajennosten avulla, jolloin saavutetaan
@@ -76,11 +76,8 @@ mukaanlukien Linux ja Windows. Suosittuja Apache-alustalla
 käytettäviä ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä
 ympäristössä käytettäviä Web-palveluita ovat mm. Wikipediassa
 käytettävä MediaWiki ja lukuisilla selainkäyttöisillä
-keskustelupalstoilla käytettävä phpBB.
-
-TODO LAMP (Linux + Apache + MySQL + PHP)
-
-\todo{Nämä tulevat viikolla 22.}
+keskustelupalstoilla käytettävä phpBB. Ympäristöä, jossa on käytössä
+Linux, Apache, MySQL ja PHP, kutsutaan usein nimellä LAMP.
 
 \subsection{IIS}
 
@@ -116,14 +113,60 @@ sisällönhallintajärjestelmä. Sitä voidaan käyttää kaikenlaisen web-sisä
 jonka lisäksi se on käännetty yli 40 kielelle. Helppokäyttöisyys, joustavuus ja laajennettavuus ovat niitä tekijöitä, jotka ovat tehneet Plonesta suositun. Plonelle löytyvä ohjeistus
 on myös hyvin kattavaa, ja se on yksi tuetuimmista avoimen lähdekoodin projekteista. Ilmaista web-sovellusalustaa etsivälle Zope ja Plone tarjoavatkin parasta mahdollista.
 
-\section{Hajautetut palvelut}
+\section{Käänteinen välityspalvelin}
 
-TODO Pyynnön ohjaaminen usealle palvelimelle (reverse proxy), Hyödyt verrattuna keskitettyyn
+Suositut Web-palvelut ovat usein rakenteeltaan hajautettuja, jolloin
+palvelimeen kohdistuva kuormitus saadaan jaettua useammalle
+laitteelle. Tämä vähentää palvelujen kustannuksia, koska tällöin ei
+tarvita yhtä tehokasta laitetta, vaan palvelu voidaan toteuttaa
+useammalla pienempitehoisella palvelimella. Kustannussäästöjen lisäksi
+hajautettu rakenne on vikasietoisempi, koska yhden palvelimen
+vikaantuessa käyttäjät voidaan automaattisesti ohjata muille
+palvelimille.
+
+Hajautetun Web-palvelun kyseessä ollessa tarvitaan kuormantasaaja,
+joka ohjaa kyselyt sellaisenaan toisille palvelimille joko
+kiertovuorottelulla (engl. \textit{round robin}) tai ohjaamalla sisään
+tuleva kysely aina sellaiselle palvelimelle, jonka kuormitus on
+alhaisin. Tällaista järjestelmää kutsutaan käänteiseksi
+välityspalvelimeksi (engl. \textit{reverse proxy}).
+
+Käytettäessä käänteistä välityspalvelinta, voidaan varsinaiset
+Web-palvelimet sijoittaa palomuurin taakse, koska näihin laitteisiin
+ei käyttäjä ole suoraan yhteydessä. Välityspalvelimeen voidaan myös
+sijoittaa ohjelmistopohjainen palomuuri, joka suodattaa yleisimmät
+tietomurron yritykset. Tällöin nämä kyselyt eivät pääse
+kuormittamaan tai haittaamaan muutoin palvelinten toimintaa.
+
+Käänteisellä välityspalvelimella voidaan muillakin tavoin lisätä
+palvelinten suorituskykyä ja luotettavuutta. Välityspalvelin voi
+esimerkiksi ottaa vastuulleen tiedon salaamisen tai toimia
+välimuistina. Välimuistiin tallennetaan muuttumaton sisältö, jolloin
+tällaisia kyselyitä ei tarvitse välittää palvelimelle saakka, koska ne
+löytyvät välityspalvelimen muistista.
 
 \section{Välimuistipalvelut}
 
-TODO 
-- "talon sisällä" olevat välimuistit
- - Akamai ym. "ulkoiset" välimuistit (ei luovuta esim. IP-osoitteita)
- - tiedon keräämisen kannalta IDS:lle (minkälaiset logitukset?)
+Edellä kuvattu käänteinen välityspalvelin ei laajamittaisissa
+Web-palveluissa ole riittävä ratkaisu kuormituksen
+tasaamiseen. Järjestely vähentää Web-palvelinten kuormitusta, mutta ei
+vähennä eikä hajauta palvelun verkkoliikennettä. Jotta
+maailmanlaajuiset palvelut voitaisiin toteuttaa ilman maakohtaisia
+erillissivustoja, tarvitaan keinoja kuormituksen jakamiseen
+verkkotopologisesti edullisesti.
 
+Yksi suosituimmista välimuistipalveluista on Akamai Technologiesin
+\textit{Web Ap\-plic\-a\-tion Accelerator}~\cite{akamai}. Järjestelmä
+koostui kesäkuussa 2010 yhteensä 65~000 palvelimesta, jotka
+sijaitsevat 70 eri valtion alueella. Käyttäjän tekemät kyselyt
+ohjataan automaattisesti sopivimpaan Akamain palvelimeen. Sopivin
+palvelin valitaan yhteyden luotettavuuden ja nopeuden
+perusteella. Palvelu voi noutaa ennakolta kaiken sivulla sijaitsevan
+staattisen sisällön, jolloin näiden osien välittäminen ei kuormita
+varsinaisia Web-palvelimia lainkaan.
+
+Palvelun haittana on toisaalta se, että Web-palveluntarjoaja ei näe
+suoraan sivustolle tulevia kyselyitä, koska monet kyselyt eivät etene
+välimuistipalvelua syvemmälle. Tällöin tilastointi ja erilaisten tietomurtojen
+tunnistaminen on vaikeampaa. Monet välimuistipalveluntarjoajat, Akamai
+mukaanlukien, tarjoavat asiakkailleen tilastointipalveluita.
