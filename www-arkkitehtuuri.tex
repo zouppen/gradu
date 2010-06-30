@@ -12,7 +12,7 @@ hajautetun rakenteen ansiosta on tehnyt Web-palveluista
 mielenkiintoisia niin kehittäjien kuin käyttäjienkin
 näkökulmasta\cite{javaweb}.
 
-IBM määrittelee WWW-palvelut seuraavasti: ``Web-palvelut ovat
+IBM määrittelee Web-palvelut seuraavasti: ``Web-palvelut ovat
 itsenäisiä ja modulaarisia sovelluksia, jotka voidaan julkistaa,
 määritellä, paikallistaa ja suorittaa verkon ylitse, yleeensä WWW:n
 välityksellä.''\cite[s.4]{websecurity}
@@ -129,7 +129,8 @@ joka ohjaa kyselyt sellaisenaan toisille palvelimille joko
 kiertovuorottelulla (engl. \textit{round robin}) tai ohjaamalla sisään
 tuleva kysely aina sellaiselle palvelimelle, jonka kuormitus on
 alhaisin. Tällaista järjestelmää kutsutaan käänteiseksi
-välityspalvelimeksi (engl. \textit{reverse proxy}).
+välityspalvelimeksi (engl. \textit{reverse proxy}). Kuvassa
+\ref{reverseproxy} havainnollistetaan kuormantasauksen toimintaa.
 
 Käytettäessä käänteistä välityspalvelinta, voidaan varsinaiset
 Web-palvelimet sijoittaa palomuurin taakse, koska näihin laitteisiin
@@ -145,17 +146,35 @@ välimuistina. Välimuistiin tallennetaan muuttumaton sisältö, jolloin
 tällaisia kyselyitä ei tarvitse välittää palvelimelle saakka, koska ne
 löytyvät välityspalvelimen muistista.
 
-\section{Välimuistipalvelut}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/reverseproxy.pdf}
+\caption{Käänteisen välityspalvelimen toiminta.}
+\label{reverseproxy}
+\end{figure}
 
-Edellä kuvattu käänteinen välityspalvelin ei laajamittaisissa
-Web-palveluissa ole riittävä ratkaisu kuormituksen
-tasaamiseen. Järjestely vähentää Web-palvelinten kuormitusta, mutta ei
-vähennä eikä hajauta palvelun verkkoliikennettä. Jotta
-maailmanlaajuiset palvelut voitaisiin toteuttaa ilman maakohtaisia
-erillissivustoja, tarvitaan keinoja kuormituksen jakamiseen
-verkkotopologisesti edullisesti.
+\section{Pilvivälimuisti}
 
-Yksi suosituimmista välimuistipalveluista on Akamai Technologiesin
+Edellä kuvattu käänteinen välityspalvelin ei ole riittävä ratkaisu
+kuormituksen tasaamiseen, kun kyse on laajamittaisesta
+Web-palveluntarjonnasta. Käänteinen välityspalvelin vähentää
+Web-palvelinten kuormitusta, mutta ei vähennä eikä hajauta palvelun
+verkkoliikennettä. Jotta maailmanlaajuiset palvelut voitaisiin
+toteuttaa ilman maakohtaisia erillissivustoja, tarvitaan keinoja
+kuormituksen jakamiseen verkkotopologisesti edullisesti.
+
+Eräs ratkaisu ongelmaan on sijoittaa välimuistipalvelimia
+eri maantieteellisille alueille. Palvelimet säilövät välimuistiinsa harvoin
+muuttuvia sivuja ja muita staattisia resursseja. Sivulle tulevat
+kyselyt voidaan ohjata näille palvelimille esimerkiksi aluekohtaisten
+nimipalveluiden avulla~\cite{geodns}. Kuvassa \ref{cloudcache} havainnollistetaan
+järjestelmän toimintaa.
+
+Käytännössä tällaisen järjestelmän rakentaminen ja ylläpito on
+kallista, koska se vaatii toimintaa useiden valtioiden alueilla ja
+lukuisien palveluntarjoajien kanssa. Ratkaisuna tähän ongelmaan on kehitetty
+pilvivälimuistipalveluita.
+Yksi suosituimmista näistä on Akamai Technologiesin
 \textit{Web Ap\-plic\-a\-tion Accelerator}~\cite{akamai}. Järjestelmä
 koostui kesäkuussa 2010 yhteensä 65~000 palvelimesta, jotka
 sijaitsevat 70 eri valtion alueella. Käyttäjän tekemät kyselyt
@@ -165,8 +184,15 @@ perusteella. Palvelu voi noutaa ennakolta kaiken sivulla sijaitsevan
 staattisen sisällön, jolloin näiden osien välittäminen ei kuormita
 varsinaisia Web-palvelimia lainkaan.
 
-Palvelun haittana on toisaalta se, että Web-palveluntarjoaja ei näe
+Pilvivälimuistin haittapuolena on se, että Web-palveluntarjoaja ei näe
 suoraan sivustolle tulevia kyselyitä, koska monet kyselyt eivät etene
 välimuistipalvelua syvemmälle. Tällöin tilastointi ja erilaisten tietomurtojen
 tunnistaminen on vaikeampaa. Monet välimuistipalveluntarjoajat, Akamai
-mukaanlukien, tarjoavat asiakkailleen tilastointipalveluita.
+mukaanlukien, tarjoavat kuitenkin asiakkailleen monipuolisia tilastointipalveluita.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=12cm]{pics/cloudcache.pdf}
+\caption{Pilvivälimuistin toiminta.}
+\label{cloudcache}
+\end{figure}
