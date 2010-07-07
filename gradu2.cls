@@ -15,16 +15,7 @@
 
 %% Some packages need special handling if the output is PDF, this \if is just
 %% in case we need it
-\newif\ifpdf
-\ifx\pdfoutput\undefined
-  \pdffalse
-\else
-  \ifnum\pdfoutput=1
-    \pdftrue
-  \else
-    \pdffalse
-  \fi
-\fi
+\usepackage{ifpdf}
 
 \newif\iffi
 \fitrue
