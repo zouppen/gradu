@@ -2,16 +2,16 @@
 
 \chapter{Johdanto}
 
-Viime vuosina web-sovellukset ovat kasvattaneet suuresti suosiota, ja nykyisin yhä useampi palvelu, jossa tietoturvan ja saatavuuden takaaminen on elintärkeää, on siirtynyt osittain tai kokonaan 
-verkon puolelle. Tämä on vaikuttanut suuresti siihen, mihin tietoturvahyökkäykset nykyisin kohdistuvat, ja kuinka niitä pyritään toteuttamaan. Hyökkäysten muuttuessa yhä hienostuneimmiksi, 
+Viimeisen vuosikymmenen aikana Web-sovellukset ovat kasvattaneet suuresti suosiota ja monet Web-palvelut ovat nykyisin kriittisiä osia yhteiskuntamme toimivuuden kannalta. Internetin välityksellä käytetettävien palveluiden tietoturvan ja saatavuuden takaaminen onkin monissa tapauksissa elintärkeää. Tietojärjestelmien siirtyminen julkishallinnon ja yritysten erillisverkoista julkiseen Internetiin on vaikuttanut omalta osaltaan myös siihen, miten tietoturvahyökkäykset nykyisin kohdistuvat, ja kuinka niitä pyritään toteuttamaan.
+
+Hyökkäysten muuttuessa yhä hienostuneimmiksi, 
 eivät perinteiset tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun ylläpitäjiä. Tästä syystä erilaisten tietoturvaratkaisuiden ympärillä käy kova kuhina, ja aihepiiri 
 on herättänyt suurta kiinnostusta tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty selvittämään tietoturvahyökkäyksiä ja näiden mukana tulevia haasteita, on lukematon määrä. 
-Ongelma on löytää näistä ne menetelmät, jotka oikeasti toimivat riittävällä tarkkuudella ja nopeudella.  
+Haasteena on löytää näistä ne menetelmät, jotka oikeasti toimivat riittävällä tarkkuudella ja nopeudella.  
 
-Hyökkäysten tunnistaminen toimii siten, että analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään viitteitä tapahtuvista hyökkäyksistä. Tunnistamiseen pohjautuvat menetelmät jaetaan usein
-kahteen eri tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen (eng. anomaly detection) ja väärinkäytösten tunnistamiseen (eng. misuse detection). Näistä anomalioiden tunnistamiseen perustuvat
-järjestelmät luovat malleja järjestelmän, käyttäjän tai verkon normaalista käyttäytymisestä, ja vertaamalla tapahtumia näin muodostettuihin kuvauksiin, voidaan poikkeavuudet tunnistaa. Väärinkäytösten 
-tunnistamiseen tarkoitetut järjestelmät taas sisältävät joukon kuvauksia eli signatuureja tunnetuista hyökkäyksistä. Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin kuvauksia vastaavat
-hyökkäykset voidaan tunnistaa. Joissakin tapauksissa jaottelu on myös tehty sen mukaan, mistä tutkittava liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon pohjautuviksi (eng. network based)
-ja asiakaspohjaisiksi (eng. host based). 
+Tietoturvahyökkäysten tunnistaminen toimii siten, että analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään viitteitä tapahtuvista hyökkäyksistä. Menetelmät jaetaan usein
+kahteen eri tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen (engl. \textit{anomaly detection}) ja väärinkäytösten tunnistamiseen (engl. \textit{misuse detection}). Näistä anomalioiden tunnistamiseen perustuvat malleihin, joita luodaan järjestelmän, käyttäjän tai verkon normaalista käyttäytymisestä. Kun näitä malleja verrataan tuleviin tapahtumia, voidaan poikkeavuudet tunnistaa. Väärinkäytösten 
+tunnistamiseen tarkoitetut järjestelmät puolestaan sisältävät joukon kuvauksia eli signatuureja tunnetuista hyökkäyksistä. Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin kuvauksia vastaavat
+hyökkäykset voidaan tunnistaa. Hyökkäysten tunnistusjärjestelmät jaetaan joissakin tapauksissa myös sen mukaan, mistä tutkittava liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon pohjautuviksi (engl. \textit{network based})
+ja asiakaspohjaisiksi (engl. \textit{host based}).
 
