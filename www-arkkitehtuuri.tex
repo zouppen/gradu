@@ -12,15 +12,15 @@ hajautetun rakenteen ansiosta on tehnyt Web-palveluista
 mielenkiintoisia niin kehittäjien kuin käyttäjienkin
 näkökulmasta\cite{javaweb}.
 
-IBM määrittelee Web-palvelut seuraavasti: ``Web-palvelut ovat
+IBM määrittelee Web-palvelut seuraavasti: \textit{Web-palvelut ovat
 itsenäisiä ja modulaarisia sovelluksia, jotka voidaan julkistaa,
-määritellä, paikallistaa ja suorittaa verkon ylitse, yleeensä WWW:n
-välityksellä.''\cite[s.4]{websecurity}
+määritellä, paikallistaa ja suorittaa verkon ylitse, yleeensä Webin
+välityksellä.}~\cite[s.4]{websecurity}
 
-Tietoturvan kannalta WWW-palvelut ovat haastavia, koska niitä
+Tietoturvan kannalta Web-palvelut ovat haastavia, koska niitä
 käytetään Internetin välityksellä eivätkä ne ole rajoittuneita
-esimerkiksi tietyn organisaation lähiverkkoon. Myös osia
-WWW-palveluista sijaitsee usein fyysisesti eri paikoissa ja ne
+esimerkiksi tietyn organisaation lähiverkkoon.
+Lisäksi Web-palveluiden osia sijoitetaan usein fyysisesti eri paikkoihin ja ne
 kommunikoivat keskenään Internetin välityksellä.
 
 Tässa luvussa käsitellään komponentteja, joista tämänhetkiset
@@ -32,57 +32,87 @@ jotka vaikuttavat palvelun tietoturvaan.
 Web-palveluiden toteuttajan näkökulmasta lähin komponentti on
 palvelinohjelmisto. Se käsittelee HTTP-kyselyt ja lähettää vastauksina
 käyttäjän selaimessa näytettäviä ja prosessoitavia osia, kuten
-hypertekstiä, kuvia ja komentosarjoja.
+hypertekstiä, kuvia ja selainohjelmassa suoritettavia komentosarjoja.
 
-Web-palvelinohjelmisto ei välttämättä kommunikoi suoraan palvelun
-käyttäjän tietokoneen kanssa vaan välissä käytetään usein välimuistipalvelua,
-joka vähentää palvelimelle kohdistuvaa rasistusta säilyttämällä
-harvoin muuttuvaa sisältöä välimuistissa ja välittämällä tätä suoraan
-käyttäjille. Muuttuva tai välimuistille uusi sisältö pyydetään
-palvelinohjelmistolta.
+Web-palvelun käyttäjä ei kuitenkaan välttämättä kommunikoi suoraan
+Web-pal\-ve\-li\-men kanssa. Suuret Web-palvelut koostuvat usein
+palvelinohjelmiston lisäksi välimuistipalvelusta, joka vähentää
+palvelimelle kohdistuvaa rasistusta säilyttämällä harvoin muuttuvaa
+sisältöä välimuistissa ja välittämällä tätä suoraan
+käyttäjille. Ainoastaan muuttuva tai välimuistille uusi sisältö pyydetään
+palvelinohjelmistolta. Tällöin palvelinohjelmiston suorituskyky ei ole
+niin keskeisessä roolissa Web-palvelun suorituskyvyssä kuin ilman
+välimuistia olisi. % FIXME kerrottu toisaalla.
 
-Internet-tietoturvapalveluita tarjoavan Netcraftin raportista
+Tietoturvapalveluita tarjoavan Netcraftin raportista
 huhtikuulta 2010~\cite{netcraft} käy ilmi, että kaksi suurinta
-Web-palvelinalustaa ovat \textit{Apache} (53.93~\% suosituimmista
-sivuista), \textit{Microsoft} (24.97~\%). Näiden jälkeen tulevat
-\textit{Google} ja \textit{nginx} kumpikin 6~\% osuudella.
+Web-palvelinalustan kehittäjää ovat \textit{Apache Software Foundation} (53,93~\% suosituimmista
+sivuista), \textit{Microsoft} (24,97~\%). Näiden jälkeen tulevat
+\textit{Google} ja \textit{nginx}-projekti kumpikin 6~\% osuudella.
 
 Tuloksia voi vääristää jonkin verran se, että joissakin tapauksissa
-edustalla suoritetaan välimuistipalveluna toista palvelinohjelmistoa,
-esimerkiksi Apachea tai nginx:ä, joka välittää kyselyt eteenpäin
-varsinaiselle Web-palvelinohjelmistolle. Tämä selittää esimerkiksi
+edustalla suoritetaan välitys- tai välimuistipalveluna toista
+palvelinohjelmistoa, esimerkiksi Apachea tai nginx:ä, joka välittää
+kyselyt eteenpäin varsinaiselle
+Web-pal\-ve\-lin\-oh\-jel\-mis\-tol\-le. Tämä selittää esimerkiksi
 sen, miksi Zope puuttuu kokonaan suosituimpien palvelinten
-joukosta. Esimerkiksi Jyväskylän yliopiston Web-palvelimena näkyy
-tilastoinnissa Apache, vaikka Web-palvelu on toteutettu
-Zope-palvelinohjelmiston päällä suoritettavalla Plonella. Samoin on
-käynyt Tomcat-palvelimella ajettavalle Korppi-o\-pin\-to\-tie\-to\-jär\-jes\-tel\-mäl\-le.
+joukosta. Esimerkiksi Jyväskylän yliopiston palvelinohjelmiston nimenä
+Netcraftin tilastoissa näkyy Apache~\cite{netcraft_jyu}, vaikka
+palvelu on toteutettu Zope-pal\-ve\-lin\-oh\-jel\-mis\-ton päällä
+suoritettavalla Plonella. Samoin on käynyt Tomcat-pal\-ve\-li\-mel\-la
+ajettavalle Korppi-o\-pin\-to\-tie\-to\-jär\-jes\-tel\-mäl\-le.
+
+Palvelinohjelmiston suosiolla voidaan olettaa olevan vaikutusta
+siihen, kuinka paljon mielenkiintoa ohjelmistoa kohtaan on
+tietomurtoja tekevien kräkkereiden keskuudessa. Toisaalta
+suuren suosion saaneita Web-palvelinalustoja kohtaan on myös
+positiivista kiinnostusta tietoturvapiireissä, jolloin etenkin vapaan
+lähdekoodin palvelinalustojen tietoturvan taso edistynee suosion
+kasvaessa.
 
 \subsection{Apache}
 
-Suosituimpana palvelinalustana Apache on luonnollisesti suosittu kohde
-myös tietomurtojen yrityksille. Apachesta itsestään on kuitenkin
-löydetty verrattain vähän
-tietoturva-aukkoja. Suurin osa tietomurroista
-keskittyykin murtamaan varsinaista Web-palvelua palvelinalustan
+Apache HTTP Server on Apache Software Foundationin kehittämä vapaan
+lähdekoodin Web-palvelinalusta. Apache pohjautuu NCSA:ssa
+kirjoitettuun httpd-ohjelmistoon. Ensimmäinen versio
+Apache-palvelimesta julkaistiin keväällä 1995. Alle vuodessa se
+saavutti suosiossa edeltäjänsä NCSA httpd:n ja Apache on siitä lähtien
+pitänyt ykköspaikkaa maailman suosituimpana Web-palvelinalustana.~\cite{apache}
+
+Suosituimpana palvelinalustana Apache on luonnollisesti yleinen kohde
+myös tietomurtojen yrityksille. Apachen tietoturva-aukkoja
+hyödyntämällä on kuitenkin harvoin onnistuttu saamaan laajamittaista
+vahinkoa. Suurimmassa osassa tietomurtoja keskitytäänkin murtamaan
+varsinaista Web-palvelua palvelinalustan
 sijaan.  % tämä on oletus, FIXME etsi lähde tai poista
 
 Apache pystyy suorittamaan komentosarjoja perinteisen CGI-rajapinnan
 lisäksi myös palvelinlaajennosten avulla, jolloin saavutetaan
 tiiviimpi integraatio ja enemmän suorituskykyä verrattuna
-CGI-rajapintaan~\cite{cginopeus}.
+CGI-rajapintaan~\cite{cginopeus}. Yksi yleisimmistä
+palvelinlaajennoksista on PHP-kielen tuki.
 
 Apachea voidaan suorittaa lukuisissa eri käyttöjärjestelmissä,
-mukaanlukien Linux ja Windows. Suosittuja Apache-alustalla
-käytettäviä ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä
-ympäristössä käytettäviä Web-palveluita ovat mm. Wikipediassa
-käytettävä MediaWiki ja lukuisilla selainkäyttöisillä
-keskustelupalstoilla käytettävä phpBB. Ympäristöä, jossa on käytössä
-Linux, Apache, MySQL ja PHP, kutsutaan usein nimellä LAMP.
+mukaanlukien Linux ja Windows. Suosittuja Apache-alustalla käytettäviä
+ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä ympäristössä
+käytettäviä Web-palveluita ovat mm. Wikipedian käyttämä MediaWiki ja
+lukuisilla selainkäyttöisillä keskustelupalstoilla käytössä oleva
+phpBB. Palvelinympäristöä, jossa on käytössä Linux, Apache, MySQL ja
+PHP, kutsutaan usein nimellä LAMP.
+
+Tietoturvan näkökulmasta Apachen vahvuutena on sen tiivis integraatio
+Linux-jakeluihin. Mikäli vakavia tietoturvaan liittyviä
+haavoittuvaisuuksia paljastuu, ohjelmisto on vaivatonta ja nopeaa
+päivittää uudempaan versioon. Tällöin palvelinohjelmistoa vastaan
+kehitetyt murtautumiskomentosarjat eivät pysy pitkiä aikoja
+toimintakykyisinä.  Tämä on luultavasti syynä siihen, että Apache on
+säilyttänyt ykköspaikkansa Web-palveluntarjoajien ja kehittäjien
+suosiossa mitattuna.
 
 \subsection{IIS}
 
-Apachen jälkeen toiseksi suurinta markkinaosuutta web-palvelinalustoista pitää Microsoftin kehittämä Internet Information Services (lyh. IIS). Ensimmäisen versio sovelluksesta
-julkaistiin NT-käyttöjärjestelmälle vuona 1996, ja vuonna 2008 julkaistiin IIS 7 Windows Server 2008 palvelinjakelun yhteydessä. Uusin virallinen versio sovelluksesta on tällä hetkellä   
+Apachen jälkeen toiseksi suurinta markkinaosuutta Web-palvelinalustoista pitää Microsoftin kehittämä Internet Information Services (lyh. \textit{IIS}). Ensimmäisen versio sovelluksesta
+julkaistiin Windows NT-käyttöjärjestelmälle vuona 1996, ja vuonna 2008 julkaistiin IIS 7 Windows Server 2008 palvelinjakelun yhteydessä. Uusin virallinen versio sovelluksesta on tällä hetkellä   
 IIS 7.5, ja siitä on ladattavissa 180-päivän ilmainen kokeiluversio Windows Server 2008 alustalle Microsoftin sivuilta \cite{IIS}.
 
 Aikaisemmista IIS-versioista on löydetty paljon eri tasoisia tietoturvariskejä, joista tunnetuin on Code Red Wormiksi nimetty hyökkäys, joka saastutti yli kolmesataatuhatta web-sivustoa.
@@ -90,9 +120,14 @@ Hyökkäys pohjautui puskuriylivuotoon, johon Microsoft oli julkaissut päivityk
 johdosta yleinen käsitys IIS-sovellusten tietoturvasta on vähintäänkin kyseenalainen. Uusimmista versioista ei ole kuitenkaan löydetty vastaavanlaisia tietoturvariskejä, ja Secunian
 ylläpitämän listan mukaan uusimmasta versiosta ei löydy yhtään paikkaamatonta tietoturvariskiä \cite{Secunia}.
 
-Suurin muutos uusimmissa versioissa verrattaessa vanhoihin on siirtyminen modulaariseen arkkitehtuuriin. Tämä mahdollistaa uusien komponenttien nopean lisäämisen ja poistamisen, jonka lisäksi  
+Suurin muutos uusimmissa versioissa verrattaessa vanhoihin on
+siirtyminen modulaariseen arkkitehtuuriin. Arkkitehtuuri mahdollistaa uusien komponenttien nopean lisäämisen ja poistamisen, jonka lisäksi  
 monipuolinen API-rajapinta tarjoaa mahdollisuuden tehdä yksilöllisiä komponentteja omiin tarpeisiin. Modulaarinen rakenne parantaa myös sovelluksen tietoturvaa pienentämällä asennettavien 
-osien määrää ainoastaan niihin, joita ylläpitäjä tarvitsee. Tietoturvaan ja skaalautuvuuteen on muutenkin kiinnitetty enemmän huomiota alusta asti, joiden lisäksi monet Apachen ominaisuuksista
+osien määrää ainoastaan niihin, joita ylläpitäjä tarvitsee. Edut modulaarisuudesta
+vastaavat paljolti niitä etuja, jotka saavutettiin Apache-palvelimen version
+1.3 yhteydessä.
+
+Tietoturvaan ja skaalautuvuuteen on muutenkin kiinnitetty enemmän huomiota alusta asti, joiden lisäksi monet Apachen ominaisuuksista
 kuten URL-osoitteiden uudelleenkirjoitus on otettu käyttöön \cite{IIS}. IIS:n suurimpana haittapuolena nykyisin sen onkin sidonnaisuus Windows-maailmaan, sillä muille alustoille sitä ei ole 
 saatavilla. Tästä huolimatta IIS on nykyisin varteenotettava vaihtoehto Apachelle tietynlaisessa ympäristössä. 
 
