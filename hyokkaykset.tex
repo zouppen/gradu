@@ -2,57 +2,75 @@
 
 \chapter{Perinteiset tietoturvahyökkäykset}
 
-Tietoyhteiskunnassa yksikään verkossa oleva kone ei ole suojassa tietoturvahyökkäyksiltä,
-ja niiden mukana tulevilta ongelmilta. Hyökkäykset ovat nykyisin myös hyvin monimuotoisia, ja
-ne voidaan jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
-mukaan. Uusia hyökkäystapoja kehitetään jatkuvasti lisää, ja vanhat saavat uusia
-ominaisuuksia. Vaikka osaan hyökkäyksistä on olemassa erilaisia suojautumistapoja, 
-on näiltä kaikilta suojautuminen ylläpitäjän kannalta mahdoton tehtävä. Verkon
-turvallisuuden kannalta on kuitenkin tärkeää, että niiden tuomat riskit
-tiedostetaan, ja niihin pyritään puuttumaan  mahdollisuuksien ja resurssien
-mukaan.
+Tietoyhteiskunnassa yksikään verkossa oleva laite ei ole suojassa
+tietoturvahyökkäyksiltä, ja niiden mukanaan tuomilta
+ongelmilta. Hyökkäykset ovat nykyisin myös hyvin monimuotoisia ja ne
+voidaan jakaa eri kategorioihin niiden tavoitteiden ja toteutustapojen
+mukaan. Uusia hyökkäystapoja kehitetään jatkuvasti lisää ja
+tunnetutkin hyökkäystavat saavat uusia ominaisuuksia. Vaikka
+suurimpaan osaan hyökkäyksistä on olemassa erilaisia
+suojautumistapoja, on näiltä kaikilta suojautuminen ylläpitäjän
+kannalta mahdoton tehtävä. Verkon turvallisuuden kannalta on kuitenkin
+tärkeää, että hyökkäysten riskit tiedostetaan ja uhkien toteutumisen
+todennäköisyyksiä voidaan pienentää mahdollisuuksien ja resurssien
+rajoissa.
+
 
 \section{Tiedon urkinta ja väärentäminen}
 
-Ennen kuin hyökkääjä pystyy murtautumaan verkkoon tai koneeseen, tulee hänen
-selvittää kohteen mahdolliset heikkoudet. Haluttuja tietoja ovat esimerkiksi
-asennetut käyttöjärjstelmät, ohjelmistojen versiotiedot ja verkon yleinen
-rakenne ja tietoturvataso. Näiden tietojen selvittämiseksi hyökkääjää aloittaa verkkoa 
-kohtaan joukon hyökkäyksiä, joita kutsutaan tiedusteluhyökkäyksiksi (engl. Probe Attacks). 
-Tällaiset hyökkäykset ovat hyökkäyksistä yleisimpiä, sillä niiden toteuttaminen ei vaadi hyökkääjältä
-kovin syvällistä osaamista. Verkosta löytyy paljon valmiita työkaluja,
-joiden avulla hyökkääjä pystyy urkkimaan tarvittavat tiedot, sekä mahdollisesti
-saman tien hyödyntämään löydettyjä heikkouksia. Hyökkääjä, jolla on tarkka
-kuvaus verkon laitteista ja palveluista, voi käyttää näitä tietoja
-haavoittuvuuksien etsimiseen ja järjestelmien murtautumiseen \cite{IDS}.
+Ennen kuin hyökkääjä pystyy murtautumaan verkkoon tai verkossa
+sijaitsevaan tietokoneeseen, tulee hänen selvittää järjestelmän
+mahdolliset heikkoudet. Haluttuja tietoja ovat esimerkiksi asennetut
+käyttöjärjestelmät, ohjelmistojen versiotiedot sekä verkon yleinen
+rakenne ja tietoturvataso. Näiden tietojen selvittämiseksi hyökkääjä
+aloittaa verkkoa kohtaan joukon hyökkäyksiä, joita kutsutaan
+tiedusteluhyökkäyksiksi (engl. \textit{Probe Attacks}). Tällaiset
+tiedustelut ovat varsinaisia hyökkäyksiä yleisempiä, sillä niiden
+toteuttaminen ei vaadi hyökkääjältä kovin syvällistä
+osaamista. Verkosta löytyy paljon valmiita työkaluja, joiden avulla
+hyökkääjä pystyy urkkimaan tarvittavat tiedot ja mahdollisesti jo
+saman tien hyödyntämään havaittuja heikkouksia. Hyökkääjä, jolla on
+tietämystä verkossa käytettävistä laitteista ja palveluista, voi
+hyödyntää näitä tietoja haavoittuvuuksien etsimiseen ja järjestelmien
+murtautumiseen \cite{IDS}.
 
-Kun hyökkääjällä on riittävä tietämys verkon eri komponenteista, voi hän aloittaa
-hyökkäyksen suunnittelun. Yksi tapa murtautua IP-pohjaiseen verkkoon
-on hyödyntää protokollissa olevia heikkouksia. Tällaisia hyökkäyksiä kutsutaan
-spoofing- eli kalasteluhyökkäyksiksi, ja niissä murtautuja pyrkii naamioimaan oman koneensa
-siten, että se näyttäa kuuluvan kohteena olevan koneen kanssa samaan verkkoon.
-Tällöin hyökkääjä pystyy huijaamaan kohdekonetta jakamaan ja lähettämään
-arkaluontoista tietoa, jota jaettaisiin muuten vain luotettujen osapuolien kesken.
-Tällaiset hyökkäyset jaotellaan edelleen sokeisiin tai aktiivisiin hyökkäyksiin sen mukaan, 
-kuinka paljon tietoa hyökkääjällä on verkosta. Sokeassa hyökkäyksessä kohdekoneen
-lähettämiä vastauksia ei pystytä seuraamaan, koska  murtautujan oikeudet ovat puutteellisia
-ja koneen käyttämä IP, joksi hyökkääjä haluaa naamioitua, on harvoin tiedossa.
-Aktiivisessa hyökkäyksessä murtautujalla taas on tieto koneiden välisistä oikeuksista,
-jolloin tiedon korruptoiminen, muokkaaminen ja välittäminen toiseen verkkoon
-on helppo toteuttaa \cite{WEBS}.
+Kun hyökkääjällä on riittävä tietämys verkon eri komponenteista, voi
+hän aloittaa hyökkäyksen suunnittelun. Yksi tapa murtautua
+tietoverkkoon on hyödyntää verkkokerroksen protokollissa, kuten TCP ja
+IP, olevia heikkouksia. Tällaisia hyökkäyksiä kutsutaan
+\textit{spoofing}- eli \textit{petkutushyökkäyksiksi}. Niissä
+murtautuja pyrkii naamioimaan oman koneensa siten, että se näyttäa
+kuuluvan kohteena olevan laitteen kanssa samaan lähiverkkoon.  Tällöin
+hyökkääjä pystyy helpommin huijaamaan kohdekonetta jakamaan ja
+lähettämään arkaluontoista tietoa, jota jaettaisiin muuten ainoastaan
+luotettujen osapuolien kesken.  Tällaiset hyökkäykset jaotellaan
+edelleen sokeisiin ja aktiivisiin hyökkäyksiin sen mukaan, kuinka
+paljon hyökkääjällä on tietoa verkon rakenteesta. Sokeassa
+hyökkäyksessä kohdekoneen lähettämiä vastauksia ei pystytä seuraamaan,
+koska murtautujan oikeudet ovat puutteellisia ja IP-osoite, jonka
+haltijaksi hyökkääjä haluaa naamioitua, on harvoin tiedossa.
+Aktiivisessa hyökkäyksessä murtautujalla on käytettävissään tietoa
+tietokoneiden välisistä käyttöoikeuksista, jolloin tiedon
+korruptoiminen, muokkaaminen ja välittäminen toiseen verkkoon on
+helpompaa toteuttaa \cite{WEBS}.
 
 \subsection{IP Spoofing}
 
-IP Spoofing on hyökkäys, jossa pyritään murtautumaan verkkoon ja hankkimaan
-arkaluontoista tietoa väärentämällä lähetettäviin paketteihin luotetun koneen
-IP-osoite. Hyökkäykset jaotellaan sokeisiin ja aktiivisiin hyökkäyksiin sen mukaan,
-mistä hyökkäys toteutetaan. Hyökkäykset toimivat siten, että kolmivaiheisen yhteydenmuodostuksen aikana
-hyökkääjä tekeytyy koneeksi, johon halutulla kohteella on luottamussuhde. Tämä tapahtuu
-muokkaamalla lähetettävien pakettien otsaketietoja ja kuittausnumeroita. Tässä onnistuakseen
-hyökkääjän tulee pystyä vastaamaan oikeilla kuittausnumeroilla kohteen lähettämiin
-paketteihin. Nämä kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka takia tämä
-hyökkäystapa on vaikea toteuttaa \cite{WEBS}. Niin kutsuttu Man in The Middle -hyökkäys, jossa hyökkääjä 
-kaappaa kahden koneen välisen yhteyden, perustuu myös IP-osoitteen väärinkäyttöön (kuva \ref{Man}).
+IP Spoofing on hyökkäys, jossa pyritään murtautumaan verkkoon ja
+hankkimaan arkaluontoista tietoa väärentämällä lähetettäviin
+paketteihin luotetun koneen IP-osoite. Hyökkäykset jaotellaan
+sokeisiin ja aktiivisiin hyökkäyksiin sen mukaan, mistä hyökkäys
+toteutetaan. Hyökkäykset toimivat siten, että kolmivaiheisen
+yhteydenmuodostuksen aikana hyökkääjä tekeytyy tietokoneeksi, johon
+hyökkäyksen kohteella on luottamussuhde. Tämä tapahtuu muokkaamalla
+lähetettävien pakettien otsaketietoja ja kuittausnumeroita. Tässä
+onnistuakseen hyökkääjän tulee pystyä vastaamaan oikeilla
+kuittausnumeroilla kohteen lähettämiin paketteihin. Nämä
+kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka vuoksi
+tämä hyökkäystapa on vaikea toteuttaa \cite{WEBS}. Niin kutsuttu Man
+in The Middle -hyökkäys, jossa hyökkääjä kaappaa kahden koneen välisen
+yhteyden, perustuu myös IP-\-osoitteen väärinkäyttöön. Kuva \ref{Man}
+havainnollistaa hyökkäyksen toteuttamista.
 
 \begin{figure}[ht]
 \centering
@@ -61,95 +79,125 @@ kaappaa kahden koneen välisen yhteyden, perustuu myös IP-osoitteen väärinkä
 \label{Man}
 \end{figure}
 
-Vaikka IP-osoitteen varastamiseen perustuvat hyökkäykset ovat vaikeita toteuttaa,
-ovat ne melko yleisiä, sillä jokainen TCP/IP protokollaa käyttävä järjestelmä on niille alttiina. Tämä
-johtuu siitä, että TCP/IP-pino sallii pakettien käsin muokkaamisen. Tämä
-toiminto on sallittu, koska toimiakseen jotkut IP-pohjaiset palvelut joutuvat
-käsin muokkaamaan pakettien sisältöä ennen lähettämistä. Tällaisia palveluita
-ovat esimerkiksi mobiili IP-ympäristö ja VPN-järjestelmät, joissa lähettäjän IP
-muutetaan toiseksi \cite{DDOS}.
+Vaikka IP-osoitteen väärentämiseen perustuvat hyökkäykset ovat
+vaikeita toteuttaa, ovat ne melko yleisiä, sillä jokainen
+TCP/IP-protokollaa käyttävä järjestelmä on niille alttiina. Tämä
+johtuu siitä, että TCP/IP-verkossa on sallittua muokata paketteja
+tiedonsiirron aikana. Näin on, koska eräät IP-pohjaiset palvelut
+edellyttävät pakettien sisällön muuttamista lähettämisen
+yhteydessä. Tällaisia palveluita ovat esimerkiksi mobiili-IP- ja
+VPN-järjestelmät.~\cite{DDOS}.
 
-IP spoofing hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain tapa on
-määrittää verkko siten, että se ei salli sellaisten pakettien kulkua, jotka
-väittävät kuuluvansa sisäverkon koneelle, mutta jotka tulevat verkkoon
-ulkopuolisista liitännöistä. Jos tämä kuitenkin halutaan sallia, niin jokainen
-sessio tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen tulisi
-pohjautua koko järjestelmän kattavaan salaukseen \cite{WEBS}.
+IP spoofing -hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain
+tapa on määritellä verkon reitittimet estämään sellaisten pakettien
+kulku, jotka on merkitty lähetetyiksi sisäverkon laittelta, mutta
+jotka todellisuudessa saapuvat reitittimeen sen ulkopuolisista
+liitännöistä. Jos tämä kuitenkin halutaan sallia, niin jokainen sessio
+tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen
+tulisi pohjautua koko järjestelmän kattavaan salaukseen \cite{WEBS}.
+
+% TODO: tarkista, mitä tällä kryptaamisella reitittimessä oikein
+% tarkoitetaan.
 
 \subsection{ARP Spoofing}
 
-Nykyisin lähes jokainen verkko pohjautuu TCP/IP-protokollan ja Ethernet-verkon
-väliseen toimintaan. Tämän toiminnan mahdollistamiseksi tarvitaan ARP-pro\-to\-kol\-laa,
-jonka tehtävänä on selvittää jokaista IP-osoitetta vastaava Ethernet- eli MAC-osoite. Tämä osoite
-on uniikki jokaiselle verkkokortille, ja sen avulla verkossa olevat koneet pystytään tunnistamaan.
-Tämä tieto tarvitaan, koska ilman sitä verkko ei pysty välittämään paketteja oikealle koneelle.
-ARP-spoofing, jota kutsutaan myös ARP-myrkyttämiseksi, pyrkii hyödyntämään ARP-protokollan
-toimintaa syöttämällä reitittimissä ylläpidettäviin ARP-tauluihin virheellistä
-tietoa (kuva \ref{ARP-spoofing}). Tämä tapahtuu kaappaamalla verkon yleislähetysviestejä, ja muokkaamalla
-kuittausviestien sisältöä siten, että kuittausviesteihin hyökkääjä laittaa
-kohdeosoitteeksi oman IP-osoitteen ja vastaa viestiin omalla MAC-osoitteella.
-Tämän jälkeen kohdekoneelle tarkoitetut paketit ohjautuvat hyökkääjän koneelle \cite{WEBS}.
+Nykyisin lähes jokainen verkko pohjautuu TCP/IP-protokollan ja
+Ethernet-verkon väliseen yhteistoimintaan. Tässä yhteydessä tarvitaan
+ARP-pro\-to\-kol\-laa, jonka tehtävänä on selvittää IP-osoitteita
+vastaavat Ethernet- eli MAC-osoiteet. Ethernet-osoite
+verkkokorttikohtainen ja sen avulla yksilöidään lähiverkossa
+sijaitsevat tietokoneet ja muut aktiivilaitteet.  Tietoa tarvitaan
+myös IP-protokollalla liikennöitäessä, koska ilman tietoa
+Ethernet-osoitteesta lähiverkossa sijaitseva reititin ei pystyisi
+välittämään Internetistä saapuvia paketteja eteenpäin oikealle
+laitteelle eikä myöskään lähiverkossa sijaitseva tietokone pystyisi
+siirtämään tietoa IP-protokollalla muille lähiverkossa sijaitseville
+laitteille.
+
+ARP spoofing -hyökkäyksessä, jota kutsutaan myös ARP-myrkyttämiseksi,
+pyritään syöttämään syöttämään reitittimien ARP-tauluihin virheellistä
+tietoa (kuva \ref{ARP-spoofing}). Tämä tapahtuu kaappaamalla verkon
+yleislähetysviestejä ja muokkaamalla kuittausviestien sisältöä siten,
+että kuittausviesteihin hyökkääjä laittaa kohdeosoitteeksi oman
+IP-osoitteensa. Verkon aktiivilaitteilta saapuviin, muille
+tarkoitettuihin kyselyihin vastataan omalla MAC-osoitteella.  Tämän
+jälkeen kohdelaitteelle tarkoitetut paketit ohjautuvatkin hyökkääjän
+koneelle \cite{WEBS}.
+
+ARP-protokolla on hyvin haavoittuvainen hyökkäyksille, koska
+oletuksena se ei sisällä minkäänlaista suojautumiskeinoa
+ARP-myrkyttämiselle. Siksi paras keino suojautua tällaisilta
+hyökkäyksiltä on varmistaa, että ennen ARP-taulun muokkausta
+tunnistetaan käyttäjät jollakin keinolla. Toinen mahdollisuus on
+käyttää verkkolaitteissa staattisia ARP-tauluja~\cite{WEBS}. Jakamalla
+lähiverkko pienempiin osiin virtuaalisten lähiverkkojen (VLAN) avulla
+voidaan myöskin rajata ARP-myrkyttämisen vaikutuksia.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=12cm]{pics/arp.pdf}
-\caption{ARP-taulun myrkyttäminen käyttäen Man in The Middle hyökkäystä}
+\caption{ARP-taulun myrkyttäminen käyttäen Man In the Middle -hyökkäystä.}
 \label{ARP-spoofing}
 \end{figure}
 
-ARP-protokolla on hyvin haavoittuvainen hyökkäyksille, koska oletuksena se ei
-sisällä suojauskeinoa ARP-myrkyttämiselle. Siksi paras keino suojautua
-tällaisilta hyökkäyksiltä on varmistaa, että ennen ARP-taulun muokkausta
-tunnistetaan käyttäjät jollakin keinolla. Toinen mahdollisuus on käyttää
-staattista ARP-taulua \cite{WEBS}.
-
 \section{Denial Of Service}
 
-CERT \cite{CERT}, joka on yksi tietoturva-alan johtavista tutkimuskeskuksista, 
-määrittelee palvelunestohyökkäyksen (engl. Denial of Service)
-sellaiseksi teoksi, jossa hyökkääjän tavoitteena on estää laillisia
-käyttäjiä käyttämästä heille kuuluvia tai käytössä olevia
-palveluita. Tällaisia palveluita voivat olla esimerkiksi verkon
-resurssien käyttö sekä verkon yli käytettävät
-web-sovellukset. Hyökkäyksillä pyritään lamauttamaan palvelua tarjoava
-verkko tai palvelin siten, että oikeiden pyyntöjen vastaanottamiseen
-ei enää riitä resursseja. Keinoja tähän on monia, ja koska näistä
-lähes jokainen käyttää nykyisin hyväkseen eri protokollien sallittuja
-toimintoja, on hyökkäyksiltä suojautuminen hyvin vaikeaa \cite{Hacking}.
+CERT \cite{CERT}, joka on yksi tietoturva-alan johtavista
+tutkimuskeskuksista, määrittelee palvelunestohyökkäyksen
+(engl. \textit{Denial of Service}, DoS) sellaiseksi teoksi, jossa
+hyökkääjän tavoitteena on estää palvelun käyttäjiä käyttämästä heille
+kuuluvia tai heidän käytettävissään olevia palveluita. Tällaisia
+palveluita voivat olla esimerkiksi tietoliikenneresurssit tai verkossa
+käytettävät Web-sovellukset. Hyökkäyksillä pyritään lamauttamaan
+palvelua tarjoava verkko tai palvelin siten, että asiaankuuluvien
+pyyntöjen vastaanottamiseen tai käsittelyyn ei enää riitä
+resursseja. Keinoja hyökkäysten toteuttamiseen on monia. Koska
+valtaosa palvelunestohyökkäyksistä käyttää hyväkseen eri protokollien
+sallittuja toimintoja, on hyökkäyksiltä suojautuminen hyvin vaikeaa
+\cite{Hacking}.
 
 Palvelunestohyökkäykset voidaan jakaa kolmeen ryhmään näiden
 toteutustapojen ja tavoitteiden mukaan. Ensimmäiseen ryhmään kuuluvat
-hyökkäykset, joiden tarkoitus on rajoitettujen resurssien loppuun
-kuluttaminen. Tämä voidaan toteuttaa esimerkiksi kuormittamalla verkoa
-tai palvelinta turhilla pyynnöillä. Toiseen ryhmään kuuluvat
-hyökkäykset, jotka pyrkivät joko tuhoamaan tai muuttamaan
-konfigurointitietoja siten, että kone tai verkko ei toimi enää
-ollenkaan. Viimeiseen ryhmään kuuluvat verkon komponenttien
-muokkaamiseen tai tuhoamiseen tähtäävät hyökkäykset \cite{CERT}. Vaikka tässä
-työssä keskitytään vain resursseihin kohdistuviin hyökkäyksiin, niin
-palvelun kokonaisturvallisuuden kannalta ylläpitäjän tulee kiinnittää 
-jokaiseen ryhmään tasapuolisesti huomiota.
+hyökkäykset, joiden tarkoituksena on kuormittaa palvelimia ja kuluttaa
+loppuun niiden rajoitetut resurssit. Tämä voidaan toteuttaa esimerkiksi
+kuormittamalla verkkoa tai palvelinta turhilla pyynnöillä. Toiseen
+ryhmään kuuluvat hyökkäykset, jotka pyrkivät joko tuhoamaan tai
+muuttamaan konfigurointitietoja siten, että kone tai verkko lakkaa
+toimimasta. Viimeiseen ryhmään kuuluvat verkon komponenttien
+muokkaamiseen tai tuhoamiseen tähtäävät hyökkäykset
+\cite{CERT}. Vaikka tässä työssä keskitytään vain resursseihin
+kohdistuviin hyökkäyksiin, niin palvelun kokonaisturvallisuuden
+kannalta ylläpitäjän tulee kiinnittää jokaiseen ryhmään tasapuolisesti
+huomiota.
 
-Viime vuosina palvelunestohyökkäykset ovat edelleen kehittyneet
-käsittämään verkkokerroksen raa’an voiman hyökkäysten lisäksi myös
-sovelluskerroksen hyökkäykset, joiden toteuttaminen vaatii usein
-hyökkääjältä vain vähän omia resursseja \cite{Hacking}. Nämä sovelluskerroksen
-hyökkäykset ovat toteutukseltaan hyvin hienostuneita, ja ne
-jäävät yleensä huomaamatta yrityksen tietoturvaratkaisuilta, koska ne
-eivät poikkea normaalista liikenteestä. Hyökkääjä saattaa esimerkiksi
-pyytää sellaista resurssia palvelulta, jonka pyytäminen vie vain vähän
-hyökkääjän omia resursseja, mutta aiheuttaa palvelimelle suuren
-kuorman \cite{DDOSb}. Tällaisen hyökkäyksen teho nähtiin vuonna 2004, kun
-MyDoom-viruksella saastuneet koneet kuormittivat yleisimpiä
+% TODO näistä kolmesta voisi tehdä söpön taulukon.
+
+Viime vuosina palvelunestohyökkäysten kirjo on voimakkaasti
+laajentunut. Alkuperäisten, pelkästään verkkokerroksen raa’an voiman
+hyökkäysten, lisäksi on alkanut esiintyä sovelluskerroksen
+hyökkäyksiä, joiden toteuttaminen vaatii hyökkääjältä usein varsin
+vähän omia resursseja \cite{Hacking}. Nämä sovelluskerroksen
+hyökkäykset ovat toteutukseltaan hyvin hienostuneita, jolloin ne
+jäävät yleensä huomaamatta tavanomaisilta tietoturvajärjestelmiltä,
+koska tietoliikenteen sisältö ei juurikaan poikkea
+normaalitilanteesta. Hyökkääjä saattaa esimerkiksi pyytää sellaista
+resurssia palvelulta, jonka kysely vie vain vähän hyökkääjän omia
+resursseja, mutta aiheuttaa palvelimelle suuren kuormituksen
+\cite{DDOSb}.
+
+Sovelluskerroksen hyökkäysten teho nähtiin vuonna 2004, kun
+MyDoom-\-viruksella saastuneet koneet kuormittivat yleisimpiä
 hakukoneita etsimällä näiden avulla uusia sähköpostiosoitteita, joihin
-lähettää saastunut sähköposti \cite{Hacking}. Sovelluskerroksen hyökkäyksen
-vaikutus voidaan kohdistaa myös haluttua palvelua kohti, jolloin
-vaikutukset ovat vieläkin suuremmat. Näin tapahtui, kun Yhdysvalloissa
-yrittäjä palkkasi ”DDoS mafian” kaatamaan kilpailijoidensa nettisivut
-HTTP-kutsuilla, jotka pyysivät ladattavaksi isoa kuvatiedostoa
-\cite{DDOSb}. Tämä aiheutti kolmelle kilpailijalle arviolta jopa yhden
-miljoonan dollarin tappiot, ja pysäytti heidän toimintansa lähes kahdeksi
-viikoksi \cite{FBI}.
+lähettää saastunut sähköposti \cite{Hacking}. Sovelluskerroksen
+hyökkäyksen vaikutus voidaan kohdistaa myös yksittäisiä palveluita
+kohti, jolloin vaikutukset ovat vieläkin suuremmat. Näin tapahtui
+vuonna 2003, kun Yhdysvalloissa yrittäjä palkkasi ns. DDoS-mafian
+kaatamaan kilpailijoidensa verkkosivut HTTP-kyselyillä, jotka pyysivät
+ladattavaksi isoa kuvatiedostoa \cite{DDOSb}. Tämä aiheutti kolmelle
+kilpailijalle arviolta jopa miljoonan dollarin tappiot ja pysäytti
+näiden liiketoiminnan lähes kahdeksi viikoksi \cite{FBI}.
+
+% Joel oikolukenut tähän saakka.
 
 \subsection{SYN-hukuttaminen}
 TCP/IP-protokollan yksi suunnittelulähtökodista oli, että sitä
