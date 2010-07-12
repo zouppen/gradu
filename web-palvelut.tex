@@ -2,7 +2,7 @@
 
 \chapter{Web-palvelut ja niiden tietoturva}
 
-Toimivan ja turvallisen web-pohjaisen palvelun tarjoaminen vaatii
+Toimivan ja turvallisen Web-pohjaisen palvelun tarjoaminen vaatii
 nykyisin todella paljon aikaa ja huolellisuutta sekä palvelun kehittäjältä että
 palvelun tarjoajalta ja ylläpitäjältä. Ajat ovat muuttuneet siitä,
 jolloin käyttäjät selailivat pääasiassa staattisia web-sivuja, ja käyttivät tarjotuista
@@ -17,12 +17,12 @@ muodossa, joita myös edellä mainitut palvelut edustavat. Uudet teknologiat ja
 kiire tuovat kuitenkin aina mukanaan joukon uusia heikkouksia, joita hyökkääjät
 pyrkivät hyödyntämään. 
 
-\section{Web 2.0}
+\section{Dynaaminen Web}
 
 Web 2.0 on termi, jota käytetään monessa eri merkityksessä ja
-asiayhteydessä. Se yhdistetään usein uusiin dynaamisiin web-teknologioihin ja internet-
-aikakauden tuotteiden/palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
-on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota internet pitää tällä
+asiayhteydessä. Se yhdistetään usein uusiin dynaamisiin Web-teknologioihin ja Internet-
+aikakauden tuotteiden ja palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
+on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota Internet pitää tällä
 hetkellä sisällään. Tämä muutos on lähtöisin siitä, että kuluttajatottumukset
 ovat kehittyneet kohti interaktiivisia palvelumalleja, joissa käyttäjillä on
 entistä suurempi mahdollisuus vaikuttaa siihen, miten haluttu informaatio esitetään.
@@ -145,14 +145,14 @@ osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 
 \newpage
 
-\section{Web-palveluiden tietoturva}
+\section{Web-palveluihin kohdistuvia hyökkäyksiä}
 
-Internetin kehittyessä myös web-palveluihin kohdistuvat hyökkäykset ovat saaneet
+Internetin kehittyessä myös Web-palveluihin kohdistuvat hyökkäykset ovat saaneet
 uusia ilmenemismuotoja. Aikaisemmin ``web hakkerointia'' käytettiin kuvaamaan
 hyökkäyksiä, jotka kohdistuivat palveluita tarjoaviin alustoihin kuten Apache ja 
 Microsoft IIS. Nämä hyökkäykset perustuivat tunnettujen haavoittuvaisuuksien
 hyödyntämiseen, ja oikeille työkaluilla varustautunut hyökkääjä pystyi kaatamaan haavoittuvan
-palvelun muutamassa minuutissa. Esimerkiksi tunnetuimpien internet-matojen Code Redin ja Nimdan toiminta
+palvelun muutamassa minuutissa. Esimerkiksi tunnetuimpien Internet-matojen Code Redin ja Nimdan toiminta
 perustui Microsoft IIS:sä olevan haavoittuvuuden hyödyntämiseen \cite{Hacking}. 
 
 Tämänlaiset hyökkäykset ovat kuitenkin menettäneet suurimman tehonsa, koska tehdyistä virheistä on opittu. Löydettyihin 
@@ -160,36 +160,8 @@ haavoittuvaisuuksiin reagoidaan entistä nopeammin, yhä useampi alusta on konfi
 avulla pystytään nopeasti ja helposti havaitsemaan yleisimmät tietoturvariskit \cite{Hacking}. Näistä seikoista johtuen
 hyökkääjät ovat alkaneet kiinnittämään entistä enemmän huomiota itse alustalla pyöritettäviin palveluihin pyrkien 
 murtautumaan järjestelmiin näiden kautta. Dynaamisten web-teknologioiden myötä tämän tyyppiset hyökkäykset ovat saaneet
-enemmän huomiota, sillä se tarjoaa hakkereille entistä monipuolisemman hyökkäyspinnan. Tietoturvan 
+enemmän huomiota, sillä se tarjoaa hyökkääjille entistä monipuolisemman hyökkäyspinnan. Tietoturvan 
 kannalta onkin tärkeää, että kumpaankin hyökkäystapaan kiinnitetään huomiota.
-
-\subsection{Web-alustojen turvaaminen}
-
-Yllä mainitut seikat eivät tarkoita sitä, että web-palveluita pyörittävät alustat olisivat
-turvassa hyökkäyksiltä. Onnistuneet hyökkäykset ovat edelleen yhtä tuhoisa, jos niihin ei varauduta ennalta.
-Erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa kategorioissa olevia heikkouksia
-
-\begin{itemize}
-\item Valmiit esimerkkitiedostot
-\item Lähdekoodin paljastuminen
-\item Kanonisointi
-\item Palvelmiin asennetut lisäosat
-\item Syötteen tarkistaminen \cite{Hacking}.
-\end{itemize}
-Kanonisoinnilla tarkoitetaan sääntöjen mukaisen syötteen väärinkäyttöä. Hyökkäys pohjautuu siihen,
-että useimpia palveluita ja resursseja voidaan kutsua monin eri tavoin. Esimerkiksi tiedostoa C:\textbackslash text.txt voidaan 
-kutsua syntaksilla ..\textbackslash text.txt. Sovellukset, jotka tekevät tietoturvapäätökset käyttäen hyödyksi resurssinimeä,
-voidaan helposti huijata suorittamaan odottamattomia toimintoja \cite{Hacking}.
-
-Listatuilta asioilta suojautuminen on melko yksinkertaista, kunhan noudattaa muutamia perussääntöjä. Ensinnäkin tuotannossa 
-olevilla palvelimilla ei tulisi koskaan olla asennettuna tai käytettynä tiedostoja, joiden turvallisuudesta ei ole
-takeita. Näihin tiedostoihin lukeutuvat muun muassa paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
-lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
-on asennettu viimeisimmät päivitykset, sillä ne yleensä korjaavat tunnetut heikkoudet \cite{Hacking}. Jo pelkästään näillä 
-toimilla pystytään suurimmaksi osaksi estämään sellaiset hyökkäykset, jotka kohdistuvat itse käytettyyn palvelinalustaan.
-Palvelunesto- ja spoofing-hyökkäyksiltä nämä eivät suojaa, ja tästä syystä resursseihin kohdistuville hyökkäyksille
-tulee olla erilliset suojausmenetelmät.
-\newpage
 
 \subsection{SQL injektio}
 
@@ -432,7 +404,7 @@ lisäämällä selaimeen mekanismi, joka pyrki arvioimaan vastasiko tehdyt pyynn
 että tutkimuskenttä CSRF hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
 sovelluksen kehittäjälle ja ylläpitäjälle.
 
-\section{Web-palveluiden turvaaminen}
+\section{Web-palveluiden tietoturvan parantaminen}
 
 Web-palveluiden ja verkon tietoturvasta vastaaminen on tarkkuutta ja aikaa vaativaa työtä, joka edellyttää omien tietojen jatkuvaa päivittämistä sekä ja liikenteen ja palveluiden
 seuraamista. Jo pelkästään yleisimpien tietoturvariskien tunnistaminen ja korjaaminen osoittautuu usein käsin tehtynä ylivoimaiseksi tehtäväksi verkkojen ja palveluiden
@@ -453,6 +425,33 @@ tietoturvariskejä. Tämä luku kasvoi jopa 96 prosenttiin, kun sivuston tutki t
 ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet olivat 20 prosenttia yleisempiä kuin sovelluskehittäjien tekemät. Tutkimus myös 
 osoitti sen, että XSS-hyökkäykset olivat SQL injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
 kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta. 
+
+\subsection{Web-alustojen tietoturva}
+
+Yllä mainitut seikat eivät tarkoita sitä, että web-palveluita pyörittävät alustat olisivat
+turvassa hyökkäyksiltä. Onnistuneet hyökkäykset ovat edelleen yhtä tuhoisa, jos niihin ei varauduta ennalta.
+Erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa kategorioissa olevia heikkouksia
+
+\begin{itemize}
+\item Valmiit esimerkkitiedostot
+\item Lähdekoodin paljastuminen
+\item Kanonisointi
+\item Palvelmiin asennetut lisäosat
+\item Syötteen tarkistaminen \cite{Hacking}.
+\end{itemize}
+Kanonisoinnilla tarkoitetaan sääntöjen mukaisen syötteen väärinkäyttöä. Hyökkäys pohjautuu siihen,
+että useimpia palveluita ja resursseja voidaan kutsua monin eri tavoin. Esimerkiksi tiedostoa C:\textbackslash text.txt voidaan 
+kutsua syntaksilla ..\textbackslash text.txt. Sovellukset, jotka tekevät tietoturvapäätökset käyttäen hyödyksi resurssinimeä,
+voidaan helposti huijata suorittamaan odottamattomia toimintoja \cite{Hacking}.
+
+Listatuilta asioilta suojautuminen on melko yksinkertaista, kunhan noudattaa muutamia perussääntöjä. Ensinnäkin tuotannossa 
+olevilla palvelimilla ei tulisi koskaan olla asennettuna tai käytettynä tiedostoja, joiden turvallisuudesta ei ole
+takeita. Näihin tiedostoihin lukeutuvat muun muassa paketeissa mukana tulevat esimerkkitiedostot ja palvelimelle asennettavat 
+lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
+on asennettu viimeisimmät päivitykset, sillä ne yleensä korjaavat tunnetut heikkoudet \cite{Hacking}. Jo pelkästään näillä 
+toimilla pystytään suurimmaksi osaksi estämään sellaiset hyökkäykset, jotka kohdistuvat itse käytettyyn palvelinalustaan.
+Palvelunesto- ja spoofing-hyökkäyksiltä nämä eivät suojaa, ja tästä syystä resursseihin kohdistuville hyökkäyksille
+tulee olla erilliset suojausmenetelmät.
 
 \subsection{Snort}
 

@@ -2,31 +2,28 @@
 
 \chapter{Tutkimusasetelma}
 
-Edellisissä luvuissa on esitetty pieni osa niistä hyökkäyksistä, joita vastaan verkot ja web-palvelut joutuvat nykyisin suojautumaan. Niiden suuresta määrästä johtuen on ilmiselvää, että täysin 
-turvallista ympäristöä on mahdoton rakentaa. Yleensä tämä ei ole edes tietoturvasuunnittelun lähtökohtana, vaan tärkeämpää on löytää tasapaino palvelun saatavuuden, ja käytettyjen tietoturvaratkaisuiden 
-välillä. Liian raskaat menetelmät aiheuttavat ylimääräistä viivettä palvelun tai verkon saatavuuteen, ja liian kevyet ratkaisut jättävät ne avoimiksi yleisimmille hyökkäyksille. 
+Edellisissä luvuissa on esitetty osa niistä hyökkäyksistä, joita vastaan verkot ja Web-palvelut joutuvat nykyisin suojautumaan. Niiden suuresta määrästä johtuen on ilmiselvää, että täysin 
+turvallista ympäristöä on mahdoton rakentaa. Tätä ei edes pidetä tietoturvasuunnittelun lähtökohtana, vaan tärkeämpää on löytää tasapaino palvelun saatavuuden ja käytettyjen tietoturvaratkaisuiden 
+välillä. Liian raskaat menetelmät aiheuttavat ylimääräistä viivettä palvelun tai verkon saatavuuteen, ja liian kevyet ratkaisut jättävät ne avoimiksi tietoturvahyökkäyksille. 
 
 \section{Lähtökohta}
 \label{sec:lahtokohta}
 
-Tämän Pro gradu -tutkielman tavoitteena on pyrkiä tunnistamaan Web-palveluihin kohdistuvia poikkeavuuksia analysoimalla palvelimien tallentamaa tapahtumalokia.
-
-Tässä tutkielmassa käytettävä data on peräisin yritykseltä, joka
-tarjoaa hosting-palveluita suuryrityksille. Lokitiedostot ovat peräisin kolmelta tuotannosta jo poistetuilta palvelimilta, jotka ovat olleet vastuussa muutaman suuren palvelukokonaisuuden pyörittämisestä.
+Tämän Pro gradu -tutkielman tavoitteena on pyrkiä tunnistamaan Web-palveluihin kohdistuvia poikkeavuuksia analysoimalla palvelimien tallentamaa tapahtumalokia. Analysoitavaksi saamamme loki on 
+peräisin yritykseltä, joka tarjoaa hosting-palveluita suuryrityksille. Lokitiedostot ovat peräisin kolmelta tuotannosta jo poistetuilta palvelimilta, ja ne ovat olleet vastuussa muutaman suuren 
+palvelukokonaisuuden pyörittämisestä.
 
 Analysoitava data on Apache-palvelimien tuottamaa lokia, joka sisältää
 web-palveluille kohdistuvia HTTP-pyyntöjä. Lokia on yhteensä 24
 gigatavua, ja se sisältää yli 1,7 miljardia sivupyyntöä.
 Lokia on kerätty noin 10 kuukauden
-ajanjaksolta. 
+ajanjaksolta. Se on tallennettu \textit{Combined Log Format} -muotoon,
+joka on yleinen Apache-palvelimen käyttämä lokitiedoston
+muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
 
 % Tarkat luvut:
 % - Dataa 24133108 kiB
 % - Sivupyyntöjä (ml. error-logit) on 1666171347 kpl.
-
-Loki on tallennettu \textit{Combined Log Format} -muodossa,
-joka on yleinen Apache-palvelimen käyttämä lokitiedoston
-muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
 
 \begin{framed}
 \begin{verbatim*}
@@ -36,12 +33,13 @@ muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena mu
 "Mozilla/5.0 (SymbianOS/9.2;...)"
 \end{verbatim*}
 \end{framed}
+\newpage
 
 Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Niitä analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä, sekä
 hyökkäyksen jo tapahduttua tutkia siihen johtaneita vaiheita. Pienillä sivustoilla lokin läpikäyminen jälkikäteen käsin on vielä mahdollista, mutta puhuttaessa palveluista, joilla on miljoonia käyttäjiä 
-kuukaudessa, ei tämä ole enää mahdollista. Tästä syystä lokien analysoiminen tulee automatisoida. Tämä taas johtaa siihen, että järjestelmän tulisi pystyä tunnistamaan miljoonien kyselyiden joukosta
-ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää sääntöpohjaista ratkaisua, mutta aikaisemmin esitetyistä syistä johtuen, ei tämä tarjoa aina riittävää tunnistuskykyä. Tästä 
-syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttu data verrataan opetettuun malliin, jolloin poikkeava
+kuukaudessa, ei tämä ole enää mahdollista. Tästä syystä lokien analysoiminen tulee automatisoida. Tämä taas tarkoittaa sitä, että järjestelmän tulee pystyä tunnistamaan miljoonien kyselyiden joukosta
+ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää sääntöpohjaista ratkaisua, mutta aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää tunnistuskykyä. Tästä 
+syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttua lokia verrataan opetettuun malliin, jolloin poikkeava
 liikenne voidaan tunnistaa.
 
 Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt, kuin myös palvelimelle 
@@ -56,27 +54,27 @@ palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotet
 \label{CLF2}
 \end{figure}
 
-\section{Käytettyjen menetelmien yleinen kuvaus}
+\section{Tutkimuksessa käytetyt menetelmät}
 
-Ongelmia lokin analysoimisessa aiheuttaa datan suuri määrä, ja lokissa esiintyvien parametrien tyypit. Näistä osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien 
-etsiminen näistä on haastavaa. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten muuttujien 
-piirteet. Seuraavaksi esitetään yleisellä tasolla käytetyt tekniikat, ja sitä seuraa näiden tarkempi matemaattinen kuvaus.
+Ongelmia lokin analysoimisessa aiheuttaa sen suuri määrä, ja siinä esiintyvien parametrien tyypit. Parametreista osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien 
+etsiminen näistä suoraan on haastavaa. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten
+muuttujien piirteet. Seuraavaksi esitellään yleisellä tasolla analysoinnissa käytetyt tekniikat, ja tätä seuraa näiden tarkempi matemaattinen kuvaus.
 
-Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten ja diffuusioetäisyyksien käyttöön, jotka tarjoavat tehokkaan tavan löytää merkittäviä geometrisia rakenteita datasta. Näiden
+Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten ja diffuusioetäisyyksien käyttöön. Ne tarjoavat tehokkaan tavan löytää merkittäviä geometrisia rakenteita datasta, ja niiden
 käyttämistä moniulotteisen datan esittämisessä on esitelty \cite{diff} \cite{diff2}. Menetelmien tehokkuus perustuu siihen, että diffuusiokuvausten avulla pystytään vähentämään analysoitavan datan dimensioita
 säilyttäen kuitenkin sen rakenne. Periaatteessa dimensioiden vähentäminen tarkoittaa sitä, että datajoukko esitetään toisella datajoukolla, jonka dimensio on pienempi. Tällöin sen klusteroiminen sekä 
 analysoiminen ja esittäminen graafisesti on helpompaa.
+
+Datan luonteesta johtuen pelkkä dimensioiden vähentäminen ei tuo esille poikkeavuuksia, vaan tätä varten tarvitaan parametreja, jotka kuvaavat HTTP-pyynnön sisältöä tarkemmin. Suurimmasta osasta kyselyn
+sisältämistä parametreista kuten IP-osoitteesta, ajasta tai käytetystä selaimesta tämä ei käy ilmi. Toki näistä voidaan tunnistaa esimerkiksi hyökkäykset, joissa yritetään kuluttaa palvelimen resurssit loppuun
+hakemalla samaa resurssia yhä uudestaan tai pommittamalla uusia yhteysyrityksiä. Web-palveluihin kohdistuvat hyökkäykset ovat kuitenkin usein paljon hienovaraisempia. Parhaiten näitä voidaan yrittää tunnistaa
+tutkimalla tarkemmin GET-parametrin jälkeistä osaa, josta käy ilmi parametrit, joita hyökkääjä välittää palvelimelle. 
 
 Dimensioiden vähentäminen tapahtuu laskemalla diffuusioetäisyydet eli keskimääräiset arvot kaikista kahden pisteen välisistä poluista ts. todennäköisyydet kulkea satunnaiskululla pisteestä toiseen kiinteällä
 askelmäärällä. Ennen tätä analysoitava data tulee muuttaa kategoriseksi, sillä muuten erilaisten parametrityyppien välisiä etäisyyksiä ei pystyä laskemaan. Osa parametreista on jo valmiiksi kategorisessa 
 muodossa, mutta numeerinen data tulee erikseen kategorisoida. Numeerisen datan automaattinen kategorisointi tapahtuu klusteroimalla yhtä ominaisuutta, ja laskemalla klusteroinnin hyvyysarvo. Tätä jatketaan niin pitkään,
 kunnes optimaalinen klusterointi on saavutettu. Prosessi toistetaan vaihtaen kategorioiden lukumäärää jokaisessa iteraatiossa, ja se luku, joka tuottaa parhaimman arvon, valitaan optimaaliseksi kategorioiden 
-määräksi.
-
-Datan luonteesta johtuen pelkkä dimensioiden vähentäminen ei tuo esille poikkeavuuksia, vaan tätä varten tarvitaan parametreja, jotka kuvaavat HTTP-pyynnön sisältöä tarkemmin. Suurimmasta osasta kyselyn
-sisältämistä parametreista kuten IP-osoitteesta, ajasta tai käytetystä selaimesta tämä ei käy ilmi. Toki näistä voidaan tunnistaa esimerkiksi hyökkäykset, joissa yritetään kuluttaa palvelimen resurssit loppuun
-hakemalla samaa tiedostoa yhä uudestaan tai pommittamalla uusia yhteysyrityksiä. Web-palveluihin kohdistuvat hyökkäykset ovat kuitenkin usein paljon hienovaraisempia. Parhaiten näitä voidaan yrittää tunnistaa
-tutkimalla tarkemmin GET-parametrin jälkeistä osaa, josta käy ilmi parametrit, joita hyökkääjä välittää palvelimelle. 
+määräksi .
 
 Tietoturvahyökkäyksissä hyökkääjä pyrkii aina ohittamaan jollakin tavalla asetetut suojaukset. Usein tämä tarkoittaa sitä, että palvelimelle välitetyt pyynnöt muodostuvat pitkistä merkkijonoista, ja niissä käytetyt
 merkit poikkeavat tyypillisesti käytetyistä merkeistä. Useiden peräkkäisten avain-arvo parien määrä myös saattaa kasvaa reilusti tavallista suuremmaksi. Näiden tunnistamista varten käytämme analyysissa n-gram -analyysiksi
@@ -97,21 +95,21 @@ Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan 
 $\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessa data muodostaa $N \times n$ matriisin, jossa 
 rivit pitävät sisällään yksittäiset kyselyt, ja sarakkeet ovat näiden analysoitavat parametrit.
 
-Aluksi luodaan matriisi, joka kuvaa pisteiden välisiä etäisyyksiä käyttäen gaussin jakaumaa. Naapureiden samankaltaisuutta kuvaa $\epsilon$. 
+Aluksi luodaan samankaltaisuusmatriisi, joka kuvaa pisteiden välisiä etäisyyksiä käyttäen gaussin jakaumaa. Naapureiden samankaltaisuuden määrittää $\epsilon$. 
 
 \begin{equation}
 W_{ij} = e^{-\frac{||x_i - x_j||^2}{\epsilon}}
 \label{KERNEL}
 \end{equation}
 
-Matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
+Näin luodun matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
 
 \begin{equation}
 D_{ii} = \sum_{j=1}^{N} W_{ij}
 \label{ROWSUM}
 \end{equation}
 
-Nyt jokaisen rivin summa on 1. Tätä normalisointia eli todennäköisyyttä siirtyä tilasta toiseen kuvatkoot $P$
+Nyt jokaisen rivin summaksi tulee 1. Tätä normalisointia eli todennäköisyyttä siirtyä tilasta toiseen kuvatkoot $P$
 
 \begin{equation}
 P = D^{-1} W
@@ -125,7 +123,7 @@ $P$:n ominaisvektorit ovat samat kuin konjugaattimatriisin, joka on esitetty yht
 \label{SYMM}
 \end{equation}
 
-Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Tämä matriisi säilyttää ominaisvektorit, ja sitä kutsutaan
+Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Näin luotu matriisi säilyttää ominaisvektorien arvot, ja sitä kutsutaan
 normalisoiduksi Laplace muunnokseksi.
 
 \begin{equation}
@@ -133,7 +131,7 @@ normalisoiduksi Laplace muunnokseksi.
 \label{NGL}
 \end{equation}
 
-Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen SVD:tä (engl. Singular Value Decomposition). Koska $\tilde{P}$ on normaali matriisi, spektriteoria (spectral theorem) sanoo, että tällainen matriisin 
+Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen SVD:tä (engl. Singular Value Decomposition). Koska $\tilde{P}$ on normaali matriisi, spektriteorian (spectral theorem) mukaan tällaisen matriisin 
 hajoitelma on yhtälön \ref{SVD} mukainen.  
 
 \begin{equation}
@@ -141,7 +139,7 @@ hajoitelma on yhtälön \ref{SVD} mukainen.
 \label{SVD}
 \end{equation}
 
-Matriisin $\Lambda$ diagonaalilla olevat arvot ovat samat kuin matriisissa $\tilde{P}$, koska ne ovat symmetrisia. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisvektorit 
+Matriisin $\Lambda$ diagonaalilla olevat arvot ovat samat kuin matriisissa $\tilde{P}$, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisvektorit 
 
 Matriisin $U = [ u_1, u_2, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
 saamme ne matriisin $V$ sarakkeina  $V = [v_1, v_2, \dots, v_k]$.  
@@ -178,8 +176,8 @@ saadaan aloittamalla analyysi ensimmäisestä kirjaimesta ja liuttumalla ikkunaa
 Käyttäen tällä tavoin syntynyttä sarjaa saadaan rakennettua matriisi, joka sisältää tiedon merkkien jakaantumisesta.
 
 $N$-gram -analyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-gram -sarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
-jolloin $n=2$ ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain nollia.
-Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
+jolloin $n=2$, ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain 
+nollia. Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
 
 \subsection{Satunnaisprojektio}
 
