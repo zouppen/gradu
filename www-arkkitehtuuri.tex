@@ -39,10 +39,7 @@ Web-pal\-ve\-li\-men kanssa. Suuret Web-palvelut koostuvat usein
 palvelinohjelmiston lisäksi välimuistipalvelusta, joka vähentää
 palvelimelle kohdistuvaa rasistusta säilyttämällä harvoin muuttuvaa
 sisältöä välimuistissa ja välittämällä tätä suoraan
-käyttäjille. Ainoastaan muuttuva tai välimuistille uusi sisältö pyydetään
-palvelinohjelmistolta. Tällöin palvelinohjelmiston suorituskyky ei ole
-niin keskeisessä roolissa Web-palvelun suorituskyvyssä kuin ilman
-välimuistia olisi. % FIXME kerrottu toisaalla.
+käyttäjille. Tällainen konfiguraatio esitellään tarkemmin luvussa \ref{valimuisti}.
 
 Tietoturvapalveluita tarjoavan Netcraftin raportista
 huhtikuulta 2010~\cite{netcraft} käy ilmi, että kaksi suurinta
@@ -74,7 +71,7 @@ kasvaessa.
 
 Apache HTTP Server on Apache Software Foundationin kehittämä vapaan
 lähdekoodin Web-palvelinalusta. Apache pohjautuu NCSA:ssa
-kirjoitettuun httpd-ohjelmistoon. Ensimmäinen versio
+kirjoitettuun httpd-oh\-jel\-mis\-toon. Ensimmäinen versio
 Apache-palvelimesta julkaistiin keväällä 1995. Alle vuodessa se
 saavutti suosiossa edeltäjänsä NCSA httpd:n ja Apache on siitä lähtien
 pitänyt ykköspaikkaa maailman suosituimpana Web-palvelinalustana.~\cite{apache}
@@ -129,26 +126,30 @@ vastaavat paljolti niitä etuja, jotka saavutettiin Apache-palvelimen version
 
 Tietoturvaan ja skaalautuvuuteen on muutenkin kiinnitetty enemmän huomiota alusta asti, joiden lisäksi monet Apachen ominaisuuksista
 kuten URL-osoitteiden uudelleenkirjoitus on otettu käyttöön \cite{IIS}. IIS:n suurimpana haittapuolena nykyisin sen onkin sidonnaisuus Windows-maailmaan, sillä muille alustoille sitä ei ole 
-saatavilla. Tästä huolimatta IIS on nykyisin varteenotettava vaihtoehto Apachelle tietynlaisessa ympäristössä. 
+saatavilla. Rajoituksistaan huolimatta IIS on nykyisin varteenotettava vaihtoehto Apachelle tietynlaisessa ympäristössä. 
 
 \subsection{Zope}
 
-Vaikka Apachen ja Microsoft IIS:n markkinaosuudet kattavat suurimman osan käytetyistä web-alustoista, on markkinoilla suuri määrä pienempiä ratkaisuja, joille löytyy oma käyttäjäkuntansa. Yksi 
+Vaikka Apachen ja Microsoft IIS:n markkinaosuudet kattavat suurimman osan käytetyistä Web-alustoista, on markkinoilla suuri määrä pienempiä ratkaisuja, joille löytyy oma käyttäjäkuntansa. Yksi 
 näistä on vapaaseen lähdekoodiin pohjautuva Zope \cite{Zope}. Zope tulee sanoista ``Z Object Publishing Environment'', ja se on kirjoitettu pääosin käyttäen Pythonia. Zope on ensimmäinen
-web-sovellusten suunnitteluun tarkoitettu oliopohjainen julkaisujärjestelmä, ja sen mukana tulee erillinen tietokantasovellus ja web-palvelinalusta. Zopesta on olemassa useita eri jakeluita, ja 
+Web-sovellusten suunnitteluun tarkoitettu oliopohjainen julkaisujärjestelmä, ja sen mukana tulee erillinen tietokantasovellus ja web-palvelinalusta. Zopesta on olemassa useita eri jakeluita, ja 
 näistä käytetyin on Zope2. 
 
-Vaikka Zope itsessään sisältää web-palvelimen, voidaan sitä käyttää myös rinnakkain muiden palvelimien kanssa. Tällaiseen ratkaisuun voidaan päätyä, jos halutaan esimerkiksi ylläpitää samalla
-palvelimella sekä Zopella että muilla työkaluilla tuotettua sisältöä, tai jos halutaan käyttää palveluita kuten Apachen SSL. Monissa tehtävissä muut alustat toimivat myös nopeammin ja 
-turvallisemmin kuin Zope. Zopen käyttö ei myöskään sulje perinteisen tietokantaratkaisun käyttöä, ja sen tukemiin tietokantoihin kuuluu muun muassa Oracle, PostgreSQL ja MySQL. Usein eri 
+Vaikka Zope itsessään sisältää Web-palvelimen, voidaan sitä käyttää myös rinnakkain muiden palvelimien kanssa. Tällaiseen ratkaisuun voidaan päätyä, jos halutaan esimerkiksi ylläpitää samalla
+palvelimella sekä Zopella että muilla työkaluilla tuotettua sisältöä,
+tai jos halutaan käyttää palveluita kuten Apachen tarjoamaa SSL-salausta. Monissa tehtävissä muut alustat toimivat myös nopeammin ja 
+turvallisemmin kuin Zope. Zopen käyttö ei myöskään sulje perinteisen
+relaatiotietokannan käyttöä, ja sen tukemiin tietokantoihin kuuluu
+muun muassa MySQL, Oracle ja PostgreSQL. Usein eri 
 tietokantoja käytetään myös rinnakkain, jolloin Zopen objektit voidaan tallentaa ZODB-oliotietokantaan ja muu data perinteisiin relaatiotietokantoihin. 
 
-Zopen yksi suurimmista vahvuuksista on sille tehdyt lisäosat, joita löytyy lukematon määrä. Näistä tunnetuin on Zopen päälle rakennettu Plone \cite{Plone}, joka on pitkälle kehitetty 
-sisällönhallintajärjestelmä. Sitä voidaan käyttää kaikenlaisen web-sisällön kuten blogien ja sisäisten ja ulkoisten web-sivustojen hallitsemiseen. Se on helppo asentaa ja ottaa käyttöön, 
+Zopen yksi suurimmista vahvuuksista on sille tehdyt lisäosat, joita löytyy runsaasti. Näistä tunnetuin on Plone~\cite{Plone}, joka on pitkälle kehitetty 
+sisällönhallintajärjestelmä. Sitä voidaan käyttää kaikenlaisen Web-sisällön kuten blogien ja sisäisten ja ulkoisten Web-sivustojen hallitsemiseen. Se on helppo asentaa ja ottaa käyttöön, 
 jonka lisäksi se on käännetty yli 40 kielelle. Helppokäyttöisyys, joustavuus ja laajennettavuus ovat niitä tekijöitä, jotka ovat tehneet Plonesta suositun. Plonelle löytyvä ohjeistus
-on myös hyvin kattavaa, ja se on yksi tuetuimmista avoimen lähdekoodin projekteista. Ilmaista web-sovellusalustaa etsivälle Zope ja Plone tarjoavatkin parasta mahdollista.
+on myös hyvin kattavaa, ja se on yksi tuetuimmista avoimen lähdekoodin projekteista. Vapaata Web-sovellusalustaa etsivälle Zope ja Plone tarjoavatkin parasta mahdollista.
 
 \section{Käänteinen välityspalvelin}
+\label{valimuisti}
 
 Suositut Web-palvelut ovat usein rakenteeltaan hajautettuja, jolloin
 palvelimeen kohdistuva kuormitus saadaan jaettua useammalle
@@ -167,8 +168,8 @@ alhaisin. Tällaista järjestelmää kutsutaan käänteiseksi
 välityspalvelimeksi (engl. \textit{reverse proxy}). Kuvassa
 \ref{reverseproxy} havainnollistetaan kuormantasauksen toimintaa.
 
-Käytettäessä käänteistä välityspalvelinta, voidaan varsinaiset
-Web-palvelimet sijoittaa palomuurin taakse, koska näihin laitteisiin
+Käytettäessä käänteistä välityspalvelinta, varsinaiset
+Web-palvelimet voidaan sijoittaa palomuurin taakse, koska näihin laitteisiin
 ei käyttäjä ole suoraan yhteydessä. Välityspalvelimeen voidaan myös
 sijoittaa ohjelmistopohjainen palomuuri, joka suodattaa yleisimmät
 tietomurron yritykset. Tällöin nämä kyselyt eivät pääse
@@ -177,9 +178,21 @@ kuormittamaan tai haittaamaan muutoin palvelinten toimintaa.
 Käänteisellä välityspalvelimella voidaan muillakin tavoin lisätä
 palvelinten suorituskykyä ja luotettavuutta. Välityspalvelin voi
 esimerkiksi ottaa vastuulleen tiedon salaamisen tai toimia
-välimuistina. Välimuistiin tallennetaan muuttumaton sisältö, jolloin
-tällaisia kyselyitä ei tarvitse välittää palvelimelle saakka, koska ne
-löytyvät välityspalvelimen muistista.
+välimuistina.
+
+Välimuistina toimiessaan palvelimelle tallennetaan muuttumaton
+sisältö, jolloin tällaisia kyselyitä ei tarvitse välittää
+varsinaisille Web-palvelimelle saakka, koska ne löytyvät
+välityspalvelimen muistista. Ainoastaan muuttuva tai välimuistille
+uusi sisältö pyydetään palvelinohjelmistolta. Tällöin
+palvelinohjelmiston suorituskyky ei ole niin keskeisessä roolissa
+Web-palvelun suorituskyvyssä kuin ilman välimuistia olisi.
+
+Käänteinen välityspalvelin tarjoaa usein riittävät työkalut kuormituksen
+hallintaan. Järjestelmä riittää hyvin sellaisten Web-palveluiden
+tarpeisiin, joiden yleisö on pienellä maantieteellisellä alueella,
+esimerkiksi Suomessa.
+
 
 \begin{figure}[htp]
 \centering
@@ -191,25 +204,27 @@ löytyvät välityspalvelimen muistista.
 \section{Pilvivälimuisti}
 
 Edellä kuvattu käänteinen välityspalvelin ei ole riittävä ratkaisu
-kuormituksen tasaamiseen, kun kyse on laajamittaisesta
-Web-palveluntarjonnasta. Käänteinen välityspalvelin vähentää
-Web-palvelinten kuormitusta, mutta ei vähennä eikä hajauta palvelun
-verkkoliikennettä. Jotta maailmanlaajuiset palvelut voitaisiin
+kuormituksen tasaamiseen, kun kyse on laajamittaisesta, globaalin
+mittakaavan Web-pal\-ve\-lun\-tar\-jon\-nas\-ta. Käänteinen välityspalvelin
+vähentää Web-palvelinten kuormitusta, mutta ei vähennä eikä hajauta
+palvelun verkkoliikennettä. Tietoliikenne kohdistuuu kuitenkin yhteen
+pisteeseen verkkoa. Jotta maailmanlaajuiset palvelut voitaisiin
 toteuttaa ilman maakohtaisia erillissivustoja, tarvitaan keinoja
 kuormituksen jakamiseen verkkotopologisesti edullisesti.
 
-Eräs ratkaisu ongelmaan on sijoittaa välimuistipalvelimia
-eri maantieteellisille alueille. Palvelimet säilövät välimuistiinsa harvoin
-muuttuvia sivuja ja muita staattisia resursseja. Sivulle tulevat
-kyselyt voidaan ohjata näille palvelimille esimerkiksi aluekohtaisten
-nimipalveluiden avulla~\cite{geodns}. Kuvassa \ref{cloudcache} havainnollistetaan
+Eräs ratkaisu ongelmaan on sijoittaa välimuistipalvelimia eri
+maantieteellisille alueille. Nämä palvelimet säilövät välimuistiinsa
+harvoin muuttuvia sivuja ja muita staattisia resursseja. Sivulle
+tulevat kyselyt voidaan ohjata palveluntarjoajan näkökulmasta
+edullisimmille palvelimille esimerkiksi aluekohtaisten nimipalveluiden
+avulla~\cite{geodns}. Kuvassa \ref{cloudcache} havainnollistetaan
 järjestelmän toimintaa.
 
 Käytännössä tällaisen järjestelmän rakentaminen ja ylläpito on
-kallista, koska se vaatii toimintaa useiden valtioiden alueilla ja
+kallista, koska se vaatii liiketoimintaa useiden valtioiden alueilla ja
 lukuisien palveluntarjoajien kanssa. Ratkaisuna tähän ongelmaan on kehitetty
 pilvivälimuistipalveluita.
-Yksi suosituimmista näistä on Akamai Technologiesin
+Yksi suosituimmista tällaisista palveluista on Akamai Technologiesin
 \textit{Web Ap\-plic\-a\-tion Accelerator}~\cite{akamai}. Järjestelmä
 koostui kesäkuussa 2010 yhteensä 65~000 palvelimesta, jotka
 sijaitsevat 70 eri valtion alueella. Käyttäjän tekemät kyselyt
