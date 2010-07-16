@@ -262,9 +262,9 @@
         <image
            sodipodi:absref="/Users/joell/gradu/pics/spoofing_img0.png"
            xlink:href="spoofing_img0.png"
-           width="1"
+           id="image2485"
            height="1"
-           id="image2485" />
+           width="1" />
       </g>
     </pattern>
     <inkscape:perspective
@@ -407,9 +407,9 @@
         <image
            sodipodi:absref="/Users/joell/gradu/pics/spoofing_img0.png"
            xlink:href="spoofing_img0.png"
-           id="image2485-9"
+           width="1"
            height="1"
-           width="1" />
+           id="image2485-9" />
       </g>
     </pattern>
     <inkscape:perspective
@@ -518,9 +518,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="128.20378"
-     inkscape:cy="104.15805"
+     inkscape:zoom="0.7"
+     inkscape:cx="370.32229"
+     inkscape:cy="-24.413379"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -540,7 +540,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -762,19 +762,19 @@
            y="-18.637817" /></flowRegion><flowPara
          id="flowPara5374" /></flowRoot>    <text
        id="text13822"
-       y="488.78775"
-       x="468.36295"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       y="489.06183"
+       x="466.43179"
+       style="font-size:15.41709137px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif"
        xml:space="preserve"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan10314"
-         x="468.36295"
-         y="488.78775">tietoliikenteen</tspan><tspan
+         x="466.43179"
+         y="489.06183">tietoliikenteen</tspan><tspan
          sodipodi:role="line"
          id="tspan10316"
-         x="468.36295"
-         y="503.78775">määrä</tspan></text>
+         x="466.43179"
+         y="504.47891">määrä</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text13826"
@@ -1406,8 +1406,8 @@
          transform="matrix(1.0234978,0,0,1.0815798,-191.45616,-40.326024)" />
     </g>
     <path
-       style="fill:none;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)"
-       d="M 8.1950625,67.101316 C 0.16444164,108.93876 126.52877,134.8727 130.31689,78.153522"
+       style="fill:none;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS);marker-start:url(#TriangleInS)"
+       d="M 8.1950625,74.172384 C 12.286272,116.00983 126.52877,134.8727 130.31689,78.153522"
        id="path8688"
        transform="translate(133.2318,207.55772)"
        sodipodi:nodetypes="cc" />
@@ -1824,8 +1824,8 @@
     <path
        sodipodi:nodetypes="cc"
        id="path10294"
-       d="m 177.79236,427.94554 c 29.53988,-30.50399 84.10577,-42.08238 117.07107,-17.11312"
-       style="fill:none;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)" />
+       d="m 181.83297,424.91508 c 29.53988,-30.50399 80.06516,-39.05192 113.03046,-14.08266"
+       style="fill:none;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS);marker-start:url(#TriangleInS)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#TriangleInS);marker-end:url(#TriangleOutS)"
        d="m 446.08986,291.01806 c -57.22792,1e-5 -110.56954,57.22436 -110.87981,110.72299"
