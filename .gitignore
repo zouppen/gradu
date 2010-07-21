@@ -3,7 +3,6 @@
 /rakenne.lof
 /rakenne.log
 /rakenne.out
-/rakenne.pdf
 /rakenne.toc
 /rakenne.bbl
 /rakenne.blg
@@ -13,3 +12,5 @@
 /raportti.pdf
 /raportti.toc
 .DS_Store
+/lehtonen_siljander_pro_gradu.pdf
+/lehtonen_siljander_pro_gradu.synctex.gz
