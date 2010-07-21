@@ -197,42 +197,52 @@ ladattavaksi isoa kuvatiedostoa \cite{DDOSb}. Tämä aiheutti kolmelle
 kilpailijalle arviolta jopa miljoonan dollarin tappiot ja pysäytti
 näiden liiketoiminnan lähes kahdeksi viikoksi \cite{FBI}.
 
-% Joel oikolukenut tähän saakka.
-
 \subsection{SYN-hukuttaminen}
 TCP/IP-protokollan yksi suunnittelulähtökodista oli, että sitä
 käytettäisiin avoimessa ja luotetussa ympäristössä. Tästä syystä sen
 suunnittelussa ei osattu ottaa huomioon mahdollisia vihamielisiä
-käyttäjiä, jotka pyrkisivät häiritsemään muita käyttäjiä sen
-avulla. TCP/IP-protokollan käyttö kuitenkin levisi ja yleistyi
-arvaamattomasti, jonka johdosta suunnitteluvaiheessa tehdyt virheet
-periytyivät nyt käytössä olevaan IPv4-verkkorakenteeseen \cite{Hacking}.
+käyttäjiä, jotka pyrkisivät häiritsemään muiden käyttäjien
+tietoliikennettä. TCP/IP-protokollan käyttö julkisissa verkoissa kuitenkin
+yleistyi arvaamattomasti, jonka vuoksi suunnitteluvaiheessa tehdyt
+virheet periytyivät nyt käytössä olevaan IPv4-verkkojen rakenteisiin
+\cite{Hacking}.
 
-Perityistä heikkouksista tunnetuin ja käytetyin on SYN-hukuttamiseksi kutsuttu
-hyökkäys, jossa hyökkääjä pyrkii kuluttamaan kohteen kaistan loppuun
-tekaistuilla yhteydenmuodostuspyynnöillä. Hyökkäys on toteutukseltaan hyvin
-yksinkertainen ja helppo toteuttaa, sillä se käyttää hyväkseen TCP-protokollaan
-määritettyjä toimintoja. Hyökkäys perustuu siihen, että kolmiosaisessa
-yhteydenmuodostusvaiheessa kone lähettää palvelimelle SYN-paketin, jonka
-johdosta palvelin varaa tulevalle yhteydelle resursseja ja lähettämänsä SYN /
-ACK-viestin jälkeen jää odottamaan yhteyden muodostamista. Tähän koneen kuuluu
-vastata ACK-viestillä, jonka jälkeen yhteys muodostetaan \cite{Hacking}.
+Yhteydenmuodostus TCP-protokolla tapahtuu kolmivaiheisesti. Aluksi
+yhdistävä tietokone lähettää palvelimelle SYN-paketin, jonka
+seurauksana palvelin varaa tulevalle yhteydelle resursseja ja lähettää
+yhdistävälle tietokoneelle SYN/ACK-paketin. Tämän jälkeen palvelin
+jää odottamaan yhteyden muodostamista. Tähän yhdistävän tietokoneen
+tulee vastata ACK-paketilla, jonka jälkeen yhteys on muodostunut ja
+tiedonsiirto voi alkaa \cite{Hacking}. Tunnetuin TCP:tä käyttävä
+protokolla on Webissä käytettävä HTTP. Sen avulla Web-palvelimet
+pystyvät nopeasti palvelemaan useita yhtäaikaisia käyttäjiä.
 
-Tähän toimintamalliin perustuu muun muassa HTTP-protokollan toiminta, ja sen avulla 
-web-palvelimet pystyvät nopeasti palvelemaan useita yhtäaikaisia käyttäjiä.
-Koska TCP-protokolla pyrkii aina varmistamaan yhteyden muodostumisen, ja tarvittaessa 
-lähettämään SYN/ACK-viestin uudestaan SYN-paketin lähettäneelle koneelle, pystyy hyökkääjä
-käyttämään tätä ominaisuutta hyväkseen. Riittää, että hyökkääjä nuuskii
-selville käyttämättömän IP-osoitteen, joka on vielä mieluiten samasta
-osoiteavaruudesta kuin missä palvelin on. Tämän jälkeen hyökkääjä luo SYN-
-paketin, jossa on tämä tekaistu IP-osoite. Koska palvelimen lähettämä SYN/ACK-
-viesti ei koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta,
-jolloin TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan kunnes
-määritetty raja yhteyden aikakatkaisulle tulee vastaan \cite{STACK}. Hyökkääjälle
-riittää, että tämä toiminta automatisoidaan, ja koneina käytetään esimerkiksi
-saastuneista koneista muodostettua verkostoa. Tällä tavoin saadaan aikaiseksi
-kuvan \ref{syn} mukainen tilanne, jossa usean koneen avulla hyökkääjä häiritsee
-kohteen toimintaa turhilla yhteydenottopyynnöillä.
+TCP/IP-protokollan historiasta perityistä heikkouksista tunnetuin ja
+käytetyin on SYN-hukuttamiseksi kutsuttu hyökkäys, jossa hyökkääjä
+pyrkii kuluttamaan kohteen tietoliikennekapasiteetin loppuun
+tekaistuilla yhteydenmuodostuspyynnöillä. Hyökkäys on hyvin
+yksinkertainen ja helppo toteuttaa, sillä se käyttää hyväkseen
+TCP-protokollaan määritettyjä toimintoja. Hyökkäyksessä
+TCP-protokollan kolmiosaista yhteydenmuodostusta ei viedä loppuun
+saakka vaan jätetään palvelin odottamaan ACK-paketti yhdistävältä
+tietokoneelta.
+
+Koska TCP-protokolla pyrkii aina varmistamaan yhteyden muodostumisen,
+lähetetään SYN/ACK-paketti tarvittaessa uudestaan, kunnes yhdistävä
+tietokone vastaa ACK-paketilla tai määritelty aikaraja tulee
+vastaan. Tätä ominaisuutta hyökkääjä pystyy käyttämään
+hyväkseen. Riittää, että hyökkääjä nuuskii selville käyttämättömän
+IP-osoitteen, joka on vielä mieluiten samasta aliverkosta kuin missä
+palvelin sijaitsee. Tämän jälkeen hyökkääjä luo SYN-paketin, jossa on
+tämä tekaistu IP-osoite. Koska palvelimen lähettämä SYN/ACK-viesti ei
+koskaan saavu oikealla koneelle, ei palvelin saa ACK-kuittausta. Tällöin
+TCP-protokolla alkaa lähettämään pakettia uudestaan niin kauan
+kunnes määritetty raja yhteyden aikakatkaisulle tulee vastaan
+\cite{STACK}. Hyökkääjän on vaivatonta automatisoida nämä vaiheet ja
+hyökkäys voidaan toteuttaa esimerkiksi saastuneista koneista
+muodostetun verkoston avulla. Näin saadaan aikaiseksi kuvan \ref{syn}
+mukainen tilanne, jossa useita IP-osoitteita käyttämällä hyökkääjä
+häiritsee kohteen toimintaa turhilla yhteydenottopyynnöillä.
 
 \begin{figure}[hpt]
 \centering
@@ -242,43 +252,62 @@ kohteen toimintaa turhilla yhteydenottopyynnöillä.
 \end{figure}
 
 SYN-hukuttamisen mahdollistavan mekanismin avulla voidaan myös toteuttaa
-heijastettu hyökkäys (engl. reflective attack), joka on muunnos 
+heijastettu hyökkäys (engl. \textit{reflective attack}), joka on muunnos 
 SYN-hukuttamisesta. Tässä hyökkäyksessä väärennetyissä SYN-viesteissä on
 lähettäjäksi merkitty haluttu kohde. Lähettämällä suuri määrä näitä SYN-viestejä 
-esimerkiksi web-palvelimelle, aiheutuu vastaustulvasta ongelmia
+esimerkiksi Web-\-palvelimelle, aiheutuu vastaustulvasta ongelmia
 kohteelle \cite{STACK}.
 
-Koska harvalla yrityksellä on mahdollista pitää ylimääräisiä resursseja SYN-
-hukuttamisen varalta, joudutaan ratkaisua hakemaan muualta. Yksi
-alkeellinen keino on rajoittaa puoliavonaisten yhteyksien määrää, jolloin rajan
-ylittyessä yhteyksiä aletaan pudottamaan \cite{TCP}. Toinen käytetty keino on
-reitittimiltä verkkoon päin tulevan liikennemäärän seuraaminen, ja
-liikennepiikkeihin reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua
-liikenteen seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla \cite{STACK}.
-Täydellistä turvaa nämä eivät kuitenkaan tarjoa, sillä hyvin toteutettuna
-hyökkäystä on vaikea torjua.
+Koska ylimääräistä palvelinkapasiteettia ei useinkaan ole järkevää
+pitää SYN-\-hukuttamisen varalta, joudutaan ratkaisua
+hakemaan muualta. Alkeellisin keino on rajoittaa puoliavonaisten
+yhteyksien määrää, jolloin rajan ylittyessä yhteyksiä aletaan
+pudottamaan \cite{TCP}. Toinen käytetty keino on reitittimiltä
+verkkoon päin tulevan liikennemäärän seuraaminen ja liikennepiikkeihin
+reagoiminen. Hyökkäyksiä vastaan voidaan myös suojautua liikenteen
+seuraamiseen tarkoitetuilla sovelluksilla sekä pääsylistoilla
+\cite{STACK}.
+
+Kehittyneempi suojautumiskeino on muuttaa TCP-protokollan kättelyä
+siten, että yhteyden tarvitsemat resurssit varataan vasta ACK-viestin
+vastaanottamisen yhteydessä. Tätä menetelmää kutsutaan
+SYN-evästykseksi (engl. \textit{SYN Cookies}) ja se on tuettu
+mm. Linuxissa ja FreeBSD:ssä~\cite{syncookies}. Yhteydenmuodostuksessa
+tarvittavat parametrit kätketään tällöin SYN-paketin
+järjestysnumeroon. Tämän menetelmän käyttö kuitenkin rajaa pois
+runsaasti TCP-protokollan ominaisuuksista, jonka vuoksi SYN-evästys
+kytketään yleensä päälle vain hyökkäysten ajaksi.
+
+Täydellistä ratkaisua SYN-hukuttamista vastaan ei mikään näistä
+tavoista kuitenkaan tarjoa. Huolellisesti toteutettua hyökkäystä on
+vaikea torjua.
 
 \subsection{UDP Echo}
 
 Myös UDP-protokollan käyttö mahdollistaa hyökkäysten tekemisen. Nämä
-hyökkäykset käyt\-tä\-vät hyväkseen UDP:n ECHO-toimintaa, jos sen käyttö
-on vain sallittu verkossa. Näistä hyökkäyksistä tunnetuin on Fraggleksi
-nimetty hyökkäys, joka nykyisinkin aiheuttaa väärin konfiguroidussa verkossa suuria ongelmia.
-Fraggle toimii siten, että hyökkääjä lähettää UDP ECHO-viestin yleislähetyksenä, johon on merkitty lähettäjäksi
-hyökkäyksen kohde. Tähän viestiin kaikki verkon koneet pyrkivät vastaamaan,
-jolloin kohdekoneen kaista ja resurssit joudutaan varaamaan viestien vastaanottamiseen (kuva \ref{fraggle}). 
-Fraggle on hyvä esimerkki vahvistetusta hyökkäyksestä, jossa verkon laitteiden määrä
-vaikuttaa siihen, kuinka vakava hyökkäys on \cite{WEBS}. Vastaavanlainen
-hyökkäys voidaan myös toteuttaa kahden koneen välillä, jos kummassakin
-on sallittuna UDP ECHO-viestit. Tällöin hyökkääjä väärentää viestiin
-lähettäjän osoitteen ja halutun kohdeportin. Vastaanottaja vastaa
-tähän viestiin omalla ECHO-viestillä, ja näin kahden koneen välille
-muodostuu ikuinen silmukka \cite{TCP}.
-\newpage
+hyökkäykset käyttävät hyväkseen UDP Echo -protokollaa, mikäli sen
+käyttö on sallittu verkossa. Näistä hyökkäyksistä tunnetuin on
+Fraggleksi nimetty hyökkäys, joka nykyisinkin aiheuttaa väärin
+konfiguroidussa verkossa suuria ongelmia.  Fraggle toimii siten, että
+hyökkääjä lähettää UDP Echo -viestin yleislähetyksenä, johon on
+merkitty lähettäjäksi hyökkäyksen kohde. Tähän viestiin kaikki verkon
+koneet pyrkivät vastaamaan, jolloin kohdetietokoneen
+tietoliikennekapasiteetti ja resurssit käytetään viestien
+vastaanottamiseen (kuva \ref{fraggle}).
+
+Fraggle on hyvä esimerkki vahvistetusta hyökkäyksestä, jossa verkon
+laitteiden määrä vaikuttaa siihen, kuinka vakava hyökkäys on
+\cite{WEBS}. Vastaavanlainen hyökkäys voidaan myös toteuttaa kahden
+koneen välillä, jos kummassakin on sallittuna UDP Echo
+-viestit. Tällöin hyökkääjä väärentää viestiin lähettäjän osoitteen ja
+halutun kohdeportin. Vastaanottaja vastaa tähän viestiin omalla
+Echo-viestillä, ja näin kahden koneen välille muodostuu ikuinen
+silmukka \cite{TCP}.
+
 \begin{figure}[htp]
 \centering
 \includegraphics[width=13cm]{pics/fraggle.pdf}
-\caption{Vahvistettu UDP ECHO hyökkäys.}
+\caption{Vahvistettu UDP Echo -hyökkäys.}
 \label{fraggle}
 \end{figure}
 
@@ -286,20 +315,22 @@ muodostuu ikuinen silmukka \cite{TCP}.
 
 Smurf on yksi ensimmäisistä vahvistetuista DoS-hyökkäyksistä, ja se
 toimii lähes identtisesti Fragglen kanssa sillä erolla, että UDP:n
-sijasta käytetään ICMP-pro\-to\-kol\-laa. Hyökkääjä lähettää kohteen
-puolesta yleislähetyksenä verkolle ICMP ECHO-paketin, johon verkon
-laitteet vastaavat, jos ECHO-viestit on sallittuja verkossa. Jo 100
-konetta verkossa pystyy aiheuttamaan 14Mbps kuorman kohdekoneelle,
-joten pienikin väärin konfiguroitu verkko pystyy aiheuttamaan kuorman,
-jota harva linkki pystyy pitkään kestämään \cite{Hacking}.
+sijasta käytetään ICMP-\-protokollaa. Hyökkääjä lähettää kohteen
+puolesta yleislähetyksenä verkolle ICMP Echo -paketin, johon verkon
+laitteet vastaavat, jos Echo-viestit on sallittuja verkossa. Jo 100
+tietokoneen lähiverkko pystyy aiheuttamaan 14 Mb/s haittaliikenteen
+kohdekoneelle, joten pienessäkin väärin konfiguroidussa verkossa
+on mahdollista muodostaa riittävästi haittaliikennettä tietoliikenteen
+häiritsemiseen tai estämiseen \cite{Hacking}.
 
 Jos hyökkäys on päässyt käyntiin, ei tälle ole paljoa muuta tehtävissä
-kuin poistaa kohteena olevat koneet pois verkosta. Paras vastatoimi
-Fragglen ja Smurffin kaltaisille hyökkäyksille on konfiguroida
-verkon laitteet alusta asti oikein. Yleislähetysten kieltämisellä ja
-ECHO-viestien tuen poistamisella verkon laitteilta pääsee jo
-pitkälle. Samoin ICMP-protokollan käyttöä kannattaa verkossa rajoittaa
-\cite{Hacking}.
+kuin poistaa kohteena olevat laitteet pois verkosta. Paras vastatoimi
+Fragglen ja Smurffin kaltaisille hyökkäyksille on konfiguroida verkon
+laitteet alusta asti oikein. ICMP Echo -yleislähetysten estämisellä
+pääsee jo pitkälle. ICMP-protokollan käyttöä verkossa kannattaa
+muutenkin tarkkailla ja tarvittaessa rajoittaa \cite{Hacking}.
+
+% Joel oikolukenut tähän saakka.
 
 \section{Distributed Denial of Service}
 
