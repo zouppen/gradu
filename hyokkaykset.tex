@@ -330,65 +330,74 @@ laitteet alusta asti oikein. ICMP Echo -yleislähetysten estämisellä
 pääsee jo pitkälle. ICMP-protokollan käyttöä verkossa kannattaa
 muutenkin tarkkailla ja tarvittaessa rajoittaa \cite{Hacking}.
 
-% Joel oikolukenut tähän saakka.
-
 \section{Distributed Denial of Service}
 
-Vielä viime vuosikymmenellä palvelunestohyökkäykset perustuivat yleensä
-käyttöjärjestelmistä löydettyjen heikkouksien hyödyntämiseen. Näiden
-hyökkäysten aikaansaama tuho oli usein konekohtaista ja melko rajattua, joten
-hyökkäyksiä ei nähty kovinkaan vakavana uhkana. 2000-luvulla
-palvelunestohyökkäykset ovat kuitenkin kehittyneet siihen pisteeseen, että
-nykyisin palvelu saattaa joutua hajautetun palvelunestohyökkäyksen (engl.
-Distrubuted Denial of Service) kohteeksi, jolloin palvelua saattaa olla
-lamauttamassa jopa yli 140000 saastunutta konetta. Tällaisia saastuneita
-koneita kutsutaan zombeiksi, sillä näihin on murtauduttu ja asennettu
-ohjelmisto, jonka avulla murtautuja pystyy hallitsemaan konetta käyttäjän
-tietämättä. Zombie-verkoston ei tarvitse edes olla kovinkaan suuri
-aiheuttaakseen tuhoa, sillä jo 3000 koneen verkosto, jossa jokainen kone
-tuottaa 25 Kbps liikennettä, aiheuttaa yhteensä 75 Mbps kuorman verkolle \cite{Hacking}.
-Palvelunestohyökkäyksen seuraamukset ovat varautumattomalle
-taholle usein katastrofaaliset, ja pahimmillaan hyökkäys saattaa pysäyttää
-organisaation toiminnan useiksi päiviksi \cite{CERT}.
+Vielä viime vuosikymmenellä palvelunestohyökkäykset perustuivat
+yleensä käyttöjärjestelmistä löydettyjen heikkouksien
+hyödyntämiseen. Näiden hyökkäysten aikaansaama tuho riippui paljon
+käytettävistä järjestelmistä ja vahingot olivat melko
+rajattua. Palvelunestohyökkäyksiä ei nähty tällöin kovinkaan vakavana
+uhkana, mutta suhtautuminen muuttui 2000-luvulle tultaessa, kun
+hajautetut palvelunestohyökkäykset (engl. \textit{Distributed Denial
+of Service}) kehitettiin. Tällaisessa hyökkäyksessä palvelua saattaa
+olla lamauttamassa jopa yli 140~000 saastunutta konetta. Tällaisia
+saastuneita koneita kutsutaan zombeiksi (engl. \textit{zombie}).
 
-Hyökkäysten hajauttaminen useammalla koneelle tuo useita hyötyjä verrattuna
-perinteiseen palvelunestohyökkäykseen, jossa hyökkäys toteutetaan käyttäen yhtä
-konetta. Otetaan esimerkiksi vaikka web-palveluita tarjoava palvelin, jota
-vastaan halutaan tehdä palvelunestohyökkäys. Tällaisella palvelimella on
-käytössä huomattavasti suurempi määrä resursseja (kaista, muisti,
-prosessointiteho) kuin mitä yhdellä tavallisella koneella on. Tekemällä
-hyökkäyksen yhtäaikaisesti useammalla koneella, pystyy hyökkääjä kuluttamaan
-suuretkin resurssit loppuun lyhyessä ajassa. Yhdeltä koneelta tuleva
-palvelunestohyökkäys on myös helppo tunnistaa ja estää verkon ylläpitäjän
-toimesta. Hyökkääjien määrän kasvaessa tehtävä vaikeutuu huomattavasti, koska
-suurin osa koneista pitää tunnistaa ja liikennöinti pysäyttää, jotta tästä olisi
-jonkinlaista hyötyä. Jos nämä koneet on vielä levitetty ympäri internetiä, on
-hyökkäysten pysäyttäminen ilman palvelun kärsimistä mahdoton tehtävä käsin
-tehtynä. Tällaista hyökkäysliikennettä on myös vaikea erottaa tavallisesta
-liikenteestä, koska se tulee palvelimelle eri reittejä pitkin \cite{DDOS}.
+Tietokone voidaan muuttaa zombiksi murtautumalla ja asentamalla siihen
+ohjelmisto, jonka avulla murtautuja pystyy hallitsemaan laitetta
+käyttäjän tietämättä. Zombiverkoston ei tarvitse edes olla kovinkaan
+suuri aiheuttaakseen tuhoa, sillä jo 3~000 koneen verkosto, jossa
+jokainen kone tuottaa 25 kb/s liikennettä, aiheuttaa yhteensä 75 Mb/s
+kuormituksen verkolle \cite{Hacking}.  Palvelunestohyökkäyksen
+seuraamukset ovat varautumattomalle taholle usein katastrofaaliset ja
+pahimmillaan hyökkäys saattaa pysäyttää organisaation toiminnan
+useiksi päiviksi \cite{CERT}.
 
-Nopeiden yhteyksien ja verkossa olevien koneiden räjähdysmäinen kasvu on tehnyt
-hajautetuista palvelunestohyökkäyksistä hyvin tehokkaita ja tuhoisia. Suuri
-määrä verkossa kiinni olevista koneista on huonosti suojattu ja päivitetty, ja
-ihmisten tietoisuus verkon vaaroista on usein puutteellista. Tämä on luonut
-otollisen maaperän suurten zombie-verkostojen muodostamiselle virusten ja
-matojen avustuksella. Tarjolla on myös tätä tarkoitusta varten suunniteltuja
+Hyökkäysten hajauttaminen useammalla koneelle tuo useita hyötyjä
+verrattuna perinteiseen palvelunestohyökkäykseen, jossa hyökkäys
+toteutetaan käyttäen yhtä konetta. Otetaan esimerkiksi vaikka
+Web-palveluita tarjoava palvelin, jota vastaan halutaan tehdä
+palvelunestohyökkäys. Tällaisella palvelimella on käytössä
+huomattavasti suurempi määrä resursseja (tietoliikennekapasiteetti,
+muisti, laskentateho) kuin yksittäisellä zombitietokoneella on. Kun
+hyökkäys suoritetaan yhtäaikaisesti useammalla koneella, pystyy
+hyökkääjä kuluttamaan suuretkin resurssit loppuun lyhyessä
+ajassa. Yksittäiseltä koneelta tuleva palvelunestohyökkäys on helppo
+tunnistaa ja estää verkon ylläpitäjän toimesta. Hyökkääjien määrän
+kasvaessa tehtävä vaikeutuu huomattavasti, koska haittaliikennettä
+aiheuttavat tietokoneet tai itse haittaliikenne pitää tunnistaa
+hyötyliikenteen joukosta. Mikäli zombitietokoneet ovat sijoittuneet ympäri
+Internetiä, on hyökkäysten pysäyttäminen ilman palvelun laadun heikkenemistä
+mahdoton tehtävä ilman automatisointia. Haittaliikennettä on tällöin myös
+vaikea erottaa tavallisesta liikenteestä, koska se tulee palvelimelle
+useita reittejä pitkin \cite{DDOS}.
+
+Nopeiden yhteyksien ja verkossa olevien tietokoneiden räjähdysmäinen
+kasvu on tehnyt hajautetuista palvelunestohyökkäyksistä hyvin
+tehokkaita ja tuhoisia. Suuri määrä verkkoon liitetyistä laitteista on
+huonosti suojattu ja päivitetty, ja ihmisten tietoisuus verkon
+vaaroista on usein puutteellista. Tämä on luonut otollisen maaperän
+suurten zombiverkostojen muodostamiselle virusten ja matojen
+avustuksella. Tarjolla on myös tätä tarkoitusta varten suunniteltuja
 työkaluja ja ohjelmistoja, jotka tekevät tarvittavat toimenpiteet
-automaattisesti. Jo ensimmäiset työkalut kuten Trinoo ja Shaft, jotka ovat
-vapaasti saatavilla verkosta, mahdollistivat tuhansien suojaamattomien koneiden
-haltuunoton vaatimatta sen suurempaa tietämystä \cite{DDOS}.
+automaattisesti. Jo ensimmäiset, vapaasti saatavilla olevat työkalut,
+kuten Trinoo ja Shaft, mahdollistivat tuhansien suojaamattomien
+koneiden haltuunoton ilman suurempaa perehtymistä \cite{DDOS}.
 
-Hyökkäyksessä käytetyt koneet voidaan jakaa agentteihin (engl. agents) ja
-liikenteen ohjaajiin (engl. handlers) riippuen näiden rooleista. Näistä
-koneista hyökkääjä käskyttää suoraan liikenteen ohjaajia, jotka ohjaavat edelleen
-annetut käskyt agenteille hyökkäyksen alettua \cite{WEBS}\cite{DDOS}. Ensimmäisissä DDoS-
-verkoissa nämä ohjausviestit olivat salaamattomia, ja kuka tahansa pystyi
-kaappaamaan näitä. Tämä oli ongelmallista, koska liikenteen ohjaajat joutuivat
-ylläpitämään IP-listaa agenteista, jolloin liikenteen välittäjän joutuessa
-vastahyökkäyksen kohteeksi, paljastui verkon jokainen kone. Tätä suoran
-käskyttämisen heikkoutta pyrittiin korjaamaan muun muassa salaamalla liikenne ja
-viestit. Ajan saatossa liikenteen ohjaajat pystyttiin kuitenkin tunnistamaan ja
-poistamaan verkosta, jolloin hyökkäyksessä käytetty verkko hajosi \cite{DDOS}.
+Hyökkäyksessä käytetyt koneet voidaan jakaa agentteihin (engl. \textit{agents})
+ja liikenteen ohjaajiin (engl. \textit{handlers}) riippuen näiden
+rooleista. Näistä koneista hyökkääjä käskyttää suoraan liikenteen
+ohjaajia, jotka ohjaavat edelleen annetut käskyt agenteille
+hyökkäyksen alettua \cite{WEBS}\cite{DDOS}. Ensimmäisissä 
+DDoS-verkoissa nämä ohjausviestit olivat salaamattomia, jolloin kuka tahansa
+pystyi kaappaamaan näitä. Tämä oli tietomurtojen tekijöiden
+näkökulmasta ongelmallista, koska liikenteen ohjaajat joutuivat
+ylläpitämään listaa agenttien käyttämistä IP-osoitteista. Mikäli liikenteen välittäjä
+joutui vastahyökkäyksen kohteeksi, pystyttiin selvittämään zombiverkon jokaisen
+laitteen osoitteet. Tätä suoran käskyttämisen heikkoutta pyrittiin korjaamaan muun
+muassa salaamalla käytettävä viestiliikenne. Ajan saatossa liikenteen
+ohjaajat pystyttiin kuitenkin tunnistamaan ja poistamaan verkosta,
+jolloin hyökkäyksessä käytetty zombiverkko hajosi \cite{DDOS}.
 
 \begin{figure}[htp]
 \centering
@@ -397,21 +406,24 @@ poistamaan verkosta, jolloin hyökkäyksessä käytetty verkko hajosi \cite{DDOS
 \label{ddos1}
 \end{figure}
 
-Nykyisin enää harva DDoS-hyökkäyksessä käytetty verkko käyttää kuvan \ref{ddos1}
-hierarkiaa sen heikon ohjattavuuden takia. Tämän tilalle on tullut
-epäsuoraan käskyttämiseen perustuvat verkot, jotka käyttävät viestien
-välittämiseen IRC-verkkoja (kuva \ref{ddos2}). IRC on reaaliaikaiseen viestittämiseen
-tarkoitettu palvelu, jonka kautta ihmiset pystyvät reaaliajassa kirjoittamaan
-ja lukemaan viestejä. IRC-verkot muodostuvat IRC-kanavista, joita on lukematon
-määrä, ja joihin käyttäjät liittyvät ennen kommunikointia. Samalla
-periaatteella toimivat myös saastuneet koneet. Jokainen kone liittyy usein
-salasanalla suojattuun IRC-kanavaan, jonka kautta hyökkääjä antaa käskyjä
-koneille. Tällä tavalla saadaan monia etuja verrattaessa suoraan käskyttämiseen.
-Ensinnäkin liikennettä ei pystytä enää tunnistamaan poikkeavaksi, koska se on
-normaalia IRC-liikennettä. Toisekseen käytettyä kanavaa voidaan vaihtaa
-lennosta, jolloin yhden kanavan sulkeminen ei pysäytä verkon toimintaa. Näiden
-syiden takia DDoS-hyökkäysten pysäyttäminen ennen niiden käynnistymistä on
-erittäin vaikeaa \cite{DDOS}.
+Nykyisin enää harva DDoS-hyökkäyksessä käytetty verkko käyttää kuvan
+\ref{ddos1} hierarkiaa sen heikon ohjattavuuden takia. Tämän tilalle
+on tullut epäsuoraan käskyttämiseen perustuvat verkot, jotka käyttävät
+viestien välittämiseen IRC-verkkoja (kuva \ref{ddos2}). IRC on
+reaaliaikaiseen viestittämiseen tarkoitettu palvelu, jonka kautta
+ihmiset pystyvät reaaliajassa kirjoittamaan ja lukemaan
+viestejä. IRC-verkot koostuvat käyttäjistä ja IRC-kanavista, joille
+käyttäjät voivat halutessana liittyä. Epäsuoran käskyttämisen
+periaatteella toimivat verkot hyödyntävät näitä samoja
+ominaisuuksia. Jokainen kone liittyy IRC-kanavalle, joka on yleensä
+salasanalla suojattu. Kanavan kautta hyökkääjä voi antaa käskyjä
+koneille. Tällä tavalla saadaan monia etuja verrattaessa suoraan
+käskyttämiseen.  Ensinnäkin liikennettä ei pystytä enää tunnistamaan
+poikkeavaksi, koska se on tavanomaista IRC-liikennettä. Toisekseen
+käytettyä kanavaa voidaan vaihtaa lennosta, jolloin yhden kanavan
+sulkeminen ei pysäytä verkon toimintaa. Näiden syiden takia
+DDoS-hyökkäysten pysäyttäminen ennen niiden käynnistymistä on erittäin
+vaikeaa \cite{DDOS}.
 
 \begin{figure}[t]
 \centering
@@ -420,6 +432,8 @@ erittäin vaikeaa \cite{DDOS}.
 \label{ddos2}
 \end{figure}
 
+% FIXME: Mitä hittoa seuraava kappale tarkoittaa?
+
 Kuten yllä on jo tullut esille, on hajautetulta palvelunestohyökkäykseltä
 suojautuminen vaikea tehtävä riippumatta siitä, onko verkko itse kohde vai
 käytetäänkö sitä vain hyökkäysten koordinointiin. Valmista ja yksityiskohtaista
@@ -427,16 +441,19 @@ ratkaisua ei ole tarjolla, mutta seuraamalla joitakin yleisiä strategioita,
 voidaan vahinkoja rajoittaa. Nämä strategiat ovat suojautuminen, tunnistaminen
 ja reagoiminen, ja ne noudattavat vahinkoketjun yleistä elinkaarta \cite{DDOS}.
 
+% FIXME: Pitäisikö tämä muutenkin siirtää jonnekin muualle, ei liity
+% DDOSiin vaan tietoturvastrategioihin yleensä.
+
 Ensinnäkin on tärkeää, että verkon ylläpitäjä tietää tarkoin kuinka verkko
-toimii, ja käytössä on verkon toimintaa seuraavia työkaluja. Näiden avulla
+toimii ja hyödynnetään verkon toimintaa analysoivia työkaluja. Näiden avulla
 verkon heikot kohdat pystytään tunnistamaan ja vahvistamaan. Käytössä tulee
 olla myös jonkinlainen suojausjärjestelmä, joka kirjaa ylös riittävän pitkältä
 ajalta ylös verkkoon tulevan ja lähtevän liikenteen, sillä aina hajautettu
 palvelunestohyökkäys ei kaada koko verkkoa. Tällöin on tärkeää, että tapahtunut
-pystytään tarkasti analysoimaan, ja löydetyt heikkoudet paikattua parhaalla
+pystytään tarkasti analysoimaan ja löydetyt heikkoudet paikattua parhaalla
 mahdollisella tavalla \cite{DDOS}.
 
-Kun hyökkäys on päällä, tulee käytetty hyökkäystapa tunnistaa mahdollisimman
+Kun hyökkäys on meneillään, tulee käytetty hyökkäystapa tunnistaa mahdollisimman
 nopeasti. Useimmat hyökkäykset noudattavat tiettyä kaavaa, ja näiden
 tunnistamiseen on olemassa useita valmiita työkaluja. Tämä on tärkeää, koska
 tunnistamisen jälkeen voidaan rajata, mistä hyökkäys on peräisin ja tehdä
@@ -446,8 +463,8 @@ Viranomaisten mukaan tuominen on muutenkin tärkeää, koska vain tätä kautta
 voidaan käytettyä hyökkäysverkostoa lähteä tunnistamaan ja toivottavasti myös
 hajottamaan \cite{DDOS}.
 
-Jotta nopea reagoiminen olisi mahdollista, tulee yrityksessä olla tehtynä
-toimintasuunnitelmat hyökkäyksen varalta. Ensimmäinen vaihtoehto lienee aina
+Jotta nopea reagoiminen olisi mahdollista, tulee organisaatiolla olla
+toimintasuunnitelma hyökkäyksen varalta. Ensimmäinen vaihtoehto lienee aina
 haitallisen liikenteen estäminen, mutta tätä varten tulee olla tehtynä tarkat
 prosessit kuinka toimitaan hyökkäyksen alettua. Tärkeää on sopia mitä
 dokumentoidaan ja kuinka asioista raportoidaan oikeille tahoille. Hyökkäyksen
@@ -458,59 +475,61 @@ kehittää oikeaan suuntaan \cite{DDOS}.
 
 \section{Remote-to-Local}
 
-Remote-to-Local (lyh. R2L) on hyökkäystyyppi, jossa hyökkääjä pyrkii
-saamaan koneelle sellaiset oikeudet, joita hänellä ei muuten
+Remote-to-Local (lyh. \textit{R2L}) on hyökkäystyyppi, jossa hyökkääjä pyrkii
+saamaan koneelle laajemmat oikeudet, kuin hänellä muuten
 olisi. Tämä tapahtuu useimmiten käyttäen hyväksi järjestelmässä olevia
 heikkouksia, joiden avulla hyökkääjä pääsee verkon yli murtautumaan
 koneelle \cite{IDS}. Pahimmassa tapauksessa hyökkääjä saa hankittua koneelle
 pääkäyttäjän oikeudet, jolloin koneen ja verkon resurssit ovat täysin
-hyökkääjän käytössä.
+hyökkääjän käytettävissä.
 
-Onnistuneet R2L hyökkäykset ovat verkon ylläpitäjien kannalta pahimpia
+Onnistuneet R2L-hyökkäykset ovat verkon ylläpitäjien kannalta pahimpia
 mahdollisia, sillä niiden mahdollistamat tuhot ja aiheuttamat kustannukset ovat
-muita hyökkäyksiä huomattavasti suuremmat \cite{IDSb}. Onnistunut R2L-hyökkäys saattaa
-myös muut verkon koneet vaaraan, sillä usein hyökkääjä pyrkii asentamaan
+huomattavasti suurempia verrattuna muihin hyökkäystyyppeihin \cite{IDSb}. Onnistunut R2L-hyökkäys saattaa
+myös muut lähiverkon koneet vaaraan, sillä usein hyökkääjä pyrkii asentamaan
 koneisiin ohjelmistoja, joiden avulla hyökkääjä pystyy ottamaan koneen haltuun
-käyttäjän huomaamatta. Tällä tavoin osa aikaisemmin mainituista Zombie-
-verkostoista saa alkunsa.
+käyttäjän huomaamatta. Tällä tavoin osa aikaisemmin mainituista
+zombverkostoista saa alkunsa.
 
-Käytetyimmät web-palvelinohjelmistot (Apache ja IIS) vastaavat noin 85\%
-kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi BIND-
-nimipalvelinohjelmistolla on markkinaenemmistö. Ohjelmistojen yleisyydestä
+Käytetyimmät Web-palvelinohjelmistot, Apache ja IIS, vastaavat noin 85~\%
+kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi
+BIND-\-ohjelmistoa käytetään valtaosassa nimipalvelimista. Ohjelmistojen yleisyydestä
 johtuen yli puolet R2L-hyökkäyksen mahdollistavista heikkouksista onkin
 löydetty näille alustoille \cite{IDS}. Useat haavoittuvaisuudet johtuvat
 ohjelmointivirheistä, joiden johdosta hyökkääjä pystyy aiheuttamaan
-sovellukseen muistin ylivuodon (engl. Buffer Overflow). Tämä usein kaataa
+sovellukseen muistin ylivuodon (engl. \textit{Buffer Overflow}). Tämä usein kaataa
 sovelluksen tai saattaa sen sellaiseen tilaan, jossa hyökkääjä pystyy ajamaan
-omia komentoja koneella. Kattava listaus löydetyistä heikkouksista ja näiden
-korjauksista löytyy osoitteesta www.cve.mitre.org/cve \cite{CVE}.
+omia komentoja koneella. Kattava listaus löydetyistä haavoittuvuuksista ja näiden
+korjauksista löytyy osoitteesta \url{www.cve.mitre.org/cve} \cite{CVE}.
 
 Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista, sillä
-nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa siitä ensin
-sovelluksen kehittäjille ennen julkista ilmoitusta. Siksi usein korjaus
-haavoittuvuuteen on olemassa, ennen kuin sitä on mahdollista hyödyntää \cite{IDSb}.
+nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa siitä
+yleensä ensin
+sovelluksen kehittäjille ennen julkista ilmoitusta. Siksi korjaus
+haavoittuvuuteen on usein olemassa ennen kuin sitä on mahdollista hyödyntää \cite{IDSb}.
 Vastuu jääkin verkon ylläpitäjälle, että käytetyt sovellukset ja 
 suojausjärjestelmät pidetään ajan tasalla, sillä suurin osa onnistuneista hyökkäyksistä 
 johtuu siitä, että tunnettuja tietoturva-aukkoja ei ole korjattu.
 
 \section{User-to-Root}
 
-User-to-Root (lyh. U2R) hyökkäyksessä murtautuja pyrkii hankkimaan
+User-to-Root (lyh. \textit{U2R}) hyökkäyksessä murtautuja pyrkii hankkimaan
 koneelle pääkäyttäjän oikeudet. Tämä tapahtuu käyttäen järjestelmässä
 olevia haavoittuvaisuuksia, joita ei ole paikattu. Useimmiten
 hyökkäykset pohjautuvat koodausvirheisiin, jotka mahdollistavat
 ylivuodon aiheuttamisen sekä odottamattomien syötteiden antamisen
 \cite{IDS}. Käyttäjästä pääkäyttäjäksi hyökkäys eroaa R2L hyökkäyksestä
-siten, että hyökkääjällä on jo valmiiksi pääsy koneelle normaalina
-käyttäjänä.
+siten, että hyökkääjällä on jo valmiiksi pääsy koneelle tavallisen
+käyttäjän oikeuksilla.
 
 U2R-hyökkäykset ovat L2R-hyökkäysten ohella vaikeimpia torjua, jos kohteena
-oleva järjestelmä mahdollistaa näiden toteuttamisen. Tämä johtuu siitä, että
+oleva järjestelmä on altis U2R-hyökkäyksille. Vaikea torjuttavuus johtuu siitä, että
 usein hyökkäyksestä aiheutuva liikenne muistuttaa hyvin paljon normaalia
-liikennettä, jonka johdosta itsestään oppivat puolustusjärjestelmät eivät pysty
+liikennettä, jonka vuoksi itsestään oppivat puolustusjärjestelmät eivät pysty
 riittävän tarkasti erottamaan haitallista liikennettä normaalista \cite{U2R}.
 Kehittyneimmilläkin järjestelmillä näiden hyökkäysten tunnistaminen on todella
 heikkoa. Tämän on osoittanut useat eri tutkimushankkeet, jotka ovat käyttäneet
-järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä, jonka sisältö
-on tarkkaan tiedossa. Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
+järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä,
+jossa olevat tietomurrot ja muu poikkeava toiminta on merkitty.
+Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
 paikkeille.
