@@ -426,9 +426,42 @@ ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet ol
 osoitti sen, että XSS-hyökkäykset olivat SQL injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
 kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta. 
 
+\subsection{Tietoturvastrategia}
+
+% TODO: Kristian tarkastaa, onko tässä järkeä.
+
+Tietoturvan kannalta on tärkeää, että verkon ylläpitäjä tietää tarkoin
+kuinka verkko toimii ja sen valvonnassa hyödynnetään verkon
+analysointityökaluja. Näiden avulla verkon heikot kohdat pystytään
+tunnistamaan ja vahvistamaan. Käytössä tulee olla myös jonkinlainen
+suojausjärjestelmä, joka kirjaa ylös riittävän pitkältä ajalta ylös
+verkkoon tulevan ja lähtevän liikenteen, sillä esimerkiksi hajautettu
+palvelunestohyökkäys ei aina kaada koko verkkoa. Tällöin on tärkeää,
+että tapahtunut pystytään tarkasti analysoimaan ja löydetyt heikkoudet
+paikattua parhaalla mahdollisella tavalla \cite{DDOS}.
+
+Kun hyökkäys on meneillään, tulee käytetty hyökkäystapa tunnistaa mahdollisimman
+nopeasti. Useimmat hyökkäykset noudattavat tiettyä kaavaa, ja näiden
+tunnistamiseen on olemassa useita valmiita työkaluja. Tämä on tärkeää, koska
+tunnistamisen jälkeen voidaan rajata, mistä hyökkäys on peräisin ja tehdä
+tarvittavat toimenpiteet hyökkäyksen torjumiseksi. Useimmissa tapauksissa
+tämä tarkoittaa yhteistyötä palveluntarjoajan ja viranomaisten kanssa.
+Viranomaisten mukaan tuominen on muutenkin tärkeää, koska vain tätä kautta
+voidaan käytettyä hyökkäysverkostoa lähteä tunnistamaan ja toivottavasti myös
+hajottamaan \cite{DDOS}.
+
+Jotta nopea reagoiminen olisi mahdollista, tulee organisaatiolla olla
+toimintasuunnitelma hyökkäyksen varalta. Ensimmäinen vaihtoehto lienee aina
+haitallisen liikenteen estäminen, mutta tätä varten tulee olla tehtynä tarkat
+prosessit kuinka toimitaan hyökkäyksen alettua. Tärkeää on sopia mitä
+dokumentoidaan ja kuinka asioista raportoidaan oikeille tahoille. Hyökkäyksen
+jälkeinen analyysi on myös riippuvainen sovituista käytännöistä. Tämä analyysi
+on erittäin tärkeää, sillä vain sitä kautta toimintasuunnitelmia voidaan
+kehittää oikeaan suuntaan \cite{DDOS}.
+
 \subsection{Web-alustojen tietoturva}
 
-Yllä mainitut seikat eivät tarkoita sitä, että web-palveluita pyörittävät alustat olisivat
+Aikaisemmin esitetyt seikat eivät tarkoita sitä, että Web-palveluita pyörittävät alustat olisivat
 turvassa hyökkäyksiltä. Onnistuneet hyökkäykset ovat edelleen yhtä tuhoisa, jos niihin ei varauduta ennalta.
 Erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa kategorioissa olevia heikkouksia
 

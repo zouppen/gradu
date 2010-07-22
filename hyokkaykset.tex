@@ -97,7 +97,7 @@ tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen
 tulisi pohjautua koko järjestelmän kattavaan salaukseen \cite{WEBS}.
 
 % TODO: tarkista, mitä tällä kryptaamisella reitittimessä oikein
-% tarkoitetaan.
+% tarkoitetaan. Tarkistetaan lähteestä.
 
 \subsection{ARP Spoofing}
 
@@ -169,8 +169,6 @@ muokkaamiseen tai tuhoamiseen tähtäävät hyökkäykset
 kohdistuviin hyökkäyksiin, niin palvelun kokonaisturvallisuuden
 kannalta ylläpitäjän tulee kiinnittää jokaiseen ryhmään tasapuolisesti
 huomiota.
-
-% TODO näistä kolmesta voisi tehdä söpön taulukon.
 
 Viime vuosina palvelunestohyökkäysten kirjo on voimakkaasti
 laajentunut. Alkuperäisten, pelkästään verkkokerroksen raa’an voiman
@@ -432,47 +430,6 @@ vaikeaa \cite{DDOS}.
 \label{ddos2}
 \end{figure}
 
-% FIXME: Mitä hittoa seuraava kappale tarkoittaa?
-
-Kuten yllä on jo tullut esille, on hajautetulta palvelunestohyökkäykseltä
-suojautuminen vaikea tehtävä riippumatta siitä, onko verkko itse kohde vai
-käytetäänkö sitä vain hyökkäysten koordinointiin. Valmista ja yksityiskohtaista
-ratkaisua ei ole tarjolla, mutta seuraamalla joitakin yleisiä strategioita,
-voidaan vahinkoja rajoittaa. Nämä strategiat ovat suojautuminen, tunnistaminen
-ja reagoiminen, ja ne noudattavat vahinkoketjun yleistä elinkaarta \cite{DDOS}.
-
-% FIXME: Pitäisikö tämä muutenkin siirtää jonnekin muualle, ei liity
-% DDOSiin vaan tietoturvastrategioihin yleensä.
-
-Ensinnäkin on tärkeää, että verkon ylläpitäjä tietää tarkoin kuinka verkko
-toimii ja hyödynnetään verkon toimintaa analysoivia työkaluja. Näiden avulla
-verkon heikot kohdat pystytään tunnistamaan ja vahvistamaan. Käytössä tulee
-olla myös jonkinlainen suojausjärjestelmä, joka kirjaa ylös riittävän pitkältä
-ajalta ylös verkkoon tulevan ja lähtevän liikenteen, sillä aina hajautettu
-palvelunestohyökkäys ei kaada koko verkkoa. Tällöin on tärkeää, että tapahtunut
-pystytään tarkasti analysoimaan ja löydetyt heikkoudet paikattua parhaalla
-mahdollisella tavalla \cite{DDOS}.
-
-Kun hyökkäys on meneillään, tulee käytetty hyökkäystapa tunnistaa mahdollisimman
-nopeasti. Useimmat hyökkäykset noudattavat tiettyä kaavaa, ja näiden
-tunnistamiseen on olemassa useita valmiita työkaluja. Tämä on tärkeää, koska
-tunnistamisen jälkeen voidaan rajata, mistä hyökkäys on peräisin ja tehdä
-tarvittavat toimenpiteet hyökkäyksen torjumiseksi. Useimmissa tapauksissa
-tämä tarkoittaa yhteistyötä palveluntarjoajan ja viranomaisten kanssa.
-Viranomaisten mukaan tuominen on muutenkin tärkeää, koska vain tätä kautta
-voidaan käytettyä hyökkäysverkostoa lähteä tunnistamaan ja toivottavasti myös
-hajottamaan \cite{DDOS}.
-
-Jotta nopea reagoiminen olisi mahdollista, tulee organisaatiolla olla
-toimintasuunnitelma hyökkäyksen varalta. Ensimmäinen vaihtoehto lienee aina
-haitallisen liikenteen estäminen, mutta tätä varten tulee olla tehtynä tarkat
-prosessit kuinka toimitaan hyökkäyksen alettua. Tärkeää on sopia mitä
-dokumentoidaan ja kuinka asioista raportoidaan oikeille tahoille. Hyökkäyksen
-jälkeinen analyysi on myös riippuvainen sovituista käytännöistä. Tämä analyysi
-on erittäin tärkeää, sillä vain sitä kautta toimintasuunnitelmia voidaan
-kehittää oikeaan suuntaan \cite{DDOS}.
-
-
 \section{Remote-to-Local}
 
 Remote-to-Local (lyh. \textit{R2L}) on hyökkäystyyppi, jossa hyökkääjä pyrkii
@@ -533,3 +490,5 @@ järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä,
 jossa olevat tietomurrot ja muu poikkeava toiminta on merkitty.
 Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
 paikkeille.
+
+% TODO: Etsitäänpä tähän tietoa root exploiteista.
