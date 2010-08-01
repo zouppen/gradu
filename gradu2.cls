@@ -23,6 +23,9 @@
 \newif\ifcopyright
 \copyrighttrue
 
+\newif\ifcreativecommons
+\creativecommonsfalse
+
 \newif\ifnumbib
 \numbibtrue
 
@@ -74,6 +77,7 @@
 
 \DeclareOption{copyright}{\copyrighttrue}
 \DeclareOption{nocopyright}{\copyrightfalse}
+\DeclareOption{creativecommons}{\creativecommonstrue}
 
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
@@ -576,6 +580,13 @@
     \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
     \medskip%
     \noindent\gradu@license%
+\fi%
+\ifcreativecommons%
+    \bigskip%
+    \noindent\begin{tabular}{ l p{10cm} } %
+      \includegraphics[height=1.0truecm]{cc-by-sa} %
+      & \vspace{-1.0truecm}\small\gradu@license\normalsize \\ %
+    \end{tabular}%
 \fi%
   \end{titlepage}%
 \else%
