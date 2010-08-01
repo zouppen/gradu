@@ -584,8 +584,9 @@
 \ifcreativecommons%
     \bigskip%
     \noindent\begin{tabular}{ l p{10cm} } %
+      \hline\noalign{\bigskip} %
       \includegraphics[height=1.0truecm]{cc-by-sa} %
-      & \vspace{-1.0truecm}\small\gradu@license\normalsize \\ %
+      & \vspace{-0.95truecm}\small\gradu@license\normalsize \\ %
     \end{tabular}%
 \fi%
   \end{titlepage}%
