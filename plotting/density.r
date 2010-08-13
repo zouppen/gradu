@@ -153,7 +153,10 @@ densityplot.normal <-
 }
 
 # Plots densities the simple way.
-densityplot.classic <- function(zipola, do.lineinfo = T) {
+densityplot.classic <- function(zipola, do.lineinfo = T, do.random = F) {
+  if (do.random) {
+    zipola <- sample.table(zipola)
+  }
   ano.sd <- sd(zipola$density)
   ano.lim <- 3 * ano.sd
 
@@ -162,17 +165,42 @@ densityplot.classic <- function(zipola, do.lineinfo = T) {
   ano.x <- (1:length(zipola$density))[ano.filter]
   ano.y <- zipola$density[ano.filter]
 
-  plot(zipola$density)
+  normal.x <- (1:length(zipola$density))[!ano.filter]
+  normal.y <- zipola$density[!ano.filter]
+  
+  # Plot nothing, just ensure axes are scaled nicely
+  plot(zipola$density, pch=NA_integer_)
 
   # Add anomaly limits
   abline(h=ano.sd,lty=2)
   abline(h=ano.lim,lty=1)
 
+  # Plot normal activity
+  points(normal.x, normal.y, pch=19)
+
+  # Plot anomalies
+  points(ano.x, ano.y, pch=2)
+  
   if (do.lineinfo) {
     # Plot lineinfo tuples for each anomaly
-    lineinfo <- paste(" ", paste(zipola$i1[ano.filter],
-                                 zipola$i2[ano.filter],
-                                 zipola$i3[ano.filter],sep=","))
-    text(ano.x, ano.y,lineinfo,srt="-90",adj=0)
+    lineinfo <- paste(zipola$i1[ano.filter],
+                      zipola$i2[ano.filter],
+                      zipola$i3[ano.filter],sep=",")
+    text(ano.x, ano.y,lineinfo,srt="0",pos=1)
   }  
+}
+
+# Randomizes the order of samples in a table.
+sample.table <- function(tbl) {
+  size <- length(tbl[,1])
+  if (!exists(".Random.seed")) sample(1) # Make sure there is an RNG ready.
+  
+  # Using the same seed to get identical sampling order for every columns.
+  oldseed <- .Random.seed
+  for (i in (1:length(tbl))) {
+    .Random.seed <- oldseed
+    tbl[,i] <- sample(tbl[,i])
+  }
+  # keep the new seed. (otherwise rng doesn't advance)
+  tbl
 }
