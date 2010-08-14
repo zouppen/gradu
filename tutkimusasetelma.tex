@@ -86,16 +86,14 @@ matriisi on laskennallisesti tehokas, ja se säilyttää tässä tapauksessa rii
 
 \subsection{Diffuusiokuvaus}
 
-\todo{Matemaattista oikeellisuutta ei ole vielä tarkistettu!}
-
-Moniulotteisen datan analysoiminen on aina haasteellinen tehtävä johtuen suuresta parametrimäärästä. Tämän takia käytämme tässä työssä hyödyksi diffuusiokuvauksia, jotka ovat tehokas tapa vähentää analysoitavan datan
-ulottuvuuksia säilyttäen kuitenkin datan rakenne. Tämän jälkeen sen klusterointi ja visualisointi pienempiulotteisessa avaruudessa on helpompaa.
+Moniulotteisen datan analysoiminen on aina haasteellinen tehtävä johtuen parametrien suuresta määrästä. Tämän takia käytämme tässä työssä hyödyksi diffuusiokuvauksia, jotka ovat tehokas tapa vähentää analysoitavan datan
+ulottuvuuksia säilyttäen kuitenkin sen rakenne. Tämän jälkeen esimerkiksi klusterointi ja visualisointi pienempiulotteisessa avaruudessa on helpompaa.
 
 Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan normaali käyttätyminen. Tämä tapahtuu käyttäen opetusmateriaalia, joka on osa analysoitavaa dataa. Olkoot tämä opetusmateriaali 
-$\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessa data muodostaa $N \times n$ matriisin, jossa 
+$\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessamme data muodostaa $N \times n$ matriisin, jossa 
 rivit pitävät sisällään yksittäiset kyselyt, ja sarakkeet ovat näiden analysoitavat parametrit.
 
-Aluksi luodaan samankaltaisuusmatriisi, joka kuvaa pisteiden välisiä etäisyyksiä käyttäen gaussin jakaumaa. Naapureiden samankaltaisuuden määrittää $\epsilon$. 
+Aluksi luomme samankaltaisuusmatriisin, joka kuvaa eri pisteiden välisiä etäisyyksiä. Naapuruston laajuuden määrittää euklidinen etäisyys $\epsilon$, jonka arvona voidaan käyttää haluttua mittaa. Tutkimuksessamme käytämme arvona painotettua Hammingin etäisyyttä.
 
 \begin{equation}
 W_{ij} = e^{-\frac{||x_i - x_j||^2}{\epsilon}}
@@ -109,7 +107,7 @@ D_{ii} = \sum_{j=1}^{N} W_{ij}
 \label{ROWSUM}
 \end{equation}
 
-Nyt jokaisen rivin summaksi tulee 1. Tätä normalisointia eli todennäköisyyttä siirtyä tilasta toiseen kuvatkoot $P$
+Nyt jokaisen rivin summaksi tulee 1. Tätä todennäköisyyttä siirtyä datapisteestä toiseen kuvatkoon $P$
 
 \begin{equation}
 P = D^{-1} W
@@ -123,26 +121,25 @@ $P$:n ominaisvektorit ovat samat kuin konjugaattimatriisin, joka on esitetty yht
 \label{SYMM}
 \end{equation}
 
-Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Näin luotu matriisi säilyttää ominaisvektorien arvot, ja sitä kutsutaan
-normalisoiduksi Laplace muunnokseksi.
+Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Näin luotua matriisia kutsutaan normalisoiduksi graafin  Laplace-operaatioksi.
 
 \begin{equation}
 \tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}} = D^{\frac{1}{2}} D^{-1} W D^{-\frac{1}{2}} = D^{-\frac{1}{2}} W D^{-\frac{1}{2}}
 \label{NGL}
 \end{equation}
 
-Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen SVD:tä (engl. Singular Value Decomposition). Koska $\tilde{P}$ on normaali matriisi, spektriteorian (spectral theorem) mukaan tällaisen matriisin 
-hajoitelma on yhtälön \ref{SVD} mukainen.  
+Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. Singular Value Decomposition = SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (spectral theorem) mukaan tällaisen matriisin 
+hajotelma on yhtälön \ref{SVD} mukainen.  
 
 \begin{equation}
 \tilde{P} = U \Lambda U^*
 \label{SVD}
 \end{equation}
 
-Matriisin $\Lambda$ diagonaalilla olevat arvot ovat samat kuin matriisissa $\tilde{P}$, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisvektorit 
+Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
 
-Matriisin $U = [ u_1, u_2, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
-saamme ne matriisin $V$ sarakkeina  $V = [v_1, v_2, \dots, v_k]$.  
+Matriisin $U = [ u_0, u_1, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
+saamme ne matriisin $V$ sarakkeina  $V = [v_0, v_1, \dots, v_k]$.  
 
 \begin{equation}
 V = D^{-\frac{1}{2}} U
@@ -156,15 +153,15 @@ Nyt datan koordinaatit pienennetyssä ulottuvuudessa ovat yhtälön \ref{MAP_COO
 \label{MAP_COORDINATES}
 \end{equation}
 
-Käyttämällä sopivaa $\epsilon$ spektrin hajoaminen on nopeaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $V_0$ on vakio, joten se voidaan jättää pois.
-Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksessa on esitetty yhtälössä \ref{DM}.
+Käyttämällä sopivaa arvoa $\epsilon$ lähestyvät ominaisarvot nopeasti nollaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $v_0$ on vakio, joten se voidaan jättää pois.
+Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen on esitetty yhtälössä \ref{DM}.
 
 \begin{equation}
 \Psi_d : x_i \to \left[ \lambda_1 V_{i1}, \lambda_2 V_{i2}, \dots, \lambda_d V_{id} \right]
 \label{DM}
 \end{equation}
 
-Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $n$ vanhan $d$ sijaan.
+Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $d$ vanhan $n$ sijaan.
 
 \subsection{$N$-gram -analyysi}
 
