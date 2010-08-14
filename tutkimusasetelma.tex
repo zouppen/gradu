@@ -1,65 +1,18 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
-\chapter{Tutkimusasetelma}
+\chapter{Tutkimuksessa käytetyt menetelmät}
 
 Edellisissä luvuissa on esitetty osa niistä hyökkäyksistä, joita vastaan verkot ja Web-palvelut joutuvat nykyisin suojautumaan. Niiden suuresta määrästä johtuen on ilmiselvää, että täysin 
 turvallista ympäristöä on mahdoton rakentaa. Tätä ei edes pidetä tietoturvasuunnittelun lähtökohtana, vaan tärkeämpää on löytää tasapaino palvelun saatavuuden ja käytettyjen tietoturvaratkaisuiden 
 välillä. Liian raskaat menetelmät aiheuttavat ylimääräistä viivettä palvelun tai verkon saatavuuteen, ja liian kevyet ratkaisut jättävät ne avoimiksi tietoturvahyökkäyksille. 
 
-\section{Lähtökohta}
-\label{sec:lahtokohta}
-
-Tämän Pro gradu -tutkielman tavoitteena on pyrkiä tunnistamaan Web-palveluihin kohdistuvia poikkeavuuksia analysoimalla palvelimien tallentamaa tapahtumalokia. Analysoitavaksi saamamme loki on 
-peräisin yritykseltä, joka tarjoaa hosting-palveluita suuryrityksille. Lokitiedostot ovat peräisin kolmelta tuotannosta jo poistetuilta palvelimilta, ja ne ovat olleet vastuussa muutaman suuren 
-palvelukokonaisuuden pyörittämisestä.
-
-Analysoitava data on Apache-palvelimien tuottamaa lokia, joka sisältää
-web-palveluille kohdistuvia HTTP-pyyntöjä. Lokia on yhteensä 24
-gigatavua, ja se sisältää yli 1,7 miljardia sivupyyntöä.
-Lokia on kerätty noin 10 kuukauden
-ajanjaksolta. Se on tallennettu \textit{Combined Log Format} -muotoon,
-joka on yleinen Apache-palvelimen käyttämä lokitiedoston
-muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
-
-% Tarkat luvut:
-% - Dataa 24133108 kiB
-% - Sivupyyntöjä (ml. error-logit) on 1666171347 kpl.
-
-\begin{framed}
-\begin{verbatim*}
-130.234.49.2 - - [10/May/2009:15:53:01 +0300]
-"GET /scripts/access.pl?user=matti&passwd=admin HTTP/1.1"
-200 2680 "http://www.jyu.fi/a.html"
-"Mozilla/5.0 (SymbianOS/9.2;...)"
-\end{verbatim*}
-\end{framed}
-\newpage
-
-Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Niitä analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä, sekä
-hyökkäyksen jo tapahduttua tutkia siihen johtaneita vaiheita. Pienillä sivustoilla lokin läpikäyminen jälkikäteen käsin on vielä mahdollista, mutta puhuttaessa palveluista, joilla on miljoonia käyttäjiä 
-kuukaudessa, ei tämä ole enää mahdollista. Tästä syystä lokien analysoiminen tulee automatisoida. Tämä taas tarkoittaa sitä, että järjestelmän tulee pystyä tunnistamaan miljoonien kyselyiden joukosta
-ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää sääntöpohjaista ratkaisua, mutta aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää tunnistuskykyä. Tästä 
-syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttua lokia verrataan opetettuun malliin, jolloin poikkeava
-liikenne voidaan tunnistaa.
-
-Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt, kuin myös palvelimelle 
-välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi kirjautumisessa käytetyt tiedot, ja tietokannalle välitetyt kyselyt. Staattiset sivunlatauspyynnöt ja parametreja sisältävät pyynnöt erottaa
-resurssipolun jälkeisestä kysymysmerkistä. Kysymysmerkin jälkeinen kyselyosuus koostuu avain-arvo-pareista, joista ensimmäinen on kutsuttu parametri, ja jälkimmäinen tämän arvo (kuva \ref{CLF2}). Riippuen
-palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotettuna.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=13cm]{pics/logi2.pdf}
-\caption{HTTP-kyselyn GET-osa}
-\label{CLF2}
-\end{figure}
-
-\section{Tutkimuksessa käytetyt menetelmät}
-
-Ongelmia lokin analysoimisessa aiheuttaa sen suuri määrä, ja siinä esiintyvien parametrien tyypit. Parametreista osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien 
+Ongelmia lokin analysoimisessa aiheuttaa aineiston suuri määrä, ja siinä esiintyvien parametrien tyypit. Parametreista osa on luokka-asteikollisia ja osa puolestaan numeroasteikollisia, joten tietynlaisten toimintamallien 
 etsiminen näistä suoraan on haastavaa. Parametrien suuri määrä aiheuttaa myös laskennallisia ongelmia, joten niiden määrää tulee pystyä jotenkin vähentämään säilyttäen kuitenkin mahdollisimman tarkkaan alkuperäisten
 muuttujien piirteet. Seuraavaksi esitellään yleisellä tasolla analysoinnissa käytetyt tekniikat, ja tätä seuraa näiden tarkempi matemaattinen kuvaus.
 
+
+\section{Menetelmien yleinen kuvaus}
+ 
 Anomalioiden tunnistamiseen käyttämämme järjestelmä pohjautuu diffuusiokuvausten ja diffuusioetäisyyksien käyttöön. Ne tarjoavat tehokkaan tavan löytää merkittäviä geometrisia rakenteita datasta, ja niiden
 käyttämistä moniulotteisen datan esittämisessä on esitelty \cite{diff} \cite{diff2}. Menetelmien tehokkuus perustuu siihen, että diffuusiokuvausten avulla pystytään vähentämään analysoitavan datan dimensioita
 säilyttäen kuitenkin sen rakenne. Periaatteessa dimensioiden vähentäminen tarkoittaa sitä, että datajoukko esitetään toisella datajoukolla, jonka dimensio on pienempi. Tällöin sen klusteroiminen sekä 
@@ -84,7 +37,7 @@ Suurilla tietomassoilla n-gram -analyysi tuottaa isoja matriiseja, joiden käsit
 avulla, joka on ulottuvuuksien vähentämiseen tarkoitettu menetelmä. Satunnaisprojektiossa moniulotteinen data heijastetaan pienempiulotteiseen aliavaruuteen käyttäen satunnaisesti luotua matriisia. Näin syntynyt uusi 
 matriisi on laskennallisesti tehokas, ja se säilyttää tässä tapauksessa riittävän määrän informaatiota. 
 
-\subsection{Diffuusiokuvaus}
+\section{Diffuusiokuvaus}
 
 Moniulotteisen datan analysoiminen on aina haasteellinen tehtävä johtuen parametrien suuresta määrästä. Tämän takia käytämme tässä työssä hyödyksi diffuusiokuvauksia, jotka ovat tehokas tapa vähentää analysoitavan datan
 ulottuvuuksia säilyttäen kuitenkin sen rakenne. Tämän jälkeen esimerkiksi klusterointi ja visualisointi pienempiulotteisessa avaruudessa on helpompaa.
@@ -163,7 +116,7 @@ Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen
 
 Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $d$ vanhan $n$ sijaan.
 
-\subsection{$N$-gram -analyysi}
+\section{$N$-gram -analyysi}
 
 Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. $N$-gram -analyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
 peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti muun muassa tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
@@ -176,7 +129,7 @@ $N$-gram -analyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on data
 jolloin $n=2$, ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain 
 nollia. Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
 
-\subsection{Satunnaisprojektio}
+\section{Satunnaisprojektio}
 
 Satunnaisprojektiossa alkuperäinen $N$-ulotteinen data heijastetaan $k$-ulotteiseen $(k \ll N)$ aliavaruuteen käyttäen satunnaista $k \times N$ matriisia $R$ \cite{Random}. Olkoot meillä esimerkiksi matriisi 
 $X_{m\times N}$, jossa $m$ on havaintojen määrä, ja $N$ on datan alkuperäinen dimensio. Olkoot  $k$  sitten uusi haluttu dimensioiden määrä. Uuden matriisin laskemiseksi luodaan satunnainen matriisi 
@@ -206,33 +159,3 @@ r_{ij} = \sqrt{3}\cdot
 
 Tällaisen jakauman käyttäminen vähentää entisestään laskenta-aikaa, sillä laskenta voidaan suorittaa käyttäen kokonaislukuja. Yllä olevan jakauman tapauksessa laskenta on vieläkin nopeampaa, sillä operaatioista
 tarvitaan vain kolmasosa, sillä luotu matriisi sisältää suurimmaksi osaksi nollia \cite{Random}.
-
-% Tuomon kommentit:
-%
-% "Dimensioiden vähentäminen tapahtuu" -kappale esittää asian jotenkin
-% eri tavalla. Tuo voi tietysti pohjautua Diffusion maps -julkaisuun.
-%
-% En ole lukenut että asia esitettäisiin noin. Tavallaan se on totta,
-% mutta en ole aivan varma voiko sen sanoa noin.
-%
-% Minusta tuo parametreja käsittelevä kappale voisi olla ennen
-% diffuusiokarttaa. Tällöin liikuttaisiin loogisessa järjestyksessä, eli
-% ensin piirteiden erottaminen ja sitten vasta niistä muodostuvan
-% taulukon ulottuvuuksien vähentäminen.
-%
-% Viitteitä voisi olla n-grammien käyttöön.
-%
-% Ainakin miten Juholta olen ymmärtänyt, tuossa mallissa
-% diffuusiokarttaa käytetään vain alkuvaiheen koulutusdatan
-% suodattimena.
-%
-% Mutta tuo tuleekin tosiaan esille kun tuohan oli vain yleiskuvaus. Ja
-% se voisi minusta olla virtaviivaisempi.
-%
-% Sanottaisiin, että nyt tehdään X, saadaan tuloksena Y, sitten tehdään
-% näin ja saadaan tuloksena tämä... ja lopulta saadaan haluttu tieto
-% anomalioista.
-%
-% Kuvat selventää aina.
-%
-% Mutta tuo teksti on hieman sekavassa järjestyksessä vielä.

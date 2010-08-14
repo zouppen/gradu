@@ -2,26 +2,65 @@
 
 \chapter{Tiedon keruu ja käsittely}
 
-Luvussa \ref{sec:lahtokohta} kuvailtiin tutkittavien lokitiedostojen
-alkuperää ja tiedostomuotoa. Tässä luvussa tutustutaan
-seikkaperäisemmin siihen, kuinka analysoitava palvelinloki on
-järjestetty tiedostoihin ja millä tavoin tietoa on esikäsitelty
-analyysiä silmällä pitäen. Käytetyt menetelmät soveltuvat pienin
-muutoksin myös muiden Web-hotellien palvelinlokien esikäsittelyyn,
-mikäli arkistointikäytänteet eivät suuresti poikkea tässä esitellystä.
+Tässä luvussa tutustutaan aluksi tutkittavien lokitiedostojen
+alkuperään ja tiedostomuotoon sekä aineiston arkistointitapaan. Tämän
+jälkeen käydään läpi, kuinka tietoa on esikäsitelty analyysiä silmällä
+pitäen. Käytetyt menetelmät soveltuvat pienin muutoksin myös muiden
+Web-palveluntarjoajien palvelinlokien esikäsittelyyn, mikäli
+arkistointikäytänteet eivät suuresti poikkea tässä esitellystä.
 
 Esimerkeissä käytetyt palvelinten ja palveluiden nimet ovat
 kuvitteellisia, mutta rakenne vastaa tutkittua ympäristöä.
 
- % - Mistä data on peräisin?
- %    - Palvelun rakenteen kuvaus
- % - Millaista data on?
- %   - HTTP
- %   - Apachen logit
- % - Miten data on kerätty? (ohjelmistot ja verkkotopologia)
- %   - Yleisellä tasolla
- % - Mitä työkaluja on käytetty (Haskell ja PhasefulSplitter)
- % - Miten dataa on käsiteltu ja suodatettu?
+
+\section{Lähtökohta}
+\label{sec:lahtokohta}
+
+Analysoitavaksi saamamme loki on peräisin yritykseltä, joka toimii
+Web-\-palveluntarjoajana suuryrityksille. Lokitiedostot ovat peräisin
+kolmelta tuotannosta jo poistetuilta palvelimilta, ja ne ovat olleet
+vastuussa muutaman suuren palvelukokonaisuuden pyörittämisestä.
+
+Analysoitava data on Apache-palvelimien tuottamaa lokia, joka sisältää
+Web-palveluille kohdistuvia HTTP-pyyntöjä. Lokia on yhteensä 24
+gigatavua, ja se sisältää yli 1,7 miljardia sivupyyntöä.
+Lokia on kerätty noin 10 kuukauden
+ajanjaksolta. Se on tallennettu \textit{Combined Log Format} -muotoon,
+joka on yleinen Apache-palvelimen käyttämä lokitiedoston
+muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
+
+% Tarkat luvut:
+% - Dataa 24133108 kiB
+% - Sivupyyntöjä (ml. error-logit) on 1666171347 kpl.
+
+\begin{framed}
+\begin{verbatim*}
+130.234.49.2 - - [10/May/2009:15:53:01 +0300]
+"GET /scripts/access.pl?user=matti&passwd=admin HTTP/1.1"
+200 2680 "http://www.jyu.fi/a.html"
+"Mozilla/5.0 (SymbianOS/9.2;...)"
+\end{verbatim*}
+\end{framed}
+
+Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Niitä analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä, sekä
+hyökkäyksen jo tapahduttua tutkia siihen johtaneita vaiheita. Pienillä sivustoilla lokin läpikäyminen jälkikäteen käsin on vielä mahdollista, mutta puhuttaessa palveluista, joilla on miljoonia käyttäjiä 
+kuukaudessa, ei tämä ole enää mahdollista. Tästä syystä lokien analysoiminen tulee automatisoida. Tämä taas tarkoittaa sitä, että järjestelmän tulee pystyä tunnistamaan miljoonien kyselyiden joukosta
+ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää sääntöpohjaista ratkaisua, mutta aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää tunnistuskykyä. Tästä 
+syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttua lokia verrataan opetettuun malliin, jolloin poikkeava
+liikenne voidaan tunnistaa.
+
+Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt, kuin myös palvelimelle 
+välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi kirjautumisessa käytetyt tiedot, ja tietokannalle välitetyt kyselyt. Staattiset sivunlatauspyynnöt ja parametreja sisältävät pyynnöt erottaa
+resurssipolun jälkeisestä kysymysmerkistä. Kysymysmerkin jälkeinen kyselyosuus koostuu avain-arvo-pareista, joista ensimmäinen on kutsuttu parametri, ja jälkimmäinen tämän arvo (kuva \ref{CLF2}). Riippuen
+palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotettuna.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{pics/logi2.pdf}
+\caption{HTTP-kyselyn GET-osa}
+\label{CLF2}
+\end{figure}
+
 
 \section{Tiedon rakenne}
 
