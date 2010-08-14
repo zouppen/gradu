@@ -43,3 +43,29 @@ densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F, main="Ano
     }
   }
 }
+
+plot.service <- function(service, filename) {
+
+  print(paste("plotataan: ",service," ",filename))
+  
+  rawdata <- read.zipola(paste("../anomaliat/resource_coords/",filename,sep=""))
+  n <- length(rawdata[,1])
+  main <- paste("Poikkeavuudet resurssissa ",service, "  (n=",n,")", sep="")
+  
+  # Plot SVG
+  svg(paste("../pics/tiheyskuvat/service_",service,".svg",sep=""))
+  densityplot.classic(rawdata, main=main)
+  dev.off()
+  
+  # Plot PDF
+  pdf(paste("../pics/tiheyskuvat/service_",service,".pdf",sep=""))
+  densityplot.classic(rawdata, main=main)
+  dev.off()
+}
+
+plot.services <- function(tbl) {
+  
+  for (i in (1:length(tbl[,1]))) {
+    plot.service(tbl$service[i],tbl$file[i])
+  }
+}
