@@ -28,9 +28,21 @@ Käytetyimmissä resursseissa HTTP-kyselyitä oli kymmeniä tuhansia, joten joka
 menetelmän rajoituksista. Ongelma ratkaistiin valitsemalla satunnaisotannalla ilman takaisinpanoa 2000 HTTP-kyselyä niistä resursseista, joissa oli 
 kyselyitä yli tämän määrän. Näin ollen jokaisesta resurssista muodostettiin lopulta tiedosto, jossa oli korkeintaan 2000 HTTP-kyselyä.
 
+Analysoitavan palvelun eri resurssit on kuvattu graafissa \ref{service_resources}. Kuvassa vaaka-akselina on käytetty N-grammien lukumäärää ja 
+pystyakselina GET-parametrien lukumäärää. Resursseista valitsimme kuusi tarkempaan tarkasteluun, ja ne on merkitty kuvaajaan niiden resurssinumerolla. 
+Resurssit pyrimme valitsemaan siten, että jokaisesta ryppäästä on valittu yksi.
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{pics/service_resources.pdf}
+\caption{Palvelun resurssien ominaisuudet}
+\label{service_resources}
+\end{figure}
 
 \section{Tulokset}
+
+
+
 
 \section{Kehitysideoita}
 % Keksi parempi otsikko? :-)
