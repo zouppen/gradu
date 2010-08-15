@@ -41,11 +41,19 @@ Resurssit pyrimme valitsemaan siten, että jokaisesta ryppäästä olisi yksi va
 
 \section{Tulokset}
 
-Palvelun jokaisesta resurssista muodostettiin diffuusiokuvaus käyttäen korkeintaan 2000 pistettä. Näin lasketuista diffuusiokuvauksista muodostettiin
-seuraavaksi diffuusiokartta käytäen toista ja kolmatta ominaisvektoria. Esimerkiksi kuvassa \ref{diffusio_1} on resurssin 1 diffuusiokuvauksen pohjalta
-luotu diffuusiokartta. Kuvaajasta nähdään, että muutamaa poikkeusta lukuunottamatta pisteet sijoittuvat hyvin lähelle toisia. Tätä kuvaajaa on 
-vielä ``täristetty'' asian havainnollistamiseksi, sillä muuten pisteidän suurta määrää ei pysty kuvaajasta näkemään, koska lähes kaikki pisteet 
-sijoittuvat samaan kohtaan. ``Täristäminen'' on tehty käyttäen.... JOEL!
+Palvelun jokaisesta resurssista muodostettiin aluksi diffuusiokuvaus
+käyttäen korkeintaan 2~000 pistettä. Näin lasketuista
+diffuusiokuvauksista muodostettiin seuraavaksi diffuusiokartta käytäen
+toista ja kolmatta ominaisvektoria.  Koska suuri määrä pisteitä
+sijoittui täsmälleen samoihin koordinaatteihin, kartan luettavuuden
+parantamiseksi kartan pisteitä ``täristettiin''. Täristäminen
+suoritettiin lisäämällä ominaisvektorien arvoihin normaalijakaumasta
+satunnaisesti poimittu arvo. Normaalijakauman keskihajontana
+käytettiin yhtä prosenttia akselin leveydestä. Kuvassa
+\ref{diffusio_1} nähdään edellä kuvatulla tavalla muodostettu
+diffuusiokartta resurssista 1. Kuvaajasta voidaan havaita, että
+muutamaa poikkeusta lukuunottamatta pisteet sijoittuvat hyvin lähelle
+toisia.
 
 Analysoimalla saatua diffuusiokarttaa voidaan määrittää ne pisteet, jotka on luokiteltu poikkeaviksi siinä joukossa, jossa kyseisiä pisteitä on 
 verrattu. Diffuusiokartta ei ole kuitenkaan kovinkaan havainnollinen, joten diffuusiokuvauksen pohjalta on luotu vielä etäisyyskartta. Kuvassa
