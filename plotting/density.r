@@ -67,7 +67,7 @@ plot.service <- function(service, filename, do.svg=TRUE, do.pdf=FALSE) {
 
   print(paste("plotataan: ",service," ",filename))
   
-  rawdata <- read.zipola(paste("../anomaliat/resource_coords/",filename,sep=""))
+  rawdata <- read.zipola(paste("../anomaliat/matlab_output/",filename,sep=""))
   n <- length(rawdata[,1])
 
   ## Plot SVG
