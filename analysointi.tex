@@ -11,9 +11,8 @@ tärkeitä kehitysideoita, joita syntyi tutkimuksen aikana.
 Saamamme materiaali koostui neljästä eri Web-palvelusta, joista analyysiin valitsimme yhden. Muista palveluista saadut lokitiedostot käsiteltiin
 myös valmiiksi, mutta koska lokitietoja oli määrällisesti niin paljon, päädyimme tarkastelemaan tarkemmin vain yhtä. Valitsemastamme palvelusta
 analysoimme myös vain viikon mittaisen jakson. Tähän ratkaisuun päädyttiin sen takia, että analysoitavaa dataa oli kerätty noin puolen vuoden ajalta,
-joten jo yhden palvelun osalta koko datan läpikäymiseen olisi mennyt kohtuuttomasti aikaa. Diffuusikuvausten laskemiseen voitiin
-myös käyttää korkeintaan noin 5000 yksittäistä pistettä 2000 pisteen ollessa laskennallisesti vielä tehokasta, koska algoritmin aikavaativuus kasvaa
-eksponentiaalisesti verrattaessa opetusmateriaalin kokoon. 
+joten jo yhden palvelun osalta koko datan läpikäymiseen olisi mennyt kohtuuttomasti aikaa. Käytetyn menetelmän rajoitukset, jotka on kerrottu luvussa \ref{sec:matlab},
+asettivat myös käytännön rajoituksia analysoitavien tiedostojen määrälle.
  
 Esikäsittelyvaiheessa HTTP-kyselyt jaetaan palvelun resurssien mukaan omiin tiedostoihin, joissa ne ovat CVS-formaatissa kuvan ??? mukaisesti. 
 Resursseihin kohdistuvat kyselyt vaihtelevat suuresti sen mukaan, kuinka käytetty mikäkin resurssi on. Perinteisen Web-sivuston tapauksessa tähän
@@ -38,8 +37,6 @@ Resurssit pyrimme valitsemaan siten, että jokaisesta ryppäästä olisi yksi va
 \caption{Palvelun resurssien ominaisuudet.}
 \label{service_resources}
 \end{figure}
-
-\section{Tulokset}
 
 Palvelun jokaisesta resurssista muodostettiin aluksi diffuusiokuvaus
 käyttäen korkeintaan 2~000 pistettä. Näin lasketuista
@@ -69,6 +66,14 @@ ainoaksi merkitty poikkeama, jolla on arvot ovat 7,3 ja 14594. Näistä ensimmä
 HTTP-kysely löytyy. Seuraava luku taas kertoo sen palvelimen, johon kysely on tullut ja viimeisin luku kertoo sen lokitiedoston rivin, josta
 haluttu kysely löytyy. Näitä tietoa seuraamalla pystytään sitten yksilöimään haluttu kysely.
    
+\section{Tulokset}
+
+Analysoitavassa materiaalissa resurssilla 1 \ref{service_1} oli viisi HTTP-kyselyä, jotka merkittiin poikkeaviksi. Tutkimalla diffuusiokuvauksen
+luomiseen käytettyä lokia ja palauttamalla HTTP-kyselyt alkuperäiseen muotoon, pystyimme paikallistamaan nämä kyselyt ja vertaamaan niitä lokin
+muihin kyselyihin. Resurssin 1 tapauksessa poikkeavuudet näyttivät johtuvan 
+
+Kuvassa \ref{servuce_18} on nähtävillä, että 181 kyselystä yksi todettiin poikkeavaksi. 
+
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_1.pdf}
