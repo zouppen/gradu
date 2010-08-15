@@ -4,6 +4,24 @@ read.zipola <- function(filename)
   read.table(file(filename), sep=",",col.names=cols)
 }
 
+group.anomalies <- function(zipola) {
+  ano <- vector(6,mode="list")
+  names(ano) <- c("sd","limit","ano.x","ano.y","normal.x","normal.y")
+
+  ano$sd <- sd(zipola$density)
+  ano$limit <- 3 * ano$sd
+
+  anofilter <- zipola$density > ano$limit
+
+  ano$ano.x <- (1:length(zipola$density))[anofilter]
+  ano$ano.y <- zipola$density[anofilter]
+
+  ano$normal.x <- (1:length(zipola$density))[!anofilter]
+  ano$normal.y <- zipola$density[!anofilter]
+
+  ano
+}
+
 # Plots densities the simple way.
 densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F, main="Anomaliat") {
 
@@ -73,3 +91,17 @@ plot.services <- function(tbl) {
     plot.service(tbl$service[i],tbl$file[i])
   }
 }
+
+## Diffusion functions
+
+optimal.variation <- function(v, randomness=0.01) {
+  variation <- max(v) - min(v)
+  randomness * variation
+}
+
+variate <- function(v, ...) {
+  rnorm(v,mean=v,sd=optimal.variation(v))
+}
+
+## plot.diffusion <- function(tbl, randomness=0) {
+  
