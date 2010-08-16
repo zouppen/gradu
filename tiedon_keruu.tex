@@ -206,10 +206,11 @@ Linux-järjestelmässä seuraavalla tavalla:
 mkdir lists
 find [[polku]] -iname '*.gz' | classifier lists/
 \end{lstlisting} 
+\label{filelist}
 
 Ajon yhteydessä muodostuu hakemiston \texttt{lists} alle palveluiden
-mukaan nimetyt tiedostot, joiden sisällä on palveluun kuuluvat
-tiedostonnimet. Tiedostot ovat tekstimuotoon sarjallistettuja.
+mukaan nimetyt tiedostot. Tiedostomuoto joiden sisällä on palveluun kuuluvat
+tiedostonnimet sekä tiedon siitä, minkä palvelimen lokitiedostosta on kyse. Tiedostot ovat tekstimuotoon sarjallistettuja.
 
 \subsection{Muuntaminen tietorakenteeksi}
 
@@ -334,5 +335,24 @@ Diffuusikuvausten laskemiseen voidaan käyttää korkeintaan noin 5000 yksittäi
 algoritmin aikavaativuus kasvaa eksponentiaalisesti verrattaessa opetusmateriaalin kokoon. 
 
 \section{Pisteen takaisin muuntaminen palvelinlokin riviksi}
+
+LineInfo-tietorakennetta kuljetetaan esikäsittelyvaiheesta
+lähtien datan mukana. Tietorakenne tallennetaan matriisin kolmeen
+ensimmäiseen sarakkeeseen, eli tekstimuotoisessa esityksessä se
+sijaitsee rivin kolmessa ensimmäisessä pilkulla erotetussa kentässä.
+
+
+kaikki anomaliat kaikissa resursseissa:
+
+%a <- readZipolaFile "/home/joell/zipolalta/service_a_anomalies.csv"
+%saveLogLines tiedostolistaus kohde a
+
+%anomaliat resursseittain ryhmiteltynä:
+
+%backtrackCSVnumeric
+%tiedostolistaus
+%vektorihakemisto
+%kohde
+%[1,18,337,721,723,882]
 
 TODO

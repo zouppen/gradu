@@ -14,147 +14,189 @@ analysoimme myös vain viikon mittaisen jakson. Tähän ratkaisuun päädyttiin 
 joten jo yhden palvelun osalta koko datan läpikäymiseen olisi mennyt kohtuuttomasti aikaa. Käytetyn menetelmän rajoitukset, jotka on kerrottu luvussa \ref{sec:matlab},
 asettivat myös käytännön rajoituksia analysoitavien tiedostojen määrälle.
  
-Esikäsittelyvaiheessa HTTP-kyselyt jaetaan palvelun resurssien mukaan omiin tiedostoihin, joissa ne ovat CVS-formaatissa kuvan ??? mukaisesti. 
-Resursseihin kohdistuvat kyselyt vaihtelevat suuresti sen mukaan, kuinka käytetty mikäkin resurssi on. Perinteisen Web-sivuston tapauksessa tähän
-vaikuttavat esimerkiksi resurssia käyttävän palvelun käyttöaste ja se, käytetäänkö samaa resurssia useamman sivun osana. 
+Esikäsittelyvaiheessa HTTP-kyselyt jaetaan palvelun resurssien mukaan
+omiin tiedostoihin, joissa ne ovat CSV-formaatissa kuvan ???
+mukaisesti.  Resursseihin kohdistuvien kyselyiden lukumäärä vaihtelee
+suuresti sen mukaan, kuinka käytetty mikäkin resurssi on. Web-sivun
+kyseessä ollessa lukumäärä vastaa sivun käyntimäärää. Mikäli resurssia
+käytetään esimerkiksi muun sivun osana, kuten tyylitiedostojen ja
+kuvien tapauksessa, tämä kasvattaa merkittävästi kyselyiden lukumäärää
+verrattuna tavanomaiseen Web-sivuun.
 
-Analyysissä käyttämämme viikon pituinen jakso sisälsi yhteensä 913 eri resurssia ja näihin kohdistuvat kyselymäärät vaihtelivat muutamasta kappaleesta
-aina kymmeniin tuhansiin. Näistä suodatimme pois sellaiset resurssit, joihin kohdistui alle 100 kyselyä ja joiden GET-parametreistä muodostettujen
-erilaisten n-grammien määrä oli alle kymmenen. Suodatuksen jälkeen analysoitavaksi jäi 36 resurssia. Käyttämillämme suodatusrajoilla ei ole tekemistä 
-itse esikäsittelijän kanssa, vaan suodatusrajat on käyttäjän säädettävissä tiedostosta \texttt{src/InterestingParameters.hs}.
-    
-Käytetyimmissä resursseissa HTTP-kyselyitä oli kymmeniä tuhansia, joten jokaisesta resurssista ei pystytty suoraan tekemään diffuusiokuvausta johtuen
-menetelmän rajoituksista. Ongelma ratkaistiin valitsemalla satunnaisotannalla ilman takaisinpanoa 2000 HTTP-kyselyä niistä resursseista, joissa oli 
-kyselyitä yli tämän määrän. Näin ollen jokaisesta resurssista muodostettiin lopulta tiedosto, jossa oli korkeintaan 2000 HTTP-kyselyä.
+Analyysissä käyttämämme viikon pituinen jakso sisälsi yhteensä 913 eri
+resurssia ja näihin kohdistuvat kyselymäärät vaihtelivat muutamasta
+kappaleesta aina kymmeniin tuhansiin. Koska dynaamisiin
+Web-palveluihin kohdistuvat tietoturvahyökkäyksissä hyödynnetään
+erityisesti HTTP-kyselyn parametriosan käsittelyn haavoittuvaisuuksia,
+tutkitaan tässä vain sellaisia palveluita, joissa esiintyy vaihteleva
+kirjo parametreja. Tämä rajaus tehtiin suodattamalla pois sellaiset
+resurssit, joihin kohdistui alle sata kyselyä ja joiden
+GET-parametreistä muodostettujen erilaisten n-grammien määrä oli alle
+kymmenen. Suodatuksen jälkeen analysoitavaksi jäi 36
+resurssia. Suodatus suoritettiin esikäsitelyn jälkeen, ja
+suodatusrajat on säädettävissä tiedostosta
+\texttt{src/InterestingParameters.hs}.
 
-Analysoitavan palvelun eri resurssit on esitetty kuvassa \ref{service_resources}. Kuvassa vaaka-akselina on käytetty N-grammien lukumäärää ja 
-pystyakselina GET-parametrien lukumäärää. Resursseista valitsimme kuusi tarkempaan tarkasteluun, ja ne on merkitty kuvaajaan niiden resurssinumerolla. 
-Resurssit pyrimme valitsemaan siten, että jokaisesta ryppäästä olisi yksi valittuna.
+Käytetyimmissä resursseissa HTTP-kyselyitä oli kymmeniä tuhansia,
+joten jokaisesta resurssista ei pystytty suoraan tekemään
+diffuusiokuvausta johtuen menetelmän rajoituksista. Ongelma
+ratkaistiin valitsemalla satunnaisotannalla ilman takaisinpanoa 2~000
+HTTP-kyselyä niistä resursseista, joissa oli kyselyitä yli tämän
+määrän. Näin ollen jokaisesta resurssista muodostettiin lopulta
+tiedosto, jossa oli enintään 2~000 HTTP-kyselyä.
 
-\begin{figure}[ht]
+\begin{figure}[hb]
 \centering
 \includegraphics[width=13cm]{pics/service_resources.pdf}
 \caption{Palvelun resurssien ominaisuudet.}
 \label{service_resources}
 \end{figure}
 
-Palvelun jokaisesta resurssista muodostettiin aluksi diffuusiokuvaus
-käyttäen korkeintaan 2~000 pistettä. Näin lasketuista
-diffuusiokuvauksista muodostettiin seuraavaksi diffuusiokartta käytäen
-toista ja kolmatta ominaisvektoria.  Koska suuri määrä pisteitä
-sijoittui täsmälleen samoihin koordinaatteihin, kartan luettavuuden
-parantamiseksi kartan pisteitä ``täristettiin''. Täristäminen
-suoritettiin lisäämällä ominaisvektorien arvoihin normaalijakaumasta
-satunnaisesti poimittu arvo. Normaalijakauman keskihajontana
-käytettiin yhtä prosenttia akselin leveydestä. Kuvassa
-\ref{diffusio_1} nähdään edellä kuvatulla tavalla muodostettu
-diffuusiokartta resurssista 1. Kuvaajasta voidaan havaita, että
-muutamaa poikkeusta lukuunottamatta pisteet sijoittuvat hyvin lähelle
-toisia.
+Analysoitavan palvelun eri resurssit on esitetty kuvassa
+\ref{service_resources}. Kuvassa vaaka-\-akselina on käytetty
+N-grammien lukumäärää ja pystyakselina GET-parametrien
+lukumäärää. Resursseista valitsimme kuusi tarkempaan tarkasteluun, ja
+ne on merkitty kuvaajaan niiden resurssinumerolla.  Resurssit pyrimme
+valitsemaan siten, että jokaisesta ryppäästä olisi yksi valittuna.
 
-Analysoimalla saatua diffuusiokarttaa voidaan määrittää ne pisteet, jotka on luokiteltu poikkeaviksi siinä joukossa, jossa kyseisiä pisteitä on 
-verrattu. Diffuusiokartta ei ole kuitenkaan kovinkaan havainnollinen, joten diffuusiokuvauksen pohjalta on luotu vielä etäisyyskartta. Kuvassa
-\ref{service_1} on resurssista 1 muodostettu etäisyyskartta. Kuvaajassa vaaka-akselille on sijoitettu resurssille kohdistuneet HTTP-kyselyt,
-ja pystyakselin mittana on etäisyys. Tässä pystyakseli ilmaisee sen, kuinka kaukana kukin piste on vertailujoukon sisällä. Jokaiselle kuvaajalle
+Palvelun jokaisesta resurssista muodostettiin aluksi diffuusiokuvaus
+käyttäen edellä kuvatulla tavalla suodatettua aineistoa.
+Analysoimalla saatua diffuusiokuvausta voidaan määrittää ne pisteet,
+jotka on luokiteltu poikkeaviksi siinä joukossa, jossa kyseisiä
+pisteitä on verrattu.
+
+Näin lasketuista diffuusiokuvauksista muodostettiin seuraavaksi
+diffuusiokartta käytäen toista ja kolmatta ominaisvektoria.  Koska
+suuri määrä pisteitä sijoittui täsmälleen samoihin koordinaatteihin,
+kartan luettavuuden parantamiseksi sirontakuvion pisteitä
+``täristettiin''. Täristäminen suoritettiin lisäämällä
+ominaisvektorien arvoihin normaalijakaumasta satunnaisesti poimittu
+arvo. Normaalijakauman keskihajontana käytettiin yhtä prosenttia
+akselin leveydestä. Kuvassa \ref{diffusio_1} nähdään edellä kuvatulla
+tavalla muodostettu diffuusiokartta resurssista 1. Kuvaajasta voidaan
+havaita, että muutamaa poikkeusta lukuunottamatta pisteet sijoittuvat
+hyvin lähelle toisia.
+
+Diffuusiokartta ei ole sellaisenaan kovinkaan havainnollinen, joten
+jokaiselle pisteelle lasketaan poikkeavuusluku. Se muodostetaan
+diffuusiokuvauksen toisen, kolmannen ja neljännen ominaisvektorin
+muodostamassa diffuusioavaruudessa summaamalla euklidinen etäisyys
+lähimpään kolmeen pisteeseen. Tätä etäisyystiedon avulla voidaan piste
+luokitella poikkeavuudeksi ja tästä aineistosta voidaan piirtää
+poikkeavuuskartta.
+
+% FIXME etäisyyskartta -> poikkeavuuskartta. Tuomon vinkki.
+
+Kuvassa
+\ref{service_1} on resurssista 1 muodostettu poikkeavuuskartta. Kuvaajassa vaaka-akselille on sijoitettu resurssille kohdistuneet HTTP-kyselyt,
+ja pystyakselin mittana on poikkeavuus. Tässä pystyakseli ilmaisee sen, kuinka poikkeava kukin piste on vertailujoukon sisällä. Jokaiselle kuvaajalle
 on vielä määritetty keskihajonta ja raja-arvo, jonka ylittäneet pisteet merkitään poikkeaviksi. Tämä raja-arvo vaihtelee tapauskohtaisesti, ja sen
 arvo on kolme kertaa keskihajonta. Keskihajonta on merkitty kuvaajaan katkoviivalla ja raja-arvo yhtenäisellä viivalla. Esimerkiksi resurssin 1 
-etäisyyskartassa \ref{service_1} on nähtävissä viisi poikkeavuudeksi merkittyä pistettä.
+poikkeavuusskartassa \ref{service_1} on nähtävissä viisi poikkeavuudeksi merkittyä pistettä.
 
-Jokainen diffuusiokartan luomiseen käytetytty piste pystytään palauttamaan siihen HTTP-kyselyyn, josta se on muodostettu. Esitetyissä kuvaajissa
-palauttamiseen tarvittavat tiedot on merkitty niihin pisteisiin, jotka on merkitty poikkeaviksi. Otetaan esimerkiksi kuvaajan \ref{service_18}
-ainoaksi merkitty poikkeama, jolla on arvot ovat 7,3 ja 14594. Näistä ensimmäinen arvo ilmoittaa sen tiedoston järjestysnumeron, josta kyseinen 
-HTTP-kysely löytyy. Seuraava luku taas kertoo sen palvelimen, johon kysely on tullut ja viimeisin luku kertoo sen lokitiedoston rivin, josta
-haluttu kysely löytyy. Näitä tietoa seuraamalla pystytään sitten yksilöimään haluttu kysely.
-   
+Jokainen diffuusiokartan luomiseen käytetytty piste pystytään
+palauttamaan siihen HTTP-kyselyyn, josta se on
+muodostettu. Esitetyissä kuvaajissa palauttamiseen tarvittavat tiedot
+on merkitty niihin pisteisiin, jotka ylittävät raja-arvon. Otetaan
+esimerkiksi kuvaajan \ref{service_18} ainoaksi merkitty poikkeama,
+jolla on arvot ovat 7,3 ja 14594. Näistä ensimmäinen arvo ilmoittaa
+sen tiedoston järjestysnumeron, josta kyseinen HTTP-kysely
+löytyy. Seuraava luku puolestaan kertoo sen palvelimen
+järjestysnumeron, johon kysely on ohjattu. Näiden kahden luvun avulla
+voidaan yksilöidä tietty lokitiedosto. Viimeisin luku sisältää
+rivinumeron kyseisen lokitiedoston sisällä.  Tämän kolmikon avulla
+pystytään yksilöimään haluttu kysely ja pistettä vastaava alkuperäinen
+palvelinlokin rivi voidaan löytää.
+
 \section{Tulokset}
 
 Analysoitavassa materiaalissa resurssilla 1 \ref{service_1} oli viisi HTTP-kyselyä, jotka merkittiin poikkeaviksi. Tutkimalla diffuusiokuvauksen
 luomiseen käytettyä lokia ja palauttamalla HTTP-kyselyt alkuperäiseen muotoon, pystyimme paikallistamaan nämä kyselyt ja vertaamaan niitä lokin
 muihin kyselyihin. Resurssin 1 tapauksessa poikkeavuudet näyttivät johtuvan 
 
-Kuvassa \ref{servuce_18} on nähtävillä, että 181 kyselystä yksi todettiin poikkeavaksi. 
+Kuvassa \ref{service_18} on nähtävillä, että 181 kyselystä yksi todettiin poikkeavaksi. 
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_1.pdf}
-\caption{Resurssin 1 diffuusiokartta.}
+\caption{Resurssin 1 täristetty diffuusiokartta.}
 \label{diffusio_1}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_1.pdf}
-\caption{Resurssin 1 etäisyyskartta.}
+\caption{Resurssin 1 poikkeavuuskartta.}
 \label{service_1}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_18.pdf}
-\caption{Resurssin 18 diffuusiokartta.}
+\caption{Resurssin 18 täristetty diffuusiokartta.}
 \label{diffusio_18}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_18.pdf}
-\caption{Resurssin 18 etäisyyskartta.}
+\caption{Resurssin 18 poikkeavuuskartta.}
 \label{service_18}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_337.pdf}
-\caption{Resurssin 337 diffuusiokartta.}
+\caption{Resurssin 337 täristetty diffuusiokartta.}
 \label{diffusio_337}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_337.pdf}
-\caption{Resurssin 337 etäisyyskartta.}
+\caption{Resurssin 337 poikkeavuuskartta.}
 \label{service_337}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_721.pdf}
-\caption{Resurssin 721 diffuusiokartta.}
+\caption{Resurssin 721 täristetty diffuusiokartta.}
 \label{diffusio_721}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_721.pdf}
-\caption{Resurssin 721 etäisyyskartta.}
+\caption{Resurssin 721 poikkeavuuskartta.}
 \label{service_721}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_723.pdf}
-\caption{Resurssin 723 diffuusiokartta.}
+\caption{Resurssin 723 täristetty diffuusiokartta.}
 \label{diffusio_723}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_723.pdf}
-\caption{Resurssin 723 etäisyyskartta.}
+\caption{Resurssin 723 poikkeavuuskartta.}
 \label{service_723}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_882.pdf}
-\caption{Resurssin 882 diffuusiokartta.}
+\caption{Resurssin 882 täristetty diffuusiokartta.}
 \label{diffusio_882}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/tiheyskuvat/service_882.pdf}
-\caption{Resurssin 882  etäisyyskartta.}
+\caption{Resurssin 882 poikkeavuuyskartta.}
 \label{service_882}
 \end{figure}
 
