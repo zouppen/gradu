@@ -2,7 +2,7 @@
 
 \chapter{Analyysi}
 
-Tässä luvussa käydään vaiheittain läpi yhden valitun palvelun analysointi sekä esitetään perustelut, joiden pohjalta tehtyihin ratkaisuihin on päädytty. 
+Tässä luvussa käydään vaiheittain läpi yhden valitun palvelun analysointi sekä esitetään perustelut, joiden pohjalta tehtyihin ratkaisuihin päädyttiin. 
 Luvussa myös esitellään analysoinnista saatuja tuloksia sekä pohditaan näihin johtaneita syitä. Lopuksi vielä esitetään jatkotutkimuksen kannalta 
 tärkeitä kehitysideoita, joita syntyi tutkimuksen aikana. 
  
@@ -12,8 +12,9 @@ Saamamme materiaali koostui neljästä eri Web-palvelusta, joista analyysiin val
 myös valmiiksi, mutta koska lokitietoja oli määrällisesti niin paljon, päädyimme tarkastelemaan tarkemmin vain yhtä. Valitsemastamme palvelusta
 analysoimme myös vain viikon mittaisen jakson. Tähän ratkaisuun päädyttiin sen takia, että analysoitavaa dataa oli kerätty noin puolen vuoden ajalta,
 joten jo yhden palvelun osalta koko datan läpikäymiseen olisi mennyt kohtuuttomasti aikaa. Käytetyn menetelmän rajoitukset, jotka on kerrottu luvussa \ref{sec:matlab},
-asettivat myös käytännön rajoituksia analysoitavien tiedostojen määrälle.
- 
+asettivat myös käytännön rajoituksia analysoitavien tiedostojen määrälle. Tämän kokoinen otanta oli kuitenkin riittävän suuri esikäsittelijän toimivuuden
+testaamiseen, jonka lisäksi käytettyjen menetelmien sopivuutta käytössä olleen materiaalin analysoimiseen voitiin arvioida. 
+
 Esikäsittelyvaiheessa HTTP-kyselyt jaetaan palvelun resurssien mukaan
 omiin tiedostoihin, joissa ne ovat CSV-formaatissa kuvan ???
 mukaisesti.  Resursseihin kohdistuvien kyselyiden lukumäärä vaihtelee
@@ -64,7 +65,7 @@ Analysoimalla saatua diffuusiokuvausta voitiin määrittää ne pisteet,
 jotka oli luokiteltu poikkeaviksi siinä joukossa, jossa kyseisiä
 pisteitä oli verrattu. 
 
-Näin lasketuista diffuusiokuvauksista muodostettiin seuraavaksi
+Seuraavaksi lasketuista diffuusiokuvauksista muodostettiin
 diffuusiokartta käytäen toista ja kolmatta ominaisvektoria. Koska
 suuri määrä pisteitä sijoittui täsmälleen samoihin koordinaatteihin,
 kartan luettavuuden parantamiseksi sirontakuvion pisteitä
@@ -101,9 +102,7 @@ sen tiedoston järjestysnumeron, josta kyseinen HTTP-kysely
 löytyy. Seuraava luku puolestaan kertoo sen palvelimen
 järjestysnumeron, johon kysely on ohjattu. Näiden kahden luvun avulla
 voidaan yksilöidä tietty lokitiedosto. Viimeisin luku sisältää
-rivinumeron kyseisen lokitiedoston sisällä.  Tämän kolmikon avulla
-pystytään yksilöimään haluttu kysely ja pistettä vastaava alkuperäinen
-palvelinlokin rivi voidaan löytää.
+rivinumeron kyseisen lokitiedoston sisällä.
 
 \section{Tulokset}
 
@@ -126,11 +125,9 @@ sama verkko-osoite. Onkin hyvin todennäköistä, että pyydetyt palvelut eivät
 virheitä. Viimeisessä poikkeavassa kyselyssä oli sitten muista eroava määrä avain-arvo pareja.
 
 Kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet aiheutuivat samaan tapaan ylimääräisestä tunnistetiedosta, joka oli lisätty kyselyiden perään. Kyselyt olivat selkeästi tulleet
-saman välityspalvelun kautta, ja niistä jokainen oli tullut eri käyttäjältä. Tämä viittaakin siihen, että kyseinen välityspalvelu on konfiguroitu virheellisesti jonka
-takia sitä kautta tulevat pyynnöt eivät näy palvelimelle oikein. Viimeisessä kuvassa \ref{service_882} resurssin poikkeama aiheutui siitä, että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. 
-Muut käyttäjät ainoastaan latasivat saman tiedostoa ilman ylimääräisiä parametreja.. 
-
-
+saman välityspalvelun kautta, ja niistä jokainen oli tullut eri käyttäjältä. Tämä viittaisikin siihen, että kyseinen välityspalvelu olisi konfiguroitu virheellisesti. Tämän takia
+sen kautta tulevat pyynnöt muodostettiin virheellisesti ja palvelimelle tulevia pyyntöjä ei pystytty käsittelemään oikein. Viimeisessä kuvassa \ref{service_882} resurssin poikkeama aiheutui siitä, 
+että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut käyttäjät ainoastaan latasivat saman tiedostoa ilman ylimääräisiä parametreja.. 
 
 \begin{figure}[p]
 \centering
@@ -216,21 +213,21 @@ Muut käyttäjät ainoastaan latasivat saman tiedostoa ilman ylimääräisiä pa
 \label{service_882}
 \end{figure}
 
-- Liikenne hyvin samakaltaista
-- Verkkokerroksen hyökkäykset eivät näy logissa
-- Mahdollisia aktiivisia palomuureja? verkon rakenne ei muutenkaan ole tarkkaan tiedossa
-- Sisältävätkö kyseiset palvelut muutenkaan hyökkäysten kannalta kiinnostavia kohteita?
+\section{Johtopäätöksiä ja kehitysideoita}
 
+Analyysissä tuli hyvin esille se, että suurin osa liikenteestä oli hyvin samankaltaista. Tutkittavan materiaalin osalta tätä osattiin odottaa, mutta erilaisten pyyntöjen pieni valikoima yllätti
+siitä huolimatta. Ja vaikka kyseisestä otannasta ei varsinaisia tietoturvahyökäyksiä löydetty, olimme tyytyväisiä saatuihin tuloksiin. Tulokset osoittivat selkeästi sen, että esikäsittelijä toimi halutulla tavalla ja 
+valittujen menetelmien avulla poikkeavat pyynnöt pystyttiin paikallistamaan. Myös todennäköisyys siihen, että analysoitavalle jaksolle olisi osunut jonkinlaisia tietoturvahyökkäyksiä, oli häviävän pieni
+johtuen tiedon suuresta massasta. Kyseiset palvelut eivät muutenkaan olleet sellaisia, joihin hyökkääjillä olisi ollut suurta mielenkiintoa.  
 
-\section{Kehitysideoita}
-% Keksi parempi otsikko? :-)
+Vaikka tässä työssä diffuusiokuvausten luomiseen käytettävien kyselyiden määrä rajoitti jonkin verran analyysin tekemistä, ei tämä käytännön ratkaisuissa muodostuisi ongelmaksi. Reaaliaikaisessa toteutuksessa
+järjestelmälle opetetaan etukäteen normaali käyttäytyminen diffuusiokuvauksen avulla, jonka jälkeen uusien pisteiden paikka vertailujoukossa lasketaan yksitellen. Tällöin algoritmin käyttämä laskenta-aika
+pysyy vakiona. Uudet pisteet voidaan projisoida diffuusiokuvaukseen esimerkiksi Nyströmin laajennuksen avulla, mutta tätä emme tähän työhön ottaneet enää mukaan. Menetelmä on kuitenkin hyvin tunnettu,
+ja sitä on sovellettu monissa diffuusiokuvausten käyttöön pohjautuvissa tutkimuksissa.  
 
-- Reaaliaikaisessa toteutuksessa aikavaativuus ei ole ongelma, koska järjestelmälle opetetaan etukäteen normaali käyttäytyminen, jonka jälkeen
-uudet pisteet projisoidaan yksitellen kuvaan. Nyström extension
+Seuraava looginen askel testauksissa olisi analysoida materiaalia rajatummalta alustalta ja lyhyemmältä ajanjaksolta. Esimerkiksi lokitiedot sellaisilta ajan hetkiltä, jolloin tietomurtoyritysten tiedetään tapahtuneen,
+tarjoaisi erinomaiset puitteet testata tässä työssä käytettyjä ratkaisuja. Tätä kautta voitaisiin myös määrittää uusia parametreja, ja laajentaa käytettyjä menetelmiä. N-grammien lisäksi järjestelmä
+voisi käyttää parametreina esimerkiksi samasta osoitteesta tulevien kyselyiden tiheyttä ja resurssipyynnöissä esiintyvien merkkien yleistä jakautumista. Käyttäjän IP-osoitteesta voitaisiin myös selvittää esimerkiksi
+palveluntarjoaja, jonka kautta kysely tuli. Opetusjakson tarkempi määrittely tarjoaisi myös analyysin kannalta luotettavampaa tietoa. 
 
-- Menetelmänt toimivuuden testauksen kannalta tarvittaisiin rajatumpaa materiaalia. Esimerkiksi lyhyempi ajan jakso sellaiselta hetkeltä, jolloin
- tiedetään hyökkäyksen tapahtuneen
-
-- Opetusjakson määrittely
-
-- Uusien parametrien määrittäminen. Onko tämä mahdollista? ESim. IP-osoite ja selaimen tunnistetieto
+- Verkkokerroksen hyökkäykset jää huomaamatta. 
