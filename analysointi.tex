@@ -72,7 +72,7 @@ kartan luettavuuden parantamiseksi sirontakuvion pisteitä
 ``täristettiin''. Täristäminen suoritettiin lisäämällä
 ominaisvektorien arvoihin normaalijakaumasta satunnaisesti poimittu
 arvo. Normaalijakauman keskihajontana käytettiin yhtä prosenttia
-akselin leveydestä. Kuvassa \ref{diffusio_1} nähdään edellä kuvatulla
+akselin leveydestä. Kuvassa \ref{diffuusio_1} nähdään edellä kuvatulla
 tavalla muodostettu diffuusiokartta resurssista 1. Kuvaajasta voidaan
 havaita, että muutamaa poikkeusta lukuunottamatta pisteet sijoittuivat
 hyvin lähelle toisia.
@@ -83,8 +83,6 @@ summaamalla euklidinen etäisyys lähimpään kolmeen pisteeseen
 diffuusiokuvauksen toisen, kolmannen ja neljännen ominaisvektorin
 muodostamassa diffuusioavaruudessa. Tämän etäisyystiedon avulla voitiin piste
 luokitella poikkeavuudeksi sekä piirtää poikkeavuuskartta.
-
-% FIXME etäisyyskartta -> poikkeavuuskartta. Tuomon vinkki.
 
 Kuvassa \ref{service_1} on resurssista 1 muodostettu poikkeavuuskartta. Kuvaajassa vaaka-akselille on sijoitettu resurssille kohdistuneet HTTP-kyselyt
 ja pystyakselin mittana on poikkeavuus. Tässä pystyakseli ilmaisee sen kuinka poikkeava kukin piste on vertailujoukon sisällä. Jokaiselle kuvaajalle
@@ -106,34 +104,62 @@ rivinumeron kyseisen lokitiedoston sisällä.
 
 \section{Tulokset}
 
-Analysoitavassa materiaalissa resurssilla 1 \ref{service_1} oli viisi HTTP-kyselyä, jotka merkittiin poikkeaviksi. Tutkimalla diffuusiokuvauksen
-luomiseen käytettyä lokia, ja palauttamalla HTTP-kyselyt alkuperäiseen muotoon, pystyimme paikallistamaan nämä kyselyt ja vertaamaan niitä lokin
-muihin kyselyihin. Resurssin 1 tapauksessa kolme poikkeavaksi merkittyä kyselyä sisälsi sellaisen tunnistetiedon käyttäjistä, jota ei esiintynyt 
-muissa kyselyissä. Kahdesta jäljelle jääneestä kyselystä yhdessä oli yritetty suoraan pyytää sellaista sivustoa, johon palvelu ei todennäköisesti
-tarjonnut mahdollisuutta. Viimeisin kysely sitten... FIXME: Tarkistettava Joelilta onko tuossa joku bugi?
+Analysoitavassa materiaalissa resurssilla 1 (kuva \ref{service_1}) oli
+viisi HTTP-kyselyä, jotka merkittiin poikkeaviksi. Tutkimalla
+diffuusiokuvauksen luomiseen käytettyä lokia, ja palauttamalla
+HTTP-kyselyt alkuperäiseen muotoon, pystyimme paikallistamaan nämä
+kyselyt ja vertaamaan niitä lokin muihin kyselyihin. Resurssin 1
+tapauksessa neljä poikkeavaksi merkittyä kyselyä sisälsivät sellaisen
+GET-parametrin, jota ei esiintynyt muissa kyselyissä. Parametri
+vaikutti olevan jonkinlainen tunniste, jolla käyttäjä oli mahdollista
+yksilöidä. Jäljelle jääneessä kyselyssä esiintyi useita eri
+GET-parametreja, joita kyseinen resurssi ei käsittele. Tämä on
+saattanut yksinkertaisesti johtua siitä, että käyttäjä on kopioinut
+Web-sivun osoitteen selaimeensa virheellisesti.
 
 Kuvassa \ref{service_18} on nähtävillä resurssin 8 poikkeavuuskartta. Kyseisessä otannassa oli mukana 181 pistettä ja näistä yksi todettiin poikkeavaksi.
 Resurssi 8 tarjosi vain staattista sisältöä, joten GET-parametrin jälkeistä kyselyosuutta ei HTTP-kyselyissä pitänyt olla. Poikkeavassa kyselyssä oli
 GET-parametrin resurssipolun jälkeen kuitenkin kysymysmerkki, ja tämän perässä oli pyynnön tehneen alustan verkko-osoite. Poikkeavan kyselyn tunnistaminen
-oli helppoa, sillä se oli ainoa kysely, jolle n-gram analyysi tuotti rivejä. Resurssille tehty kysely oli selkeästi virheellinen, sillä merkitty verkko-osoite 
+oli helppoa, sillä se oli ainoa kysely, jolle n-gram -analyysi tuotti
+nollasta poikkeavia arvoja. Resurssille tehty kysely oli selkeästi virheellinen, sillä merkitty verkko-osoite 
 oli privaattiverkon osoite. Kyselyssä käytetty alusta oli myös ainoa laatuaan.
 
-Resurssisa 337 \ref{service_337} poikkeavuuksia havaittiin kuusi kappaletta. Näistä neljässä oli GET-parametrin jälkeen lisättynä samanlainen tunnistetieto
+Resurssissa 337 (kuva \ref{service_337}) poikkeavuuksia havaittiin kuusi kappaletta. Näistä neljässä oli GET-parametrina samanlainen tunnistetieto
 kuin resurssin 1 kolmessa havaitussa poikkeavuudessa. Yksi poikkeavuus taas oli saman käyttäjän aiheuttama kuin resurssilla 8, sillä kysely tuli samasta
-verkko-osoitteesta ja näiden välillä ei ollut kuin muutama minuutti aikaa. Käytetty alusta oli myös ainoa laatuaan ja kyselyyn oli lisätty perään
-sama verkko-osoite. Onkin hyvin todennäköistä, että pyydetyt palvelut eivät ole suunniteltu kyseiselle alustalle, jolloin kyselyiden oikeassa muodostuksessa ilmenee
+verkko-osoitteesta ja näiden välillä ei ollut kulunut kuin muutama
+minuutti. Käytetty alusta oli myös ainoa laatuaan ja kyselyn yhtenä parametrina oli 
+sama verkko-osoite. Onkin hyvin todennäköistä, että kyselyt
+kohdistuivat väärään palveluun, koska kyselyiden oikeassa muodostuksessa ilmeni
 virheitä. Viimeisessä poikkeavassa kyselyssä oli sitten muista eroava määrä avain-arvo pareja.
 
-Kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet aiheutuivat samaan tapaan ylimääräisestä tunnistetiedosta, joka oli lisätty kyselyiden perään. Kyselyt olivat selkeästi tulleet
-saman välityspalvelun kautta, ja niistä jokainen oli tullut eri käyttäjältä. Tämä viittaisikin siihen, että kyseinen välityspalvelu olisi konfiguroitu virheellisesti. Tämän takia
-sen kautta tulevat pyynnöt muodostettiin virheellisesti ja palvelimelle tulevia pyyntöjä ei pystytty käsittelemään oikein. Viimeisessä kuvassa \ref{service_882} resurssin poikkeama aiheutui siitä, 
-että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut käyttäjät ainoastaan latasivat saman tiedostoa ilman ylimääräisiä parametreja.. 
+Molempien kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet
+aiheutuivat GET-parametrista, jota ei esiintynyt muissa
+kyselyissä. Ylimääräisen parametrin nimi oli sama, kuin resurssissa 1,
+ja niistä jokainen tuli samasta IP-osoitteesta. Parametrin arvo
+kuitenkin vaihteli kyselystä riippuen. Tämä viittaa siihen, että
+kyselyt olivat tulleet välityspalvelimen kautta, joka jostakin syystä
+lisää kyseisen tunnistetiedon. Tämän takia sen kautta tulevat pyynnöt
+näyttävät erilaiselta. Palvelin kuitenkin oli osannut käsitellä nämä
+kyselyt normaalisti, sillä HTTP-\-vastauskoodi näiden kyselyiden
+osalta oli 200.
+
+Viimeisen analysoidun resurssin (kuva \ref{service_882}) ainoa
+havaittu poikkeavuus johtui ylimääräisestä GET-parametrista. Kyseisen
+nimistä parametria ei esiintynyt muissa kyselyissä. Aineistossa
+esiintyi kuitenkin toinen parametrillinen kysely, joka näkyy
+diffuusiokartassa (kuva \ref{diffuusio_882}) kuvan vasemmassa
+alalaidassa. Kyseinen piste on myös erottuu poikkeavuuskartassa (kuva \ref{service_882})
+raja-arvon alapuolella olevana pienenä kohoumana. Tätä pistettä ei
+kuitenkaan luokiteltu poikkeavuudeksi, koska sen etäisyys ympäröiviin
+pisteisiin ei ollut tarpeeksi suuri. Syytä tähän emme tiedä.
+
+% TODO Zipola voisi vähän arvailla, miksi näin.
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_1.pdf}
 \caption{Resurssin 1 täristetty diffuusiokartta.}
-\label{diffusio_1}
+\label{diffuusio_1}
 \end{figure}
 
 \begin{figure}[p]
@@ -147,7 +173,7 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_18.pdf}
 \caption{Resurssin 18 täristetty diffuusiokartta.}
-\label{diffusio_18}
+\label{diffuusio_18}
 \end{figure}
 
 \begin{figure}[p]
@@ -161,7 +187,7 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_337.pdf}
 \caption{Resurssin 337 täristetty diffuusiokartta.}
-\label{diffusio_337}
+\label{diffuusio_337}
 \end{figure}
 
 \begin{figure}[p]
@@ -175,7 +201,7 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_721.pdf}
 \caption{Resurssin 721 täristetty diffuusiokartta.}
-\label{diffusio_721}
+\label{diffuusio_721}
 \end{figure}
 
 \begin{figure}[p]
@@ -189,7 +215,7 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_723.pdf}
 \caption{Resurssin 723 täristetty diffuusiokartta.}
-\label{diffusio_723}
+\label{diffuusio_723}
 \end{figure}
 
 \begin{figure}[p]
@@ -203,7 +229,7 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 \centering
 \includegraphics[width=11cm]{pics/diffuusiokuvat/service_882.pdf}
 \caption{Resurssin 882 täristetty diffuusiokartta.}
-\label{diffusio_882}
+\label{diffuusio_882}
 \end{figure}
 
 \begin{figure}[p]
@@ -215,19 +241,66 @@ että kyseinen HTTP-pyyntö oli ainoa, johon oli lisätty erillinen arvo. Muut k
 
 \section{Johtopäätöksiä ja kehitysideoita}
 
-Analyysissä tuli hyvin esille se, että suurin osa liikenteestä oli hyvin samankaltaista. Tutkittavan materiaalin osalta tätä osattiin odottaa, mutta erilaisten pyyntöjen pieni valikoima yllätti
-siitä huolimatta. Ja vaikka kyseisestä otannasta ei varsinaisia tietoturvahyökäyksiä löydetty, olimme tyytyväisiä saatuihin tuloksiin. Tulokset osoittivat selkeästi sen, että esikäsittelijä toimi halutulla tavalla ja 
-valittujen menetelmien avulla poikkeavat pyynnöt pystyttiin paikallistamaan. Myös todennäköisyys siihen, että analysoitavalle jaksolle olisi osunut jonkinlaisia tietoturvahyökkäyksiä, oli häviävän pieni
-johtuen tiedon suuresta massasta. Kyseiset palvelut eivät muutenkaan olleet sellaisia, joihin hyökkääjillä olisi ollut suurta mielenkiintoa.  
+Analyysissä tuli hyvin esille se, että suurin osa liikenteestä oli
+hyvin samankaltaista. Tutkittavan materiaalin osalta tätä osattiin
+odottaa, mutta erilaisten pyyntöjen pieni valikoima yllätti siitä
+huolimatta. Ja vaikka kyseisestä otannasta ei varsinaisia
+tietoturvahyökäyksiä löydetty, olimme tyytyväisiä saatuihin
+tuloksiin. Tulokset osoittivat selkeästi sen, että esikäsittelijä
+toimii halutulla tavalla ja valittujen menetelmien avulla poikkeavat
+pyynnöt pystytään paikallistamaan.
 
-Vaikka tässä työssä diffuusiokuvausten luomiseen käytettävien kyselyiden määrä rajoitti jonkin verran analyysin tekemistä, ei tämä käytännön ratkaisuissa muodostuisi ongelmaksi. Reaaliaikaisessa toteutuksessa
-järjestelmälle opetetaan etukäteen normaali käyttäytyminen diffuusiokuvauksen avulla, jonka jälkeen uusien pisteiden paikka vertailujoukossa lasketaan yksitellen. Tällöin algoritmin käyttämä laskenta-aika
-pysyy vakiona. Uudet pisteet voidaan projisoida diffuusiokuvaukseen esimerkiksi Nyströmin laajennuksen avulla, mutta tätä emme tähän työhön ottaneet enää mukaan. Menetelmä on kuitenkin hyvin tunnettu,
-ja sitä on sovellettu monissa diffuusiokuvausten käyttöön pohjautuvissa tutkimuksissa.  
+Valtavasta tietomassasta johtuen aineistosta pystyttiin käytettävissä
+olleen ajan puitteissa analysoimaan vain murto-osa. On siksi täysin
+mahdollista, että palveluun kohdistuneita tietomurtoyrityksiä jäi
+havaitsematta. Analysoidut palvelut saattoivat myös olla sellaisia,
+joihin ei kohdistu kiinnostusta hyökkääjien keskuudessa.
 
-Seuraava looginen askel testauksissa olisi analysoida materiaalia rajatummalta alustalta ja lyhyemmältä ajanjaksolta. Esimerkiksi lokitiedot sellaisilta ajan hetkiltä, jolloin tietomurtoyritysten tiedetään tapahtuneen,
-tarjoaisi erinomaiset puitteet testata tässä työssä käytettyjä ratkaisuja. Tätä kautta voitaisiin myös määrittää uusia parametreja, ja laajentaa käytettyjä menetelmiä. N-grammien lisäksi järjestelmä
-voisi käyttää parametreina esimerkiksi samasta osoitteesta tulevien kyselyiden tiheyttä ja resurssipyynnöissä esiintyvien merkkien yleistä jakautumista. Käyttäjän IP-osoitteesta voitaisiin myös selvittää esimerkiksi
-palveluntarjoaja, jonka kautta kysely tuli. Opetusjakson tarkempi määrittely tarjoaisi myös analyysin kannalta luotettavampaa tietoa. 
+Vaikka tässä työssä diffuusiokuvausten laskentaan käytetyn algoritmin
+kompleksisuus rajoitti jonkin verran analyysin tekemistä, ei tämä
+käytännön toteutuksessa muodostune kuitenkaan
+ongelmaksi. Reaaliaikaisessa toteutuksessa järjestelmälle voidaan
+opettaa etukäteen normaali käyttäytyminen diffuusiokuvauksen avulla,
+jonka jälkeen uusien pisteiden paikka vertailujoukossa lasketaan
+yksitellen. Tällöin algoritmin aikavaativuus riippuu ainoastaan
+opetusjakson koosta, eikä analysoitavien pisteiden määrästä. Uudet
+pisteet voidaan projisoida diffuusioavaruuteen esimerkiksi Nyströmin
+laajennuksen avulla, jota emme tähän työhön ottaneet enää
+mukaan. Menetelmä on kuitenkin hyvin tunnettu, ja sitä on sovellettu
+monissa diffuusiokuvausten käyttöön pohjautuvissa tutkimuksissa.
 
-- Verkkokerroksen hyökkäykset jää huomaamatta. 
+Opetusjakson tarkempi määrittely tarjoaisi analyysin kannalta
+hyödyllisempää tietoa. Jatkokehityksessä seuraava askel olisi
+analysoida tarkemmin valikoitua materiaalia. Tämä voisi tarkoittaa
+esimerkiksi sellaisen lokin analysointia, jolloin tiedetään
+tietomurtoyritysten tapahtuneen. Tätä liikennettä voitaisiin verrata
+normaalitilanteeseen ja näin tunnistaa piirteitä, jotka erottavat
+poikkeavan liikenteen normaalista.  Tällaisen aineiston käyttö
+tarjoaisi erinomaiset puitteet testata tässä työssä käytettyjä
+ratkaisuja.
+
+Toinen kehityssuunta olisi kehittää esikäsittelymenetelmiä. Tämä voisi
+tarkoittaa esimerkiksi sitä, että palvelinlokista kerättäisiin enemmän
+piirteitä, joista voitaisiin muodostaa enemmän parametreja
+diffuusiokuvasta varten. Tällaisia piirteitä olisi esimerkiksi
+käyttäjän IP-osoite ja Web-selaimen tunnistetieto. IP-osoitteen
+luokittelussa voitaisiin hyödyntää esimerkiksi tarjolla olevia
+GeoIP-\-tietokantoja. Käyttäjän IP-osoitteesta voitaisiin näin
+selvittää esimerkiksi palveluntarjoaja, jonka kautta kysely
+tuli.
+
+Käyttämämme esikäsittelijä ei myöskään hyödynnä kyselyiden ajallista
+riippuvuutta eikä ryhmittele kyselyitä muuten kuin resurssien
+perusteella. Esikäsittelijää voisi laajentaa siten, että se mittaisi
+esimerkiksi samasta osoitteesta tulevien kyselyiden tiheyttä. Näin
+olisi mahdollista tunnistaa nykyistä paremmin purskeista liikennettä,
+joka usein liittyy palvelunestohyökkäyksiin.
+
+Poikkeavuuksien tunnistamisessa voitaisiin käyttää Apache-lokin
+rinnalla myös muita tietolähteitä. Tällaisia olisivat esimerkiksi
+palvelinten muistinkulutus ja prosessorikuormitus. Lisäksi
+Web-palvelimen toiminnasta voisi kerätä myös sellaisia parametreja,
+joita ei yleisesti kerätä lokeihin. Esimerkkinä kyselyihin vastaamiseen kulunut
+aika ja resurssit. Tietoa voisi kerätä myös verkkokerrokselta,
+jolloin voitaisiin havaita sellaiset hyökkäykset, joita ei ole
+mahdollista tunnistaa sovelluskerroksella.
