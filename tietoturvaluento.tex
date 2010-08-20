@@ -1,0 +1,62 @@
+% -*- mode: LaTeX; coding: utf-8; -*-
+%
+% TIETOTEKNIIKAN LAITOKSEN GRADUSEMINAARIESITYS
+% Joel Lehtonen
+%
+% Based on Timo Männikkö's template. 
+%
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel}
+
+\usepackage{palatino} % Better font
+\usepackage[intlimits]{amsmath} % For better math mode, namely integrals
+\usepackage{amssymb} % Math symbols
+
+\usepackage[pdftex]{graphicx} % Pictures
+
+\usepackage{hyperref}
+\usepackage{cite}
+
+% Optional 1,5 point line spacing
+%\usepackage{setspace}
+%\onehalfspace
+
+% Hakkeroidaan babel-paketin suomenkielisiä käännöksiä:
+% Vaihdetaan lähdeluettelon otsikoksi Lähteet
+\addto\captionsfinnish{\def\refname{Lähteet}}
+% Hakkerointi päättyy
+
+\title{Web-palveluiden tietoturva}
+\author{Joel Lehtonen\\ \texttt{joel.lehtonen@iki.fi} \\\\Kristian Siljander\\ \texttt{kristian.siljander@jyu.fi}}
+\date{20.8.2010}
+
+\newcommand{\seminaari}{Seminaariesitys...}
+\newcommand{\license}{
+\bigskip%
+\noindent\begin{tabular}{ l p{10cm} } %
+  \hline%
+  \noalign{\bigskip} %
+  \includegraphics[height=1.0truecm]{cc-by-sa} %
+  & \vspace{-0.95truecm}\small Tämän teoksen käyttöoikeutta koskee Creative Commons
+  Attribution-ShareAlike 3.0 Unported -lisenssi.\normalsize \\ %
+\end{tabular}%
+}
+
+\begin{document}
+
+\maketitle
+
+% Input is used instead of include to avoid extra page break.
+\input{web-palvelut}
+
+\pagebreak
+
+\bibliographystyle{ieeetr}
+\bibliography{lahteet}
+
+\end{document}

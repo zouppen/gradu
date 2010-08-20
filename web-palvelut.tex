@@ -1,6 +1,11 @@
 % -*- mode: LaTeX; coding: utf-8; -*-
 
+% Artikkelia varten.
+\ifdefined\seminaari
+\begin{abstract}
+\else
 \chapter{Web-palvelut ja niiden tietoturva}
+\fi
 
 Toimivan ja turvallisen Web-pohjaisen palvelun tarjoaminen vaatii
 nykyisin todella paljon aikaa ja huolellisuutta sekä palvelun kehittäjältä että
@@ -17,11 +22,19 @@ muodossa, joita myös edellä mainitut palvelut edustavat. Uudet teknologiat ja
 kiire tuovat kuitenkin aina mukanaan joukon uusia heikkouksia, joita hyökkääjät
 pyrkivät hyödyntämään. 
 
+\ifdefined\seminaari
+\end{abstract}
+\license
+\pagebreak
+\else
+\relax
+\fi
+
 \section{Dynaaminen Web}
 
 Web 2.0 on termi, jota käytetään monessa eri merkityksessä ja
-asiayhteydessä. Se yhdistetään usein uusiin dynaamisiin Web-teknologioihin ja Internet-
-aikakauden tuotteiden ja palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
+asiayhteydessä. Se yhdistetään usein uusiin dynaamisiin Web-\-teknologioihin ja In\-ter\-net-
+ai\-ka\-kau\-den tuotteiden ja palveluiden kehityskaarien kuvaamiseen \cite{WEB2}. Yhteistä näille
 on se, että ne pyrkivät esittämään sitä muutosta ja kasvua, jota Internet pitää tällä
 hetkellä sisällään. Tämä muutos on lähtöisin siitä, että kuluttajatottumukset
 ovat kehittyneet kohti interaktiivisia palvelumalleja, joissa käyttäjillä on
@@ -38,8 +51,8 @@ joukossa, niin tietoturva-asiat jäävät usein taka-alalle \cite{WEB2b}.
 Tietoturvan kannalta teknologiat, jotka luetaan kuuluvan osaksi Web 2.0
 teknologiaperhettä, ovat jatkuvan huomion ja kehityksen kohteena. Nämä teknologiat
 muodostavat sen voiman, joka mahdollistaa siirtymisen dynaamisiin
-sovelluksiin kuten Google Maps, ja yritysten toimintojen ohjaamisen verkkoon.
-Teknologiat kuten Asynchronous JavaScript (AJAX), Cascading Style Sheet (CSS),
+sovelluksiin, kuten Google Maps, ja yritysten toimintojen ohjaamisen verkkoon.
+Teknologiat, kuten Asynchronous JavaScript (AJAX), Cascading Style Sheet (CSS),
 Flash, JSON ja XML voidaan kaikki laskea kuuluvan osaksi Web 2.0-perhettä.
 Osa näistä teknologioista on ollut jo pidemmän aikaa käytössä, kun taas osaa on
 vasta nyt alettu hyödyntämään siihen, mihin ne on alun perin suunniteltu \cite{WEB2}.
@@ -49,13 +62,13 @@ väliset suhteet.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/web_ymparisto.pdf}
-\caption{Web 2.0 teknologiaperhe}
+\caption{Web 2.0 teknologiaperhe.}
 \label{web}
 \end{figure}
 
 Tietoturvan kannalta dynaamiset web-teknologiat tuovat mukanaan joukon uusia haasteita. Ensinnäkin
 samat vanhat tietoturvariskit, jotka vaivasivat jo Web 1.0 aikoihin, ovat edelleen voimassa. Näiden lisäksi
-hyökkäykset kuten Cross-Site Scripting (XSS) ja Cross-Site Request Forgery (CSRF) 
+hyökkäykset, kuten Cross-Site Scripting (XSS) ja Cross-Site Request Forgery (CSRF) 
 ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
 monipuolisemman ympäristön, jonka kautta murtautua järjestelmiin \cite{WEB2}. Dynaamiset
 web-sovellukset antavat myös loppukäyttäjille ja takana oleville ohjelmille enemmän
@@ -69,11 +82,11 @@ haitallisia skriptejä koneelle käyttäen jotain tunnettua tietoturva-aukkoa. Y
 arvion mukaan jopa 70 prosenttia kaikista haitallisista koodeista ladataankin käyttäen
 Ajaxia \cite{WEB2c}.
 
-Palvelinpuolella muutokset eivät rajoitu vain dynaamisten web-teknologioiden tuomiin
+Palvelinpuolella muutokset eivät rajoitu vain dynaamisten Web-\-teknologioiden tuomiin
 tietoturvariskeihin, sillä uudenlainen ajattelu vaatii myös uudenlaista
 palveluarkkitehtuuria. Uusi arkkitehtuuriratkaisu tuo aina mukanaan suuren
 joukon muutoksia, jotka tulee ottaa huomioon tietoturvan suunnittelussa.
-Palvelukeskeinen arkkitehtuuri (engl. Service Oriented Architecture, SOA) on
+Palvelukeskeinen arkkitehtuuri (engl. Service Ori\-ent\-ed Architecture, SOA) on
 yksi näistä kehysmalleista, joka on kasvattanut suosiotaan Web 2.0:n
 vanavedessä. SOA-arkkitehtuurilla onkin nykyisin tärkeä rooli palvelujen
 välisen kommunikoinnin kehittämisessä. Siksi on tärkeää ymmärtää, mistä
@@ -82,11 +95,12 @@ merkitsee tietoturvan kannalta.
 
 \section{Palvelukeskeinen arkkitehtuuri}
 
-Web-pohjaiset sovellukset ovat saaneet yhä suurempaa huomiota yrityspuolen
-tuotekehityksessä. Tätä muutosta on ollut ohjaamassa teknologioiden
-kehittyminen siihen pisteeseen, missä yritykset pystyvät tarjoamaan aikaisemmin
-asiakas-serveri sovelluksia verkon välityksellä luotettavasti ja nopeasti. Tämä
-ratkaisu on tuonut mukanaan rahallisia säästöjä yrityksille, jotka ovat ennen
+Web-pohjaiset sovellukset ovat saaneet yhä suurempaa huomiota yritysten
+tuotekehityksessä. Muutoksen taustalla on teknologian
+kehittyminen siihen pisteeseen, missä toimittajat pystyvät
+luotettavasti ja nopeasti tarjoamaan aikaisempien
+palvelin-asiakas -sovelluksien sijaan verkon välityksellä käytettäviä sovelluksia. Tämä
+ratkaisu on tuonut mukanaan taloudellisia säästöjä yrityksille, jotka ovat ennen
 joutuneet itse huolehtimaan muun muassa sovellusten ajan tasalla pitämisestä ja
 palvelimien ylläpitämisestä \cite{WEB2}. Muutos on luonut myös tarpeen löytää yhä
 tehokkaampia kehitysmalleja ja tapoja toteuttaa entistä monimutkaisempia ja
@@ -94,52 +108,57 @@ vaativimpia sovelluksia suuryritysten tarpeisiin. Yksi tapa hallita tätä
 muutosta on perustaa tehdyt ohjelmistosuunnittelun ratkaisut palvelukeskeisen
 arkkitehtuurin malliin.
 
-Puhuttaessa dynaamisista web-palveluista, palvelukeskeinen arkkitehtuuri lähtee siitä
+Puhuttaessa dynaamisista Web-palveluista, palvelukeskeinen arkkitehtuuri lähtee siitä
 ajatuksesta, että palveluiden toiminnot ja prosessit pyritään suunnittelemaan
 toimimaan mahdollisimman itsenäisesti ja avoimesti siten, että niitä pystytään
 kutsumaan joustavasti eri sovellusten välillä käyttäen standardoitua rajapintaa.
-Tähän ratkaisuun ovat ajaneet pyrkimys laskea IT-kustannuksia, sekä jo käytössä olevien 
-ratkaisujen uudelleenkäytön maksimointi. Aikaisemmin tämän toteuttaminen
-on ollut vaikeaa sovellusten heterogeenisyyden takia, jonka johdosta eri
+Tähän ratkaisuun ovat ajaneet pyrkimys laskea IT-kustannuksia ja
+uudelleenkäytön maksimointi jo käytössä olevissa 
+ratkaisuissa. Aikaisemmin tämän toteuttaminen
+on ollut vaikeaa sovellusten heterogeenisyyden takia, jolloin eri
 alustojen ja toimittajien väliset yhteistoiminnot ovat olleet usein mahdottomia
 toteuttaa. Yhä useamman sovelluksen ja palvelun siirtyessä verkkoon tästä
-halutaan nyt päästä eroon, ja tähän ongelmaan palvelukeskeinen arkkitehtuuri
-pyrkii tuomaan ratkaisun. Käytännössä tämä tarkoittaa sitä, että arkkitehtuurin
+rajoitteesta halutaan nyt päästä eroon ja tähän ongelmaan palvelukeskeinen arkkitehtuuri
+pyrkii tuomaan ratkaisun.
+
+Käytännössä siirtyminen palvelukeskeiseen arkitehtuuriin tarkoittaa sitä, että arkkitehtuurin
 tulee tarjota sovelluksille mahdollisimman joustava sekä sijainnista ja
 protokollasta riippumattoman alusta \cite{SOA}. Tämän avulla loppukäyttäjälle
 voidaan tarjota palveluita monesta eri paikasta yhtä aikaa siten, ettei hän ole
-edes tästä tietoinen. Kyseessä on sama ajattelumalli, johon dynaamiset web-sovellukset
+edes tästä tietoinen. Kyseessä on sama ajattelumalli, johon dynaamiset Web-sovellukset
 pohjautuvat, ja siksi palvelukeskeinen arkkitehtuuri on saanut paljon
 nostetta Web 2.0:n myötä.
 
 Palvelukeskeisen arkkitehtuurin tuomat edut eivät rajoitu pelkästään
-kustannussäästöihin. Sen tuomiin etuihin kuuluu myös muun muassa uusien toimintojen
+kustannussäästöihin. Sen tuomiin etuihin kuuluu myös muun muassa uu\-si\-en toimintojen
 helpompi integrointi jo käytössä oleviin järjestelmiin sekä monimutkaisten
 kokonaisuuksien sujuvampi hallinta. Organisaatioille on myös tärkeää, että tällä
 tavalla suunniteltuihin palvelumalleihin on nopeampi tehdä haluttuja muutoksia, jolloin 
 reagointi markkinamuutoksiin voidaan toteuttaa nopeassa aikataulussa \cite{WEB2c}. Tämä on
 erityisen tärkeää, koska markkinoille on ilmestynyt monia uusia tekniikoita,
-jotka mahdollistavat web-palveluiden integroinnin jo käytössä oleviin
-palveluihin. Vuonna 2008 web-pohjaisten palveluiden kehittämiseen
-käytettiinkin arviolta yli 11 miljardia dollaria, ja osa fokuksesta on jo siirtynyt
+jotka mahdollistavat Web-palveluiden integroinnin jo käytössä oleviin
+palveluihin.
+
+Vuonna 2008 Web-pohjaisten palveluiden kehittämiseen
+käytettiin arviolta yli 11 miljardia dollaria, ja osa fokuksesta on jo siirtynyt
 kohti keskikokoisia ja pieniä yrityksiä. Web-pohjaisten palveluiden merkityksen
 uskotaan entisestään kasvavan ja yritykset, jotka reagoivat hitaasti tähän
 muutokseen, huomaavat tulevaisuudessa olevansa epäsuotuisassa asemassa \cite{WEB2b}.
 
-Palvelinpuolella tapahtuvat muutokoset tarkoittavat sopeutumista uudenlaiseen
-ajattelumalliin, jossa palvelut on hajautettu ympäri verkkoa, ja joista osa ei
-välttämättä ole saman ylläpitäjän hallinnassa. Kuvan \ref{soa} mukainen ratkaisu
+Palvelimen arkkitehtuurissa tapahtuvat muutokset tarkoittavat sopeutumista uudenlaiseen
+ajattelumalliin, jossa palvelut on hajautettu ympäri verkkoa. Näistä palveluista kaikki
+eivät välttämättä ole yhteisen tietohallinnon alaisuudessa. Kuvan \ref{soa} mukainen ratkaisu
 tulee olemaan tulevaisuudessa arkipäivää, ja se tuo mukanaan uusia rajapintoja,
 joiden kautta hyökkääjä voi pyrkiä murtautumaan järjestelmään tai jopa
 yrityksen sisäiseen verkkoon. Koska palveluiden välinen kommunikointi perustuu
 tässä mallissa luottamussuhteen luomiseen, tulee erityistä kiinnittää huomiota
-siihen, kuinka salaukset ja tunnistautuminen hoidetaan web-palveluita tarjoavien
+siihen, kuinka salaus ja tunnistautuminen hoidetaan Web-palveluita tarjoavien
 osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/soa_arkkitehtuuri.pdf}
-\caption{SoA-arkkitehtuuri}
+\caption{SoA-arkkitehtuuri.}
 \label{soa}
 \end{figure}
 
@@ -148,7 +167,7 @@ osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 \section{Web-palveluihin kohdistuvia hyökkäyksiä}
 
 Internetin kehittyessä myös Web-palveluihin kohdistuvat hyökkäykset ovat saaneet
-uusia ilmenemismuotoja. Aikaisemmin ``web hakkerointia'' käytettiin kuvaamaan
+uusia ilmenemismuotoja. Aikaisemmin ``Web-hakkeroinnin'' nimellä kutsuttiin
 hyökkäyksiä, jotka kohdistuivat palveluita tarjoaviin alustoihin kuten Apache ja 
 Microsoft IIS. Nämä hyökkäykset perustuivat tunnettujen haavoittuvaisuuksien
 hyödyntämiseen, ja oikeille työkaluilla varustautunut hyökkääjä pystyi kaatamaan haavoittuvan
@@ -159,34 +178,40 @@ Tämänlaiset hyökkäykset ovat kuitenkin menettäneet suurimman tehonsa, koska
 haavoittuvaisuuksiin reagoidaan entistä nopeammin, yhä useampi alusta on konfiguroitu oikein ja saatavilla on työkaluja, joiden
 avulla pystytään nopeasti ja helposti havaitsemaan yleisimmät tietoturvariskit \cite{Hacking}. Näistä seikoista johtuen
 hyökkääjät ovat alkaneet kiinnittämään entistä enemmän huomiota itse alustalla pyöritettäviin palveluihin pyrkien 
-murtautumaan järjestelmiin näiden kautta. Dynaamisten web-teknologioiden myötä tämän tyyppiset hyökkäykset ovat saaneet
+murtautumaan järjestelmiin näiden kautta. Dynaamisten Web-teknologioiden myötä tämän tyyppiset hyökkäykset ovat saaneet
 enemmän huomiota, sillä se tarjoaa hyökkääjille entistä monipuolisemman hyökkäyspinnan. Tietoturvan 
 kannalta onkin tärkeää, että kumpaankin hyökkäystapaan kiinnitetään huomiota.
 
-\subsection{SQL injektio}
+\subsection{SQL-injektio}
 
-Virheelliseen syöttötietoon perustuvat hyökkäykset ovat jo pidemmän aikaa vaivanneet web-pohjaisia sovelluksia.
-Dynaamisten web-sovellusten myötä hyökkäykset ovat entisestään yleistyneet, sillä monimutkaisten sovellusten takana käytetään entistä
+Virheelliseen syöttötietoon perustuvat hyökkäykset ovat jo pidemmän aikaa vaivanneet Web-pohjaisia sovelluksia.
+Dynaamisten Web-sovellusten myötä hyökkäykset ovat entisestään yleistyneet, sillä monimutkaisten sovellusten takana käytetään entistä
 enemmän erilaisia tietokantapohjaisia ratkaisuja kuten MySQL. Nämä hyökkäykset hyödyntävät sitä seikkaa, että suurin osa
 sovelluksista ei tee selkeää eroa käyttäjän antaman syötteen ja ohjelmalle annettavien käskyjen välillä. Tämä mahdollistaa
 sen, että hyökkääjä pystyy piilottamaan annettuun hakuun ohjelmatason käskyjä, jotka muokkaavat sovelluksen toimintaa
-hyökkääjän haluamaan suuntaan \cite{WEB2}. Normaaleilla toimenpiteillä tällaisen hyökkäysten tunnistaminen on hankalaa, sillä
-yritysten tietoturvasta vastaavat palomuurit toimivat OSI-mallin kolmannella, neljännellä ja viidennellä kerroksella, eivätkä ne tunnista
-ylimmän tason eli ohjelmistotason kautta tulevia hyökkäyksiä. Tämän lisäksi useimmat palomuurit eivät ymmärrä protokollien
+hyökkääjän haluamaan suuntaan \cite{WEB2}. Tavanomaisilla
+menetelmillä, kuten palomuureilla, tällaisen hyökkäysten tunnistaminen on hankalaa, sillä
+monien organisaatioiden tietoturvasta vastaavat palomuurit toimivat OSI-mallin
+kolmannella, neljännellä ja viidennellä kerroksella. Tämän vuoksi
+niiltä jäävät huomaamatta ylimmän kerroksen eli ohjelmistokerroksen
+kautta tulevat hyökkäykset. Tämän lisäksi useimmat palomuurit eivät
+ymmärrä sovellusprotokollien,
 kuten HTTP:n tarkkaa sisältöä \cite{SQLSS}.    
 
 Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessaä vaiheessa hyökkääjän tulee tunnistaa 
-web-sovelluksessa käytetyt teknologiat. Tämä onnistuu muun muassa tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
-sivun lähdekoodia, ja käyttämällä tätä varten tehtyjä työkaluja kuten Nessusta ja Nmapin. Osaavalla hyökkääjälle tämä vaihe on melko triviaali, 
+Web-sovelluksessa käytetyt teknologiat. Tämä onnistuu muun muassa tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
+sivun lähdekoodia ja käyttämällä tarkoitusta varten tehtyjä työkaluja kuten Nessusta ja Nmapin. Osaavalla hyökkääjälle tämä vaihe on melko triviaali, 
 mutta hyökkäyksen kannalta tiedot ovat elintärkeitä, sillä injektiohyökkäyksen onnistuminen on täysin riippuvainen 
-käytetystä alustasta. Kun tarvittavat tiedot on saatu kerättyä, voidaan varsinaista hyökkäystä alkaa suunnittelemaan.
-Tämä tapahtuu tunnistamalla ne syötteet, jotka käyttäjä pystyy sovellukselle antamaan. Tämä käsittää käytännössä kaiken sen 
-tiedon, joka kulkee HTTP GET ja HTTP POST pyynnöissä. Viimeisessä vaiheessa hyökkääjän tehtäväksi jää niiden syötteiden 
-tunnistaminen, joita käyttämällä sovelluksen toimintaa saadaaan muokattua. Tähänkin tehtävään löytyy useita valmiita työkaluja, ja
-monessa tapauksessa samat toimintaperiaatteet toimivat eri alustojen välillä \cite{WEB2}.
+käytetystä alustasta.
 
-Structured Query Language (lyh. SQL), joka on alan de facto standardi tietokantojen käsittelyyn, on käytössä lähes jokaisessa
-web-sovelluksessa, joka käyttää jonkinlaista tietokantaratkaisua. Sen syntaksi on sekoitus ohjelmakäskyjä ja käyttäjän antamia
+Kun tarvittavat tiedot on saatu kerättyä, voidaan varsinaista hyökkäystä alkaa suunnittelemaan.
+Tämä tapahtuu tunnistamalla ne syötteet, jotka käyttäjä pystyy sovellukselle antamaan. Tämä käsittää käytännössä kaiken sen 
+tiedon, joka voidaan välittää HTTP:n GET- ja POST-pyynnöissä. Viimeisessä vaiheessa hyökkääjän tehtäväksi jää niiden syötteiden 
+tunnistaminen, joita käyttämällä sovelluksen toimintaa saadaaan muokattua. Tähänkin tehtävään löytyy useita valmiita työkaluja, ja
+monessa tapauksessa samat toimintaperiaatteet toimivat monilla eri alustoilla \cite{WEB2}.
+
+Structured Query Language (lyh. SQL), joka on alan vakiintunut standardi tietokantojen käsittelyyn, on käytössä lähes jokaisessa
+Web-\-sovelluksessa, joka käyttää jonkinlaista tietokantaratkaisua. Sen syntaksi on sekoitus ohjelmakäskyjä ja käyttäjän antamia
 syötteitä, ja huonosti määritettynä käyttäjän antama syöte voidaan tulkita virheellisesti ohjelmatason käskyksi. Tämän syötteen
 hyökkääjä joutuu usein etsimään sokeasti, mutta syötteet kuten
 
@@ -228,12 +253,12 @@ String query= ``SELECT id FROM user\_table WHERE \\username=' ' OR 1=1; DROP TAB
 user\_table;
 \end{center}
 \end{tt}
-Näin muodostettu haku on syntaktisesti täysin oikea, ja se poistaa tietokannassa olevan user\_table tiedoston, joka pitää
+Näin muodostettu haku on syntaktisesti täysin oikea. Kyseinen lause poistaa tietokannassa olevan user\_table tiedoston, joka pitää
 sisällään järjestelmään tallennetut käyttäjät \cite{WEB2}. 
 
 Vastaavanlaisia tekniikoita käyttäen hyökkääjä pystyy tekemään kaiken sen, joka pystytään esittämään SQL-kyselynä, ja johon ajettavalla
-sovelluksella on riittävät oikeudet. Mielivaltaisten käskyjen antaminen, DLL tiedostojen luominen ja ajaminen sekä tietokannan
-sisällön lähettäminen jollekin toiselle internetissä olevalle palvelimelle ovat vain muutamia esimerkkejä toiminnoista, joita
+sovelluksella on riittävät oikeudet. Mielivaltaisten käskyjen antaminen, DLL-tiedostojen luominen ja ajaminen sekä tietokannan
+sisällön lähettäminen jollekin toiselle Internetiin liitetylle palvelimelle ovat vain muutamia esimerkkejä toiminnoista, joita
 onnistunut hyökkäys voi aiheuttaa \cite{SQLSS}.
 
 Injektiohyökkäykset eivät rajoitu pelkästään SQL-kieleen, sillä useat eri tekniikat kuten XPath ja LDAP sisältävät vastaavanlaisia 
@@ -241,38 +266,56 @@ heikkouksia \cite{WEB2}. SQL-kieleen pohjautuvat hyökkäykset ovat kuitenkin ka
 pohjautuvat ratkaisut sisältävät usein myös osan seuraavista ominaisuuksista, jotka mahdollistavat hyökkäysten tekemisen:
 
 \begin{itemize}
-\item Kommentoinnin mahdollistavat merkki: "{-}{-}.
-\item Mahdollisuus suorittaa useita hakuja yhdellä kertaa käyttäen puolipistettä.
+\item Kommentoinnin mahdollistavat merkki: "{-}{-}
+\item Mahdollisuus suorittaa useita hakuja yhdellä kertaa käyttäen puolipistettä
 \item SQL-palvelimen antamat tarkat virheilmoitukset
-\item Syötteen tyypin ehdoton kääntäminen -- kokonaisluvut käännetään mahdollisuuksien mukaan merkkijonoksi, jolloin hyökkääjän
-             on helpompi arvata oikea syöte \cite{SQLSS}.
+\item Dynaaminen tyypitys -- kokonaisluvut käännetään mahdollisuuksien mukaan merkkijonoksi, jolloin hyökkääjän
+             on helpompi arvata oikea syöte \cite{SQLSS}
 \end{itemize}
 
-Esille tulleiden asioiden valossa on selvää, että SQL-kieleen pohjautuvat haavoittuvuudet ovat todellinen uhka yritysten tietoturvalle.
+% TODO Syötteen tyypin ehdoton kääntäminen = dynaaminen tyypitys? tarkista.
+
+Esille tulleiden asioiden valossa on selvää, että SQL-kieleen pohjautuvat haavoittuvuudet ovat todellinen uhka tietoturvalle.
 Tästä johtuen on tärkeää, että sovellusten turvallisuus pyritään takaamaan kaikin mahdollisin tavoin. Täysin turvallisen sovelluksen 
 suunnitteleminen on kuitenkin mahdoton tehtävä, mutta noudattamalla muutamia perusperiaatteita voidaan riskiä vähentää huomattavasti.
-Vastaavasti myös palvelinpuolella SQL-injektiohyökkäykset tulee ottaa huomioon suunniteltaessa verkon tietoturvaratkaisuja.
+Verkon tietoturvaratkaisuja valittaessa ja suunniteltaessa
+SQL-injektiohyökkäykset tulee ottaa huomioon.
 
-Koska injektiohyökkäykset pyrkivät hyödyntämään syötteiden virheellistä tulkintaa, voi hyväksyttävien syötteiden rajoittaminen tuntua
-helpolta ratkaisulta ongelmaan. Osittain tämä ratkaisee asian, mutta ongelmaksi muodostuu se, kuinka valita mikä syöte on hyväksyttävä
-ja mikä virheellinen. Tämän valitsemiseen on useita eri tapoja kuten esimerkiksi sallia ainoastaan syötteet, jotka tiedetään etukäteen hyväksi
-ja huonon syötteen riisuminen tai pois tiputtaminen. Näistä tavoista ensimmäinen on kaikista rajoittavin, koska tällöin syötteen jokainen 
-merkki tarkistetaan, ja jos se ei ole sallittujen merkkien joukossa, niin koko haku hylätään. Huonojen syötteiden riisuminen on myös vaikea
-toteuttaa, koska harvoin pystytään määrittelemään, mikä haku on huono ja mikä hyvä. Yksi hyväksi todettu tapa onkin rajoittaa tiettyjen
-merkkien käyttöä siten, että merkin ollessa haussa mukana tämä muutetaan toiseen muotoon. Tämäkään ratkaisu ei ole täysin ongelmaton, ja siksi
-usein vain hylätään koko syöte, jos se ei vastaa odotettua syötettä \cite{SQLSS}.
+Koska injektiohyökkäykset pyrkivät hyödyntämään syötteiden
+virheellistä tulkintaa, voi hyväksyttävien syötteiden rajoittaminen
+tuntua helpolta ratkaisulta ongelmaan. Osittain tämä ratkaisee asian,
+mutta ongelmaksi muodostuu se, kuinka valita mikä syöte on
+hyväksyttävä ja mikä virheellinen. Yksi keino on sallia ainoastaan
+syötteet, jotka tiedetään etukäteen kelvollisiksi. Tällöin huono syöte
+voidaan jättää kokonaan käsittelemättä. Tämä keino on kaikista
+rajoittavin, koska tällöin syötteen jokainen merkki tarkistetaan, ja
+jos se ei ole sallittujen merkkien joukossa, niin koko haku
+hylätään.
 
-Palvelinpuolella tulee myös ottaa huomioon muutamia asioita, joita seuraamalla voidaan huomattavasti parantaa yrityksen tietoturvaa.
-Palvelinpuolen ratkaisuilla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
-Seuraava lista ei ole millään tavalla täydellinen ratkaisu ongelmaan, mutta se antaa osviittaa siitä, millä tavoin riskiä voidaan vähentää:
+Toinen lähestymistapa suojaamiseen on riisua syötteestä ongelmalliset
+merkit, kuten merkkijonon päättävä symboli. Usein tämäkin on vaikea
+toteuttaa käytännössä, koska joskus voi olla vaikeaa määritellä, mikä
+haku on huono ja mikä hyvä. Yksi hyväksi todettu tapa onkin rajoittaa
+tiettyjen merkkien käyttöä siten, että merkin ollessa haussa mukana
+tämä muutetaan toiseen muotoon. Tämäkään ratkaisu ei ole täysin
+ongelmaton, ja siksi usein vain hylätään koko syöte, jos se ei vastaa
+odotettua syötettä \cite{SQLSS}.
+
+Palvelinohjelmistoissa tulee myös ottaa huomioon muutamia asioita, joita seuraamalla voidaan huomattavasti parantaa yrityksen tietoturvaa.
+Tietoturvan kannalta huonellisesti suunnitellun palvelinohjelmiston avulla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
+Seuraava lista ei ole millään tavalla täydellinen ratkaisu ongelmaan,
+mutta se sisältää tärkeimpiä keinoja injektiohyökkäysten estämiseen ja
+niiden vaikutusten minimointiin.
 
 \begin{itemize}
-\item SQL-palvelimen ajaminen pienillä käyttöoikeuksilla.
-\item Sallia tallennettujen proseduurien ajaminen ainoastaan järjestelmän ylläpitäjille
+\item SQL-palvelimen ajaminen pienillä käyttöoikeuksilla
+\item Sallitaan tallennettujen proseduurien ajaminen ainoastaan järjestelmän ylläpitäjille
 \item Linkitettyjen palvelimien yksinkertaisten tunnistusten poistaminen
 \item Määrittää palomuuri siten, että ainoastaan luotetut käyttäjät saavat ottaa yhteyden SQL-palvelimeen. Usein ainoat, joiden yhteydet 
-      tulee sallia, ovat ylläpitäjät ja web-palvelut, joita tietokanta palvelee \cite{SQLSS}.
+      tulee sallia, ovat ylläpitäjät ja Web-palvelut, joita tietokanta palvelee \cite{SQLSS}.
 \end{itemize}
+
+% Joel oikolukenut tähän asti.
 
 \subsection{Cross-Site Scripting}
 Nykyisin yhä useampi yritys on tietoinen verkon tarjoamista mahdollisuuksista, ja sen mukana tulevista vaaroista. Yritykset ovat tämän johdosta
@@ -297,7 +340,7 @@ sillä 63 prosenttia haavoittuvaisuuksista kohdistui web-sovelluksiin \cite{SYM2
 
 Kuten aikaisemmin on tullut esille, niin injektiohyökkäykset eivät rajoitu pelkästään tietokantasovelluksiin. Myös XSS-hyökkäykset ovat eräänlaisia 
 injektiohyökkäyksiä sillä erotuksella, että hyökkääjä ei suoraan toteuta injektiota vaan uhri tekee sen itse. Tähän hyökkääjällä on useita eri 
-keinoja, ja harvoin käyttäjä edes huomaa joutuneensa hyökkäyksen kohteeksi. Hyökkäyksen onnistuessa web-sivujen käyttämä Same Origin -periaate 
+keinoja, ja harvoin käyttäjä edes huomaa joutuneensa hyökkäyksen kohteeksi. Hyökkäyksen onnistuessa web-sivujen käyttämä Same Origin -pe\-ri\-aa\-te 
 voidaan kiertää, jolloin hyökkääjän on mahdollista ajaa kohteen selaimessa haluamaansa koodia ja skriptejä. Tämä saman alkuperän periaate on web-selainten 
 yksi tärkeimmistä suojausmenetelmistä, ja se estää muun muassa skriptien lataamisen yhdestä lähteestä hakemalla tai asettamalla määrityksiä toisesta lähteestä \cite{WEB2}.
 
@@ -331,7 +374,7 @@ osapuolelta \ref{heijastettu} \cite{WEB2}.
 
 Hyökkääjän mahdollisuudet eivät rajoitu pelkästään evästeiden varastamiseen. Onnistuneen XSS-hyökkäyksen jälkeen hyökkääjä voi esimerkiksi ohjata
 käyttäjän osoitteeseen, joka jäljittelee haluttua sivustoa. Käyttäjän yrittäessä kirjautua tähän palveluun, saa hyökkääjä selville käyttäjän tunnuksen ja
-salasanan. XSS-hyökkäykset tarjoavatkin erinomaisen mahdollisuuden toteuttaa phishing eli tiedon kalasteluhyökkäyksiä. XSS-madot ovat
+salasanan. XSS-hyökkäykset tarjoavatkin erinomaisen mahdollisuuden toteuttaa \textit{phishing} eli tiedon kalasteluhyökkäyksiä. XSS-\-madot ovat
 myös viime aikoina yleistyneet, sillä yhä useampi palvelu on niille haavoittuvainen. Esimerkiksi webmail-sovelluksia varten kirjoitetut madot 
 käyttävät hyödyksi sitä seikkaa, että hyökkääjä pääsee käsiksi uhrin kontaktilistaan. Tällainen mato pyrkii leviämään lähettämällä 
 kontaktilistalla oleviin osoitteisiin sähköpostia, ja koska viesti tulee luotettavasta osoitteesta, ei käyttäjät osaa usein varoa viestissä
@@ -525,7 +568,7 @@ ansiosta Nessus pystytään pitämään ajantasalla uusimmista hyökkäyksistä,
 
 Paros Proxy \cite{Paros} on Javalla kirjoitettu web proxy, jonka avulla voidaan arvioida web-sovelluksen turvallisuutta. Se mahdollistaa kokonaisten sivustojen indeksoimisen,
 jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP- ja HTTPS-liikennettä mukaanlukien evästeitä. Sen mukana tulee
-myös skanneri yleisimpien web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-ammattilaisten
+myös skanneri yleisimpien web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-\-ammattilaisten
 parissa, jotka etsivät sivustoilta haavoittuvuuksia.
 
 \subsection{ModSecurity}
