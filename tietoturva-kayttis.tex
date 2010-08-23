@@ -1,0 +1,125 @@
+% -*- mode: LaTeX; coding: utf-8; -*-
+%
+% Luento kurssille TIEA222 Kokkolassa 21.8.2010.
+% Joel Lehtonen
+%
+% Based on Timo Männikkö's template. 
+%
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel}
+
+\usepackage{palatino} % Better font
+\usepackage[intlimits]{amsmath} % For better math mode, namely integrals
+\usepackage{amssymb} % Math symbols
+
+\usepackage[pdftex]{graphicx} % Pictures
+
+\usepackage{hyperref}
+\usepackage{cite}
+
+% Optional 1,5 point line spacing
+%\usepackage{setspace}
+%\onehalfspace
+
+% Hakkeroidaan babel-paketin suomenkielisiä käännöksiä:
+% Vaihdetaan lähdeluettelon otsikoksi Lähteet
+\addto\captionsfinnish{\def\refname{Lähteet}}
+% Hakkerointi päättyy
+
+\title{Käyttöjärjestelmiin tunkeutumisen tapoja}
+\author{Joel Lehtonen\\ \texttt{joel.lehtonen@iki.fi} \\\\Kristian Siljander\\ \texttt{kristian.siljander@jyu.fi}}
+\date{23.8.2010}
+
+\newcommand{\license}{
+\bigskip%
+\noindent\begin{tabular}{ l p{10cm} } %
+  \hline%
+  \noalign{\bigskip} %
+  \includegraphics[height=1.0truecm]{cc-by-sa} %
+  & \vspace{-0.95truecm}\small Tämän teoksen käyttöoikeutta koskee Creative Commons
+  Attribution-ShareAlike 3.0 Unported -lisenssi.\normalsize \\ %
+\end{tabular}%
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent Tämä on Tietoturva (TIEA222) -kurssin oheismateriaali. Tässä esitellään hyvin lyhyesti Remote-to-Local- ja User-to-Root-hyökkäykset.
+\end{abstract}
+
+\license
+\pagebreak
+
+
+\section{Remote-to-Local}
+
+Remote-to-Local (lyh. \textit{R2L}) on hyökkäystyyppi, jossa hyökkääjä pyrkii
+saamaan koneelle laajemmat oikeudet, kuin hänellä muuten
+olisi. Tämä tapahtuu useimmiten käyttäen hyväksi järjestelmässä olevia
+heikkouksia, joiden avulla hyökkääjä pääsee verkon yli murtautumaan
+koneelle \cite{IDS}. Pahimmassa tapauksessa hyökkääjä saa hankittua koneelle
+pääkäyttäjän oikeudet, jolloin koneen ja verkon resurssit ovat täysin
+hyökkääjän käytettävissä.
+
+Onnistuneet R2L-hyökkäykset ovat verkon ylläpitäjien kannalta pahimpia
+mahdollisia, sillä niiden mahdollistamat tuhot ja aiheuttamat kustannukset ovat
+huomattavasti suurempia verrattuna muihin hyökkäystyyppeihin \cite{IDSb}. Onnistunut R2L-hyökkäys saattaa
+myös muut lähiverkon koneet vaaraan, sillä usein hyökkääjä pyrkii asentamaan
+koneisiin ohjelmistoja, joiden avulla hyökkääjä pystyy ottamaan koneen haltuun
+käyttäjän huomaamatta. Tällä tavoin osa aikaisemmin mainituista
+zombverkostoista saa alkunsa.
+
+Käytetyimmät Web-palvelinohjelmistot, Apache ja IIS, vastaavat noin 85~\%
+kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi
+BIND-\-ohjelmistoa käytetään valtaosassa nimipalvelimista. Ohjelmistojen yleisyydestä
+johtuen yli puolet R2L-hyökkäyksen mahdollistavista heikkouksista onkin
+löydetty näille alustoille \cite{IDS}. Useat haavoittuvaisuudet johtuvat
+ohjelmointivirheistä, joiden johdosta hyökkääjä pystyy aiheuttamaan
+sovellukseen muistin ylivuodon (engl. \textit{Buffer Overflow}). Tämä usein kaataa
+sovelluksen tai saattaa sen sellaiseen tilaan, jossa hyökkääjä pystyy ajamaan
+omia komentoja koneella. Kattava listaus löydetyistä haavoittuvuuksista ja näiden
+korjauksista löytyy osoitteesta \url{www.cve.mitre.org/cve} \cite{CVE}.
+
+Tunnetuilta R2L-hyökkäyksiltä suojautuminen on hyvin yksinkertaista, sillä
+nykyinen trendi on, että haavoittuvuuden löytänyt taho ilmoittaa siitä
+yleensä ensin
+sovelluksen kehittäjille ennen julkista ilmoitusta. Siksi korjaus
+haavoittuvuuteen on usein olemassa ennen kuin sitä on mahdollista hyödyntää \cite{IDSb}.
+Vastuu jääkin verkon ylläpitäjälle, että käytetyt sovellukset ja 
+suojausjärjestelmät pidetään ajan tasalla, sillä suurin osa onnistuneista hyökkäyksistä 
+johtuu siitä, että tunnettuja tietoturva-aukkoja ei ole korjattu.
+
+\section{User-to-Root}
+
+User-to-Root (lyh. \textit{U2R}) hyökkäyksessä murtautuja pyrkii hankkimaan
+koneelle pääkäyttäjän oikeudet. Tämä tapahtuu käyttäen järjestelmässä
+olevia haavoittuvaisuuksia, joita ei ole paikattu. Useimmiten
+hyökkäykset pohjautuvat koodausvirheisiin, jotka mahdollistavat
+ylivuodon aiheuttamisen sekä odottamattomien syötteiden antamisen
+\cite{IDS}. Käyttäjästä pääkäyttäjäksi hyökkäys eroaa R2L hyökkäyksestä
+siten, että hyökkääjällä on jo valmiiksi pääsy koneelle tavallisen
+käyttäjän oikeuksilla.
+
+U2R-hyökkäykset ovat L2R-hyökkäysten ohella vaikeimpia torjua, jos kohteena
+oleva järjestelmä on altis U2R-hyökkäyksille. Vaikea torjuttavuus johtuu siitä, että
+usein hyökkäyksestä aiheutuva liikenne muistuttaa hyvin paljon normaalia
+liikennettä, jonka vuoksi itsestään oppivat puolustusjärjestelmät eivät pysty
+riittävän tarkasti erottamaan haitallista liikennettä normaalista \cite{U2R}.
+Kehittyneimmilläkin järjestelmillä näiden hyökkäysten tunnistaminen on todella
+heikkoa. Tämän on osoittanut useat eri tutkimushankkeet, jotka ovat käyttäneet
+järjestelmiensä testaamiseen DARPAn simuloimaa verkkoliikennettä,
+jossa olevat tietomurrot ja muu poikkeava toiminta on merkitty.
+Parhaimmillaankin tunnistaminen on jäänyt 20 prosentin
+paikkeille.
+
+\bibliographystyle{ieeetr}
+\bibliography{lahteet}
+
+\end{document}
