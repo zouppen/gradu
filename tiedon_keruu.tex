@@ -57,7 +57,7 @@ palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotet
 \begin{figure}[ht]
 \centering
 \includegraphics[width=13cm]{pics/logi2.pdf}
-\caption{HTTP-kyselyn GET-osa}
+\caption{HTTP GET -kyselyn rakenne.}
 \label{CLF2}
 \end{figure}
 
@@ -128,11 +128,14 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 
 \section{Tavoite}
 
-
+Tiedon käsittely voidaan jakaa esikäsittelyyn, menetelmään ja
+jälkikäsittelyyn. Esikäsittelyn tavoitteena on muuntaa palvelinlokit
+muotoon, jota menetelmä pystyy käsittelemään. Menetelmävaiheessa
+aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä
+luetaan diffuusiokuvauksen tuottamaa dataa ja selvitetään
+mielenkiintoisten havaintojen taustalla olevat HTTP-kyselyt.
 
 \section{Esikäsittely}
-
-\todo{Tästä luvusta puuttuu vielä tekstiä!}
 
 Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa käytetty
 \textit{Combined Log Format} -muoto. Tiedosto on tekstimuotoinen,
@@ -174,7 +177,7 @@ Esikäsittely jakaantuu seuraavaat kolmeen vaiheeseen:
 \begin{enumerate}
 \item Tiedostolistan muodostaminen ja tiedostojen ryhmittely palveluittain.
 \item Tiedostojen sisällön lukeminen ja muuntaminen tietorakenteeksi.
-\item Tietorakenteiden jatkokäsittely.
+\item Tietorakenteiden jatkokäsittely menetelmälle soveltuvaan muotoon.
 \end{enumerate}
 
 \subsection{Tiedostolistan muodostaminen}
@@ -316,15 +319,41 @@ processFile gramFile prefix fromFile
 
 Käyttämässämme datassa olevat kyselyiden parametrit sisältävät hyvin
 samantyyppisiä arvoja, joten niistä muodostuu kohtuullisen
-pieniulotteisia 2-grammitaulukoita. TODO kuinka pieniä? Tämän vuoksi
-matriiseihin ei sovelleta satunnaisprojektiota.
+pieniulotteisia 2-grammitaulukoita. Tässä tutkimuksessa käytetyllä
+aineistolla suurin esiintynyt 2-grammien lukumäärä oli
+189. Käytännössä havaittiin, että käyttämällämme laitteistolla alle
+200 saraketta sisältävän matriisin laskenta oli riittävän
+nopeaa. Tämän vuoksi dimensioita ei tarvitse vähentää, joten matriiseihin ei sovelleta
+satunnaisprojektiota.
 
-TODO.
 
 \section{Jatkokäsittely}
 
-Lopuksi eri kenttien numeeriset ja
-luokka-asteikolliset arvot klusteroidaan.
+Lopuksi eri kenttien  numeeriset arvot Osa arvoista toimii
+sellaisenaan klustereina, mutta osa täytyy luokitella.
+
+TODO
+
+Merkkijonoja sisältävät arvot toimivat kukin omana klusterinaan. HTTP
+Method -kentässä esiintyvät arvot numeroidaan seuraavasti:
+
+% ["HEAD","GET","POST","PUT","DELETE","TRACE","OPTIONS", "CONNECT","PATCH"]
+
+% ["HTTP/1.0","HTTP/1.1"]
+
+Tässä vaiheessa kuvassa \ref{ngramdata} esiintyvä tietorakenne
+muunnetaan matriisimuotoon.
+
+%data ParamInfo = ParamInfo {
+%      paramCount :: Integer                    -- ^Frequency of this parameter.
+%    , ngramMap   :: M.Map (Ngram Char) Integer -- ^N-grams.
+%    } deriving (Show,Read,Eq)
+
+%data ResourceStat = ResourceStat {
+%      resourceCount :: Integer                 -- ^Frequency of this resource.
+%    , params        :: M.Map String ParamInfo  -- ^Key and its n-gram.
+%} deriving (Show,Read,Eq)
+
 
 TODO
 
