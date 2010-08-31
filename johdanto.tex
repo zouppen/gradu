@@ -6,11 +6,11 @@ Viime vuosina Web-sovellusten ja -palveluiden suosio ja käyttö ovat
 olleet kovassa kasvussa, ja monet näistä ovat nykyisin kriittisiä osia
 yhteiskuntamme toimivuuden kannalta. Internetin välityksellä
 käytettävien palveluiden tietoturvan ja saatavuuden takaaminen on
-tämän johdosta noussut monessa yrityksessä
-elintärkeäksi. Tietojärjestelmien siirtyessä julkishallinnon ja
+tämän johdosta noussut monessa yrityksessä tärkeään rooliin.
+Tietojärjestelmien siirtyminen julkishallinnon ja
 yritysten erillisverkoista julkiseen Internetiin on vaikuttanut omalta
 osaltaan myös siihen, mihin tietoturvahyökkäykset nykyisin
-kohdistuvat, ja kuinka niitä pyritään toteuttamaan.
+kohdistuvat ja kuinka ne pyritään toteuttamaan.
 
 Hyökkäysten muuttuessa yhä hienostuneimmiksi, eivät perinteiset
 tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun
@@ -28,21 +28,22 @@ tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen
 (engl. \textit{anomaly detection}) ja väärinkäytösten tunnistamiseen
 (engl. \textit{misuse detection}). Näistä anomalioiden tunnistaminen
 perustuu malleihin, joita luodaan järjestelmän, käyttäjän tai verkon
-normaalista käyttäytymisestä. Näin luotuja malleja verrataan tuleviin
-tapahtumia, jolloin poikkeavuudet voidaan tunnistaa. Väärinkäytösten
-tunnistamiseen tarkoitetut järjestelmät puolestaan sisältävät joukon
-kuvauksia eli signatuureja tunnetuista hyökkäyksistä. Tuleva liikenne
-tarkistetaan näitä kuvauksia vastaan, jolloin kuvauksia vastaavat
-hyökkäykset voidaan tunnistaa. Hyökkäysten tunnistusjärjestelmät
+normaalista käyttäytymisestä. Tulevaa liikennettä sitten verrataan 
+näin luotuihin malleihin, jolloin opituista malleista poikkeava liikenne
+voidaan tunnistaa. Väärinkäytösten tunnistamiseen tarkoitetut järjestelmät 
+puolestaan sisältävät joukon kuvauksia eli signatuureja tunnetuista hyökkäyksistä. 
+Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin näitä vastaavat
+hyökkäykset tunnistetaan. Hyökkäysten tunnistusjärjestelmät
 jaetaan joissakin tapauksissa myös sen mukaan, mistä tutkittava
 liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon
 pohjautuviksi (engl. \textit{network based}) ja asiakaspohjaisiksi
 (engl. \textit{host based}).
 
-Tässä tutkielmassa tietoturvahyökkäykset pyritään tunnistamaan
-analysoimalla Web-palvelimien tuottamaa tapahtumalokia. Lokista
-yritetään etsiä ja tunnistaa anomalioita normaalin liikenteen
-joukosta.  Käytetty menetelmä pohjautuu diffuusiokuvausten käyttöön.
+Tässä tutkielmassa tietoturvahyökkäykset pyritään tunnistamaan analysoimalla 
+Web-palvelimien tuottamaa tapahtumalokia. Lokista yritetään etsiä ja tunnistaa
+poikkeavuuksia normaalin liikenteen joukosta käyttäen diffuusiokuvauksia. Näiden
+avulla pystytään helpommin esittämään ja kuvaamaan sellaista materiaalia, joka 
+koostuu suuresta määrästä parametreja.
 
 Tutkielman rakenne on seuraavanlainen. Luvussa 2 esitellään yleisellä
 tasolla Web-palvelinalustoja, ja käydään läpi Web-palveluiden
@@ -54,14 +55,14 @@ dynaamisista Web-teknologioista, jotka mahdollistavat suurimman osan
 nykyisistä tietoturvahyökkäyksistä, ja luku 6 sisältää katsauksen
 tutkimuskenttään liittyvään tutkimukseen.
 
-Luvussa 7 esitellään tutkimusasetelma ja analyysissa käytetty
-materiaali. Luku sisältää myös kuvauksen analyysissa käytetyistä
-menetelmistä. Luvussa 8 käydään läpi lokitiedon rakennetta ja
-esikäsittelijää, joka on on suunniteltu ja toteutettu tätä tutkimusta
-varten. Esimerkkien avulla esitellään myös sovelluksen toimintaa.
+Luvussa 7 kuvaillaan analyysissa käytetyt menetelmät, ja luvussa 8
+esitellään tutkimuksen lähtökohta ja analysoitavan materiaalin rakenne.
+Samassa luvussa myös käydään läpi esikäsittelijää,joka on on suunniteltu 
+ja toteutettu tätä tutkimusta varten. Esimerkkien avulla esitellään myös 
+sovelluksen toimintaa.
 
 Luvussa 9 esitellään saatuja tuloksia kuvaajien avulla, ja
 analyisoidaan näitä tarkemmin sekä esitetään mahdollisia syitä
-saatuihin tuloksiin. Viimeisessä luvussa sitten tehdään yhteenveto
-koko työstä, ja jatkotutkimuksia ajatellen esitetään
-parannusehdotuksia.
+saatuihin tuloksiin. Jatkotutkimuksia ajatellen esitetään
+myös parannusehdotuksia. Viimeinen luku sitten sisältää
+yhteenvedon koko työstä ja ajatuksia sen onnistumisesta.
