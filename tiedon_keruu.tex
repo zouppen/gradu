@@ -351,19 +351,53 @@ jatkossa huomiota.
 \subsection{Matriisien muodostaminen tietorakenteista}
 
 Tämän vaiheen yhteydessä aineistossa esiintyvät eri tyyppiset arvot
-numeroidaan. 
-
-TODO
-
-HTTP Method -kentässä esiintyvät arvot numeroidaan
-seuraavasti:
-
-% Merkkijonoja sisältävät arvot toimivat kukin omana ryhmänään.
+numeroidaan. Nämä arvot sijoitetaan matriisin sarakkeisiin taulukon
+\ref{matriisi} mukaisesti.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{llll}
-HTTP method & Klusteri \\
+\begin{tabular}{l|l}
+sarake & sisältö \\
+\hline
+
+1 & tiedoston järjestysnumero \\
+2 & palvelimen tunnistenumero \\
+3 & rivinumero lokitiedostossa \\
+4 & tunti (0-23) \\
+5 & viikonpäivä (maanantai = 1, ... , sunnuntai = 7) \\
+6 & HTTP-metodi \\
+7 & HTTP-protokollan versio \\
+8 & HTTP-vastauskoodi \\
+9 & siirretyn datamäärän suuruusluokka \\
+10 & resurssin numero \\
+11 ... & lista n-grammien esiintymistiheyksistä \\
+
+\end{tabular}
+\caption{Matriisin sarakkeiden sisältö.}
+\label{matriisi}
+\end{table}
+
+\pagebreak
+
+Taulukon \ref{matriisi} sarakkeet 1--3 yksilöivät HTTP-kyselyn. Tämän
+tiedon avulla on mahdollista hakea matriisin riviä vastaava
+palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
+poikkeaviksi havaittuja pisteitä tutkitaan.
+
+Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti
+ja viikonpäivä. Ajankohta määräytyy palvelimen kellon mukaan ja
+aikavyöhykeenä on UTC.
+
+Kyselyssä esiintyvä HTTP-metodi ja HTTP-protokollan versio ovat
+esitetty sarakkeissa 6 ja 7. Metodit on numeroitu taulukon
+\ref{metodi} mukaisesti, ja protokollan versio puolestaan taulukon
+\ref{httpversio} mukaisesti. Numeerinen HTTP-vastauskoodi esiintyy
+sellaisenaan sarakkeessa 8.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+metodi & ryhmä \\
 \hline
 HEAD & 1 \\
 GET & 2 \\
@@ -377,22 +411,41 @@ PATCH & 9 \\
 
 \end{tabular}
 \caption{HTTP Method -kentän numerointi.}
-\label{tiedostot}
+\label{metodi}
 \end{table}
-
 
 \begin{table}[h]
 \centering
 \begin{tabular}{llll}
-HTTP:n versio & Klusteri \\
+versio & ryhmä \\
 \hline
 HTTP/1.0 & 1 \\
 HTTP/1.1 & 2 \\
 \end{tabular}
-\caption{ HTTP:n versiokentän numerointi..}
-\label{tiedostot}
+\caption{ HTTP:n versiokentän numerointi.}
+\label{httpversio}
 \end{table}
 
+
+Kyselyn seurauksena siirretyn datamäärän suuruuluokka ilmaistaan
+sarakkeessa 9. Suuruusluokka lasketaan $\chi$-funktion avulla, jossa x
+on siirretyn datan määrä tavuina.
+
+% TODO viittaus kaavaan oikeasti.
+
+\[
+  \chi(x) = \left\{
+  \begin{array}{ll}
+    0 & \quad \text{, kun $x = 0$}\\
+    \lfloor log_2 \, x \rfloor & \quad \text{, kun x > 0}\\
+  \end{array} \right.
+\]
+
+Sarakkeessa 10 ilmaistaan resurssin numero. Koska jokaisesta
+resurssista muodostetaan erillinen matriisi, tämän sarakeen arvo on
+vakio jokaisessa matriisissa.
+
+% Merkkijonoja sisältävät arvot toimivat kukin omana ryhmänään.
 
 Käyttämässämme datassa olevat kyselyiden parametrit sisältävät hyvin
 samantyyppisiä arvoja, joten niistä muodostuu kohtuullisen
@@ -418,23 +471,7 @@ määritellään muodostettavien matriisitiedostojen nimen alkuosa.
 parameter2vector ngram lahde kohde
 \end{lstlisting} 
 
-
-
-% Tässä vaiheessa kuvassa \ref{ngramdata} esiintyvä tietorakenne
-% muunnetaan matriisimuotoon.
-
-%data ParamInfo = ParamInfo {
-%      paramCount :: Integer                    -- ^Frequency of this parameter.
-%    , ngramMap   :: M.Map (Ngram Char) Integer -- ^N-grams.
-%    } deriving (Show,Read,Eq)
-
-%data ResourceStat = ResourceStat {
-%      resourceCount :: Integer                 -- ^Frequency of this resource.
-%    , params        :: M.Map String ParamInfo  -- ^Key and its n-gram.
-%} deriving (Show,Read,Eq)
-
-
-TODO
+TODO esimerkkirivejä matriisista!
 
 \section{Matlab toteutus}
 \label{sec:matlab}
