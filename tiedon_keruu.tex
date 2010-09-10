@@ -66,25 +66,30 @@ normaali käyttäytyminen, jonka jälkeen analysoitavaa lokia verrataan
 opetettuun malliin, jolloin poikkeava liikenne voidaan tunnistaa.
 
 Tietoturvan kannalta kiinnostavin osa lokista on HTTP-kyselyn
-osoiteosa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää
+osoiteosa, jossa viitataan johonkin resurssiin ja välitetään
+tarvittaessa parametreja. HTTP-kysely sisältää
 niin staattiset sivunlatauspyynnöt kuin myös palvelimelle
 välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi
 kirjautumisessa käytetyt tiedot ja tietokannalle välitetyt
-kyselyt. Kysymysmerkin jälkeinen osuus koostuu
-parametrilistasta, jossa parametrit ovat erotettu toisistaan
-\texttt{\&}-merkillä. Yksittäinen parametri on avain-arvopari, jossa
-avain on yhtäsuurusmerkin
-vasemmalla puolella ja arvo oikealla puolella (kuva
-\ref{CLF2}). Käytettävien parametrien lukumäärä vaihtelee palvelusta
-riippuen. Mikäli parametreja ei ole lainkaan, ei parametriosaa eikä
-sitä edeltävää kysymysmerkkiä esiinny kyselyssä. Näin on esimerkiksi
-silloin, kun HTTP-kysely kohdistuu staattiseen Web-sivuun.
+kyselyt.
+
+Kysely koostuu metodista, resurssista ja parametriosasta.  Metodin
+jälkeen välilyönnillä erotettuna seuraa osoiteosa. Se jakautuu
+resurssiin ja parametreihin, jossa erottimena toimii kysymysmerkki.
+Parametriosa koostuu parametrilistasta, jossa parametrit ovat erotettu
+toisistaan \texttt{\&}-merkillä. Yksittäinen parametri on
+avain-arvopari, jossa avain on yhtäsuurusmerkin vasemmalla puolella ja
+arvo oikealla puolella (kuva \ref{CLF2}). Käytettävien parametrien
+lukumäärä vaihtelee palvelusta riippuen. Mikäli parametreja ei ole
+lainkaan, ei parametriosaa eikä sitä edeltävää kysymysmerkkiä esiinny
+kyselyssä. Näin on esimerkiksi silloin, kun HTTP-kysely kohdistuu
+staattiseen Web-sivuun.
 
 \vskip 0.5cm
 \begin{figure}[ht]
 \[
 \overbrace{\texttt{GET}}^\text{metodi}
-\overbrace{\texttt{/scripts/access.pl}}^\text{polku}
+\overbrace{\texttt{/scripts/access.pl}}^\text{resurssi}
 \texttt{?}
 \overbrace{\underbrace{\texttt{user}}_\text{avain 1}
 \texttt{=}
@@ -173,7 +178,7 @@ Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa käytetty
 joten se ei sellaisenaan sovellu analyysivaiheeseen, jossa käsitellään
 klustereita. Osa palvelinlokin sisällöstä on myös analyysin kannalta
 tarpeetonta ja nämä osat tulee suodattaa pois. Lisäksi yhteen
-Web-palveluun liittyvät kyselyt ovat lisäksi jakautuneet useaan eri
+Web-palveluun liittyvät kyselyt ovat jakautuneet useaan eri
 tiedostoon eri palvelinten ja vuorokausien mukaisesti.
 
 Esikäsittelijä on toteutettu osana tätä tutkimusta. Esikäsittelijä on
@@ -183,7 +188,7 @@ tehokkaat työkalut ohjelmakoodin rinnakkaistamiseen ja datan
 sarjallistamiseen. \textit{PhasefulSplitter} on vapaa ohjelma ja sitä saa
 levittää edelleen ja muuttaa Free Software Foundationin julkaiseman
 GNU General Public Licensen (GPL-lisenssi) version 3~\cite{gplv3} tai (valinnan
-mukaan) myöhemmän version ehtojen mukaisesti. Esikäsittelijä on
+mukaan) myöhemmän version ehtojen mukaisesti. Sovellus on
 ladattavissa Internetistä osoitteesta \\
 \url{http://iki.fi/zouppen/repo/phasefulsplitter.git}.
 
@@ -203,13 +208,17 @@ Relaatiotietokantaa ei käytetä, koska tietokantakyselyiden
 rinnakkaistaminen osoittautui hyvin vaikeaksi verrattuna suoraan
 tiedostoja käsittelevään toteutukseen.
 
-Esikäsittely jakaantuu seuraavaat kolmeen vaiheeseen:
+Esikäsittely jakaantuu seuraavaat neljään vaiheeseen:
 
 \begin{enumerate}
 \item Tiedostolistan muodostaminen ja tiedostojen ryhmittely palveluittain.
 \item Tiedostojen sisällön lukeminen ja muuntaminen tietorakenteeksi.
-\item Tietorakenteiden jatkokäsittely menetelmälle soveltuvaan muotoon.
+\item N-grammien muodostaminen HTTP-kyselyn parametreista.
+\item Aineiston muuntaminen matriisimuotoon analyysiä varten.
 \end{enumerate}
+
+Seuraavaksi käydään läpi esimerkkien tuella se, kuinka nämä vaiheet
+voidaan suorittaa.
 
 \subsection{Tiedostolistan muodostaminen}
 
@@ -339,34 +348,17 @@ esiintymistiheydet. Tekstimuotoista tiedostoa voidaan käyttää apuna
 arvioitaessa, mihin resursseihin ja parametreihin kannattaa kiinnittää
 jatkossa huomiota.
 
-Tämän jälkeen voidaan suorittaa n-grammianalyysin toinen vaihe koko
-palvelun sisältämälle datalle. Suoritetaan seuraava komento samassa
-hakemistossa, missä ensimmäinen vaihekin suoritettiin:
+\subsection{Matriisien muodostaminen tietorakenteista}
 
-\begin{lstlisting}[language=bashshell]
-ghci ParameterToVector.hs
-processFile gramFile prefix fromFile
-\end{lstlisting} 
-
-Käyttämässämme datassa olevat kyselyiden parametrit sisältävät hyvin
-samantyyppisiä arvoja, joten niistä muodostuu kohtuullisen
-pieniulotteisia 2-grammitaulukoita. Tässä tutkimuksessa käytetyllä
-aineistolla suurin esiintynyt 2-grammien lukumäärä oli
-189. Käytännössä havaittiin, että käyttämällämme laitteistolla alle
-200 saraketta sisältävän matriisin laskenta oli riittävän
-nopeaa. Tämän vuoksi dimensioita ei tarvitse vähentää, joten matriiseihin ei sovelleta
-satunnaisprojektiota.
-
-
-\section{Jatkokäsittely}
-
-Lopuksi eri kenttien  numeeriset arvot Osa arvoista toimii
-sellaisenaan klustereina, mutta osa täytyy luokitella.
+Tämän vaiheen yhteydessä aineistossa esiintyvät eri tyyppiset arvot
+numeroidaan. 
 
 TODO
 
-Merkkijonoja sisältävät arvot toimivat kukin omana klusterinaan. HTTP
-Method -kentässä esiintyvät arvot numeroidaan seuraavasti:
+HTTP Method -kentässä esiintyvät arvot numeroidaan
+seuraavasti:
+
+% Merkkijonoja sisältävät arvot toimivat kukin omana ryhmänään.
 
 \begin{table}[h]
 \centering
@@ -401,8 +393,35 @@ HTTP/1.1 & 2 \\
 \label{tiedostot}
 \end{table}
 
-Tässä vaiheessa kuvassa \ref{ngramdata} esiintyvä tietorakenne
-muunnetaan matriisimuotoon.
+
+Käyttämässämme datassa olevat kyselyiden parametrit sisältävät hyvin
+samantyyppisiä arvoja, joten niistä muodostuu kohtuullisen
+pieniulotteisia 2-\-grammitaulukoita. Tässä tutkimuksessa käytetyllä
+aineistolla suurin esiintynyt 2-grammien lukumäärä oli
+189. Käytännössä havaittiin, että käyttämällämme laitteistolla alle
+200 saraketta sisältävän matriisin laskenta oli riittävän
+nopeaa. Tämän vuoksi dimensioita ei tarvitse vähentää, joten matriiseihin ei sovelleta
+satunnaisprojektiota. Sen sijaan muodostetaan matriisi, jossa
+luetellaan kussakin HTTP-kyselyssä esiintyvien N-grammien
+esiintymistiheydet. Näin muodostetun matriisin tiedot liitetään
+aiemmin kerättyjen parametrien perään.
+
+Analyysissä käytettävät matriisit muodostetaan
+\texttt{parameter2vector}-sovelluksella. Listauksessa \ref{p2v}
+esiintyvä parametri \texttt{ngram} korvataan edellisessä vaiheessa
+muodostuneella N-\-grammitiedoston nimellä, \texttt{lahde} korvataan
+tietorakennetiedoston nimellä ja parametrissa \texttt{kohde}
+määritellään muodostettavien matriisitiedostojen nimen alkuosa.
+
+\begin{lstlisting}[float=h,language=bashshell,label=p2v,caption=Matriisien
+  muodostaminen.]
+parameter2vector ngram lahde kohde
+\end{lstlisting} 
+
+
+
+% Tässä vaiheessa kuvassa \ref{ngramdata} esiintyvä tietorakenne
+% muunnetaan matriisimuotoon.
 
 %data ParamInfo = ParamInfo {
 %      paramCount :: Integer                    -- ^Frequency of this parameter.
