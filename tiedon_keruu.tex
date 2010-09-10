@@ -2,6 +2,13 @@
 
 \chapter{Tiedon keruu ja käsittely}
 
+Tiedon käsittely voidaan jakaa esikäsittelyyn, menetelmään ja
+jälkikäsittelyyn. Esikäsittelyn tavoitteena on muuntaa palvelinlokit
+muotoon, jota menetelmä pystyy käsittelemään. Menetelmävaiheessa
+aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä
+luetaan diffuusiokuvauksen tuottamaa dataa ja selvitetään
+mielenkiintoisten havaintojen taustalla olevat HTTP-kyselyt.
+
 Tässä luvussa tutustutaan aluksi tutkittavien lokitiedostojen
 alkuperään ja tiedostomuotoon sekä aineiston arkistointitapaan. Tämän
 jälkeen käydään läpi, kuinka tietoa on esikäsitelty analyysiä silmällä
@@ -9,11 +16,7 @@ pitäen. Käytetyt menetelmät soveltuvat pienin muutoksin myös muiden
 Web-palveluntarjoajien palvelinlokien esikäsittelyyn, mikäli
 arkistointikäytänteet eivät suuresti poikkea tässä esitellystä.
 
-Esimerkeissä käytetyt palvelinten ja palveluiden nimet ovat
-kuvitteellisia, mutta rakenne vastaa tutkittua ympäristöä.
-
-
-\section{Lähtökohta}
+\section{Aineiston rakenne}
 \label{sec:lahtokohta}
 
 Analysoitavaksi saamamme loki on peräisin yritykseltä, joka toimii
@@ -42,36 +45,73 @@ muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena mu
 \end{verbatim*}
 \end{framed}
 
-Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Niitä analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä, sekä
-hyökkäyksen jo tapahduttua tutkia siihen johtaneita vaiheita. Pienillä sivustoilla lokin läpikäyminen jälkikäteen käsin on vielä mahdollista, mutta puhuttaessa palveluista, joilla on miljoonia käyttäjiä 
-kuukaudessa, ei tämä ole enää mahdollista. Tästä syystä lokien analysoiminen tulee automatisoida. Tämä taas tarkoittaa sitä, että järjestelmän tulee pystyä tunnistamaan miljoonien kyselyiden joukosta
-ne, jotka ovat syntyneet hyökkäyksen johdosta. Yksi mahdollisuus on käyttää sääntöpohjaista ratkaisua, mutta aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää tunnistuskykyä. Tästä 
-syystä olemme päätyneet käyttämään anomalioiden tunnistamismenetelmää, jossa järjestelmälle opetetaan normaali käyttäytyminen. Tämän jälkeen haluttua lokia verrataan opetettuun malliin, jolloin poikkeava
-liikenne voidaan tunnistaa.
+Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa
+palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Lokeja
+analysoimalla voidaan myös tunnistaa mahdollisia hyökkäysyrityksiä,
+sekä hyökkäyksen jo tapahduttua tutkia siihen johtaneita
+vaiheita. Pienillä sivustoilla ihmisen on mahdollista läpikäydä
+lokitiedostot hyökkäyksien varalta, mutta puhuttaessa palveluista,
+joilla on miljoonia käyttäjiä kuukaudessa, ei käsin läpikäyminen ole
+enää käytännössä mahdollista. Tästä syystä tarvitaan lokien
+analysoimisen automatisointia. Analysoinnille on kovat
+laatuvaatimukset, koska järjestelmän tulisi pystyä tunnistamaan
+miljoonien kyselyiden joukosta ne, jotka ovat syntyneet hyökkäyksen
+johdosta.
 
-Tietoturvan kannalta kiinnostavin osa logista on GET-parametrin jälkeinen osa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää niin staattiset sivunlatauspyynnöt, kuin myös palvelimelle 
-välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi kirjautumisessa käytetyt tiedot, ja tietokannalle välitetyt kyselyt. Staattiset sivunlatauspyynnöt ja parametreja sisältävät pyynnöt erottaa
-resurssipolun jälkeisestä kysymysmerkistä. Kysymysmerkin jälkeinen kyselyosuus koostuu avain-arvo-pareista, joista ensimmäinen on kutsuttu parametri, ja jälkimmäinen tämän arvo (kuva \ref{CLF2}). Riippuen
-palvelun toteutuksesta näitä voi olla useampia peräkkäin \&-merkillä erotettuna.
+Yksi mahdollisuus on käyttää sääntöpohjaisia suodattimia, mutta
+aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää
+tunnistuskykyä. Siksi tässä tutkimuksessa on päädytty käyttämään
+anomalioiden tunnistamismenetelmää. Järjestelmälle opetetaan
+normaali käyttäytyminen, jonka jälkeen analysoitavaa lokia verrataan
+opetettuun malliin, jolloin poikkeava liikenne voidaan tunnistaa.
 
+Tietoturvan kannalta kiinnostavin osa lokista on HTTP-kyselyn
+osoiteosa, jossa kuljetetaan varsinainen HTTP-pyyntö. Tämä sisältää
+niin staattiset sivunlatauspyynnöt kuin myös palvelimelle
+välitettävät parametriarvot. Tällaisia voivat olla esimerkiksi
+kirjautumisessa käytetyt tiedot ja tietokannalle välitetyt
+kyselyt. Kysymysmerkin jälkeinen osuus koostuu
+parametrilistasta, jossa parametrit ovat erotettu toisistaan
+\texttt{\&}-merkillä. Yksittäinen parametri on avain-arvopari, jossa
+avain on yhtäsuurusmerkin
+vasemmalla puolella ja arvo oikealla puolella (kuva
+\ref{CLF2}). Käytettävien parametrien lukumäärä vaihtelee palvelusta
+riippuen. Mikäli parametreja ei ole lainkaan, ei parametriosaa eikä
+sitä edeltävää kysymysmerkkiä esiinny kyselyssä. Näin on esimerkiksi
+silloin, kun HTTP-kysely kohdistuu staattiseen Web-sivuun.
+
+\vskip 0.5cm
 \begin{figure}[ht]
-\centering
-\includegraphics[width=13cm]{pics/logi2.pdf}
+\[
+\overbrace{\texttt{GET}}^\text{metodi}
+\overbrace{\texttt{/scripts/access.pl}}^\text{polku}
+\texttt{?}
+\overbrace{\underbrace{\texttt{user}}_\text{avain 1}
+\texttt{=}
+\underbrace{\texttt{matti}}_\text{arvo 1}
+\texttt{\&}
+\underbrace{\texttt{passwd}}_\text{avain 2}
+\texttt{=}
+\underbrace{\texttt{admin}}_\text{arvo 2}}
+^{\text{parametrit}}
+\]
 \caption{HTTP GET -kyselyn rakenne.}
 \label{CLF2}
 \end{figure}
 
 
-\section{Tiedon rakenne}
+\section{Arkistointikäytänteet}
 
 Web-hotelli, josta data on peräisin, on toteutettu siten, että yksittäiset palvelut on
-sijoitettu jokaiselle palvelimelle. Ratkaisun taustalla on
+sijoitettu useammalle palvelimelle. Ratkaisun taustalla on
 kuormituksen tasaaminen. Erillinen järjestelmä huolehtii siitä, että
 Internetistä tulevat kyselyt ohjataan tasaisesti eri
-palvelimille. 
+palvelimille. Tästä johtuen samaan palveluun kohdistuvat kyselyt
+jakautuvat useamman palvelimen lokitiedostoihin.
 
-Taulukossa \ref{nimet} on esimerkki palveluiden ja
-palvelinten nimeämisestä.
+Taulukossa \ref{nimet} on esimerkki palveluiden ja palvelinten
+nimeämisestä. Esimerkeissä käytetyt palvelinten ja palveluiden nimet
+ovat kuvitteellisia, mutta rakenne vastaa tutkittua ympäristöä.
 
 % Ei kannata ottaa esimerkkiä tästä taulukosta, tämä on vähän mutkikas.
 \begin{table}[h]
@@ -125,15 +165,6 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 \caption{Web-palvelun rakenne.}
 \label{palvelinrakenne}
 \end{figure}
-
-\section{Tavoite}
-
-Tiedon käsittely voidaan jakaa esikäsittelyyn, menetelmään ja
-jälkikäsittelyyn. Esikäsittelyn tavoitteena on muuntaa palvelinlokit
-muotoon, jota menetelmä pystyy käsittelemään. Menetelmävaiheessa
-aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä
-luetaan diffuusiokuvauksen tuottamaa dataa ja selvitetään
-mielenkiintoisten havaintojen taustalla olevat HTTP-kyselyt.
 
 \section{Esikäsittely}
 
@@ -337,9 +368,38 @@ TODO
 Merkkijonoja sisältävät arvot toimivat kukin omana klusterinaan. HTTP
 Method -kentässä esiintyvät arvot numeroidaan seuraavasti:
 
-% ["HEAD","GET","POST","PUT","DELETE","TRACE","OPTIONS", "CONNECT","PATCH"]
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+HTTP method & Klusteri \\
+\hline
+HEAD & 1 \\
+GET & 2 \\
+POST & 3 \\
+PUT & 4 \\
+DELETE & 5 \\
+TRACE & 6 \\
+OPTIONS & 7 \\
+CONNECT & 8 \\
+PATCH & 9 \\
 
-% ["HTTP/1.0","HTTP/1.1"]
+\end{tabular}
+\caption{HTTP Method -kentän numerointi.}
+\label{tiedostot}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+HTTP:n versio & Klusteri \\
+\hline
+HTTP/1.0 & 1 \\
+HTTP/1.1 & 2 \\
+\end{tabular}
+\caption{ HTTP:n versiokentän numerointi..}
+\label{tiedostot}
+\end{table}
 
 Tässä vaiheessa kuvassa \ref{ngramdata} esiintyvä tietorakenne
 muunnetaan matriisimuotoon.
