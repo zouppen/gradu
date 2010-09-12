@@ -427,19 +427,17 @@ HTTP/1.1 & 2 \\
 \end{table}
 
 
-Kyselyn seurauksena siirretyn datamäärän suuruuluokka ilmaistaan
-sarakkeessa 9. Suuruusluokka lasketaan $\chi$-funktion avulla, jossa x
+Kyselyn seurauksena siirretyn datamäärän suuruusluokka ilmaistaan
+sarakkeessa 9. Suuruusluokka lasketaan funktion \ref{modlog} avulla, jossa x
 on siirretyn datan määrä tavuina.
 
-% TODO viittaus kaavaan oikeasti.
-
-\[
+\begin{equation} \label{modlog}
   \chi(x) = \left\{
   \begin{array}{ll}
     0 & \quad \text{, kun $x = 0$}\\
     \lfloor log_2 \, x \rfloor & \quad \text{, kun x > 0}\\
   \end{array} \right.
-\]
+\end{equation}
 
 Sarakkeessa 10 ilmaistaan resurssin numero. Koska jokaisesta
 resurssista muodostetaan erillinen matriisi, tämän sarakeen arvo on
@@ -466,12 +464,27 @@ muodostuneella N-\-grammitiedoston nimellä, \texttt{lahde} korvataan
 tietorakennetiedoston nimellä ja parametrissa \texttt{kohde}
 määritellään muodostettavien matriisitiedostojen nimen alkuosa.
 
+\vskip 0.5cm
 \begin{lstlisting}[float=h,language=bashshell,label=p2v,caption=Matriisien
   muodostaminen.]
 parameter2vector ngram lahde kohde
 \end{lstlisting} 
 
-TODO esimerkkirivejä matriisista!
+Ajon seurauksena muodostuu jokaisesta resurssista erillinen
+matriisi. Kukin matriisi tallennetaan resurssin mukaan nimettyyn
+tiedostoon CSV-muodossa. Siinä matriisin rivit erotetaan toisistaan
+rivinvaihdolla, ja sarakkeet pilkulla. Listauksessa \ref{csv882} on
+poiminta CSV-muotoon tallennetusta matriisista.
+
+\vskip 0.5cm
+\begin{lstlisting}[float=h,label=csv882,caption=Esikäsiteltyä
+  dataa CSV-muodossa esitettynä.]
+6,3,13619,10,2,2,2,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+7,3,833,21,5,2,2,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+8,2,2324,23,3,2,2,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+8,2,18596,15,4,2,2,200,12,882,1,1,1,1,1,2,1,1,1,1,1,0,0,0,0,0
+8,2,14500,12,4,2,1,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+\end{lstlisting}
 
 \section{Matlab toteutus}
 \label{sec:matlab}
