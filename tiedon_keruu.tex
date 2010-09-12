@@ -219,6 +219,7 @@ Seuraavaksi käydään läpi esimerkkien tuella se, kuinka nämä vaiheet
 suoritetaan.
 
 \subsection{Tiedostolistan muodostaminen}
+\label{sec:tiedostolista}
 
 Tekstipohjainen tiedostolista luetaan
 \textit{PhasefulSplitter}-ohjelman ymmärtämään muotoon, jolloin
@@ -512,11 +513,11 @@ sarake & sisältö \\
 
 \begin{lstlisting}[float=h,label=coords882,aboveskip=0.5cm,caption=Analysoitua
  dataa CSV-muodossa esitettynä.]
-5,3,27876,-66.236,-0.23311,2.6009,0.0015736
-6,3,14497,-66.236,-0.23311,2.363,0.007315
-6,3,27313,-66.236,-0.23311,2.3902,1.7892e-13
-9,2,2840,-66.236,-0.23311,2.8299,0.00045234
-10,2,1434,-66.236,-0.23311,3.361,1.7288e-13
+6,3,13619,-66.236,-0.23311,2.3295,0.0001666
+7,3,833,-66.236,-0.23311,2.5856,0.0012385
+8,2,2324,-66.236,-0.23311,2.3297,0.0001666
+8,2,18596,-284.17,-6.6455e-06,1.3067e-12,653.84
+8,2,14500,-66.236,-0.23311,-83.326,1.5157
 \end{lstlisting}
 
 Diffuusiokuvausalgoritmin aikavaativuus on eksponentiaalinen suhteessa
@@ -528,23 +529,51 @@ rajoittamiseen käytettiin satunnaisotannan suorittavaa apuohjelmaa,
 joka sijaitsee PhasefulSplitter-sovelluksen tiedostossa \\
 \texttt{src/LinePicker.hs}.
 
-\section{Pisteen takaisinmuuntaminen palvelinlokin riviksi}
+\section{HTTP-kyselyiden yhdistäminen tuloksiin}
 
 Esikäsittelyvaiheessa jokaiseen HTTP-kyselyyn liitetään
-LineInfo-tietorakenne, jota kuljetetaan analyysivaiheen läpi. Tietorakenne tallennetaan matriisin kolmeen
-ensimmäiseen sarakkeeseen, eli tekstimuotoisessa esityksessä se
-sijaitsee rivin kolmessa ensimmäisessä pilkulla erotetussa
+LineInfo-tietorakenne, jota kuljetetaan analyysivaiheen
+läpi. Analyysin tuloksena saadaan taulukon \ref{zipolafile} mukaisia
+CSV-muodossa olevia matriiseja. Tietorakenne tallennetaan matriisin
+kolmeen ensimmäiseen sarakkeeseen, eli tekstimuotoisessa esityksessä
+se sijaitsee rivin kolmessa ensimmäisessä pilkulla erotetussa
 kentässä. Esimerkiksi listauksessa \ref{csv882} ensimmäisen pisteen
-LineInfo-arvot ovat 6, 3 ja 13619. 
+LineInfo-arvot ovat 6, 3 ja 13619.
 
-Analyysin tuloksena saadaan taulukon \ref{zipolafile} mukaisia
-CSV-muodossa olevia matriiseja, jossa LineInfo-tietorakenne si
+Jotta analyysin tulokset olisivat hyödynnettävissä, on tarpeellista
+yhdistää tulokset alkuperäisiin HTTP-kyselyihin. Tällöin voidaan
+tarkemmin tutkia, millaisia poikkeavat kyselyt ovat
+muodostaan. Yhdistämisessä käytettävä apuohjelma sijaitsee tiedostossa
+\texttt{src/LineInfoConvert.hs}. Sen käyttö on esitelty
+listauksessa \ref{backtrack}.
+Parametriin \texttt{tulosmatriisi} sijoitetaan analyysin tuloksena
+saadun matriisin tiedostonnimi. Parametri \texttt{lista} korvataan
+palvelun tiedostolistalla, joka on muodostettu luvussa
+\ref{sec:tiedostolista} esitetyllä tavalla. Yhdistetyt tulokset
+kirjoitetaan parametrissa \texttt{kohde} määriteltyyn tiedostoon,
+jonka rakenne on kuvattu taulukossa \ref{yhdistetty}.
 
+\begin{lstlisting}[language=MyHaskell,float=h,caption=HTTP-kyselyiden 
+  yhdistäminen tuloksiin.,label=backtrack,aboveskip=1cm]
+a <- readZipolaFile tulosmatriisi
+saveLogLines lista kohde a
+\end{lstlisting}
 
+\begin{table}[h]
+\centering
+\begin{tabular}{l|l}
+sarake & sisältö \\
+\hline
+1 & tiedoston järjestysnumero \\
+2 & palvelimen tunnistenumero \\
+3 & rivinumero lokitiedostossa \\
+4 & HTTP-kysely Combined Log Format -muodossa \\
 
+\end{tabular}
+\caption{Yhdistetty tulosmatriisi.}
+\label{yhdistetty}
+\end{table}
 
-%a <- readZipolaFile "/home/joell/zipolalta/service_a_anomalies.csv"
-%saveLogLines tiedostolistaus kohde a
 
 %anomaliat resursseittain ryhmiteltynä:
 
@@ -553,5 +582,3 @@ CSV-muodossa olevia matriiseja, jossa LineInfo-tietorakenne si
 %vektorihakemisto
 %kohde
 %[1,18,337,721,723,882]
-
-TODO

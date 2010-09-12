@@ -116,16 +116,16 @@ Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen
 
 Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $d$ vanhan $n$ sijaan.
 
-\section{$N$-gram -analyysi}
+\section{N-grammianalyysi}
 
-Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. $N$-gram -analyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
+Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
 peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti muun muassa tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
 
-Meidän tapauksessa tutkittavat yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-gram lasketaan käyttäen $n$ pituista liukuvaa ikkunaa. Esimerkiksi sanan ``automaatti'' 2-gram 
+Tässä tutkimuksessa yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-grammi lasketaan käyttäen $n$ pituista liukuvaa ikkunaa. Esimerkiksi sanan ``automaatti'' 2-grammi 
 saadaan aloittamalla analyysi ensimmäisestä kirjaimesta ja liuttumalla ikkunaa yhden kirjaimen verran. Tässä tapauksessa syntynyt merkkijakauma on ``au'', ``ut'', ``to'', ``om'', ``ma'', ``aa'', ``at'', ``tt'', ``ti''. 
 Käyttäen tällä tavoin syntynyttä sarjaa saadaan rakennettua matriisi, joka sisältää tiedon merkkien jakaantumisesta.
 
-$N$-gram -analyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-gram -sarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
+N-grammianalyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-grammisarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
 jolloin $n=2$, ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain 
 nollia. Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
 
