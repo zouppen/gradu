@@ -406,7 +406,7 @@ CONNECT & 8 \\
 PATCH & 9 \\
 
 \end{tabular}
-\caption{HTTP Method -kentän numerointi.}
+\caption{HTTP method -kentän numerointi.}
 \label{metodi}
 \end{table}
 
@@ -480,21 +480,68 @@ poiminta CSV-muotoon tallennetusta matriisista.
 8,2,14500,12,4,2,1,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 \end{lstlisting}
 
-\section{Matlab toteutus}
+\pagebreak
+
+\section{Diffuusiokuvausten laskenta}
 \label{sec:matlab}
 
-Diffuusikuvausten laskemiseen voidaan käyttää korkeintaan noin 5000 yksittäistä pistettä 2000 pisteen ollessa laskennallisesti vielä tehokasta. Rajoitus johtuu siitä, että
-algoritmin aikavaativuus kasvaa eksponentiaalisesti verrattaessa opetusmateriaalin kokoon. 
+Tässä tutkimuksessa käytettiin diffuusiokuvaussovellusta, joka on
+toteutettu Jyväskylän yliopistossa Tuomo Sipolan toimesta. Sovellus
+toimii Matlab-ympäristössä ja se lukee taulukon \ref{matriisi} mukaisesti
+muotoiltuja tiedostoja ja palauttaa analyysin tulokset CSV-muodossa,
+jonka rakenne on esitelty taulukossa \ref{zipolafile}.
 
-\section{Pisteen takaisin muuntaminen palvelinlokin riviksi}
 
-LineInfo-tietorakennetta kuljetetaan esikäsittelyvaiheesta
-lähtien datan mukana. Tietorakenne tallennetaan matriisin kolmeen
+\begin{table}[h]
+\centering
+\begin{tabular}{l|l}
+sarake & sisältö \\
+\hline
+1 & tiedoston järjestysnumero \\
+2 & palvelimen tunnistenumero \\
+3 & rivinumero lokitiedostossa \\
+4 & 2. ominaisvektorin arvo \\
+5 & 3. ominaisvektorin arvo \\
+6 & 4. ominaisvektorin arvo \\
+7 & poikkeavuusluku \\
+
+\end{tabular}
+\caption{Tulosmatriisin sarakkeiden sisältö.}
+\label{zipolafile}
+\end{table}
+
+\begin{lstlisting}[float=h,label=coords882,aboveskip=0.5cm,caption=Analysoitua
+ dataa CSV-muodossa esitettynä.]
+5,3,27876,-66.236,-0.23311,2.6009,0.0015736
+6,3,14497,-66.236,-0.23311,2.363,0.007315
+6,3,27313,-66.236,-0.23311,2.3902,1.7892e-13
+9,2,2840,-66.236,-0.23311,2.8299,0.00045234
+10,2,1434,-66.236,-0.23311,3.361,1.7288e-13
+\end{lstlisting}
+
+Diffuusiokuvausalgoritmin aikavaativuus on eksponentiaalinen suhteessa
+opetusmateriaalin kokoon. Tämän vuoksi diffuusiokuvausten laskentaan
+voidaan käytännössä käyttää korkeintaan 5~000 yksittäistä HTTP-kyselyä
+vastaavaa pistettä.  Ajan säästämiseksi tässä tutkimuksessa käytettiin
+kuitenkin enintään 2~000 pisteen kokoisia aineistoja. Pisteiden määrän
+rajoittamiseen käytettiin satunnaisotannan suorittavaa apuohjelmaa,
+joka sijaitsee PhasefulSplitter-sovelluksen tiedostossa \\
+\texttt{src/LinePicker.hs}.
+
+\section{Pisteen takaisinmuuntaminen palvelinlokin riviksi}
+
+Esikäsittelyvaiheessa jokaiseen HTTP-kyselyyn liitetään
+LineInfo-tietorakenne, jota kuljetetaan analyysivaiheen läpi. Tietorakenne tallennetaan matriisin kolmeen
 ensimmäiseen sarakkeeseen, eli tekstimuotoisessa esityksessä se
-sijaitsee rivin kolmessa ensimmäisessä pilkulla erotetussa kentässä.
+sijaitsee rivin kolmessa ensimmäisessä pilkulla erotetussa
+kentässä. Esimerkiksi listauksessa \ref{csv882} ensimmäisen pisteen
+LineInfo-arvot ovat 6, 3 ja 13619. 
+
+Analyysin tuloksena saadaan taulukon \ref{zipolafile} mukaisia
+CSV-muodossa olevia matriiseja, jossa LineInfo-tietorakenne si
 
 
-kaikki anomaliat kaikissa resursseissa:
+
 
 %a <- readZipolaFile "/home/joell/zipolalta/service_a_anomalies.csv"
 %saveLogLines tiedostolistaus kohde a
