@@ -30,20 +30,18 @@ gigatavua, ja se sisältää yli 1,7 miljardia sivupyyntöä.
 Lokia on kerätty noin 10 kuukauden
 ajanjaksolta. Se on tallennettu \textit{Combined Log Format} -muotoon,
 joka on yleinen Apache-palvelimen käyttämä lokitiedoston
-muoto~\cite{combined}. Alla on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
+muoto~\cite{combined}. Listauksessa \ref{httpkys} on esimerkki onnistuneen HTTP-kyselyn seurauksena muodostuneesta lokirivistä.
 
 % Tarkat luvut:
 % - Dataa 24133108 kiB
 % - Sivupyyntöjä (ml. error-logit) on 1666171347 kpl.
 
-\begin{framed}
-\begin{verbatim*}
+\begin{lstlisting}[float=h,caption=Esimerkki onnistuneesta HTTP-kyselystä.,label=httpkys,aboveskip=0.5cm]
 130.234.49.2 - - [10/May/2009:15:53:01 +0300]
 "GET /scripts/access.pl?user=matti&passwd=admin HTTP/1.1"
 200 2680 "http://www.jyu.fi/a.html"
 "Mozilla/5.0 (SymbianOS/9.2;...)"
-\end{verbatim*}
-\end{framed}
+\end{lstlisting}
 
 Web-palvelimien tuottama loki sisältää paljon tietoa muun muassa
 palveluiden käyttöasteista, ja niihin kohdistuvista kuormista. Lokeja
@@ -183,7 +181,7 @@ tiedostoon eri palvelinten ja vuorokausien mukaisesti.
 
 Tässä työssä käytetty esikäsittelijä on toteutettu osana tätä tutkimusta. Sovelluksen 
 nimi on \textit{PhasefulSplitter}, ja se on ohjelmoitu käyttäen
-Haskell-ohjelmointikielellä~\cite{haskell98}. Haskell on valittu, koska se tarjoaa
+Haskell-ohjelmointikielellä \cite{haskell98}. Haskell on valittu, koska se tarjoaa
 tehokkaat työkalut ohjelmakoodin rinnakkaistamiseen ja datan
 sarjallistamiseen. \textit{PhasefulSplitter} on vapaa ohjelma ja sitä saa
 levittää edelleen ja muuttaa Free Software Foundationin julkaiseman
@@ -231,9 +229,9 @@ palvelinten nimet ja niitä vastaavat numeeriset viitteet. Viitteitä
 voidaan hyödyntää myöhemmin, jos halutaan muuntaa analyysivaiheessa
 kiinnostava havainto takaisin Apache-lokin riviksi. Tässä luvun
 esimerkissä käytettävän tiedoston sisältö on esitelty listauksessa
-\ref{servermap}
+\ref{servermap}.
 
-\begin{lstlisting}[language=MyHaskell,float=h,caption=Tiedoston server.map sisältö.,label=servermap,aboveskip=1cm]
+\begin{lstlisting}[language=MyHaskell,float=h,caption=Tiedoston server.map sisältö.,label=servermap]
 [
       ("dapper",1)
     , ("edgy",2)
@@ -242,18 +240,17 @@ esimerkissä käytettävän tiedoston sisältö on esitelty listauksessa
 \end{lstlisting}
 
 Tiedostolista voidaan muodostaa
-Linux-järjestelmässä seuraavalla tavalla:
-
-\begin{lstlisting}[language=bashshell]
-mkdir lists
-find [[polku]] -iname '*.gz' | classifier lists/
-\end{lstlisting} 
-\label{filelist}
-
+Linux-järjestelmässä listauksen \ref{filelist} mukaisesti.
 Ajon yhteydessä muodostuu hakemiston \texttt{lists} alle palveluiden
 mukaan nimetyt tiedostot. Tiedoston sisältönä on palveluun kuuluvat
 tiedostonnimet sekä tiedon siitä, minkä palvelimen lokitiedostosta on kyse. Tiedostot ovat tekstimuotoon 
 sarjallistettuja.
+
+\begin{lstlisting}[language=bashshell,label=filelist,aboveskip=1cm,caption=Tiedostolistan
+  muodostaminen.]
+mkdir lists
+find [[polku]] -iname '*.gz' | classifier lists/
+\end{lstlisting}
 
 \subsection{Muuntaminen tietorakenteeksi}
 
@@ -264,6 +261,24 @@ palastellaan ja kyselyt sarjallistetaan tiedostoihin. Tietorakenne on
 esitelty listauksessa \ref{entry}.
 
 \lstset{language=MyHaskell}
+
+Koska jatkokäsittely voidaan hoitaa säikeistettynä useammalle
+prosessorille tai ytimelle, tässä vaiheessa sovellukselle tulee
+ilmoittaa säikeiden määrä. Tiedon perusteella sovellus jakaa yhteen
+palveluun liittyvän datan haluttuun määrään erillisiä tiedostoja. Jako
+mahdollistaa tehokkaan jälkikäsittelyn, koska tiedostojen sisältöä on
+mahdollista käsitellä myöhemmin samanaikaisesti.
+
+Linuxin \texttt{xargs}-komennolla voidaan myös tämän vaihe suorittaa
+rinnakkaistettuna, jolloin eri palveluihin kuuluva data voidaan
+muuntaa samanaikaisesti. Mikäli eri palveluihin kuuluvien lokien
+datamäärä vaihtelee, ei rinnakkaistamisesta kuitenkaan saavuteta
+täyttä hyötyä.  Listauksessa \ref{a2d} muunnetaan palvelinlokit
+sovelluksen käyttämään muotoon. Käsiteltävät tiedostot luetaan
+\texttt{lists}-hakemistosta löytyvien
+tiedostolistauksista. Tietorakenteet kirjoitetaan hakemistoon
+\texttt{data}. Listauksessa mainittu N korvataan tietokoneen
+prosessorien tai ytimien määrällä.
 
 \begin{lstlisting}[float=h,caption=Yhden lokirivin säilövä tietorakenne.,label=entry,aboveskip=1cm]
 data Entry = Entry {
@@ -280,23 +295,8 @@ data Entry = Entry {
 } deriving (Show,Eq)
 \end{lstlisting}
 
-Koska jatkokäsittely voidaan hoitaa säikeistettynä useammalle
-prosessorille tai ytimelle, tässä vaiheessa sovellukselle tulee
-ilmoittaa säikeiden määrä. Tiedon perusteella sovellus jakaa yhteen
-palveluun liittyvän datan haluttuun määrään erillisiä tiedostoja. Jako
-mahdollistaa tehokkaan jälkikäsittelyn, koska tiedostojen sisältöä on
-mahdollista käsitellä myöhemmin samanaikaisesti.
-
-Linuxin \texttt{xargs}-komennolla voidaan myös tämän vaihe suorittaa
-rinnakkaistettuna, jolloin eri palveluihin kuuluva data voidaan
-muuntaa samanaikaisesti. Mikäli eri palveluihin kuuluvien lokien datamäärä
-vaihtelee, ei rinnakkaistamisesta kuitenkaan saavuteta täyttä hyötyä.
-Alla olevassa esimerkissä esikäsitellään \texttt{lists}-hakemistosta
-löytyvät tiedostolistat ja kirjoitetaan ne hakemiston \texttt{data}
-alle. Korvaa listauksessa esiintyvä N tietokoneen prosessorien tai
-ytimien määrällä. 
-
-\begin{lstlisting}[language=bashshell]
+\begin{lstlisting}[float=h,language=bashshell,label=a2d,caption=Muuntaminen
+  tietorakenteeksi.]
 ls lists/*| xargs -n 1 -I{} -P [[N]] apache2data [[N]] {} data/
 \end{lstlisting}
 
@@ -331,29 +331,43 @@ datalla taulukon kooksi muodostui muutamia kymmeniä kilotavuja.
 Lopputulos on siis vain murto-osa alkuperäisen datamassan
 suuruudesta.
 
-N-grammianalyysin ensimmäinen vaihe suoritetaan menemällä halutun
-palvelun mukaiseen hakemistoon ja suorittamalla seuraava komento:
-
-\begin{lstlisting}[language=bashshell]
-parameter_analyzer *.pf.gz +RTS -N
-\end{lstlisting} 
-
+N-grammianalyysin ensimmäinen vaihe suoritetaan halutun
+palvelun hakemistossa listauksen \ref{paraanal} mukaisesti.
 Hakemistoon muodostuu ajon seurauksena tiedostot \texttt{ngrams.out}
 ja \texttt{grams\_raw.txt}. Näistä ensimmäinen on binaarimuodossa ja
 se sisältää toisessa vaiheessa tarvittavan datan. 
 Toisessa tiedostossa on tekstimuodossa (Haskellin
-show-muodossa) eri resurssien ja 2-grammien
+Show-muodossa) eri resurssien ja 2-grammien
 esiintymistiheydet. Tekstimuotoista tiedostoa voidaan käyttää apuna
 arvioitaessa, mihin resursseihin ja parametreihin kannattaa kiinnittää
 jatkossa huomiota.
+
+\begin{lstlisting}[language=bashshell,aboveskip=1cm,label=paraanal,caption=N-grammianalyysin
+  ensimmäinen vaihe.]
+parameter_analyzer *.pf.gz +RTS -N
+\end{lstlisting} 
 
 \subsection{Matriisien muodostaminen tietorakenteista}
 
 Tämän vaiheen yhteydessä aineistossa esiintyvät eri tyyppiset arvot
 numeroidaan. Nämä arvot sijoitetaan matriisin sarakkeisiin taulukon
 \ref{matriisi} mukaisesti.
+Näistä kolme ensimmäistä saraketta yksilöivät HTTP-kyselyn. 
+Tietojen avulla on mahdollista hakea matriisin riviä vastaava
+palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
+poikkeaviksi havaittuja pisteitä tutkitaan. 
 
-\begin{table}[h]
+Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti ja viikonpäivä. 
+Tämä ajankohta määräytyy palvelimen kellon mukaan ja aikavyöhykeenä on UTC. Lokista ei kuitenkaan
+nähdä miltä aikavyökkeeltä kysely on peräisin.
+
+Kyselyssä esiintyvä HTTP-metodi ja HTTP-protokollan versio ovat
+esitetty sarakkeissa 6 ja 7. Metodit on numeroitu taulukon
+\ref{metodi} mukaisesti, ja protokollan versio puolestaan taulukon
+\ref{httpversio} mukaisesti. Numeerinen HTTP-vastauskoodi esiintyy
+sellaisenaan sarakkeessa 8.
+
+\begin{table}[p]
 \centering
 \begin{tabular}{l|l}
 sarake & sisältö \\
@@ -376,24 +390,7 @@ sarake & sisältö \\
 \label{matriisi}
 \end{table}
 
-\pagebreak
-
-Taulukon \ref{matriisi} kolme ensimmäistä saraketta yksilöivät HTTP-kyselyn. 
-Näiden tietojen avulla on mahdollista hakea matriisin riviä vastaava
-palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
-poikkeaviksi havaittuja pisteitä tutkitaan. 
-
-Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti ja viikonpäivä. 
-Tämä ajankohta määräytyy palvelimen kellon mukaan ja aikavyöhykeenä on UTC. Lokista ei kuitenkaan
-nähdä miltä aikavyökkeeltä kysely on peräisin.
-
-Kyselyssä esiintyvä HTTP-metodi ja HTTP-protokollan versio ovat
-esitetty sarakkeissa 6 ja 7. Metodit on numeroitu taulukon
-\ref{metodi} mukaisesti, ja protokollan versio puolestaan taulukon
-\ref{httpversio} mukaisesti. Numeerinen HTTP-vastauskoodi esiintyy
-sellaisenaan sarakkeessa 8.
-
-\begin{table}[h]
+\begin{table}[p]
 \centering
 \begin{tabular}{ll}
 metodi & ryhmä \\
@@ -413,7 +410,7 @@ PATCH & 9 \\
 \label{metodi}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[p]
 \centering
 \begin{tabular}{llll}
 versio & ryhmä \\
@@ -424,7 +421,6 @@ HTTP/1.1 & 2 \\
 \caption{ HTTP:n versiokentän numerointi.}
 \label{httpversio}
 \end{table}
-
 
 Kyselyn seurauksena siirretyn datamäärän suuruusluokka ilmaistaan
 sarakkeessa 9. Suuruusluokka lasketaan funktion \ref{modlog} avulla, jossa x
@@ -438,6 +434,7 @@ on siirretyn datan määrä tavuina.
   \end{array} \right.
 \end{equation}
 
+\vskip 0.5cm
 Sarakkeessa 10 ilmaistaan resurssin numero. Koska jokaisesta
 resurssista muodostetaan erillinen matriisi, tämän sarakeen arvo on
 vakio jokaisessa matriisissa.
@@ -463,8 +460,7 @@ muodostuneella N-\-grammitiedoston nimellä, \texttt{lahde} korvataan
 tietorakennetiedoston nimellä ja parametrissa \texttt{kohde}
 määritellään muodostettavien matriisitiedostojen nimen alkuosa.
 
-\vskip 0.5cm
-\begin{lstlisting}[float=h,language=bashshell,label=p2v,caption=Matriisien
+\begin{lstlisting}[float=h,language=bashshell,label=p2v,aboveskip=0.5cm,caption=Matriisien
   muodostaminen.]
 parameter2vector ngram lahde kohde
 \end{lstlisting} 
@@ -475,8 +471,7 @@ tiedostoon CSV-muodossa. Siinä matriisin rivit erotetaan toisistaan
 rivinvaihdolla, ja sarakkeet pilkulla. Listauksessa \ref{csv882} on
 poiminta CSV-muotoon tallennetusta matriisista.
 
-\vskip 0.5cm
-\begin{lstlisting}[float=h,label=csv882,caption=Esikäsiteltyä
+\begin{lstlisting}[float=h,label=csv882,aboveskip=0.5cm,caption=Esikäsiteltyä
   dataa CSV-muodossa esitettynä.]
 6,3,13619,10,2,2,2,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 7,3,833,21,5,2,2,200,12,882,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
