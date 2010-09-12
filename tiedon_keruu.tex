@@ -2,10 +2,10 @@
 
 \chapter{Tiedon keruu ja käsittely}
 
-Tiedon käsittely voidaan jakaa esikäsittelyyn, menetelmään ja
-jälkikäsittelyyn. Esikäsittelyn tavoitteena on muuntaa palvelinlokit
+Tiedon käsittely jaetaan esikäsittelyyn, menetelmään ja
+jälkikäsittelyyn. Esikäsittelyn aikana palvelinlokit muutetaan sellaiseen
 muotoon, jota menetelmä pystyy käsittelemään. Menetelmävaiheessa
-aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä
+aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä sitten
 luetaan diffuusiokuvauksen tuottamaa dataa ja selvitetään
 mielenkiintoisten havaintojen taustalla olevat HTTP-kyselyt.
 
@@ -52,18 +52,18 @@ sekä hyökkäyksen jo tapahduttua tutkia siihen johtaneita
 vaiheita. Pienillä sivustoilla ihmisen on mahdollista läpikäydä
 lokitiedostot hyökkäyksien varalta, mutta puhuttaessa palveluista,
 joilla on miljoonia käyttäjiä kuukaudessa, ei käsin läpikäyminen ole
-enää käytännössä mahdollista. Tästä syystä tarvitaan lokien
-analysoimisen automatisointia. Analysoinnille on kovat
+enää käytännössä mahdollista. Tästä syystä lokien
+analysoiminen tulee automatisoida. Analysoinnille on myös kovat
 laatuvaatimukset, koska järjestelmän tulisi pystyä tunnistamaan
 miljoonien kyselyiden joukosta ne, jotka ovat syntyneet hyökkäyksen
 johdosta.
 
 Yksi mahdollisuus on käyttää sääntöpohjaisia suodattimia, mutta
-aikaisemmin esitetyistä syistä johtuen ei tämä tarjoa aina riittävää
+aikaisemmissa luvuissa esitetyistä syistä johtuen ei tämä tarjoa aina riittävää
 tunnistuskykyä. Siksi tässä tutkimuksessa on päädytty käyttämään
-anomalioiden tunnistamismenetelmää. Järjestelmälle opetetaan
-normaali käyttäytyminen, jonka jälkeen analysoitavaa lokia verrataan
-opetettuun malliin, jolloin poikkeava liikenne voidaan tunnistaa.
+diffuusiokuvauksiin perustuvaa anomalioiden tunnistamismenetelmää. 
+Tässä järjestelmälle opetetaan ensiksi normaali käyttäytyminen, jonka jälkeen analysoitavaa
+lokia verrataan opetettuun malliin. Näin poikkeava liikenne voidaan tunnistaa.
 
 Tietoturvan kannalta kiinnostavin osa lokista on HTTP-kyselyn
 osoiteosa, jossa viitataan johonkin resurssiin ja välitetään
@@ -137,9 +137,9 @@ Lokitiedostot on sijoitettu hakemistorakenteeseen, jossa juuressa ovat
 palvelinten nimien mukaiset hakemistot, joiden sisällä sijaitsevat
 lokitiedostot, jotka on nimetään yhdistämällä palvelun nimi
 päivämääräleimaan. Tiedostonnimessä käytetty päivämäärän muoto
-noudattaa ISO 8601 -standardia~\cite{iso8601}. Tiedostot on pakattu
+noudattaa ISO 8601 -standardia~\cite{iso8601}, ja tiedostot on pakattu
 \texttt{gzip}-pakkausohjelmalla. Taulukossa \ref{tiedostot}
-havainnollistetaan tiedostonnimien muodostumista.
+on havainnollistettu tiedostonnimien muodostuminen.
 
 \begin{table}[h]
 \centering
@@ -161,7 +161,7 @@ välitetään palvelun kautta. Välimuistipalvelu toimii siten, että
 mikäli pyydettyä resurssia ei löydy sen omasta muistista, se pyytää
 sitä yhdeltä Web-hotellin palvelimista ja välittää vastauksen edelleen
 asiakkaalle. Välimuistipalvelun käyttö ei kuitenkaan muilta osin
-vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
+vaikuta palvelun rakenteeseen. Tämä rakenne käy ilmi kuvasta
 \ref{palvelinrakenne}.
 
 \begin{figure}[htp]
@@ -176,14 +176,14 @@ vaikuta palvelun rakenteeseen. Rakenne käy ilmi kuvasta
 Luvussa \ref{sec:lahtokohta} esiteltiin lokitiedostoissa käytetty
 \textit{Combined Log Format} -muoto. Tiedosto on tekstimuotoinen,
 joten se ei sellaisenaan sovellu analyysivaiheeseen, jossa käsitellään
-klustereita. Osa palvelinlokin sisällöstä on myös analyysin kannalta
+luokka-asteikollisia muuttujia. Osa palvelinlokin sisällöstä on myös analyysin kannalta
 tarpeetonta ja nämä osat tulee suodattaa pois. Lisäksi yhteen
 Web-palveluun liittyvät kyselyt ovat jakautuneet useaan eri
 tiedostoon eri palvelinten ja vuorokausien mukaisesti.
 
-Esikäsittelijä on toteutettu osana tätä tutkimusta. Esikäsittelijä on
-nimeltään \textit{PhasefulSplitter} ja se on toteutettu
-Haskell-ohjelmointikielellä~\cite{haskell98}. Haskell tarjoaa
+Tässä työssä käytetty esikäsittelijä on toteutettu osana tätä tutkimusta. Sovelluksen 
+nimi on \textit{PhasefulSplitter}, ja se on ohjelmoitu käyttäen
+Haskell-ohjelmointikielellä~\cite{haskell98}. Haskell on valittu, koska se tarjoaa
 tehokkaat työkalut ohjelmakoodin rinnakkaistamiseen ja datan
 sarjallistamiseen. \textit{PhasefulSplitter} on vapaa ohjelma ja sitä saa
 levittää edelleen ja muuttaa Free Software Foundationin julkaiseman
@@ -218,16 +218,15 @@ Esikäsittely jakaantuu seuraavaat neljään vaiheeseen:
 \end{enumerate}
 
 Seuraavaksi käydään läpi esimerkkien tuella se, kuinka nämä vaiheet
-voidaan suorittaa.
+suoritetaan.
 
 \subsection{Tiedostolistan muodostaminen}
 
 Tekstipohjainen tiedostolista luetaan
 \textit{PhasefulSplitter}-ohjelman ymmärtämään muotoon, jolloin
 tiedostonnimet ryhmitellään palveluiden nimien perusteella. 
-
-Luokittelun yhteydessä palvelinten nimet korvataan numeerisilla
-viitteillä. Tätä varten asetetaan tiedestoon \texttt{server.map}
+Luokittelun yhteydessä myös palvelinten nimet korvataan numeerisilla
+viitteillä. Tätä varten asetetaan tiedostoon \texttt{server.map}
 palvelinten nimet ja niitä vastaavat numeeriset viitteet. Viitteitä
 voidaan hyödyntää myöhemmin, jos halutaan muuntaa analyysivaiheessa
 kiinnostava havainto takaisin Apache-lokin riviksi. Tässä luvun
@@ -252,8 +251,9 @@ find [[polku]] -iname '*.gz' | classifier lists/
 \label{filelist}
 
 Ajon yhteydessä muodostuu hakemiston \texttt{lists} alle palveluiden
-mukaan nimetyt tiedostot. Tiedostomuoto joiden sisällä on palveluun kuuluvat
-tiedostonnimet sekä tiedon siitä, minkä palvelimen lokitiedostosta on kyse. Tiedostot ovat tekstimuotoon sarjallistettuja.
+mukaan nimetyt tiedostot. Tiedoston sisältönä on palveluun kuuluvat
+tiedostonnimet sekä tiedon siitä, minkä palvelimen lokitiedostosta on kyse. Tiedostot ovat tekstimuotoon 
+sarjallistettuja.
 
 \subsection{Muuntaminen tietorakenteeksi}
 
@@ -291,7 +291,6 @@ Linuxin \texttt{xargs}-komennolla voidaan myös tämän vaihe suorittaa
 rinnakkaistettuna, jolloin eri palveluihin kuuluva data voidaan
 muuntaa samanaikaisesti. Mikäli eri palveluihin kuuluvien lokien datamäärä
 vaihtelee, ei rinnakkaistamisesta kuitenkaan saavuteta täyttä hyötyä.
-
 Alla olevassa esimerkissä esikäsitellään \texttt{lists}-hakemistosta
 löytyvät tiedostolistat ja kirjoitetaan ne hakemiston \texttt{data}
 alle. Korvaa listauksessa esiintyvä N tietokoneen prosessorien tai
@@ -326,14 +325,14 @@ analyysivaiheessa, selvitetään aluksi, millaisia 2-grammeja
 aineistossa esiintyy ja jätetään taulukoimatta sellaiset 2-grammit,
 jotka eivät esiinny lainkaan.
 
-Jokaiselle resurssille muodostuu oma N-grammilistansa. Datan määrä
+Jokaiselle resurssille muodostetaan oma N-grammilistansa. Datan määrä
 luonnollisesti riippuu käytettävästä aineistosta. Käyttämällämme
-datalla taulukon kooksi muodostuu muutamia megatavuja (FIXME täsmällisesti).
-Lopputulos on kuitenkin vain murto-osa alkuperäisen datamassan
+datalla taulukon kooksi muodostui muutamia kymmeniä kilotavuja.
+Lopputulos on siis vain murto-osa alkuperäisen datamassan
 suuruudesta.
 
 N-grammianalyysin ensimmäinen vaihe suoritetaan menemällä halutun
-palvelun mukaiseen hakemistoon ja suorittamalla seuraavan komennon:
+palvelun mukaiseen hakemistoon ja suorittamalla seuraava komento:
 
 \begin{lstlisting}[language=bashshell]
 parameter_analyzer *.pf.gz +RTS -N
@@ -341,8 +340,8 @@ parameter_analyzer *.pf.gz +RTS -N
 
 Hakemistoon muodostuu ajon seurauksena tiedostot \texttt{ngrams.out}
 ja \texttt{grams\_raw.txt}. Näistä ensimmäinen on binaarimuodossa ja
-sisältää toisessa vaiheessa tarvittavan datan
-binaarimuodossa. Toisessa tiedostossa on tekstimuodossa (Haskellin
+se sisältää toisessa vaiheessa tarvittavan datan. 
+Toisessa tiedostossa on tekstimuodossa (Haskellin
 show-muodossa) eri resurssien ja 2-grammien
 esiintymistiheydet. Tekstimuotoista tiedostoa voidaan käyttää apuna
 arvioitaessa, mihin resursseihin ja parametreihin kannattaa kiinnittää
@@ -379,14 +378,14 @@ sarake & sisältö \\
 
 \pagebreak
 
-Taulukon \ref{matriisi} sarakkeet 1--3 yksilöivät HTTP-kyselyn. Tämän
-tiedon avulla on mahdollista hakea matriisin riviä vastaava
+Taulukon \ref{matriisi} kolme ensimmäistä saraketta yksilöivät HTTP-kyselyn. 
+Näiden tietojen avulla on mahdollista hakea matriisin riviä vastaava
 palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
-poikkeaviksi havaittuja pisteitä tutkitaan.
+poikkeaviksi havaittuja pisteitä tutkitaan. 
 
-Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti
-ja viikonpäivä. Ajankohta määräytyy palvelimen kellon mukaan ja
-aikavyöhykeenä on UTC.
+Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti ja viikonpäivä. 
+Tämä ajankohta määräytyy palvelimen kellon mukaan ja aikavyöhykeenä on UTC. Lokista ei kuitenkaan
+nähdä miltä aikavyökkeeltä kysely on peräisin.
 
 Kyselyssä esiintyvä HTTP-metodi ja HTTP-protokollan versio ovat
 esitetty sarakkeissa 6 ja 7. Metodit on numeroitu taulukon
