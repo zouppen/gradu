@@ -44,14 +44,44 @@ ulottuvuuksia säilyttäen kuitenkin sen rakenne. Tämän jälkeen esimerkiksi k
 
 Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan normaali käyttätyminen. Tämä tapahtuu käyttäen opetusmateriaalia, joka on osa analysoitavaa dataa. Olkoot tämä opetusmateriaali 
 $\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessamme data muodostaa $N \times n$ matriisin, jossa 
-rivit pitävät sisällään yksittäiset kyselyt, ja sarakkeet ovat näiden analysoitavat parametrit.
+yksittäinen rivi kuvaa yhtä HTTP-kyselyä ja sarakkeet vastaavat HTTP-kyselyistä määritettyjä parametreja.
 
-Aluksi luomme samankaltaisuusmatriisin, joka kuvaa eri pisteiden välisiä etäisyyksiä. Naapuruston laajuuden määrittää euklidinen etäisyys $\epsilon$, jonka arvona voidaan käyttää haluttua mittaa. Tutkimuksessamme käytämme arvona painotettua Hammingin etäisyyttä.
+Aluksi luomme samankaltaisuusmatriisin $W$, joka kuvaa pisteiden välisiä etäisyyksiä.
+Matriisi muodostetaan käyttäen painotettua Hammingin etäisyyttä. Tämä tapahtuu valitsemalla tutkittavasta matriisista $\Gamma$ rivit $x_i$ ja $x_j$ sekä merkitsemällä yhden sarakkeen kategorioiden määrää $\pi_k$:lla.
 
-\begin{equation}
-W_{ij} = e^{-\frac{||x_i - x_j||^2}{\epsilon}}
+Datapisteiden välinen painotettu Hammingin etäisyys lasketaan summaamalla sarakkeiden väliset Hammingin etäisyydet ja jakamalla se kussakin sarakkeessa esiintyvien kategorioiden määrällä.
+
+% TODO tarkista pisteiden paikka kaavoissa.
+
+\begin{equation*}
+\delta_{WH}(x_i,x_j) = \sum_{k=1}^{n} \frac{\delta(x_{ik},x_{jk})}{\pi_k}
+\label{W_HAMMING}
+\end{equation*}
+
+Kahden alkion välinen Hammingin etäisyys määritellään seuraavasti:
+
+\begin{equation*}
+\delta(x_{ik},x_{jk}) = 
+\begin{cases}
+0 & \text{, kun } x_{ik} = x_{jk} \\
+1 & \text{, muutoin}
+\end{cases} .
+\label{HAMMING}
+\end{equation*}
+
+
+Tässä käytetään Gaussisen kernelin etäisyysmittana $\delta_{WH}$:aa. Pisteiden samankaltaisuuden toisiinsa nähden määrittelee $\epsilon$. 
+
+\begin{equation*}
+W_{ij} = e^{-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}}.
 \label{KERNEL}
-\end{equation}
+\end{equation*}
+
+% TODO mikä on W? Se kernelimatriisiko?
+
+Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa on käytetty TODO-menetelmää, joka lasketaan seuraavasti:
+
+TODO, se vanha menetelmä.
 
 Näin luodun matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
 
@@ -60,28 +90,28 @@ D_{ii} = \sum_{j=1}^{N} W_{ij}
 \label{ROWSUM}
 \end{equation}
 
-Nyt jokaisen rivin summaksi tulee 1. Tätä todennäköisyyttä siirtyä datapisteestä toiseen kuvatkoon $P$
+Nyt jokaisen rivin summaksi tulee 1. $P$ kuvaa todennäköisyyttä sille, että yksittäinen alkio muuttuu tilasta toiseen.
 
 \begin{equation}
 P = D^{-1} W
 \label{PROB}
 \end{equation}
 
-$P$:n ominaisvektorit ovat samat kuin konjugaattimatriisin, joka on esitetty yhtälössä \ref{SYMM}. 
+Seuraavaksi määritellään muuttumistodennäköisyysmatriisin ominaisarvot. $P$:n ominaisarvot ovat samat kuin konjugaattimatriisin, joka on esitetty yhtälössä \ref{SYMM}. Tämän matriisin ominaisarvot voidaan johtaa matriisista $\tilde{P}$, kuten myöhemmin tulee ilmi.
 
 \begin{equation}
 \tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}}
 \label{SYMM}
 \end{equation}
 
-Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} todennäköisyysmatriisin $\tilde{P}$. Näin luotua matriisia kutsutaan normalisoiduksi graafin  Laplace-operaatioksi.
+Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} symmetrisen todennäköisyysmatriisin $\tilde{P}$. Näin luotu matriisi säilyttää ominaisarvonsa, ja sitä kutsutaan normalisoidun graafin Laplace-operaatioksi.
 
 \begin{equation}
 \tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}} = D^{\frac{1}{2}} D^{-1} W D^{-\frac{1}{2}} = D^{-\frac{1}{2}} W D^{-\frac{1}{2}}
 \label{NGL}
 \end{equation}
 
-Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. Singular Value Decomposition = SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (spectral theorem) mukaan tällaisen matriisin 
+Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. \textit{Singular Value Decomposition}, SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (engl. \textit{spectral theorem}) mukaan tällaisen matriisin 
 hajotelma on yhtälön \ref{SVD} mukainen.  
 
 \begin{equation}
@@ -89,7 +119,9 @@ hajotelma on yhtälön \ref{SVD} mukainen.
 \label{SVD}
 \end{equation}
 
-Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
+% TODO mitä tarkoittaa diag? Miksi sillä operoidaan pikku-lambdoja?
+
+Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot $diag([\lambda_1, \lambda_2, \dots, \lambda_N])$ vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
 
 Matriisin $U = [ u_0, u_1, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
 saamme ne matriisin $V$ sarakkeina  $V = [v_0, v_1, \dots, v_k]$.  
@@ -99,12 +131,15 @@ V = D^{-\frac{1}{2}} U
 \label{EIGENVECTORS}
 \end{equation}
 
-Nyt datan koordinaatit pienennetyssä ulottuvuudessa ovat yhtälön \ref{MAP_COORDINATES} matriisissa $\Psi$. 
+Nyt datan koordinaatit pienennetyssä avaruudessa ovat yhtälön \ref{MAP_COORDINATES} matriisissa $\Psi$. Matriisin rivit vastaavat datapisteitä ja sarakkeet näiden uusia pienennetyn avaruuden koordinaatteja.
 
 \begin{equation}
 \Psi = V \Lambda
 \label{MAP_COORDINATES}
 \end{equation}
+
+% TODO tarviiko mainita, että t=1 ?
+% TODO decay of spectrum? lähestyvätkö nollaa vai mitä tahansa?
 
 Käyttämällä sopivaa arvoa $\epsilon$ lähestyvät ominaisarvot nopeasti nollaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $v_0$ on vakio, joten se voidaan jättää pois.
 Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen on esitetty yhtälössä \ref{DM}.
@@ -114,7 +149,10 @@ Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen
 \label{DM}
 \end{equation}
 
-Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. Näin ollen datan uusi ulottuvuus on $d$ vanhan $n$ sijaan.
+Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. 
+Näin $n$-ulotteisesta datasta on muodostettu $d$-ulotteinen diffuusioavaruus.
+
+Tarvittaessa diffuusiokuvaus voidaan skaalata jakamalla sen koordinaatit luvulla $\lambda_1$.
 
 \section{N-grammianalyysi}
 
