@@ -63,7 +63,7 @@ densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F) {
   }
 }
 
-plot.service <- function(service, filename, do.svg=TRUE, do.pdf=FALSE) {
+plot.service <- function(service, filename, do.svg=FALSE, do.pdf=TRUE) {
 
   print(paste("plotataan: ",service," ",filename))
   
@@ -73,13 +73,13 @@ plot.service <- function(service, filename, do.svg=TRUE, do.pdf=FALSE) {
   ## Plot SVG
   if (do.svg) {
     ## Density map
-    svg(paste("../pics/tiheyskuvat/service_orig_",service,".svg",sep=""))
+    svg(paste("../pics/tiheyskuvat/service_",service,".svg",sep=""))
     par(family="serif")
     densityplot.classic(rawdata)
     dev.off()
 
     # Diffusion map
-    svg(paste("../pics/diffuusiokuvat/service_orig_",service,".svg",sep=""))
+    svg(paste("../pics/diffuusiokuvat/service_",service,".svg",sep=""))
     par(family="serif")
     diffusionplot(rawdata, randomness=0.01)
     dev.off()
@@ -88,14 +88,14 @@ plot.service <- function(service, filename, do.svg=TRUE, do.pdf=FALSE) {
   ## Plot PDF
   if (do.pdf) {
     ## Density map
-    pdf(paste("../pics/tiheyskuvat/service_orig_",service,".pdf",sep=""))
-    par(family="serif")
+    pdf(paste("../pics/tiheyskuvat/service_",service,".pdf",sep=""))
+    par(family="serif",mar=c(0.3,4,1,0.3))
     densityplot.classic(rawdata)
     dev.off()
 
     # Diffusion map
-    pdf(paste("../pics/diffuusiokuvat/service_orig_",service,".pdf",sep=""))
-    par(family="serif")
+    pdf(paste("../pics/diffuusiokuvat/service_",service,".pdf",sep=""))
+    par(family="serif",mar=c(4,4,1,0.3))
     diffusionplot(rawdata, randomness=0.01)
     dev.off()
   }

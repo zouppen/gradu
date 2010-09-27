@@ -46,12 +46,20 @@ Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan 
 $\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessamme data muodostaa $N \times n$ matriisin, jossa 
 yksittäinen rivi kuvaa yhtä HTTP-kyselyä ja sarakkeet vastaavat HTTP-kyselyistä määritettyjä parametreja.
 
-Aluksi luomme samankaltaisuusmatriisin $W$, joka kuvaa pisteiden välisiä etäisyyksiä.
+Aluksi luodaan samankaltaisuusmatriisi $W$, joka kuvaa pisteiden välisiä etäisyyksiä.
 Matriisi muodostetaan käyttäen painotettua Hammingin etäisyyttä. Tämä tapahtuu valitsemalla tutkittavasta matriisista $\Gamma$ rivit $x_i$ ja $x_j$ sekä merkitsemällä yhden sarakkeen kategorioiden määrää $\pi_k$:lla.
 
-Datapisteiden välinen painotettu Hammingin etäisyys lasketaan summaamalla sarakkeiden väliset Hammingin etäisyydet ja jakamalla se kussakin sarakkeessa esiintyvien kategorioiden määrällä.
+%\begin{equation*}
+%W_{ij} = e^{-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}}
+%\label{KERNEL}
+%\end{equation*}
 
-% TODO tarkista pisteiden paikka kaavoissa.
+\begin{equation*}
+W_{ij} = \exp\left(-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}\right)
+\label{KERNEL}
+\end{equation*}
+
+Datapisteiden välinen painotettu Hammingin etäisyys lasketaan summaamalla sarakkeiden väliset Hammingin etäisyydet ja jakamalla se kussakin sarakkeessa esiintyvien kategorioiden määrällä.
 
 \begin{equation*}
 \delta_{WH}(x_i,x_j) = \sum_{k=1}^{n} \frac{\delta(x_{ik},x_{jk})}{\pi_k}
@@ -65,23 +73,25 @@ Kahden alkion välinen Hammingin etäisyys määritellään seuraavasti:
 \begin{cases}
 0 & \text{, kun } x_{ik} = x_{jk} \\
 1 & \text{, muutoin}
-\end{cases} .
+\end{cases}
 \label{HAMMING}
 \end{equation*}
 
+Tässä käytetään gaussisen ytimen etäisyysmittana $\delta_{WH}$:aa. Pisteiden samankaltaisuuden toisiinsa nähden määrittelee $\epsilon$. 
 
-Tässä käytetään Gaussisen kernelin etäisyysmittana $\delta_{WH}$:aa. Pisteiden samankaltaisuuden toisiinsa nähden määrittelee $\epsilon$. 
 
-\begin{equation*}
-W_{ij} = e^{-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}}.
-\label{KERNEL}
-\end{equation*}
 
 % TODO mikä on W? Se kernelimatriisiko?
 
-Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa on käytetty TODO-menetelmää, joka lasketaan seuraavasti:
+Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa käytetään laskennallisesti tehokasta Lafonin menetelmää (TODO lähde). 
+Menetelmässä lasketaan keskiarvo funktion $\delta_{WH}(x_i,x_j)$ minimiarvoista, kun $x_i \ne x_j$. 
 
-TODO, se vanha menetelmä.
+\begin{equation*}
+\epsilon = \frac{1}{k} \sum_{i=1}^k \min_{j:x_j \ne x_i} \delta_{WH}(x_i, x_j)
+\label{EPSILON}
+\end{equation*}
+
+TODO korjaa kuvaajat vastaamaan paremmin laskettuja tuloksia!
 
 Näin luodun matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
 
