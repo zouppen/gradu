@@ -428,10 +428,10 @@ sarakkeessa 9. Suuruusluokka lasketaan funktion \ref{modlog} avulla, jossa x
 on siirretyn datan määrä tavuina.
 
 \begin{equation} \label{modlog}
-  M(x) = \left\{
+  \text{M}(x) = \left\{
   \begin{array}{ll}
-    0 & \quad \text{, kun $x = 0$}\\
-    \lfloor log_2 \, x \rfloor & \quad \text{, kun x > 0}\\
+    0 & \quad \text{, kun $0 \leq x < 1$}\\
+    \lfloor \log_2 \, x \rfloor +1 & \quad \text{, kun $x \geq 1$}\\
   \end{array} \right.
 \end{equation}
 

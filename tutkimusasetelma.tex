@@ -59,14 +59,14 @@ W_{ij} = \exp\left(-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}\right)
 \label{KERNEL}
 \end{equation*}
 
-Datapisteiden välinen painotettu Hammingin etäisyys lasketaan summaamalla sarakkeiden väliset Hammingin etäisyydet ja jakamalla se kussakin sarakkeessa esiintyvien kategorioiden määrällä.
+\noindent Datapisteiden välinen painotettu Hammingin etäisyys lasketaan summaamalla sarakkeiden väliset Hammingin etäisyydet ja jakamalla se kussakin sarakkeessa esiintyvien kategorioiden määrällä.
 
 \begin{equation*}
 \delta_{WH}(x_i,x_j) = \sum_{k=1}^{n} \frac{\delta(x_{ik},x_{jk})}{\pi_k}
 \label{W_HAMMING}
 \end{equation*}
 
-Kahden alkion välinen Hammingin etäisyys määritellään seuraavasti:
+\noindent Kahden alkion välinen Hammingin etäisyys määritellään seuraavasti:
 
 \begin{equation*}
 \delta(x_{ik},x_{jk}) = 
@@ -77,13 +77,11 @@ Kahden alkion välinen Hammingin etäisyys määritellään seuraavasti:
 \label{HAMMING}
 \end{equation*}
 
-Tässä käytetään gaussisen ytimen etäisyysmittana $\delta_{WH}$:aa. Pisteiden samankaltaisuuden toisiinsa nähden määrittelee $\epsilon$. 
-
-
+\noindent Tässä käytetään gaussisen ytimen etäisyysmittana $\delta_{WH}$:aa. Pisteiden samankaltaisuuden toisiinsa nähden määrittelee $\epsilon$. 
 
 % TODO mikä on W? Se kernelimatriisiko?
 
-Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa käytetään laskennallisesti tehokasta Lafonin menetelmää (TODO lähde). 
+Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa käytetään laskennallisesti tehokasta Lafonin menetelmää, joka on kuvattu B. Bahin tutkielmassa\cite[s. 18]{bah}. 
 Menetelmässä lasketaan keskiarvo funktion $\delta_{WH}(x_i,x_j)$ minimiarvoista, kun $x_i \ne x_j$. 
 
 \begin{equation*}
@@ -91,37 +89,35 @@ Menetelmässä lasketaan keskiarvo funktion $\delta_{WH}(x_i,x_j)$ minimiarvoist
 \label{EPSILON}
 \end{equation*}
 
-TODO korjaa kuvaajat vastaamaan paremmin laskettuja tuloksia!
-
-Näin luodun matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
+\noindent Näin luodun matriisin rivit normalisoidaan diagonaalimatriisin $D$ avulla, joka luodaan yhtälössä \ref{ROWSUM}. 
 
 \begin{equation}
 D_{ii} = \sum_{j=1}^{N} W_{ij}
 \label{ROWSUM}
 \end{equation}
 
-Nyt jokaisen rivin summaksi tulee 1. $P$ kuvaa todennäköisyyttä sille, että yksittäinen alkio muuttuu tilasta toiseen.
+\noindent Nyt jokaisen rivin summaksi tulee 1. $P$ kuvaa todennäköisyyttä sille, että yksittäinen alkio muuttuu tilasta toiseen.
 
 \begin{equation}
 P = D^{-1} W
 \label{PROB}
 \end{equation}
 
-Seuraavaksi määritellään muuttumistodennäköisyysmatriisin ominaisarvot. $P$:n ominaisarvot ovat samat kuin konjugaattimatriisin, joka on esitetty yhtälössä \ref{SYMM}. Tämän matriisin ominaisarvot voidaan johtaa matriisista $\tilde{P}$, kuten myöhemmin tulee ilmi.
+\noindent Seuraavaksi määritellään muuttumistodennäköisyysmatriisin ominaisarvot. $P$:n ominaisarvot ovat samat kuin konjugaattimatriisin, joka on esitetty yhtälössä \ref{SYMM}. Tämän matriisin ominaisarvot voidaan johtaa matriisista $\tilde{P}$, kuten myöhemmin tulee ilmi.
 
 \begin{equation}
 \tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}}
 \label{SYMM}
 \end{equation}
 
-Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} symmetrisen todennäköisyysmatriisin $\tilde{P}$. Näin luotu matriisi säilyttää ominaisarvonsa, ja sitä kutsutaan normalisoidun graafin Laplace-operaatioksi.
+\noindent Jos vaihdamme $P$:n yhtälöstä \ref{SYMM} yhtälössä \ref{PROB} olevan kanssa, saamme yhtälön \ref{NGL} symmetrisen todennäköisyysmatriisin $\tilde{P}$. Näin luotu matriisi säilyttää ominaisarvonsa, ja sitä kutsutaan normalisoidun graafin Laplace-operaatioksi.
 
 \begin{equation}
 \tilde{P} = D^{\frac{1}{2}} P D^{-\frac{1}{2}} = D^{\frac{1}{2}} D^{-1} W D^{-\frac{1}{2}} = D^{-\frac{1}{2}} W D^{-\frac{1}{2}}
 \label{NGL}
 \end{equation}
 
-Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. \textit{Singular Value Decomposition}, SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (engl. \textit{spectral theorem}) mukaan tällaisen matriisin 
+\noindent Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. \textit{Singular Value Decomposition}, SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (engl. \textit{spectral theorem}) mukaan tällaisen matriisin 
 hajotelma on yhtälön \ref{SVD} mukainen.  
 
 \begin{equation}
@@ -131,7 +127,7 @@ hajotelma on yhtälön \ref{SVD} mukainen.
 
 % TODO mitä tarkoittaa diag? Miksi sillä operoidaan pikku-lambdoja?
 
-Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot $diag([\lambda_1, \lambda_2, \dots, \lambda_N])$ vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
+\noindent Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot $diag([\lambda_1, \lambda_2, \dots, \lambda_N])$ vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
 
 Matriisin $U = [ u_0, u_1, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
 saamme ne matriisin $V$ sarakkeina  $V = [v_0, v_1, \dots, v_k]$.  
@@ -141,7 +137,7 @@ V = D^{-\frac{1}{2}} U
 \label{EIGENVECTORS}
 \end{equation}
 
-Nyt datan koordinaatit pienennetyssä avaruudessa ovat yhtälön \ref{MAP_COORDINATES} matriisissa $\Psi$. Matriisin rivit vastaavat datapisteitä ja sarakkeet näiden uusia pienennetyn avaruuden koordinaatteja.
+\noindent Nyt datan koordinaatit pienennetyssä avaruudessa ovat yhtälön \ref{MAP_COORDINATES} matriisissa $\Psi$. Matriisin rivit vastaavat datapisteitä ja sarakkeet näiden uusia pienennetyn avaruuden koordinaatteja.
 
 \begin{equation}
 \Psi = V \Lambda
@@ -151,7 +147,7 @@ Nyt datan koordinaatit pienennetyssä avaruudessa ovat yhtälön \ref{MAP_COORDI
 % TODO tarviiko mainita, että t=1 ?
 % TODO decay of spectrum? lähestyvätkö nollaa vai mitä tahansa?
 
-Käyttämällä sopivaa arvoa $\epsilon$ lähestyvät ominaisarvot nopeasti nollaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $v_0$ on vakio, joten se voidaan jättää pois.
+\noindent Käyttämällä sopivaa arvoa $\epsilon$ lähestyvät ominaisarvot nopeasti nollaa, jolloin riittävän tarkkaan diffuusiokuvaukseen tarvitaan ainoastaan $d$ komponenttia. Ensimmäinen ominaisvektori $v_0$ on vakio, joten se voidaan jättää pois.
 Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen on esitetty yhtälössä \ref{DM}.
 
 \begin{equation}
@@ -159,23 +155,32 @@ Käyttäen ainoastaan ensimmäiset $d$ komponenttia diffuusiokuvauksen luomiseen
 \label{DM}
 \end{equation}
 
-Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. 
+\noindent Tämä diffuusiokuvaus upottaa tunnetut pisteet $x_i$ $d$-ulotteiseen avaruuteen. 
 Näin $n$-ulotteisesta datasta on muodostettu $d$-ulotteinen diffuusioavaruus.
 
 Tarvittaessa diffuusiokuvaus voidaan skaalata jakamalla sen koordinaatit luvulla $\lambda_1$.
 
 \section{N-grammianalyysi}
 
+% TODO lähde n-grammeista
+
 Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
 peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti muun muassa tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
 
-Tässä tutkimuksessa yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-grammi lasketaan käyttäen $n$ pituista liukuvaa ikkunaa. Esimerkiksi sanan ``automaatti'' 2-grammi 
-saadaan aloittamalla analyysi ensimmäisestä kirjaimesta ja liuttumalla ikkunaa yhden kirjaimen verran. Tässä tapauksessa syntynyt merkkijakauma on ``au'', ``ut'', ``to'', ``om'', ``ma'', ``aa'', ``at'', ``tt'', ``ti''. 
-Käyttäen tällä tavoin syntynyttä sarjaa saadaan rakennettua matriisi, joka sisältää tiedon merkkien jakaantumisesta.
+Tässä tutkimuksessa yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-grammit muodostetaan asettamalla $n$:n merkin pituinen ikkuna merkkijonon alkuun, jonka jälkeen ikkuna liu'utetaan merkki kerrallaan merkkijonon yli, keräten näin muodostuneet osamerkkijonot. Esimerkiksi merkkijonon \texttt{automaatti} 2-grammit ovat
+\texttt{au},
+\texttt{ut},
+\texttt{to},
+\texttt{om},
+\texttt{ma},
+\texttt{aa},
+\texttt{at},
+\texttt{tt} ja
+\texttt{ti}.
+Näin muodostetusta n-grammien listasta voidaan muodostaa n-grammianalyysin avulla vektori, jonka alkioihin asetetaan kunkin n-grammin esiintymistiheys. Näin muodostettua vektoria voidaan käyttää hyödyksi merkkijonon samankaltaisuuden arvioinnissa.
 
-N-grammianalyysin tuottamien matriisien ulottuvuus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-grammisarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
-jolloin $n=2$, ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Ulottuvuuksia pystytään vähentämään jonkin verran poistamalla sellaiset ulottuvuudet, joissa jokaisessa vektorissa esiintyisi vain 
-nollia. Tästäkin huolimatta matriisit ovat niin moniulotteisia, että ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
+N-grammianalyysin tuottamien vektoreiden pituus on $m^n$, jossa $m$ on datassa esiintyvien sanasten määrä ja $n$ on n-grammisarjan pituus. Tutkimuksessa analysoidaan vain kahden peräkkäisen merkin esiintyvyyksiä, 
+jolloin $n=2$, ja koska tutkittavat sanaset ovat 8-bittisiä merkkejä, niin $m=2^8=256$. Informaation määrää pystytään vähentämään jonkin verran jättämällä huomiotta ne vektorin alkiot, jotka sisältävät nollan jokaisessa tutkittavassa vektorissa. Tästäkin huolimatta alkioita on niin runsaasti, että niistä muodostetun avaruuden ulottuvuuksien määrä tulee pystyä jollakin tavoin vähentämään. 
 
 \section{Satunnaisprojektio}
 

@@ -30,15 +30,19 @@ group.anomalies <- function(zipola) {
 }
 
 # Plots densities the simple way.
-densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F) {
+densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F,randorder = T) {
 
+  if (randorder) {
+    #zipola <- sample(zipola)
+  }
+  
   a <- group.anomalies(zipola)
   
   # Plot nothing, just ensure axes are scaled nicely
   plot(zipola$density, pch=NA_integer_,xaxt="n",xlab=NA,ylab="etäisyys")
 
   # Print n to a corner
-  mtext(paste("n = ",length(zipola$i1),sep=""), adj=1)
+  mtext(paste("N = ",length(zipola$i1),sep=""), adj=1)
   
   # Add anomaly limits
   abline(h=a$sd,lty=2)
@@ -133,7 +137,7 @@ diffusionplot <- function(zipola, randomness=0, do.lineinfo=T) {
        ylim=limits.textfriendly(zipola$x2))
 
   # Print n to a corner
-  mtext(paste("n = ",length(zipola$i1),sep=""), adj=1)
+  mtext(paste("N = ",length(zipola$i1),sep=""), adj=1)
   
   ## Plot normal activity
   points(variated.x[!a$filter],
