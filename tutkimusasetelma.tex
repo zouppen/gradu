@@ -164,7 +164,7 @@ Tarvittaessa diffuusiokuvaus voidaan skaalata jakamalla sen koordinaatit luvulla
 
 % TODO lähde n-grammeista
 
-Koska haluamme analysoida tarkemmin GET-parametrin jälkeistä kyselyosuutta, tarvitsemme tähän menetelmän, joka toimii nopeasti ja tehokkaasti. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
+Tässä tutkielmassa on tarpeen analysoida tarkemmin HTTP:n GET-parametrin jälkeistä kyselyosuutta. Tarkoitusta varten tarvitaan menetelmä, joka toimii rittävän nopeasti ja tehokkaasti, mutta tuottaa kuitenkin hyödyllistä tietoa parametrien ominaisuuksista. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
 peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti muun muassa tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
 
 Tässä tutkimuksessa yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-grammit muodostetaan asettamalla $n$:n merkin pituinen ikkuna merkkijonon alkuun, jonka jälkeen ikkuna liu'utetaan merkki kerrallaan merkkijonon yli, keräten näin muodostuneet osamerkkijonot. Esimerkiksi merkkijonon \texttt{automaatti} 2-grammit ovat
