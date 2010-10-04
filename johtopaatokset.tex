@@ -2,4 +2,50 @@
 
 \chapter{Yhteenveto}
 
-TODO.
+Monien perinteisten toimintojen siirtyessä kohti digitaalisia palvelumalleja, on erilaisten 
+Web-sovellusten ja -palveluiden merkitys kasvanut huomattavasti. Lisäksi yhä useampi näistä sovelluksista
+toimii tietoturvan kannalta kriittisillä sektoreilla.
+Tämän muutoksen ovat havainneet myös tietomurtoja tekevät hyökkääjät, jotka pyrkivät kaikin
+keinoin hyödyntämään järjestelmistä löytyviä heikkouksia rikollisiin tarkoituksiin.
+
+Tietoturva on aina kulkenut alan muuta kehitystä hiukan jäljessä, ja tätä seikkaa hyökkääjät
+ovat aina käyttäneet hyväksi. Nykytilanne noudattaa myös samaa kaavaa. Perinteisiltä
+tietoturvahyökkäyksiltä osataan jo kohtuullisesti suojautua ja löydetyt haavoittuvuudet
+korjataaan riittävän nopeasti. Sovellusten tekijät ja palveluiden tarjoajavat tuntevat
+myös sen verran hyvin oman toimintaympäristönsä, että suuria virheitä ei pääse syntymään.
+
+Web-pohjaisissa palveluissa tilanne on toinen. Aihealue on vielä sen verran tuore,
+että sovellusten kehittäjät ja ylläpitäjät yrittävät vasta sopeutua siirroksen
+tuomiin muutoksiin. Uusien teknologioiden ja kehitysympäristöjen oppimiseen
+menee aina oma aikansa, ja näiden turvalliseen käyttöön vielä pidempään. 
+Tähän kun lisätään mukaan uudenlaiset arkkitehtuurimallit, joihin kehittäjät yrittävät 
+sopeutua, niin on varmaa, että sovelluksiin eksyy erilaisia haavoittuvaisuuksia.
+
+Tähän muutoksen tuomaan epävarmuuteen tietomurtoja ja -varkauksia tekevät hyökkääjät ovat iskeneet. 
+Erilaisia uusia hyökkäystapoja kehitetään jatkuvasti ja väärinkäytettyjä haavoittuvaisuuksia löydetään lähes päivittäin.
+Monet näistä hyökkäyksistä eivät edes pyri ohittamaan asetettuja suojauksia, vaan ne käyttävät hyödykseen
+sovelluksen omia toimintoja, joita ei vain ole osattu riittävästi suojata. Osa näistä heikkouksista on 
+myös niin syvällä käytetyssä tekniikoissa tai alustoissa, että suoraan niitä ei pystytä edes korjaamaan vaan
+korjaaminen vaatii kokonaan uudenlaista lähestymistapaa. Tämä ajaakin monet suunnittelijoista tekemään
+omia pikaisia korjauksia, joiden toimivuus on usein kuitenkin hyvin tapauskohtaista. 
+
+Uudenlaisten tietoturvahyökkäyksten tunnistaminen vanhoilla työkaluilla on usein hyvin hankalaa tai
+lähes mahdotonta. Yhteistä erilaisille hyökkäyksille on, että ne poikkeavat yleensä jollakin tavoin normaalista
+tietomassasta. Ongelmana on se, kuinka nämä poikkeavuudet eli anomaliat tunnistetaan suuresta tietomassasta
+riittävällä nopeudella ja tarkkuudella. Tätä tunnistamista varten onkin kehitetty useita erilaisia menetelmiä,
+jotka pyrkivät jollakin tavoin erottamaan hyökkäykset muusta liikenteestä. 
+
+Tämän tutkielman tavoitteena oli tunnistaa poikkeavat HTTP-kyselyt automaattisesti suuresta tietomassasta.
+Käytettäväksi menetelmäksi valittiin diffuusiokuvaukset, jotka tarjoavat nopean ja tehokkaan tavan tunnistaa poikkeavuudet
+järjestelmän normaalista käytöksestä. Materiaalin käsittelyä varten kehitettiin erillinen sovellus, joka suoritti 
+lähdemateriaalille halutut toiminnot. Varsinainen analyysi suoritettiin Matlab-sovelluksessa, jonka jälkeen
+poikkeaviksi merkityt pisteet käytiin yksitellen läpi.
+
+Saadut tulokset osoittavat, että diffuusiokuvausmenetelmä soveltuu hyvin tämän tyyppisen materiaalin analysointiin.
+Poikkeaviksi havaitut kyselyt erosivat myös todellisuudessa normaalista tietomassasta. Tulokset eivät kuitenkaan osoita sitä,
+että diffuusiokuvaus olisi paras valinta käytännön sovelluksiin. Tätä varten tarvitaan vielä paljon jatkotutkimusta ja vertailua
+muihin menetelmiin, johon ei tässä työssä perehdytty ollenkaan. Alustavat tulokset antavat kuitenkin uskoa siihen, että
+tulevaisuudessa diffuusiokuvausten käyttö on mahdollista eri sovellusalueilla.
+
+
+

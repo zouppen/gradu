@@ -104,8 +104,6 @@ rivinumeron kyseisen lokitiedoston sisällä.
 
 \section{Tulokset}
 
-TODO korjaa tulokset vastaamaan paremmin laskettuja kuvaajia!
-
 Analysoitavassa materiaalissa resurssilla 1 (kuva \ref{service_1}) oli
 viisi HTTP-kyselyä, jotka merkittiin poikkeaviksi. Tutkimalla
 diffuusiokuvauksen luomiseen käytettyä lokia, ja palauttamalla
@@ -119,12 +117,13 @@ GET-parametreja, joita kyseinen resurssi ei käsittele. Tämä on
 saattanut yksinkertaisesti johtua siitä, että käyttäjä on kopioinut
 Web-sivun osoitteen selaimeensa virheellisesti.
 
-Kuvassa \ref{service_18} on nähtävillä resurssin 8 poikkeavuuskartta. Kyseisessä otannassa oli mukana 181 pistettä ja näistä yksi todettiin poikkeavaksi.
-Resurssi 8 tarjosi vain staattista sisältöä, joten GET-parametrin jälkeistä kyselyosuutta ei HTTP-kyselyissä pitänyt olla. Poikkeavassa kyselyssä oli
-GET-parametrin resurssipolun jälkeen kuitenkin kysymysmerkki, ja tämän perässä oli pyynnön tehneen alustan verkko-osoite. Poikkeavan kyselyn tunnistaminen
+Kuvassa \ref{service_18} on nähtävillä resurssin 8 poikkeavuuskartta. Kyseisessä otannassa oli mukana 181 pistettä ja näistä kaksi todettiin poikkeavaksi.
+Resurssi 8 tarjosi vain staattista sisältöä, joten GET-parametrin jälkeistä kyselyosuutta ei HTTP-kyselyissä pitänyt olla. Yhdessä poikkeavassa kyselyssä oli
+GET-parametrin resurssipolun jälkeen kuitenkin kysymysmerkki ja tämän perässä oli pyynnön tehneen alustan verkko-osoite. Tämän poikkeavan kyselyn tunnistaminen
 oli helppoa, sillä se oli ainoa kysely, jolle n-gram -analyysi tuotti
 nollasta poikkeavia arvoja. Resurssille tehty kysely oli selkeästi virheellinen, sillä merkitty verkko-osoite 
-oli privaattiverkon osoite. Kyselyssä käytetty alusta oli myös ainoa laatuaan.
+oli privaattiverkon osoite. Kyselyssä käytetty alusta oli myös ainoa laatuaan. Toinen poikkeavaksi merkitty kysely oli myös helppo tunnistaa, koska siinä 
+käytetty metodi oli muista poiketen HEAD. Tarkempi analyysi osoitti, että kysely oli peräisin automaattisesta robotista, joka indeksoi Web-sivuja. 
 
 Resurssissa 337 (kuva \ref{service_337}) poikkeavuuksia havaittiin kuusi kappaletta. Näistä neljässä oli GET-parametrina samanlainen tunnistetieto
 kuin resurssin 1 kolmessa havaitussa poikkeavuudessa. Yksi poikkeavuus taas oli saman käyttäjän aiheuttama kuin resurssilla 8, sillä kysely tuli samasta
@@ -134,7 +133,7 @@ sama verkko-osoite. Onkin hyvin todennäköistä, että kyselyt
 kohdistuivat väärään palveluun, koska kyselyiden oikeassa muodostuksessa ilmeni
 virheitä. Viimeisessä poikkeavassa kyselyssä oli sitten muista eroava määrä avain-arvo pareja.
 
-Molempien kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet
+Molempien kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet yhtä lukuunottamatta
 aiheutuivat GET-parametrista, jota ei esiintynyt muissa
 kyselyissä. Ylimääräisen parametrin nimi oli sama, kuin resurssissa 1,
 ja niistä jokainen tuli samasta IP-osoitteesta. Parametrin arvo
@@ -143,17 +142,15 @@ kyselyt olivat tulleet välityspalvelimen kautta, joka jostakin syystä
 lisää kyseisen tunnistetiedon. Tämän takia sen kautta tulevat pyynnöt
 näyttävät erilaiselta. Palvelin kuitenkin oli osannut käsitellä nämä
 kyselyt normaalisti, sillä HTTP-\-vastauskoodi näiden kyselyiden
-osalta oli 200.
+osalta oli 200. Viimeinen poikkeavuus oli sitten samanlainen kuin kuvassa \ref{service_18} eli kyselyssä oli pyynnön tehneen alustan verkko-osoite.
 
-Viimeisen analysoidun resurssin (kuva \ref{service_882}) ainoa
-havaittu poikkeavuus johtui ylimääräisestä GET-parametrista. Kyseisen
-nimistä parametria ei esiintynyt muissa kyselyissä. Aineistossa
-esiintyi kuitenkin toinen parametrillinen kysely, joka näkyy
-diffuusiokartassa (kuva \ref{diffuusio_882}) kuvan vasemmassa
-alalaidassa. Kyseinen piste on myös erottuu poikkeavuuskartassa (kuva \ref{service_882})
-raja-arvon alapuolella olevana pienenä kohoumana. Tätä pistettä ei
-kuitenkaan luokiteltu poikkeavuudeksi, koska sen etäisyys ympäröiviin
-pisteisiin ei ollut tarpeeksi suuri.
+Viimeisen analysoidun resurssin (kuva \ref{service_882}) kahdesta
+havaitusta poikkeavuudesta yksi johtui samanlaisesta tunnistetiedosta,
+joka esiintyi myös aikaisemmissa kuvissa. Toinen poikkeavuus sisälsi 
+myös ylimääräisen GET-parametrin, mutta aiemmista tapauksista poiketen 
+tämä oli perinteisempi parametri, jota ei kuitenkaan olisi pitänyt
+välittää palvelimelle. Tästä huolimatta palvelin oli osannut käsitellä
+kyselyn. 
 
 
 \begin{figure}[p]
