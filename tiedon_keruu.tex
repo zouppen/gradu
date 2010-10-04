@@ -76,7 +76,7 @@ jälkeen välilyönnillä erotettuna seuraa osoiteosa. Se jakautuu
 resurssiin ja parametreihin, jossa erottimena toimii kysymysmerkki.
 Parametriosa koostuu parametrilistasta, jossa parametrit ovat erotettu
 toisistaan \texttt{\&}-merkillä. Yksittäinen parametri on
-avain-arvopari, jossa avain on yhtäsuurusmerkin vasemmalla puolella ja
+avain-arvopari, jossa avain on yhtäsuuruusmerkin vasemmalla puolella ja
 arvo oikealla puolella (kuva \ref{CLF2}). Käytettävien parametrien
 lukumäärä vaihtelee palvelusta riippuen. Mikäli parametreja ei ole
 lainkaan, ei parametriosaa eikä sitä edeltävää kysymysmerkkiä esiinny
@@ -206,7 +206,7 @@ Relaatiotietokantaa ei käytetä, koska tietokantakyselyiden
 rinnakkaistaminen osoittautui hyvin vaikeaksi verrattuna suoraan
 tiedostoja käsittelevään toteutukseen.
 
-Esikäsittely jakaantuu seuraavaat neljään vaiheeseen:
+Esikäsittely jakaantuu seuraavaan neljään vaiheeseen:
 
 \begin{enumerate}
 \item Tiedostolistan muodostaminen ja tiedostojen ryhmittely palveluittain.
@@ -321,7 +321,7 @@ vakiota voi kuitenkin tarvittaessa muuttaa.
 Ensimmäisessä ajossa selvitetään, mitkä mahdollisista 2-grammeista
 ylipäätään esiintyvät aineistossa. Mahdollisia N-grammeja on yhteensä
 $2^{8n}$ kappaletta, koska käsiteltävät merkkijonot koostuvat
-Word8-tyypeistä (8-bittinen tavu). Säästääkseme muistia
+Word8-tyypeistä (8-bittinen tavu). Säästääksemme muistia
 analyysivaiheessa, selvitetään aluksi, millaisia 2-grammeja
 aineistossa esiintyy ja jätetään taulukoimatta sellaiset 2-grammit,
 jotka eivät esiinny lainkaan.
@@ -331,6 +331,8 @@ luonnollisesti riippuu käytettävästä aineistosta. Käyttämällämme
 datalla taulukon kooksi muodostui muutamia kymmeniä kilotavuja.
 Lopputulos on siis vain murto-osa alkuperäisen datamassan
 suuruudesta.
+
+% FIXME binääri vai binaari. Yhtenäistä!
 
 N-grammianalyysin ensimmäinen vaihe suoritetaan halutun
 palvelun hakemistossa listauksen \ref{paraanal} mukaisesti.
@@ -359,8 +361,8 @@ palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
 poikkeaviksi havaittuja pisteitä tutkitaan. 
 
 Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti ja viikonpäivä. 
-Tämä ajankohta määräytyy palvelimen kellon mukaan ja aikavyöhykeenä on UTC. Lokista ei kuitenkaan
-nähdä miltä aikavyökkeeltä kysely on peräisin.
+Tämä ajankohta määräytyy palvelimen kellon mukaan ja aikavyöhykkeenä on UTC. Lokista ei kuitenkaan
+nähdä miltä aikavyöhykkeeltä kysely on peräisin.
 
 Kyselyssä esiintyvä HTTP-metodi ja HTTP-protokollan versio ovat
 esitetty sarakkeissa 6 ja 7. Metodit on numeroitu taulukon
@@ -437,7 +439,7 @@ on siirretyn datan määrä tavuina.
 
 \vskip 0.5cm
 Sarakkeessa 10 ilmaistaan resurssin numero. Koska jokaisesta
-resurssista muodostetaan erillinen matriisi, tämän sarakeen arvo on
+resurssista muodostetaan erillinen matriisi, tämän sarakkeen arvo on
 vakio jokaisessa matriisissa.
 
 % Merkkijonoja sisältävät arvot toimivat kukin omana ryhmänään.

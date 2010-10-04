@@ -14,7 +14,7 @@ näkökulmasta\cite{javaweb}.
 
 IBM määrittelee Web-palvelut seuraavasti: \textit{Web-palvelut ovat
 itsenäisiä ja modulaarisia sovelluksia, jotka voidaan julkistaa,
-määritellä, paikallistaa ja suorittaa verkon ylitse, yleeensä Webin
+määritellä, paikallistaa ja suorittaa verkon ylitse, yleensä Webin
 välityksellä}~\cite{websecurity}.
 
 Tietoturvan kannalta Web-palvelut ovat haastavia, koska niitä
@@ -23,7 +23,7 @@ esimerkiksi tietyn organisaation lähiverkkoon.
 Lisäksi Web-palveluiden osia sijoitetaan usein fyysisesti eri paikkoihin ja ne
 kommunikoivat keskenään Internetin välityksellä.
 
-Tässa luvussa käsitellään komponentteja, joista tämänhetkiset
+Tässä luvussa käsitellään komponentteja, joista tämänhetkiset
 Web-palvelut koostuvat. Erityistä huomiota on kiinnitetty seikkoihin,
 jotka vaikuttavat palvelun tietoturvaan.
 
@@ -37,7 +37,7 @@ hypertekstiä, kuvia ja selainohjelmassa suoritettavia komentosarjoja.
 Web-palvelun käyttäjä ei kuitenkaan välttämättä kommunikoi suoraan
 Web-pal\-ve\-li\-men kanssa. Suuret Web-palvelut koostuvat usein
 palvelinohjelmiston lisäksi välimuistipalvelusta, joka vähentää
-palvelimelle kohdistuvaa rasistusta säilyttämällä harvoin muuttuvaa
+palvelimelle kohdistuvaa rasitusta säilyttämällä harvoin muuttuvaa
 sisältöä välimuistissa ja välittämällä tätä suoraan
 käyttäjille. Tällainen konfiguraatio esitellään tarkemmin luvussa \ref{valimuisti}.
 
@@ -51,13 +51,13 @@ Tuloksia voi vääristää jonkin verran se, että joissakin tapauksissa
 edustalla suoritetaan välitys- tai välimuistipalveluna toista
 palvelinohjelmistoa, esimerkiksi Apachea tai nginx:ä, joka välittää
 kyselyt eteenpäin varsinaiselle
-Web-pal\-ve\-lin\-oh\-jel\-mis\-tol\-le. Tämä selittää esimerkiksi
+Web-\-palvelinohjelmistolle. Tämä selittää esimerkiksi
 sen, miksi Zope puuttuu kokonaan suosituimpien palvelinten
 joukosta. Esimerkiksi Jyväskylän yliopiston palvelinohjelmiston nimenä
 Netcraftin tilastoissa näkyy Apache~\cite{netcraft_jyu}, vaikka
-palvelu on toteutettu Zope-pal\-ve\-lin\-oh\-jel\-mis\-ton päällä
-suoritettavalla Plonella. Samoin on käynyt Tomcat-pal\-ve\-li\-mel\-la
-ajettavalle Korppi-o\-pin\-to\-tie\-to\-jär\-jes\-tel\-mäl\-le.
+palvelu on toteutettu Zope-\-palvelinohjelmiston päällä
+suoritettavalla Plonella. Samoin on käynyt Tomcat-\-palvelimella
+ajettavalle Korppi-\-opintotietojärjestelmälle.
 
 Palvelinohjelmiston suosiolla voidaan olettaa olevan vaikutusta
 siihen, kuinka paljon mielenkiintoa ohjelmistoa kohtaan on
@@ -71,7 +71,7 @@ kasvaessa.
 
 Apache HTTP Server on Apache Software Foundationin kehittämä vapaan
 lähdekoodin Web-palvelinalusta. Apache pohjautuu NCSA:ssa
-kirjoitettuun httpd-oh\-jel\-mis\-toon. Ensimmäinen versio
+kirjoitettuun httpd-\-ohjelmistoon. Ensimmäinen versio
 Apache-palvelimesta julkaistiin keväällä 1995. Alle vuodessa se
 saavutti suosiossa edeltäjänsä NCSA httpd:n ja Apache on siitä lähtien
 pitänyt ykköspaikkaa maailman suosituimpana Web-palvelinalustana.~\cite{apache}
@@ -90,7 +90,7 @@ CGI-rajapintaan~\cite{cginopeus}. Yksi yleisimmistä
 palvelinlaajennoksista on PHP-kielen tuki.
 
 Apachea voidaan suorittaa lukuisissa eri käyttöjärjestelmissä,
-mukaanlukien Linux ja Windows. Suosittuja Apache-alustalla käytettäviä
+mukaan lukien Linux ja Windows. Suosittuja Apache-alustalla käytettäviä
 ohjelmointikieliä ovat PHP ja Python. Tunnettuja tässä ympäristössä
 käytettäviä Web-palveluita ovat mm. Wikipedian käyttämä MediaWiki ja
 lukuisilla selainkäyttöisillä keskustelupalstoilla käytössä oleva
@@ -205,9 +205,9 @@ esimerkiksi Suomessa.
 
 Edellä kuvattu käänteinen välityspalvelin ei ole riittävä ratkaisu
 kuormituksen tasaamiseen, kun kyse on laajamittaisesta, globaalin
-mittakaavan Web-pal\-ve\-lun\-tar\-jon\-nas\-ta. Käänteinen välityspalvelin
+mittakaavan Web-\-palveluntarjonnasta. Käänteinen välityspalvelin
 vähentää Web-palvelinten kuormitusta, mutta ei vähennä eikä hajauta
-palvelun verkkoliikennettä. Tietoliikenne kohdistuuu kuitenkin yhteen
+palvelun verkkoliikennettä. Tietoliikenne kohdistuu kuitenkin yhteen
 pisteeseen verkkoa. Jotta maailmanlaajuiset palvelut voitaisiin
 toteuttaa ilman maakohtaisia erillissivustoja, tarvitaan keinoja
 kuormituksen jakamiseen verkkotopologisesti edullisesti.
@@ -238,7 +238,7 @@ Pilvivälimuistin haittapuolena on se, että Web-palveluntarjoaja ei näe
 suoraan sivustolle tulevia kyselyitä, koska monet kyselyt eivät etene
 välimuistipalvelua syvemmälle. Tällöin tilastointi ja erilaisten tietomurtojen
 tunnistaminen on vaikeampaa. Monet välimuistipalveluntarjoajat, Akamai
-mukaanlukien, tarjoavat kuitenkin asiakkailleen monipuolisia tilastointipalveluita.
+mukaan lukien, tarjoavat kuitenkin asiakkailleen monipuolisia tilastointipalveluita.
 
 \begin{figure}[htp]
 \centering

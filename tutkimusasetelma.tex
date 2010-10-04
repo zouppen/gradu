@@ -42,7 +42,7 @@ matriisi on laskennallisesti tehokas, ja se säilyttää tässä tapauksessa rii
 Moniulotteisen datan analysoiminen on aina haasteellinen tehtävä johtuen parametrien suuresta määrästä. Tämän takia käytämme tässä työssä hyödyksi diffuusiokuvauksia, jotka ovat tehokas tapa vähentää analysoitavan datan
 ulottuvuuksia säilyttäen kuitenkin sen rakenne. Tämän jälkeen esimerkiksi klusterointi ja visualisointi pienempiulotteisessa avaruudessa on helpompaa.
 
-Ensimmäiseksi diffuusiokuvausiin perustuvalle järjestelmälle opetetaan datan normaali käyttätyminen. Tämä tapahtuu käyttäen opetusmateriaalia, joka on osa analysoitavaa dataa. Olkoot tämä opetusmateriaali 
+Ensimmäiseksi diffuusiokuvauksiin perustuvalle järjestelmälle opetetaan datan normaali käyttäytyminen. Tämä tapahtuu käyttäen opetusmateriaalia, joka on osa analysoitavaa dataa. Olkoot tämä opetusmateriaali 
 $\Gamma = \left\{ x_1, x_2, \dots , x_N \right\}, x_i \in \mathbb{R}^n$, jossa $N$ on kyselyiden määrä ja $n$ alkuperäisen datan ulottuvuuksien määrä. Meidän tapauksessamme data muodostaa $N \times n$ matriisin, jossa 
 yksittäinen rivi kuvaa yhtä HTTP-kyselyä ja sarakkeet vastaavat HTTP-kyselyistä määritettyjä parametreja.
 
@@ -81,7 +81,11 @@ W_{ij} = \exp\left(-\frac{\delta_{WH}(x_i, x_j)}{\epsilon}\right)
 
 % TODO mikä on W? Se kernelimatriisiko?
 
-Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa käytetään laskennallisesti tehokasta Lafonin menetelmää, joka on kuvattu B. Bahin tutkielmassa\cite[s. 18]{bah}. 
+Parametrin $\epsilon$ tulee olla riittävän suuri kattaakseen
+riittävästi ympäröiviä pisteitä, mutta ei kuitenkaan niin suuri, että
+se hävittäisi pisteiden väliset etäisyydet. Tässä tutkimuksessa
+käytetään laskennallisesti tehokasta Lafonin menetelmää, joka on
+kuvattu B. Bahin tutkielmassa\cite{bah}. %s. 18
 Menetelmässä lasketaan keskiarvo funktion $\delta_{WH}(x_i,x_j)$ minimiarvoista, kun $x_i \ne x_j$. 
 
 \begin{equation*}
@@ -117,7 +121,7 @@ P = D^{-1} W
 \label{NGL}
 \end{equation}
 
-\noindent Tämän jälkeen symmetrinen matriisi hajoitetaan käyttäen singulaarihajotelmaa (engl. \textit{Singular Value Decomposition}, SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (engl. \textit{spectral theorem}) mukaan tällaisen matriisin 
+\noindent Tämän jälkeen symmetrinen matriisi hajotetaan käyttäen singulaarihajotelmaa (engl. \textit{Singular Value Decomposition}, SVD). Koska $\tilde{P}$ on normaalimatriisi, spektraaliteorian (engl. \textit{spectral theorem}) mukaan tällaisen matriisin 
 hajotelma on yhtälön \ref{SVD} mukainen.  
 
 \begin{equation}
@@ -127,9 +131,11 @@ hajotelma on yhtälön \ref{SVD} mukainen.
 
 % TODO mitä tarkoittaa diag? Miksi sillä operoidaan pikku-lambdoja?
 
-\noindent Matriisissa $\Lambda$ diagonaalilla olevat singlulaariarvot $diag([\lambda_1, \lambda_2, \dots, \lambda_N])$ vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
+\noindent Matriisissa $\Lambda$ diagonaalilla olevat singulaariarvot $diag([\lambda_1, \lambda_2, \dots, \lambda_N])$ vastaavat matriisissa $\tilde{P}$ olevia ominaisarvoja, koska se on symmetrinen. Edelleen koska $\tilde{P}$ on konjugaatti $P$:n kanssa, sisältävät nämä kaksi samat ominaisarvot. 
 
-Matriisin $U = [ u_0, u_1, \dots, u_k ]$ sarakkeet sisältävät matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä \ref{EIGENVECTORS}, voime laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
+Matriisin $U = [ u_0, u_1, \dots, u_k ]$ sarakkeet sisältävät
+matriisin $\tilde{P}$ $k$ ominaisvektoria $u_k$. Käyttämällä yhtälöä
+\ref{EIGENVECTORS} voidaan laskea matriisin $P$ oikeat ominaisvektorit $v_k$, jolloin 
 saamme ne matriisin $V$ sarakkeina  $V = [v_0, v_1, \dots, v_k]$.  
 
 \begin{equation}
@@ -164,7 +170,7 @@ Tarvittaessa diffuusiokuvaus voidaan skaalata jakamalla sen koordinaatit luvulla
 
 % TODO lähde n-grammeista
 
-Tässä tutkielmassa on tarpeen analysoida tarkemmin HTTP:n GET-parametrin jälkeistä kyselyosuutta. Tarkoitusta varten tarvitaan menetelmä, joka toimii rittävän nopeasti ja tehokkaasti, mutta tuottaa kuitenkin hyödyllistä tietoa parametrien ominaisuuksista. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
+Tässä tutkielmassa on tarpeen analysoida tarkemmin HTTP:n GET-parametrin jälkeistä kyselyosuutta. Tarkoitusta varten tarvitaan menetelmä, joka toimii riittävän nopeasti ja tehokkaasti, mutta tuottaa kuitenkin hyödyllistä tietoa parametrien ominaisuuksista. N-\-grammianalyysi on hyvin tunnettu ja käytetty menetelmä, jolla tutkitaan 
 peräkkäisten merkkien tai sanasten esiintymistiheyttä. Sitä käytetään laajalti muun muassa tilastollisen kielen analyysissa, jossa esimerkiksi puheentunnistuksessa sillä tutkitaan foneemeja eli kielen äänneyksikköjä. 
 
 Tässä tutkimuksessa yksiköt ovat merkkejä, joiden esiintymistiheyttä ja jakaantumista analysoidaan. Merkkien $n$-grammit muodostetaan asettamalla $n$:n merkin pituinen ikkuna merkkijonon alkuun, jonka jälkeen ikkuna liu'utetaan merkki kerrallaan merkkijonon yli, keräten näin muodostuneet osamerkkijonot. Esimerkiksi merkkijonon \texttt{automaatti} 2-grammit ovat
@@ -194,7 +200,7 @@ X_{m \times k}^{RP} = X_{m \times N} \cdot R_{n \times k}.
 \label{RP}
 \end{equation}
 
-Satunnaisprojektion idea on lähtöisin Johnson-Lindenstrauss lemmasta: jos vektoriavaruudessa olevat pisteet heijastetaan satunnaisesti valittuun aliavaruuteen jossa on sopiva määrä ulottuvuuksia, säilyvät pisteiden
+Satunnaisprojektion idea on lähtöisin Johnson-Lindenstraussin lemmasta: jos vektoriavaruudessa olevat pisteet heijastetaan satunnaisesti valittuun aliavaruuteen jossa on sopiva määrä ulottuvuuksia, säilyvät pisteiden
 väliset etäisyydet riittävällä tarkkuudella. $X_{m \times N} \cdot R_{n \times k}.$ laskemisen aikavaativuus on $O(dkN)$, ja jos matriisi $X$ sisältää pääasiallisesti nollia ja rivissä on keskimääräisesti $c$ kappaletta arvoja 
 $(c \ll N)$, on aikavaativuus $O(ckN)$.
 

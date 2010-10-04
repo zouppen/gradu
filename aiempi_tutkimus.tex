@@ -31,8 +31,11 @@ järjestelmä, josta löytyy yleisimpien hyökkäysten kuvaukset \cite{Signature
 
 \section{Poikkeavuuksien tunnistaminen}
 
-Väärinkäytösten tunnistamiseen käytettyjen järjestelmien suurin heikkous piilee siinä, että mallintamattomat hyökkäykset jäävät näiltä huomaamatta. Tämä on erityisesti web-palveluihin kohdistuvien
-hyökkäysten tapauksessa iso ongelma, sillä toimintaympäristö muuttuu jatkuvasti, ja uusia hyökkäyksiä ja vanhojena variaatioita ilmestyy tiuhaan tahtiin. Tällöin signatuurien pitäminen ajantasalla
+% FIXME kieliasu: signatuurit?
+
+Väärinkäytösten tunnistamiseen käytettyjen järjestelmien suurin heikkous piilee siinä, että mallintamattomat hyökkäykset jäävät näiltä huomaamatta. Tämä on erityisesti Web-palveluihin kohdistuvien
+hyökkäysten tapauksessa iso ongelma, sillä toimintaympäristö muuttuu
+jatkuvasti. Uusia hyökkäyksiä ja vanhojen hyökkäystyyppien variaatioita ilmestyy tiuhaan tahtiin. Tällöin signatuurien pitäminen ajan tasalla
 muodostuu mahdottomaksi tehtäväksi. Hyökkäysten monimuotoisuus onkin johtanut siihen, että nykyisin yhä useammassa järjestelmässä pyritään tunnistamaan poikkeavat tapahtumat normaaliin liikenteen seasta
 ilman tarkkoja signatuureja. 
 
@@ -40,11 +43,11 @@ Anomalioiden tunnistamiseen on käytössä useita eri menetelmiä, ja ne voidaan
 käyttäytyminen opetetaan opetusmateriaalin avulla. Normaalia käyttäytymistä esittävät profiilit voidaan mallintaa käyttäen joko sään\-tö\-poh\-jais\-ta-, mallipohjaista- tai tilastopohjaista menetelmää. Näistä
 sääntöpohjaiset menetelmät muistuttavat eniten perinteisiä IDS-järjestelmiä sillä erolla, että luodut säännöt pohjautuvat kerättävään dataan, ja säännöt voivat olla rakenteiltaan hyvin monimutkaisia. 
 Mallipohjaisissa menetelmissä taas luodaan normaalia käyttäytymistä kuvaavat profiilit, jota vastaan tuleva liikenne arvioidaan. Tiedonlouhinta, neuroverkot ja liikenteestä luotujen kuvioiden vertaaminen
-tulevaan liikenteeseen (eng. pattern matching) ovat tekniikoita, joita on käytetty tällaisten mallien luomiseen. Analyysissa voidaan esimerkiksi tutkia verkkopakettien kuormia \cite{Payload}\cite{ULISSE} 
+tulevaan liikenteeseen (engl. \textit{pattern matching}) ovat tekniikoita, joita on käytetty tällaisten mallien luomiseen. Analyysissa voidaan esimerkiksi tutkia verkkopakettien kuormia \cite{Payload}\cite{ULISSE} 
 ja klusteroimalla ja luokittelemalla liikenne protokollien ja palveluiden mukaan \cite{Cluster}. Viimeisen ryhmän muodostavat tilastollisiin menetelmiin pohjautuvat menetelmät \cite{PacketHeader}, jotka
 ovat jääneet vähemmälle huomiolle johtuen alati muuttuvasta toimintaympäristöstä.
 
-Toisen ryhmä anomalioiden tutkimisessa muodostavat spesifistiset mallit (eng. spesification model). Nämä menetelmät pohjautuvat enemmän ihmisten huomioihin ja asiantuntijuuteen kuin matemaattisiin
+Toisen ryhmä anomalioiden tutkimisessa muodostavat spesifistiset mallit (engl. \textit{specification model}). Nämä menetelmät pohjautuvat enemmän ihmisten huomioihin ja asiantuntijuuteen kuin matemaattisiin
 kuvauksiin. Menetelmissä käytetään useita eri elementtejä aina sovellustasolta verkkotasolle, ja näitä käyttäen luodaan normaalia käyttäytymistä kuvaavat mallit. Järjestelmät voivat hyödyntää esimerkiksi
 protokollista kerättävää tietoa anomalioiden tunnistamisessa. Järjestelmien eri tiloja ja tapahtumien välisiä suhteita voidaan myös mallintaa, jolloin poikkeavat tilat ja tapahtumaketjut voidaan
 tunnistaa. 
@@ -52,7 +55,7 @@ tunnistaa.
 Anomalioiden tunnistamiseen perustuville järjestelmille löytyy useita eri käyttökohteita. Niillä voidaan esimerkiksi pyrkiä tunnistamaan tietokantoihin kohdistuvia tunnettuja ja tuntemattomia SQL-hyökkäyksiä.
 Järjestelmälle voidaan opettaa normaali käyttäytyminen esimerkiksi tiedonlouhintamenetelmin \cite{Data} tai luomalla profiileja normaalista käyttäytymisestä \cite{SQLanomaly}\cite{SQLlearning}. Erilaisia
 menetelmiä voidaan myös yhdistellä, jolloin todennäköisyys poikkeavan liikenteen tunnistamiseen kasvaa. Tutkimalla esimerkiksi yhtä aikaisesti sekä web-pyynnöissä että SQL-kyselyissä ilmeneviä poikkeavuuksia, 
-voidaan tulevat kyselyt pisteyttää tarkasti \cite{WebSQL}. Kyselyiden kategoriointi mahdollistaa sen, että haitalliseksikin merkityt kyselyt voidaan ohjata sellaisille palvelimille, joilla ei ole 
+voidaan tulevat kyselyt pisteyttää tarkasti \cite{WebSQL}. Kyselyiden kategorisointi mahdollistaa sen, että haitalliseksikin merkityt kyselyt voidaan ohjata sellaisille palvelimille, joilla ei ole 
 pääsyä arkaluontoiseen tietoon. 
 
 Web-palveluihin kohdistuvien hyökkäysten tunnistaminen on hankala ja aikaa vievä prosessi. Aikaisemmin tässä työssä esitetyt hyökkäykset kattavat vain osan hyökkäyksistä, joita vastaan sovellussuunnittelijat ja
@@ -63,14 +66,12 @@ Poikkeavan tilan tunnistamiseen on käytetty monia eri menetelmiä, ja päätök
 web-sovelluksille suunniteltu menetelmä, joka oppii kriittisten järjestelmäkutsujen ja sovelluksen tilojen väliset suhteen analysoimalla web-sovelluksen sisäisiä tiloja. Tällä tavoin voidaan tunnistaa hyökkäykset,
 jotka aiheuttavat poikkeavia tiloja esimerkiksi sovelluksen normaaliin työkulkuun. Järjestelmä koostuu eri malleista ja osista, joille opetetaan harjoittelujakson aikana sitä vastaava normaali käytös. Jokaiselle
 osalle, jotka käytännössä vastaavat tiettyjä sovelluksen toimintoja, lasketaan myös kynnysarvo, jonka ylittyessä sen aiheuttanut toiminto lasketaan anomaliaksi. Tehdyissä testeissä järjestelmä tunnisti 
-kaikki toteutetut hyökkäykset, ja virheellisten positiivisten hälystysten määrä oli kohtuullisen pieni. Analysointi aiheutti jonkin verran kuormaa palvelimelle, mutta optimoimalla toteutusta tämä voidaan poistaa
+kaikki toteutetut hyökkäykset, ja virheellisten positiivisten hälytysten määrä oli kohtuullisen pieni. Analysointi aiheutti jonkin verran kuormaa palvelimelle, mutta optimoimalla toteutusta tämä voidaan poistaa
 lähes kokonaan. 
 
-Aikaisemmin esitettyä tapaa, jossa hyödynnetään palvelimen tuottamaa logia, voidaan käyttää myös poikkeavuuksien tunnistamisessa \cite{Multi}. Tässä tapauksessa analysoitiin Apachen tuottamaa HTTP-logia, ja huomio
+Aikaisemmin esitettyä tapaa, jossa hyödynnetään palvelimen tuottamaa lokia, voidaan käyttää myös poikkeavuuksien tunnistamisessa \cite{Multi}. Tässä tapauksessa analysoitiin Apachen tuottamaa HTTP-lokia, ja huomio
 kiinnitettiin kyselyihin, joissa parametreja käyttäen välitettiin arvoja palvelinpuolen ohjelmille tai aktivoitiin dokumentteja. Kyselyt purettiin osiin, ja niitä analysoitiin käyttäen useita eri malleja 
 muun muassa kyselyjen pituutta ja normaalia järjestystä, merkkien jakaumia ja pyyntöjen tiheyttä. Vastaavaa mallia on sovellettu myös poikkeavien järjestelmäkutsujen tunnistamisessa \cite{SystemCall}, joten sen 
 käyttö ei rajoitu pelkästään web-palveluihin. Väärinkäytös- ja anomaliamenetelmien yhdistämistä on myös ehdotettu \cite{Combination}. Tällainen järjestelmä voi toimia siten, että tuleva liikenne syötetään ensiksi 
 anomalioita tutkivalle järjestelmälle, ja vain tunnistetut positiiviset tapaukset ohjataan väärinkäytösjärjestelmälle. Menetelmän etuna on, että virheellisten positiivisten määrä tippuu suuresti, ja tarkan 
 analyysin vaativat tapahtumat pienenevät.
-
-

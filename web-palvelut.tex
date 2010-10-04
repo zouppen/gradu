@@ -66,7 +66,7 @@ väliset suhteet.
 \label{web}
 \end{figure}
 
-Tietoturvan kannalta dynaamiset web-teknologiat tuovat mukanaan joukon uusia haasteita. Ensinnäkin
+Tietoturvan kannalta dynaamiset Web-teknologiat tuovat mukanaan joukon uusia haasteita. Ensinnäkin
 samat vanhat tietoturvariskit, jotka vaivasivat jo Web 1.0 aikoihin, ovat edelleen voimassa. Näiden lisäksi
 hyökkäykset, kuten Cross-Site Scripting (XSS) ja Cross-Site Request Forgery (CSRF) 
 ovat aikaisempaa vaarallisempia, koska käytetyt teknologiat tarjoavat
@@ -198,7 +198,7 @@ kautta tulevat hyökkäykset. Tämän lisäksi useimmat palomuurit eivät
 ymmärrä sovellusprotokollien,
 kuten HTTP:n tarkkaa sisältöä \cite{SQLSS}.    
 
-Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessaä vaiheessa hyökkääjän tulee tunnistaa 
+Onnistunut injektiohyökkäys koostuu kolmesta erillisestä vaiheesta. Ensimmäisessä vaiheessa hyökkääjän tulee tunnistaa 
 Web-sovelluksessa käytetyt teknologiat. Tämä onnistuu muun muassa tulkitsemalla sivujen antamia virheilmoituksia, tutkimalla 
 sivun lähdekoodia ja käyttämällä tarkoitusta varten tehtyjä työkaluja kuten Nessusta ja Nmapin. Osaavalla hyökkääjälle tämä vaihe on melko triviaali, 
 mutta hyökkäyksen kannalta tiedot ovat elintärkeitä, sillä injektiohyökkäyksen onnistuminen on täysin riippuvainen 
@@ -207,7 +207,7 @@ käytetystä alustasta.
 Kun tarvittavat tiedot on saatu kerättyä, voidaan varsinaista hyökkäystä alkaa suunnittelemaan.
 Tämä tapahtuu tunnistamalla ne syötteet, jotka käyttäjä pystyy sovellukselle antamaan. Tämä käsittää käytännössä kaiken sen 
 tiedon, joka voidaan välittää HTTP:n GET- ja POST-pyynnöissä. Viimeisessä vaiheessa hyökkääjän tehtäväksi jää niiden syötteiden 
-tunnistaminen, joita käyttämällä sovelluksen toimintaa saadaaan muokattua. Tähänkin tehtävään löytyy useita valmiita työkaluja, ja
+tunnistaminen, joita käyttämällä sovelluksen toimintaa saadaan muokattua. Tähänkin tehtävään löytyy useita valmiita työkaluja, ja
 monessa tapauksessa samat toimintaperiaatteet toimivat monilla eri alustoilla \cite{WEB2}.
 
 Structured Query Language (lyh. SQL), joka on alan vakiintunut standardi tietokantojen käsittelyyn, on käytössä lähes jokaisessa
@@ -302,7 +302,7 @@ ongelmaton, ja siksi usein vain hylätään koko syöte, jos se ei vastaa
 odotettua syötettä \cite{SQLSS}.
 
 Palvelinohjelmistoissa tulee myös ottaa huomioon muutamia asioita, joita seuraamalla voidaan huomattavasti parantaa yrityksen tietoturvaa.
-Tietoturvan kannalta huonellisesti suunnitellun palvelinohjelmiston avulla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
+Tietoturvan kannalta huolellisesti suunnitellun palvelinohjelmiston avulla voidaan myös pienentää huonosti suunnitellun sovelluksen riskiä joutua injektiohyökkäyksen kohteeksi. 
 Seuraava lista ei ole millään tavalla täydellinen ratkaisu ongelmaan,
 mutta se sisältää tärkeimpiä keinoja injektiohyökkäysten estämiseen ja
 niiden vaikutusten minimointiin.
@@ -360,7 +360,7 @@ ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia.
 \end{figure}
 
 \newpage
-Heijastettu hyökkäys eroaa tallennetusta hyökkäysestä siten, että haitallista skriptiä ei tallenneta minnekään pystyvästä. Hyökkäyksen kohteeksi käyttäjä joutuu, kun 
+Heijastettu hyökkäys eroaa tallennetusta hyökkäyksestä siten, että haitallista skriptiä ei tallenneta minnekään pystyvästä. Hyökkäyksen kohteeksi käyttäjä joutuu, kun 
 hänet huijataan esimerkiksi painamaan vihamielistä linkkiä, joka tekee käyttäjän puolesta kyselyn haavoittuvalle sivustolle. Haavoittuva sivusto heijastaa kyselyn tuloksen 
 takaisin käyttäjälle esimerkiksi virheviestin tai hakutuloksen muodossa, ja näin toimitettu koodi suoritetaan käyttäjän selaimessa, koska se tulee selaimen luottamalta
 osapuolelta \ref{heijastettu} \cite{WEB2}.
@@ -375,12 +375,12 @@ osapuolelta \ref{heijastettu} \cite{WEB2}.
 Hyökkääjän mahdollisuudet eivät rajoitu pelkästään evästeiden varastamiseen. Onnistuneen XSS-hyökkäyksen jälkeen hyökkääjä voi esimerkiksi ohjata
 käyttäjän osoitteeseen, joka jäljittelee haluttua sivustoa. Käyttäjän yrittäessä kirjautua tähän palveluun, saa hyökkääjä selville käyttäjän tunnuksen ja
 salasanan. XSS-hyökkäykset tarjoavatkin erinomaisen mahdollisuuden toteuttaa \textit{phishing} eli tiedon kalasteluhyökkäyksiä. XSS-\-madot ovat
-myös viime aikoina yleistyneet, sillä yhä useampi palvelu on niille haavoittuvainen. Esimerkiksi webmail-sovelluksia varten kirjoitetut madot 
+myös viime aikoina yleistyneet, sillä yhä useampi palvelu on niille haavoittuvainen. Esimerkiksi Webmail-sovelluksia varten kirjoitetut madot 
 käyttävät hyödyksi sitä seikkaa, että hyökkääjä pääsee käsiksi uhrin kontaktilistaan. Tällainen mato pyrkii leviämään lähettämällä 
 kontaktilistalla oleviin osoitteisiin sähköpostia, ja koska viesti tulee luotettavasta osoitteesta, ei käyttäjät osaa usein varoa viestissä
 olevaa linkkiä. Hyökkääjä vielä usein muokkaa linkistä sen näköisen, että vastaanottaja ei osaa epäillä linkin aitoutta \cite{WEB2}. 
 XSS-madot leviävätkin usein todella nopeasti, ja ne kuljettavat usein myös muita hyökkäyksiä mukanaan. Tästä hyvänä esimerkkinä
-Sammy-madoksi nimetty XSS-hyökkäys, joka vuonna 2005 iski MySpace-sivustolle, joka on yksi tunnetuimmista sosiaaliseen verkoistutumiseen
+Sammy-madoksi nimetty XSS-hyökkäys, joka vuonna 2005 iski MySpace-sivustolle, joka on yksi tunnetuimmista sosiaaliseen verkostoistumiseen
 erikoistuneista sivustoista. Käyttäen sivustossa olevaa heikkoutta hyväkseen mato saastutti käyttäjien sivuja, ja jonkun vieraillessa 
 saastuneella sivulla, saastui myös hänen oma MySpace sivunsa. 24 tunnissa mato oli saastuttanut yli miljoona sivua, ja tilanteen korjaamiseksi
 MySpace joutui sulkemaan väliaikaisesti sivustonsa. Hyökkäyksen vahingot eivät rajoittuneet tähän, vaan seuraavina viikkoina useista tunnetuista sivustoista
@@ -388,7 +388,7 @@ kuten Googlesta ja Yahoosta löytyi vastaavanlaisia tietoturva-aukkoja \cite{WEB
 
 Tärkein asia XSS-hyökkäysten estämiseksi on olla tarkkana sen suhteen, kuinka käyttäjien tarjoama sisältö välitetään toisille käyttäjille.
 Tärkeää on myös muokata käyttäjän antama syöte aina sellaiseen muotoon, että kun palvelin lähettää esimerkiksi virhesanomassa käyttäjän antaman syötteen
-takaisin, niin ei tätä voida käyttää sellaisenaan hyökkäyksen toteuttamiseen. Tiettyjen merkkien poistamisella voidaan hyökkäyksi vähentää,
+takaisin, niin ei tätä voida käyttää sellaisenaan hyökkäyksen toteuttamiseen. Tiettyjen merkkien poistamisella voidaan hyökkäyksiä vähentää,
 mutta usein merkkien kuten heittomerkin (') poistaminen ei tule kyseeseen. Suunnittelijoiden avuksi on myös olemassa suuri määrä sovelluksia, jotka
 etsivät sivustoilla olevia heikkouksia \cite{WEB2}. Tämän suhteen tulee kuitenkin muistaa, että myös hyökkääjillä on käytettävissä samat sovellukset, joten 
 näillä löydetyt tietoturvariskit tulisi korjata mahdollisimman nopeasti. Symantecin raportin mukaan näin kuitenkin tapahtuu todella harvoin, sillä 6,961 
@@ -416,35 +416,39 @@ vieraillessa kyseisellä sivustolla. Jos käyttäjän selaimella on sitten esime
 salasanan vaihtoa tai sähköpostin lähettämistä käyttäjän nimissä \cite{WEB2b}. Hyökkääjä pystyy tällä tavoin myös ottamaan yhteyttä sellaisiin koneisiin ja palveluihin,
 joihin hänellä ei muuten olisi oikeuksia johtuen esimerkiksi palomuurista tai IP-osoitteiden suodatuksesta \cite{CSRF}.
 
-CSRF hyökkäysten teho perustuu siihen, että monet sivustot ja palvelut käyttävät evästeitä melko huolimattomasti. Koska näiden avulla sivustot autentikoivat tulevat 
-HTTP pyynnöt niin riittää, että hyökkääjä pääsee niihin käsiksi tavalla tai toisella. Useat sivustot myös sallivat käyttäjien pysyvän kirjautuneena sisällä
+CSRF hyökkäysten teho perustuu siihen, että monet sivustot ja palvelut
+käyttävät evästeitä melko huolimattomasti. Evästeitä käytetään
+käyttäjän yksilöimiseen ja tunnistamiseen, joten riittää, että hyökkääjä pääsee niihin käsiksi tavalla tai toisella. Useat sivustot myös sallivat käyttäjien pysyvän kirjautuneena sisällä
 jopa useita viikkoja, jolloin sama eväste on pitkään käytössä. Monien sovellusten ja pyyntöjen rakenne on myös hyvin ennalta arvattavissa, jolloin hyökkääjän
 on helpompi arvata käskyjen ja parametrien oikea muoto \cite{WEB2}.
 
 CSRF hyökkäykset eivät rajoitu pelkästään perinteisiin web-tekniikoihin, sillä suurin osa dynaamisista teknologioista ovat sille jollakin 
 tavalla alttiina. Erityisesti AJAX ja JavaScript ovat tuoneet mukanaan suuren joukon uusia haasteita, jotka suunnittelijoiden tulee ottaa huomioon uusien
-sovelluksien suunnittelussa. \cite{WEB2b}. Täydellinen suojautuminen CSRF hyökkäyksiltä vaatiikin sellaista syvällistä osaamista käytetyistä tekniikoista ja 
-tietämystä eri komponenttien välisistä toimininnoista, jota harvalta löytyy. Siksi iso osa sivustoista ja palveluista onkin haavoittuvaisia eri asteisille
-CSRF-hyökkäyksille. Tästä hyvänä esimerkkinä tunnettu sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF hyökkäyksen mahdollistava heikkous. Tämän avulla
+sovelluksien suunnittelussa. \cite{WEB2b}. Täydellinen suojautuminen CSRF-\-hyökkäyksiltä vaatii syvällistä osaamista käytetyistä tekniikoista ja 
+tietämystä eri komponenttien välisistä toiminnoista. Puutteellisista
+toteutuksista johtuen monet sivustoista ja palveluista ovat haavoittuvaisia
+CSRF-hyökkäyksille. Tästä tunnettuna esimerkkinä sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF-hyökkäyksen mahdollistava heikkous. Tämän avulla
 hyökkääjän oli mahdollista luoda Gmailiin sellainen suodatus, joka ohjasi tulevat postit toiseen osoitteeseen \cite{CSRF}. 
 
-CSRF hyökkäyksiltä suojautumiseen on käytössä kolme hyvin yleistä tekniikkaa. Näistä käytetyin on sisällyttää jokaiseen palvelinpuolen dataa muokkaavaan
+% TODO kieliasu! tokeni, palvelinpuoli ynnä muut.
+
+CSRF-hyökkäyksiltä suojautumiseen on käytössä kolme hyvin yleistä tekniikkaa. Näistä käytetyin on sisällyttää jokaiseen palvelinpuolen dataa muokkaavaan
 GET/POST pyyntöön mukaan salattu tokeni, jonka avulla jokainen pyyntö voidaan yksilöidä ja tunnistaa kuuluvan oikeaan istuntoon. Tämä salattu tokeni tekee
 käyttäjän syötteestä arvaamattoman muotoisen, jonka johdosta CSRF-hyökkäyksen toteuttaminen on hyvin vaikeaa \cite{WEB2}. Yksinkertaisin suojausmenetelmä on 
-taas tunnistaa HTTP pyynnön Referer otsake, ja hyväksyä vain sellaiset pyynnöt, jotka tulevat luotettavista lähteistä. Kolmas menetelmä on tehdä kustomoituja
+taas tunnistaa HTTP-kyselyn Referer-otsake, ja hyväksyä vain sellaiset pyynnöt, jotka tulevat luotettavista lähteistä. Kolmas menetelmä on tehdä kustomoituja
 otsakkeita käyttäen XMLHttpRequestia, jonka käyttö on lisääntynyt AJAXin yleistyessä. Kustomoitujen otsakkeiden oikeellisuus sitten varmistetaan, ennen kuin
 pyynnöt käsitellään palvelinpuolella \cite{CSRF}.
 
 Nämä kolme esitettyä tapaa ovat yleisimmin käytössä, mutta nekin sisältävät joukon heikkouksia. Salatun tokenin ongelma on siinä, että kyseisestä tekniikasta ei 
-ole olemassa yleisesti sovittua toteutustapaa. Tämä aiheuttaa sen, että useat ratkaisut ovat tavalla tai toisella puutteellisia. Referer otsakkeiden suodatuksen 
-ongelma on siinä, kuinka käsitellä pyyntöjä, joista puuttuu Referer otsake. Otsakkeen piilottaminen ei ole vaikea tehtävä, joten palvelin saattaa joutua 
+ole olemassa yleisesti sovittua toteutustapaa. Tämä aiheuttaa sen, että useat ratkaisut ovat tavalla tai toisella puutteellisia. Referer-otsakkeiden suodatuksen 
+ongelma on siinä, kuinka käsitellä pyyntöjä, joista puuttuu Referer-otsake. Otsakkeen piilottaminen ei ole vaikea tehtävä, joten palvelin saattaa joutua 
 päättämään vajailla tiedoilla päästääkö pyyntö läpi vaiko suodattaa se pois. XMLHttpRequestin käyttöä taas rajoittaa sen tuomat lisävaatimukset toteutukselle,
 joka rajoittaa tiettyjen palveluiden käyttöä \cite{CSRF}. 
 
-Näiden ja monien muiden syiden takia tutkimustyö CSRF hyökkäysten parissa on kasvattanut suosiotaan. Yhdessä tutkimuksessa ehdotettiin erillisen Origin
-otsakkeen lisäämistä pyyntöön, joka korjaisi Referer kentän heikkoudet \cite{CSRF}. Toisessa tutkimuksessa taas pyrittiin kasvattamaan web-selaimen turvallisuutta
+Näiden ja monien muiden syiden takia tutkimustyö CSRF-hyökkäysten parissa on kasvattanut suosiotaan. Yhdessä tutkimuksessa ehdotettiin erillisen Origin
+otsakkeen lisäämistä pyyntöön, joka korjaisi Referer-kentän heikkoudet \cite{CSRF}. Toisessa tutkimuksessa taas pyrittiin kasvattamaan web-selaimen turvallisuutta
 lisäämällä selaimeen mekanismi, joka pyrki arvioimaan vastasiko tehdyt pyynnöt käyttäjän toimia \cite{CSRFb}. Näistä kahdesta erilaisesta ratkaisusta on nähtävissä se,
-että tutkimuskenttä CSRF hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
+että tutkimuskenttä CSRF-hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
 sovelluksen kehittäjälle ja ylläpitäjälle.
 
 \section{Web-palveluiden tietoturvan parantaminen}
@@ -459,15 +463,15 @@ saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus 
 sovellukset on myös hyökkääjien käytössä, niin ainakin aukot, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
 
 Web Application Security Consortium (lyh. WASC) on vuonna 2004 perustettu avoin kansainvälinen ryhmittymä, joka koostuu tietoturva-alan asiantuntijoista sekä eri 
-yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön best practice - malleja ja standardeja turvallisesta internetistä. Se julkaisee
+yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön best practice -malleja ja standardeja turvallisesta internetistä. Se julkaisee
 erilaisia artikkeleita, esitysmateriaaleja ja tietoturvalinjauksia, joita käytetään hyvin laajasti ohjenuorina yritysmaailmassa sekä tuotekehityksessä \cite{WASC}.
 WASC:n tämän hetkisiin projekteihin kuuluvat web-sovellusten turvallisuuden tutkimiseen käytettävien ohjelmistojen arviointikriteerien laatiminen sekä tilastointi
 web-sovellusten turvallisuudesta. Viimeisimmän WASC:n tekemän raportin mukaan tutkituista sivustoista, joita oli yhteensä 12186 kappaletta ja joista löytyi 97554 
 eri asteista tietoturvariskiä, 13 prosenttia pystyttiin murtamaan täysin automaattisesti, ja noin 49 prosenttia web-sovelluksista sisälsi helposti havaittavia vakavia 
 tietoturvariskejä. Tämä luku kasvoi jopa 96 prosenttiin, kun sivuston tutki tietoturva-alan asiantuntija. Huomattavaa oli myös se, että sivustoista 99 prosenttia
 ei noudattanut alan standardeja, ja ylläpidon aiheuttamat haavoittuvaisuudet olivat 20 prosenttia yleisempiä kuin sovelluskehittäjien tekemät. Tutkimus myös 
-osoitti sen, että XSS-hyökkäykset olivat SQL injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
-kehittäjä että ylläpitäjä ovat ajantasalla palvelun nykyisestä tilasta. 
+osoitti sen, että XSS-hyökkäykset olivat SQL-injektiohyökkäysten ohella kaikista yleisimpiä \cite{WASCb}. Tämän tiedon valossa onkin tärkeää, että sekä sovelluksen
+kehittäjä että ylläpitäjä ovat ajan tasalla palvelun nykyisestä tilasta. 
 
 \subsection{Tietoturvastrategia}
 
@@ -510,7 +514,7 @@ Erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa kategori
 \item Valmiit esimerkkitiedostot
 \item Lähdekoodin paljastuminen
 \item Kanonisointi
-\item Palvelmiin asennetut lisäosat
+\item Palvelimiin asennetut lisäosat
 \item Syötteen tarkistaminen \cite{Hacking}.
 \end{itemize}
 Kanonisoinnilla tarkoitetaan sääntöjen mukaisen syötteen väärinkäyttöä. Hyökkäys pohjautuu siihen,
@@ -542,14 +546,14 @@ Koska Snortin lähdekoodi on vapaasti saatavilla, on tämän pohjalta kirjoitett
 \cite{SnortRule} ja tutkimaan verkkoliikennettä erillisinä tapahtumaketjuina \cite{SnortSet}. Näitä järjestelmiä kutsutaan usein hybridi IDS-järjestelmiksi, ja tällaisia löytyy useita erilaisia. 
 Näitä ja muita sääntöpohjaisia IDS-järjestelmiä vaivaa kuitenkin sama ongelma, eli ne ovat täysin riippuvaisia oikeanlaisesta säännöstöstä. Jos tehtyyn hyökkäykseen ei löydy suoraan sääntöä, 
 ei järjestelmä pysty tätä havaitsemaan. Hyökkäysten muuttuessa yhä monimutkaisemmiksi, on tästä muodostunut todellinen ongelma sääntöpohjaisille järjestelmille. Toinen ongelma IDS-järjestelmillä
-on niiden tapa luoda isoilla datamäärillä suhteellisen paljon virheellisia tunnistuksia. Näistä rajoituksista huolimatta sääntöpohjaiset IDS-järjestelmät ovat tällä hetkellä suosituin tapa
+on niiden tapa luoda isoilla datamäärillä suhteellisen paljon virheellisiä tunnistuksia. Näistä rajoituksista huolimatta sääntöpohjaiset IDS-järjestelmät ovat tällä hetkellä suosituin tapa
 suojautua verkkohyökkäyksiltä. 
 
 \subsection{Nikto}
 
-Nikto \cite{Nikto} on avoimeen lähdekoodiin perustuva ilmainen web-skanneri, joka etsii web-sivustoilta haavoittuvia CGI skriptejä ja tiedostoja. Sen tietokanta käsittää
+Nikto \cite{Nikto} on avoimeen lähdekoodiin perustuva ilmainen web-skanneri, joka etsii web-sivustoilta haavoittuvia CGI-skriptejä ja tiedostoja. Sen tietokanta käsittää
 yli 3500 tunnettua haavoittuvuutta sekä yli 900 eri web-alustoihin liittyvää heikkoutta. Nikto on koodattu käyttäen Perliä, ja se pyrkii skannaamaan palvelimen 
-mahdollisimman lyhyessä ajassa. Tästä syystä sen aiheuttama liikenne on helppo havaita logeista. Tämän kiertämiseksi Niktoon on lisätty mahdollisuus käyttää Whiskerin
+mahdollisimman lyhyessä ajassa. Tästä syystä sen aiheuttama liikenne on helppo havaita lokeista. Tämän kiertämiseksi Niktoon on lisätty mahdollisuus käyttää Whiskerin
 tarjoamaa libWhisker kirjastoa, joka pyrkii ohittamaan käytössä olevat suojausjärjestelmät. Nikto on erittäin tehokas ja käytetty työkalu perusturvallisuuden 
 varmistamiseen, ja vuonna 2006 tehdyssä tutkimuksessa se valittiin parhaimmaksi web--haavoittuvaisuuksia skannaavaksi sovellukseksi \cite{INS}.
 Nikton tietokantoja päivitetään hyvin satunnaisesti, joten nykyisellään se ei tunnista kaikista uusimpia hyökkäyksiä. Tästä huolimatta se on erittäin tehokas työkalu 
@@ -560,13 +564,13 @@ tietoturvan parantamiseen.
 Nessus \cite{Nessus} oli alunperin vapaaseen lähdekoodiin perustuva ilmainen tietoturvaskanneri, joka muuttui maksulliseksi vuonna 2008. 1200 dollarin vuosimaksua vastaan
 saa kuitenkin yhden parhaimmista UNIX- ja Windows-alustoilla toimivista tietoturvaskannereista \cite{NST}. Se sisältää yli 20000 erillistä lisäosaa,
 ja sen avulla on mahdollista suorittaa muun muassa reaaliaikaista liikenteen tarkkailua, konfigurointitiedostojen auditointia sekä eri verkko-osien skannausta. Maksullisuuden 
-ansiosta Nessus pystytään pitämään ajantasalla uusimmista hyökkäyksistä, ja se soveltuukin erinomaisesti suurten ja monimutkaisten verkkojen turvaamiseen\cite{Nessus}. 
+ansiosta Nessus pystytään pitämään ajan tasalla uusimmista hyökkäyksistä, ja se soveltuukin erinomaisesti suurten ja monimutkaisten verkkojen turvaamiseen\cite{Nessus}. 
 
 \subsection{Paros Proxy}
 
-Paros Proxy \cite{Paros} on Javalla kirjoitettu web proxy, jonka avulla voidaan arvioida web-sovelluksen turvallisuutta. Se mahdollistaa kokonaisten sivustojen indeksoimisen,
-jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP- ja HTTPS-liikennettä mukaanlukien evästeitä. Sen mukana tulee
-myös skanneri yleisimpien web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-\-ammattilaisten
+Paros Proxy \cite{Paros} on Javalla kirjoitettu HTTP-välityspalvelin, jonka avulla voidaan arvioida Web-sovelluksen turvallisuutta. Se mahdollistaa kokonaisten sivustojen indeksoimisen,
+jonka lisäksi sen avulla on mahdollista tallentaa ja muokata reaaliajassa käyttäjän ja palvelimen välistä HTTP- ja HTTPS-liikennettä mukaan lukien evästeitä. Sen mukana tulee
+myös skanneri yleisimpien Web-haavoittuvuuksien tunnistamiseen. Paros pohjautuu vapaaseen lähdekoodiin, ja se on hyvin käytetty työväline tietoturva-\-ammattilaisten
 parissa, jotka etsivät sivustoilta haavoittuvuuksia.
 
 \subsection{ModSecurity}
@@ -577,14 +581,16 @@ tapoja hyökkäysten tunnistamiseen ja torjumiseen. Yksi mahdollinen ratkaisu on
 välille, jolloin palvelulle tulevat pyynnöt kulkevat tämän palomuurin kautta. Tällä tavoin saapuva liikenne voidaan tutkia ja suodattaa käyttäen haluttuja määrityksiä. 
 
 ModSecurity \cite{Mod} on Apachelle suunniteltu, vapaaseen lähdekoodiin pohjautuva palomuuri, joka tarjoaa kattavan suojan web-palveluihin kohdistuvilta hyökkäyksiltä. 
-Se mahdollistaa HTTP-liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassaolevaan arkkitehtuuriin.
-ModSecuritystä on saatavilla kaupallisia lisenssejä sekä eri asteisia tukipalveluita, mutta sovelluksen käyttämät perussäännöt ovat ilmaiseksi ladattavissa, tosin näitä
+Se mahdollistaa HTTP-liikenteen monitoroinnin ja reaaliaikaisen liikenteen analyysin vaatien korkeintaan hyvin pieniä muutoksia jo olemassa olevaan arkkitehtuuriin.
+ModSecuritystä on saatavilla kaupallisia lisenssejä sekä tukipalveluita, mutta sovelluksen käyttämät perussäännöt ovat ilmaiseksi ladattavissa, tosin näitä
 ei ole hetkeen päivitetty. ModSecurityn käyttämä säännöstä mahdollistaa kuitenkin uusien sääntöjen kirjoittamisen omien tarpeiden mukaan, joten käytetyt säännöt voidaan räätälöidä 
 tilannekohtaisesti \cite{Mod}. 
 
-ModSecurityn parhaimpiin ominaisuuksiin kuuluu mahdollisuus ylläpitää täydellistä logia koko HTTP-tapahtuman ajalta, jolloin sekä pyynnöt että vastaukset pystytään analysoimaan.
-Tämän ansiosta myös tulevien POST-pyyntöjen sisältö ja rakenne voidaan tutkia. Nämä pyynnöt jäävät normaalisti logittamatta, ja tästä syystä iso osa hyökkäyksistä toteutetaankin 
-nykyisin näitä käyttämällä. Se, mitä halutaan logittaa, voidaan myös tarkkaan määrittää. Salattu ja pakattu liikenne ei myöskään aiheuta ongelmia, sillä logitus tapahtuu sillä tasolla,
+ModSecurityn parhaimpiin ominaisuuksiin kuuluu mahdollisuus ylläpitää täydellistä lokia koko HTTP-tapahtuman ajalta, jolloin sekä pyynnöt että vastaukset pystytään analysoimaan.
+Tämän ansiosta myös tulevien POST-pyyntöjen sisältö ja rakenne voidaan
+tutkia. Nämä pyynnöt jäävät normaalisti tallentamatta lokiin, jolloin
+hyökkääjän kiinnijäämisen riski on pienempi. Suurin osa hyökkäyksistä toteutetaankin 
+nykyisin POST-metodia käyttämällä. Se, mitä halutaan lokittaa, voidaan myös tarkkaan määrittää. Salattu ja pakattu liikenne ei myöskään aiheuta ongelmia, sillä lokitus tapahtuu sillä tasolla,
 jossa pyynnöt ovat valmiiksi puretussa muodossa \cite{Mod}.
 
 Liikenteen kirjaamisen ohella ModSecurity voidaan asettaa estämään tulevia hyökkäyksiä, jonka lisäksi sen avulla pystytään nopeasti paikkaamaan löydetyt haavoittuvaisuudet. 

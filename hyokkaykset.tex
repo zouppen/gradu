@@ -39,7 +39,7 @@ hän aloittaa hyökkäyksen suunnittelun. Yksi tapa murtautua
 tietoverkkoon on hyödyntää verkkokerroksen protokollissa, kuten TCP ja
 IP, olevia heikkouksia. Tällaisia hyökkäyksiä kutsutaan
 \textit{spoofing}- eli \textit{petkutushyökkäyksiksi}. Niissä
-murtautuja pyrkii naamioimaan oman koneensa siten, että se näyttäa
+murtautuja pyrkii naamioimaan oman koneensa siten, että se näyttää
 kuuluvan kohteena olevan laitteen kanssa samaan lähiverkkoon.  Tällöin
 hyökkääjä pystyy helpommin huijaamaan kohdekonetta jakamaan ja
 lähettämään arkaluontoista tietoa, jota jaettaisiin muuten ainoastaan
@@ -90,7 +90,7 @@ VPN-järjestelmät.~\cite{DDOS}.
 
 IP spoofing -hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain
 tapa on määritellä verkon reitittimet estämään sellaisten pakettien
-kulku, jotka on merkitty lähetetyiksi sisäverkon laittelta, mutta
+kulku, jotka on merkitty lähetetyiksi sisäverkon laitteilta, mutta
 jotka todellisuudessa saapuvat reitittimeen sen ulkopuolisista
 liitännöistä. Jos tämä kuitenkin halutaan sallia, niin jokainen sessio
 tulisi kryptata reitittimessä. Muutenkin yhteyksien muodostumisen
@@ -104,7 +104,7 @@ tulisi pohjautua koko järjestelmän kattavaan salaukseen \cite{WEBS}.
 Nykyisin lähes jokainen verkko pohjautuu TCP/IP-protokollan ja
 Ethernet-verkon väliseen yhteistoimintaan. Tässä yhteydessä tarvitaan
 ARP-pro\-to\-kol\-laa, jonka tehtävänä on selvittää IP-osoitteita
-vastaavat Ethernet- eli MAC-osoiteet. Ethernet-osoite
+vastaavat Ethernet- eli MAC-osoitteet. Ethernet-osoite
 verkkokorttikohtainen ja sen avulla yksilöidään lähiverkossa
 sijaitsevat tietokoneet ja muut aktiivilaitteet.  Tietoa tarvitaan
 myös IP-protokollalla liikennöitäessä, koska ilman tietoa
@@ -207,7 +207,7 @@ virheet periytyivät nyt käytössä olevaan IPv4-verkkojen rakenteisiin
 
 Yhteydenmuodostus TCP-protokolla tapahtuu kolmivaiheisesti. Aluksi
 yhdistävä tietokone lähettää palvelimelle SYN-paketin, jonka
-seurauksana palvelin varaa tulevalle yhteydelle resursseja ja lähettää
+seurauksena palvelin varaa tulevalle yhteydelle resursseja ja lähettää
 yhdistävälle tietokoneelle SYN/ACK-paketin. Tämän jälkeen palvelin
 jää odottamaan yhteyden muodostamista. Tähän yhdistävän tietokoneen
 tulee vastata ACK-paketilla, jonka jälkeen yhteys on muodostunut ja
@@ -411,7 +411,7 @@ viestien välittämiseen IRC-verkkoja (kuva \ref{ddos2}). IRC on
 reaaliaikaiseen viestittämiseen tarkoitettu palvelu, jonka kautta
 ihmiset pystyvät reaaliajassa kirjoittamaan ja lukemaan
 viestejä. IRC-verkot koostuvat käyttäjistä ja IRC-kanavista, joille
-käyttäjät voivat halutessana liittyä. Epäsuoran käskyttämisen
+käyttäjät voivat halutessaan liittyä. Epäsuoran käskyttämisen
 periaatteella toimivat verkot hyödyntävät näitä samoja
 ominaisuuksia. Jokainen kone liittyy IRC-kanavalle, joka on yleensä
 salasanalla suojattu. Kanavan kautta hyökkääjä voi antaa käskyjä
@@ -446,7 +446,7 @@ huomattavasti suurempia verrattuna muihin hyökkäystyyppeihin \cite{IDSb}. Onni
 myös muut lähiverkon koneet vaaraan, sillä usein hyökkääjä pyrkii asentamaan
 koneisiin ohjelmistoja, joiden avulla hyökkääjä pystyy ottamaan koneen haltuun
 käyttäjän huomaamatta. Tällä tavoin osa aikaisemmin mainituista
-zombverkostoista saa alkunsa.
+zombiverkostoista saa alkunsa.
 
 Käytetyimmät Web-palvelinohjelmistot, Apache ja IIS, vastaavat noin 85~\%
 kaikista käytetyistä palvelinsovelluksista. Näiden kahden lisäksi

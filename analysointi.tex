@@ -31,9 +31,9 @@ tietoturvahyökkäyksissä hyödynnetään erityisesti HTTP-kyselyn parametriosa
 käsittelyn haavoittuvaisuuksia,keskityimme vain sellaisiin palveluihin, joissa 
 esiintyi vaihteleva kirjo parametreja. Tämä rajaus tehtiin suodattamalla pois sellaiset
 resurssit, joihin kohdistui alle sata kyselyä ja joiden
-GET-parametreistä muodostettujen erilaisten n-grammien määrä oli alle
+GET-parametreista muodostettujen erilaisten n-grammien määrä oli alle
 kymmenen. Suodatuksen jälkeen analysoitavaksi jäi 36
-resurssia. Suodatus suoritettiin esikäsitelyn jälkeen ja
+resurssia. Suodatus suoritettiin esikäsittelyn jälkeen ja
 suodatusrajat on säädettävissä PhasefulSplitterin tiedostosta
 \texttt{src/InterestingParameters.hs}.
 
@@ -66,7 +66,7 @@ jotka oli luokiteltu poikkeaviksi siinä joukossa, jossa kyseisiä
 pisteitä oli verrattu. 
 
 Seuraavaksi lasketuista diffuusiokuvauksista muodostettiin
-diffuusiokartta käytäen toista ja kolmatta ominaisvektoria. Koska
+diffuusiokartta käyttäen toista ja kolmatta ominaisvektoria. Koska
 suuri määrä pisteitä sijoittui täsmälleen samoihin koordinaatteihin,
 kartan luettavuuden parantamiseksi sirontakuvion pisteitä
 ``täristettiin''. Täristäminen suoritettiin lisäämällä
@@ -74,7 +74,7 @@ ominaisvektorien arvoihin normaalijakaumasta satunnaisesti poimittu
 arvo. Normaalijakauman keskihajontana käytettiin yhtä prosenttia
 akselin leveydestä. Kuvassa \ref{diffuusio_1} nähdään edellä kuvatulla
 tavalla muodostettu diffuusiokartta resurssista 1. Kuvaajasta voidaan
-havaita, että muutamaa poikkeusta lukuunottamatta pisteet sijoittuivat
+havaita, että muutamaa poikkeusta lukuun ottamatta pisteet sijoittuivat
 hyvin lähelle toisia.
 
 Diffuusiokartta ei ole sellaisenaan kovinkaan havainnollinen, joten
@@ -88,9 +88,9 @@ Kuvassa \ref{service_1} on resurssista 1 muodostettu poikkeavuuskartta. Kuvaajas
 ja pystyakselin mittana on poikkeavuus. Tässä pystyakseli ilmaisee sen kuinka poikkeava kukin piste on vertailujoukon sisällä. Jokaiselle kuvaajalle
 on vielä määritetty keskihajonta ja raja-arvo, jonka ylittäneet pisteet merkitään poikkeaviksi. Tämä raja-arvo vaihtelee tapauskohtaisesti ja sen
 arvo on kolme kertaa keskihajonta. Keskihajonta on merkitty kuvaajaan katkoviivalla ja raja-arvo yhtenäisellä viivalla. Esimerkiksi resurssin 1 
-poikkeavuusskartassa \ref{service_1} on nähtävissä viisi poikkeavuudeksi merkittyä pistettä.
+poikkeavuuskartassa \ref{service_1} on nähtävissä viisi poikkeavuudeksi merkittyä pistettä.
 
-Jokainen diffuusiokartan luomiseen käytetytty piste pystytään
+Jokainen diffuusiokartan luomiseen käytetty piste pystytään
 palauttamaan siihen HTTP-kyselyyn, josta se on
 muodostettu. Esitetyissä kuvaajissa palauttamiseen tarvittavat tiedot
 on merkitty niihin pisteisiin, jotka ylittävät raja-arvon. Otetaan
@@ -248,7 +248,7 @@ Analyysissä tuli hyvin esille se, että suurin osa liikenteestä oli
 hyvin samankaltaista. Tutkittavan materiaalin osalta tätä osattiin
 odottaa, mutta erilaisten pyyntöjen pieni valikoima yllätti siitä
 huolimatta. Ja vaikka kyseisestä otannasta ei varsinaisia
-tietoturvahyökäyksiä löydetty, olimme tyytyväisiä saatuihin
+tietoturvahyökkäyksiä löydetty, olimme tyytyväisiä saatuihin
 tuloksiin. Tulokset osoittivat selkeästi sen, että esikäsittelijä
 toimii halutulla tavalla ja valittujen menetelmien avulla poikkeavat
 pyynnöt pystytään paikallistamaan.
