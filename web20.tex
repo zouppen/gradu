@@ -7,21 +7,21 @@ useimmat kehittäjät ja ylläpitäjät ovat noudattaneet periaatetta, että keh
 luottamattomuusperiaatteen noudattaminen noussut entistä tärkeämmäksi.
 
 Webin teknisen monimutkaistumisen taustalla on dynaamisuuden lisääntyminen. Paljon sellaisia tehtäviä, jotka aiemmin olivat palvelimen vastuulla, on siirretty käyttäjän selaimessa 
-suoritettavaksi. Lisäksi web-sivujen sisältö ei ole enää staattista, vaan uutta sisältöä voidaan ladata sivulle käyttäen useitakin eri teknologioita. Vaikka kasvava määrä tietoturvahyökkäyksistä 
-tapahtuu dynaamisten web-teknologioiden avulla, ei se tarkoita sitä, että ne olisivat tietoturvan kannalta normaalia heikompia, tai että ne sisältäisivät helposti hyödynnettäviä 
+suoritettavaksi. Lisäksi Web-sivujen sisältö ei ole enää staattista, vaan uutta sisältöä voidaan ladata sivulle käyttäen useitakin eri teknologioita. Vaikka kasvava määrä tietoturvahyökkäyksistä 
+tapahtuu dynaamisten Web-teknologioiden avulla, ei se tarkoita sitä, että ne olisivat tietoturvan kannalta normaalia heikompia tai, että ne sisältäisivät helposti hyödynnettäviä 
 haavoittuvaisuuksia. Dynaamisuus vain mahdollistaa aikaisempaa joustavamman alustan toteuttaa interaktiivisia ja normaalien työpöytäsovelluksien 
-kaltaisia palveluita, joita käyttäjät voivat ajaa suoraan web-selaimesta. Varsinainen ongelma piilee siinä, että dynaamiset web-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä 
+kaltaisia palveluita, joita käyttäjät voivat ajaa suoraan Web-selaimesta. Varsinainen ongelma piilee siinä, että dynaamiset Web-palvelut ovat aikaisempaa monimutkaisempia toteuttaa. Niissä 
 hyödynnetään useita eri teknologioita ja rajapintoja, jonka johdosta mahdollisuus tehdä virheitä kasvaa verrattaessa vanhoihin ratkaisuihin. Käytetyt teknologiat eivät siis ole syynä 
 heikentyneeseen tietoturvatasoon, vaan syynä on kehittäjien huolimattomuus tai tietämättömyys niistä mahdollisuuksista, joita huonosti suunnitellut ja toteutetut palvelut avaavat hyökkääjille.
 
 \section {AJAX}
 
 Jos jokin dynaamisista Web-teknologioista halutaan nostaa kehitystä eniten eteenpäin vieväksi voimaksi, niin vahvin ehdokas tähän on AJAX. Asynchronous JavaScript and XML (lyh. AJAX)
-itsessään ei ole mikään yksi tietty teknologia, vaan se on usean eri teknologian yhdistelmä, joita käyttämällä web-sivut pystytään muuttamaan nopeasti reagoiviksi ja niiden 
+itsessään ei ole mikään yksi tietty teknologia, vaan se on usean eri teknologian yhdistelmä, joita käyttämällä Web-sivut pystytään muuttamaan nopeasti reagoiviksi ja niiden 
 käyttökokemus saadaan muistuttamaan perinteisiä työpöytäsovelluksia \cite{AJAX}. AJAX koostuu seuraavista teknologioista:
 
 \begin{itemize}
-\item HTML ja CSS rakentavat web-selaimella näytettävän sivun.
+\item HTML ja CSS rakentavat Web-selaimella näytettävän sivun.
 \item DOM mahdollistaa ajonaikaisen sisällön tuottamisen.
 \item XML ja Extensible Stylesheet Language Transformation (lyh. XSLT)
   mahdollistavat eri komponenttien välisen tiedonsiirron.
@@ -31,9 +31,9 @@ käyttökokemus saadaan muistuttamaan perinteisiä työpöytäsovelluksia \cite{
   palvelinten kanssa \cite{WEB2b}.
 \end{itemize}
 
-Suurin AJAXin tuoma muutos perinteisiin web-sivuihin on mahdollisuus päivittää sivun sisältöä asynkronisesti, ilman käyttäjän vuorovaikutusta. Yksinkertaistettuna tämä tarkoittaa sitä,
-että sivun sisällöstä pystytään päivittämään ainoastaan halutut osat käyttäen XHR-kyselyitä. Aikaisemmin tällainen ei ole ollut mahdollista, sillä vanhat web-sivut ovat toimineet 
-pelkästään synkronisesti, jolloin erillisiä kutsuja ei ole voitu tehdä. Tällöin koko sivu on täytynyt päivittää kerralla. Tämä on ollut käytettävyyden kannalta huono asia,
+Suurin AJAXin tuoma muutos perinteisiin Web-sivuihin on mahdollisuus päivittää sivun sisältöä asynkronisesti ilman käyttäjän vuorovaikutusta. Yksinkertaistettuna tämä tarkoittaa sitä,
+että sivun sisällöstä pystytään päivittämään ainoastaan halutut osat käyttäen XHR-kyselyitä. Aikaisemmin tällainen ei ole ollut mahdollista, sillä vanhat Web-sivut toimivat
+pelkästään synkronisesti, jolloin erillisiä kutsuja ei voitu tehdä. Tällöin koko sivu täytyi päivittää kerralla. Tämä on ollut käytettävyyden kannalta huono asia,
 sillä sivu ei ole synkronisen latauksen ja käsittelyn aikana käytettävissä. XHR sisältää kaikki perinteiset HTTP-metodit mukaan lukien GET, POST, HEAD ja DELETE, joten sen avulla 
 pystytään suorittamaan kaikki yleisimmät käyttäjän toiminnot \cite{WEB2}. Kuvassa \ref{synkroninen} on esitetty tilanne, jossa sama palvelu on toteutettu käyttäen synkronisia ja 
 asynkronisia kutsuja. Kuvasta voi havaita, että dynaamisuus mahdollistaa useamman samanaikaisen kutsun tekemisen, jolloin myös palvelun viiveet voidaan pitää lyhyinä.
@@ -46,8 +46,8 @@ asynkronisia kutsuja. Kuvasta voi havaita, että dynaamisuus mahdollistaa useamm
 \end{figure}
 
 AJAXiin kohdistuvat hyökkäykset eivät eroa suuresti vanhoista murtautumismenetelmistä. Hyökkääjät pyrkivät edelleen hyödyntämään syötteen puutteellista suodattamista, muokkaamaan 
-ulostulevaa dataa, murtamaan salauksia ja hankkimaan istuntokohtaisia tietoja esimerkiksi evästeitä varastamalla. Hyökkääjien näkökulmasta AJAXin tekee erityisen kiinnostavaksi se,
-että aiempaa suurempi osa web-palvelun käyttämästä laskennasta suoritetaan käyttäjän selaimessa. Käyttäjän selaimeen, eli ns. asiakaspuoleen, ei voida kuitenkaan koskaan luottaa.
+ulos tulevaa dataa, murtamaan salauksia ja hankkimaan istuntokohtaisia tietoja esimerkiksi evästeitä varastamalla. Hyökkääjien näkökulmasta AJAXin tekee erityisen kiinnostavaksi se,
+että aiempaa suurempi osa Web-palvelun käyttämästä laskennasta suoritetaan käyttäjän selaimessa. Käyttäjän selaimeen, eli ns. asiakaspuoleen, ei voida kuitenkaan koskaan luottaa.
 JavaScriptien huolimaton käyttö avaakin hyökkääjille lukuisia tapoja murtautua palveluihin. Kyseessä on sinänsä pitkään tunnettu ongelma, mutta kehittäjien kiinnostuksen siirtyessä 
 AJAXiin ovat myös hyökkääjät alkaneet kiinnittämään asiaan enemmän huomiota \cite{AJAX}. Monet käytetyistä AJAX-ympäristöistä sisältävät myös eriasteisia tietoturvariskejä, joita 
 hyökkääjät voivat hyödyntää \cite{JSH}.
@@ -55,12 +55,12 @@ hyökkääjät voivat hyödyntää \cite{JSH}.
 \subsection{JavaScript}
 
 JavaScript on Netscapen suunnittelema skriptikieli, joka tunnettiin aluksi nimellä LiveScript. Sun Microsystemsin kehittämän Java-ohjelmointikielen yleistyessä Netscape päätti muuttaa
-sen nimen JavaScriptiksi, toivoen sen käytön yleistyvän Javan menestyksen myötä. JavaScriptillä kirjoitetut skriptit sijoitetaan HTML:n \texttt{<script>}-elementin sisään, josta voi 
-olla myös viite erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta, jollainen löytyy miltei jokaisesta Web-\-selaimesta, mukaan lukien yleisimmät mobiililaitteet.
+sen nimen JavaScriptiksi toivoen sen käytön yleistyvän Javan menestyksen myötä. JavaScriptillä kirjoitetut skriptit sijoitetaan HTML:n \texttt{<script>}-elementin sisään, josta voi 
+olla myös viite erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta, jollainen löytyy miltei jokaisesta Web-\-selaimesta mukaan lukien yleisimmät mobiililaitteet.
 
-JavaScript on tehokas työkalu, joka mahdollistaa monen muun toiminnon ohella muun muassa dynaamisten web-sivujen tekemisen, viestien kirjoittamisen selaimen tilariville, uusien ikkunoiden
-avaamisen ja interaktiivisten lomakkeiden luomisen. Skriptien toiminta rajoittuu kuitenkin web-selaimen toimintoihin, eikä sitä käyttäen voida esimerkiksi kirjoittaa levylle ja levyn 
-lukeminen rajoittuu pelkästään evästeisiin \cite{JavaScript}. Näistä rajoituksista huolimatta JavaScript mahdollistaa erittäin monipuolisten toimintojen toteuttamisen web-ympäristössä.
+JavaScript on tehokas työkalu, joka mahdollistaa monen muun toiminnon ohella muun muassa dynaamisten Web-sivujen tekemisen, viestien kirjoittamisen selaimen tilariville, uusien ikkunoiden
+avaamisen ja interaktiivisten lomakkeiden luomisen. Skriptien toiminta rajoittuu kuitenkin Web-selaimen toimintoihin, eikä sitä käyttäen voida esimerkiksi kirjoittaa levylle ja levyn 
+lukeminen rajoittuu pelkästään evästeisiin \cite{JavaScript}. Näistä rajoituksista huolimatta JavaScript mahdollistaa erittäin monipuolisten toimintojen toteuttamisen Web-ympäristössä.
 
 Suurin osa Web-sivuilla olevista skripteistä toimii siten, että ne ladataan aluksi käyttäjän koneelle, jonka jälkeen ne suoritetaan selaimessa. Skriptit sijaitsevat ja ne suoritetaan 
 käyttäjien koneilla, joten toimintaperiaatteen selvittäminen ei ole hyökkääjälle vaikeaa. Asiaa pystytään kuitenkin vaikeuttamaan muutamalla eri tavalla. Näistä yksinkertaisin on 
@@ -102,8 +102,8 @@ Tällöin hyökkääjän on mahdollista lukea suoraan otsaketiedoissa asetettuja
 kaikki nykyisin käytössä olevat toteutukset ovat niille jossakin määrin alttiina. Kaapattujen XHR-objektien tunnistaminen ei myöskään vielä ole mahdollista \cite{AJAX}. Näistä syistä johtuen 
 AJAX tarjoaa nyt ja tulevaisuudessa hyökkääjille monia mahdollisuuksia murtaa asetettuja suojauksia.
 
-Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja laajasti tuettu web-palvelimella käytetty 
-työkalu. Se on rakenteeltaan hyvin kevyt, ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}. Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen 
+Yksi yleisimmistä AJAXissa käytetyistä dataformaateista on JavaScript Object Notationt (lyh. JSON). Se on ohjelmointikielestä riippumaton ja laajasti tuettu Web-palvelimella käytetty 
+työkalu. Se on rakenteeltaan hyvin kevyt ja se koostuu kahdesta eri tietotyypistä: olioista ja taulukoista \cite{JSON}. Formaatin heikkous piilee siinä, että JSON-olio itsessään on kelvollinen 
 JavaScript-ohjelma, jonka sisältö on mahdollista kaapata \cite{AJAX}. Termi \emph{JavaScript Hijacking} kuvaa tällaista tilannetta, jossa hyökkääjä ohittaa \emph{saman alkuperän} periaatteen 
 silloin, kun JavaScriptiä käytetään arkaluontoisen tiedon lähettämiseen. Aiheesta tehdyn tutkimuksen \cite{JSH} mukaan lähes jokainen käytetty AJAX-ympäristö on alttiina tällaisilla hyökkäyksille.
 Käyttäen CSRF-hyökkäystä hyökkääjä pystyy väärinkäyttämään JSON-formaattia, ja varastamaan sekä muokkaamaan toiselle sivustolle lähetettäviä paketteja.  Tällainen hyökkäys voidaan toteuttaa 
@@ -117,15 +117,15 @@ pyynnöissä skriptejä
 
 \section{Flash}
 
-AJAXin ohella Macromedian suunnittelema ja nykyisin Adoben kehittämä Flash on ollut yksi niistä merkittävistä tekniikoista, joita käyttämällä YouTuben ja MySpacen kaltaiset 
-menestyspalvelut ovat olleet mahdollisia toteuttaa. Flashia käyttämällä kehittäjät ovat jo pitkään pystyneet luomaan interaktiivista ja rikasta web-sisältöä
-yksinkertaisista animaatioista aina monimutkaisiin peleihin ja valikoihin asti. Suurin osa web-sivustoilla olevista mainoksista on myös toteutettu käyttäen Flashia. Näistä syistä johtuen 
+AJAXin ohella Macromedian suunnittelema, ja nykyisin Adoben kehittämä Flash, on ollut yksi niistä merkittävistä tekniikoista, joita käyttämällä YouTuben ja MySpacen kaltaiset 
+menestyspalvelut ovat olleet mahdollisia toteuttaa. Flashia käyttämällä kehittäjät ovat jo pitkään pystyneet luomaan interaktiivista ja rikasta Web-sisältöä
+yksinkertaisista animaatioista aina monimutkaisiin peleihin ja valikoihin asti. Suurin osa Web-sivustoilla olevista mainoksista on myös toteutettu käyttäen Flashia. Näistä syistä johtuen 
 Flash Player on yksi ohjelmistoalan de facto~-tekniikoista, jonka käyttöaste yritys- ja kuluttajapuolella on lähes 100 prosenttia \cite{Flash}.
 
-Flashin käyttämä ActionScript-skriptikieli muistuttaa läheisesti JavaScriptiä, ja sitä käyttäen on mahdollista luoda uusia TCP-yhteyksiä, ajaa JavaScriptiä selaimessa ja luoda 
+Flashin käyttämä ActionScript-skriptikieli muistuttaa läheisesti JavaScriptiä ja sitä käyttäen on mahdollista luoda uusia TCP-yhteyksiä, ajaa JavaScriptiä selaimessa ja luoda 
 sallittuihin domaineihin HTTP-pyyntöjä. Flashin käyttämä tietoturvamalli noudattaa paljolti \emph{saman alkuperän} periaatetta, jolla rajoitetaan eri domaineissa sijaitsevien sovellusten 
 kommunikointia. Domainien välinen kommunikointi on kuitenkin sallittua, ja käytetty tietoturvapolitiikka luetaan tähän tarkoitetusta XML-tiedostosta. Tämä XML-tiedosto sijaitsee usein 
-domainin juuressa, ja se sisältää ne domainit, jotka saavat olla siihen yhteydessä. Osa Flashiin kohdistuvista hyökkäyksistä pyrkiikin muokkaamaan tietoturvapolitiikkatiedoston sisältöä
+domainin juuressa ja se sisältää ne domainit, jotka saavat olla siihen yhteydessä. Osa Flashiin kohdistuvista hyökkäyksistä pyrkiikin muokkaamaan tietoturvapolitiikkatiedoston sisältöä
 siten, että kohde sallisi yhteydet myös hyökkääjän käyttämästä osoitteesta. Tämä voidaan toteuttaa esimerkiksi käyttämällä vihamielistä RSS-syötettä tai luomalla tiedosto, joka sisältää
 uuden XML-tiedoston. Yksi tällaisista hyökkäyksistä on Stefan Esserin luoma GIF-tiedosto, jonka kommenttiin on piilotettu uusi tietoturvapolitiikka. Hyökkääjälle riittää, että kohdekone 
 vain mahdollistaa tiedoston lataamisen palvelimelle, jonka jälkeen vanha sisältö voidaan korvata GIF-tiedostoon piilotetulla \cite{WEB2}.
@@ -138,7 +138,7 @@ ajamisen siinä domainissa, jossa haavoittuvainen SWF-tiedosto sijaitsee. Osa n�
 sen, että edes luotettavina pidettävien tahojen toteutuksiin ei pidä luottaa liikaa.
 
 Yksi käytetyimmistä Flash-pohjaisista toteutuksista ovat erilaiset interaktiiviset mainokset, joita löytyy lähes jokaiselta sivustolta. Flashin levinneisyyden ansiosta ne toimivat miltei
-jokaisella käyttäjällä, ja siksi ne ovat houkutteleva keino toteuttaa hyökkäyksiä. Adobe Flash Playerista on löydetty useita eri haavoittuvaisuuksia, jotka ovat mahdollistaneet haitallisten
+jokaisella käyttäjällä ja siksi ne ovat houkutteleva keino toteuttaa hyökkäyksiä. Adobe Flash Playerista on löydetty useita eri haavoittuvaisuuksia, jotka ovat mahdollistaneet haitallisten
 koodien ajamisen kohdekoneessa. Flash-mainoksia käytetään myös laajalti haittaohjelmien levittämiseen, ja usein tällä tavalla altistuneet koneet kuuluvat käyttäjän tietämättä 
 bottiverkkoihin, joita käytetään roskapostin lähettämiseen ja palvelunestohyökkäyksiin. Haitallista koodia sisältävä mainos voi myös esimerkiksi pyrkiä ohjaamaan selaimen toiselle 
 sivustolle käyttäen ActionScriptia.  Tällaiset haitalliset mainokset eivät ole pelkästään vain pienten sivustojen ongelma, sillä vuonna 2009 suuret sivustot kuten \emph{guardian.co.uk} 
@@ -147,15 +147,15 @@ sisälsivät mainoksia, jotka olivat luonteeltaan haitallisia \cite{FlashAdd}.
 \section{Google Web Toolkit}
 
 Nykyisin yhä useampi taho pyrkii hyödyntämään tekniikoita kuten AJAXia ja JavaScriptiä omissa web-palveluissaan, ja tulevaisuudessa tämä kasvu tulee vain jatkumaan. Toimivien ja 
-turvallisten  web-palveluiden suunnitteleminen ja toteuttaminen vaatii kuitenkin sellaista syvällistä tietämystä käytetyistä tekniikoista, jota harvemmin suunnittelijoilta löytyy. 
-Tämä on yksi  niistä pääsyistä, jonka takia web-pohjaiset hyökkäykset ovat kasvaneet määrällisesti suurimmaksi hyökkäystavaksi. Asian helpottamiseksi on kehitetty erilaisia 
+turvallisten  Web-palveluiden suunnitteleminen ja toteuttaminen vaatii kuitenkin sellaista syvällistä tietämystä käytetyistä tekniikoista, jota harvemmin suunnittelijoilta löytyy. 
+Tämä on yksi  niistä pääsyistä, jonka takia Web-pohjaiset hyökkäykset ovat kasvaneet määrällisesti suurimmaksi hyökkäystavaksi. Asian helpottamiseksi on kehitetty erilaisia 
 kehitysympäristöjä, jotka pyrkivät helpottamaan suunnittelijoiden taakkaa, ja samalla tarjoamaan jonkinlaista tietoturvaa. Yksi tällaisista on Googlen kehittämä Google Web Toolkit, 
-joka on kasvamassa yhdeksi käytetyimmistä kehitysympäristöistä, ja jolla on tehty muun muassa Google Wave ja AdWords.
+joka on kasvamassa yhdeksi käytetyimmistä uusista kehitysympäristöistä.
 
 \subsection{Google Web Toolkit lyhyesti}
 
-Google Web Toolkit (lyh. GWT) on avoimeen lähdekoodiin perustuva kehitysympäristö rikkaiden ja dynaamisten web-sovellusten kehittämiseen. Suunnittelun lähtökohtana on ollut mahdollistaa
-korkealaatuisten web-sovellusten tehokas suunnittelu ilman, että kehittäjän tulee olla asiantuntija niin selainten pienissä kummallisuuksissa kuin myös XMLHttpRequest- pyyntöjen
+Google Web Toolkit (lyh. GWT) on avoimeen lähdekoodiin perustuva kehitysympäristö rikkaiden ja dynaamisten Web-sovellusten kehittämiseen. Suunnittelun lähtökohtana on ollut mahdollistaa
+korkealaatuisten Web-sovellusten tehokas suunnittelu ilman, että kehittäjän tulee olla asiantuntija niin selainten pienissä kummallisuuksissa kuin myös XMLHttpRequest- pyyntöjen
 tekemisessä ja JavaScriptien kirjoittamisessa. Tämä on mahdollista, koska GWT:llä AJAX-sovellukset kirjoitetaan Javalla, joka mahdollistaa keskittymisen korkeamman tason suunnitteluun 
 ilman, että aikaa tuhlaantuisi DOM- ja XHR-kutsujen säätämiseen. Valmis Java-sovellus käännetään automaattisesti JavaScriptiksi, ja samalla skriptien sisältö optimoidaan muun muassa
 poistamalla käyttämättömät muuttuja ja parametrit. Tämän ratkaisun etuna on myös se, että kehittäjät voivat käyttää haluamaansa Java-ympäristöä sovellusten kirjoittamiseen ja koodin 
@@ -163,7 +163,7 @@ tarkistamiseen. Käännetyt JavaScriptit myös toimivat suoraan suurimmassa osas
 
 \subsection{Google Web Toolkitin ominaisuuksia}
 
-GWT 2.0 on uusin versio ympäristöstä, ja se on tuonut mukanaan suuren joukon uusia ominaisuuksia vanhoihin versioihin verrattuna. Yksi tärkeimmistä on niin kutsutun ``hosted moden'' 
+GWT 2.0 on uusin versio ympäristöstä ja se on tuonut mukanaan suuren joukon uusia ominaisuuksia vanhoihin versioihin verrattuna. Yksi tärkeimmistä on niin kutsutun ``hosted moden'' 
 korvaaminen \emph{GWT Developer} liitännäisellä. Hosted mode oli yksi GWT:een kantavista ideoista, joka mahdollisti tietyn selainympäristön emuloimisen. Hosted modea käyttäen 
 kehittäjällä oli mahdollisuus kirjoittaa Java-koodia ja tutkia sen toimivuutta Web-selaimessa ilman, että koodia piti kääntää JavaScriptiksi. Tämä säästi reilusti kehittäjän aikaa, sillä 
 ison koodin kääntäminen on aina hidasta. Tämän ratkaisun ongelmana oli se, että emuloidut ympäristöt edustivat vanhoja selainversioita, eikä selaimille jo valmiiksi kirjoitettuja 

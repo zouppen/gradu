@@ -6,7 +6,7 @@ Tässä luvussa tutustutaan tietoturvahyökkäyksien tunnistamiseen liittyvään
 
 \section{Väärinkäytösten tunnistaminen}
 
-Väärinkäytökseen perustuvat järjestelmät ovat pitkään olleet suosituin lähestymistapa hyökkäysten torjumiseen. Nämä järjestelmät on voitu jakaa kahteen erilliseen osaan, jossa tilattomassa 
+Väärinkäytökseen perustuvat järjestelmät ovat pitkään olleet suosituin lähestymistapa tietoturvahyökkäysten torjumiseen. Nämä järjestelmät voidaan jakaa kahteen erilliseen osaan, jossa tilattomassa 
 järjestelmässä jokaista tulevaa tapahtumaa käsitellään itsenäisesti, kun taas tilallisessa järjestelmässä tutkitaan tapahtumien välisiä suhteita. Web-pohjaisten hyökkäysten tutkimisessa tietolähteinä 
 on käytetty esimerkiksi palvelimien tuottamaa lokia \cite{LightTool}, ja IDS-järjestelmien \cite{Snort}\cite{Bro} tapauksessa analysoimalla verkkokerroksen liikennettä. Ensimmäisessä ratkaisussa ongelmana
 on, että itse palvelimiin kohdistuvia hyökkäyksiä ei pystytä havaitsemaan ainoastaan lokitietoa tarkkailemalla. Samoin hyökkäyksiä, jotka koostuvat monista eri vaiheesta, on mahdotonta mallintaa. 
@@ -14,16 +14,16 @@ Verkkokerroksella toimivia järjestelmiä taas pystytään harhauttamaan muokkaa
 
 Esitettyjä ongelmia on pyritty ratkaisemaan lisäämällä havaittavien tapahtumien määrää, ja keräämällä informaatiota eri lähteistä. Esimerkiksi asentamalla sovellustasolle erillinen tiedonkeruuseen 
 tarkoitettu komponentti \cite{Application} on saatu hyviä tuloksia. Tässä tapauksessa tiedonkeruu tapahtui Apache-palvelimelle asennetun komponentin välityksellä, joka tarkkaili lokitiedon lisäksi
-pyyntöjen tulkitsemiseen ja toteuttamiseen menevää aikaa. Tämän ratkaisun etuna on myös se, että tutkittava data on salaamattomassa muodossa, ja sessioiden uudelleenrakentaminen on mahdollista. 
+pyyntöjen tulkitsemiseen ja toteuttamiseen menevää aikaa. Tällaisen ratkaisun hyvänä puolena on se, että tutkittava data on salaamattomassa muodossa, ja sessioiden uudelleenrakentaminen on mahdollista. 
 Tällä tasolla toimiva IDS-järjestelmä voi myös toimia ennaltaehkäisevästi eli haitalliseksi havaittu liikenne voidaan tiputtaa pois ennen kuin se käsitellään palvelimella. Suurimpana haittapuolena on, 
 että tietylle sovellukselle suunniteltua komponenttia ei voida sellaisenaan käyttää muilla alustoilla. 
 
 WebSTAT \cite{Webstat} on tilalliseen analyysiin perustuva IDS-järjestelmä, joka pohjautuu STAT-kehitysympäristöön \cite{STAT}. WebSTAT hyödyntää STATL-ohjelmointikieltä, joka mahdollistaa hyökkäysten
-mallintamisen ottamalla huomioon eri tapahtumien välisiä yhteyksiä ja verkkohistoriaa sekä palvelimien kuten Apachen ja Microsoftin IIS:n lokia. Koska tietoa kerätään yhtäaikaisesti monesta eri 
+mallintamisen ottamalla huomioon eri tapahtumien välisiä yhteyksiä, verkkohistoriaa sekä palvelimien kuten Apachen ja Microsoftin IIS:n lokia. Koska tietoa kerätään yhtäaikaisesti monesta eri 
 lähteestä, voidaan palvelimien lokitiedon analysointiin yhdistää alempien toimintojen kuten jär\-jes\-tel\-mä- ja verkkotason tuottamaa tietoa. Näin tehty analyysi kuvaa koko järjestelmä tilaa, jolloin 
-yllättävät muutokset pystytään havaitsemaan nopeasti. Testien mukaan tällainen analyysi voidaan toteuttaa suurissa järjestelmissä reaaliajassa aiheuttamatta suurempaa viivettä palvelimien toiminnassa. 
+yllättävät muutokset pystytään havaitsemaan nopeasti. Testien mukaan tällainen analyysi voidaan toteuttaa suurissa järjestelmissä reaaliajassa aiheuttamatta suurempaa viivettä palvelimien toimintaan. 
 Menetelmän sovittaminen tiettyyn järjestelmään vaatii jonkin verran manuaalista työtä, ja tätä voidaankin pitää sen suurimpana heikkoutena. Monimutkaisten hyökkäysten kuvaaminen on usein myös hankala
-toteuttaa, ja niiden tulkitsemiseen saattaa tuhlaantua turhaa aikaa.
+toteuttaa ja niiden tulkitsemiseen saattaa tuhlaantua turhaa aikaa.
 
 Väärinkäytösten tunnistamiseen tarkoitettuja järjestelmiä on hyödynnetty myös uudempien tietoturvahyökkäysten tunnistamisessa. Esimerkiksi vihamielisten Flash-mainosten tunnistamiseen tarkoitettu 
 OdoSwiff \cite{FlashAdd} pyrkii etsimään sivuilla olevista mainoksista hyökkäykseen tarkoitettua koodia käyttäen staattista ja dynaamista analyysia. Palvelinpuolella XSS-hyökkäyksiä vastaan on luotu 
@@ -39,7 +39,7 @@ jatkuvasti. Uusia hyökkäyksiä ja vanhojen hyökkäystyyppien variaatioita ilm
 muodostuu mahdottomaksi tehtäväksi. Hyökkäysten monimuotoisuus onkin johtanut siihen, että nykyisin yhä useammassa järjestelmässä pyritään tunnistamaan poikkeavat tapahtumat normaaliin liikenteen seasta
 ilman tarkkoja signatuureja. 
 
-Anomalioiden tunnistamiseen on käytössä useita eri menetelmiä, ja ne voidaan jakaa kahteen eri ryhmään \cite{State}. Näistä ensimmäinen sisältää oppimiseen pohjautuvat mallit, jossa normaali 
+Anomalioiden tunnistamiseen on käytössä useita eri menetelmiä ja ne voidaan jakaa kahteen eri ryhmään \cite{State}. Näistä ensimmäinen sisältää oppimiseen pohjautuvat mallit, jossa normaali 
 käyttäytyminen opetetaan opetusmateriaalin avulla. Normaalia käyttäytymistä esittävät profiilit voidaan mallintaa käyttäen joko sään\-tö\-poh\-jais\-ta-, mallipohjaista- tai tilastopohjaista menetelmää. Näistä
 sääntöpohjaiset menetelmät muistuttavat eniten perinteisiä IDS-järjestelmiä sillä erolla, että luodut säännöt pohjautuvat kerättävään dataan, ja säännöt voivat olla rakenteiltaan hyvin monimutkaisia. 
 Mallipohjaisissa menetelmissä taas luodaan normaalia käyttäytymistä kuvaavat profiilit, jota vastaan tuleva liikenne arvioidaan. Tiedonlouhinta, neuroverkot ja liikenteestä luotujen kuvioiden vertaaminen
@@ -54,7 +54,7 @@ tunnistaa.
 
 Anomalioiden tunnistamiseen perustuville järjestelmille löytyy useita eri käyttökohteita. Niillä voidaan esimerkiksi pyrkiä tunnistamaan tietokantoihin kohdistuvia tunnettuja ja tuntemattomia SQL-hyökkäyksiä.
 Järjestelmälle voidaan opettaa normaali käyttäytyminen esimerkiksi tiedonlouhintamenetelmin \cite{Data} tai luomalla profiileja normaalista käyttäytymisestä \cite{SQLanomaly}\cite{SQLlearning}. Erilaisia
-menetelmiä voidaan myös yhdistellä, jolloin todennäköisyys poikkeavan liikenteen tunnistamiseen kasvaa. Tutkimalla esimerkiksi yhtä aikaisesti sekä web-pyynnöissä että SQL-kyselyissä ilmeneviä poikkeavuuksia, 
+menetelmiä voidaan myös yhdistellä, jolloin todennäköisyys poikkeavan liikenteen tunnistamiseen kasvaa. Tutkimalla esimerkiksi yhtä aikaisesti sekä HTTP-pyynnöissä että SQL-kyselyissä ilmeneviä poikkeavuuksia, 
 voidaan tulevat kyselyt pisteyttää tarkasti \cite{WebSQL}. Kyselyiden kategorisointi mahdollistaa sen, että haitalliseksikin merkityt kyselyt voidaan ohjata sellaisille palvelimille, joilla ei ole 
 pääsyä arkaluontoiseen tietoon. 
 
@@ -63,15 +63,15 @@ ylläpitäjät joutuvat suojautumaan. Juuri tämä hyökkäysten monimuotoisuus 
 puhutuimmista tietoturvan saralla. 
 
 Poikkeavan tilan tunnistamiseen on käytetty monia eri menetelmiä, ja päätöksen tekemiseen on käytetty useita eri tietolähteitä. Esimerkiksi Swaddler \cite{Swaddler} on 
-web-sovelluksille suunniteltu menetelmä, joka oppii kriittisten järjestelmäkutsujen ja sovelluksen tilojen väliset suhteen analysoimalla web-sovelluksen sisäisiä tiloja. Tällä tavoin voidaan tunnistaa hyökkäykset,
+Web-sovelluksille suunniteltu menetelmä, joka oppii kriittisten järjestelmäkutsujen ja sovelluksen tilojen väliset suhteen analysoimalla Web-sovelluksen sisäisiä tiloja. Tällä tavoin voidaan tunnistaa hyökkäykset,
 jotka aiheuttavat poikkeavia tiloja esimerkiksi sovelluksen normaaliin työkulkuun. Järjestelmä koostuu eri malleista ja osista, joille opetetaan harjoittelujakson aikana sitä vastaava normaali käytös. Jokaiselle
 osalle, jotka käytännössä vastaavat tiettyjä sovelluksen toimintoja, lasketaan myös kynnysarvo, jonka ylittyessä sen aiheuttanut toiminto lasketaan anomaliaksi. Tehdyissä testeissä järjestelmä tunnisti 
 kaikki toteutetut hyökkäykset, ja virheellisten positiivisten hälytysten määrä oli kohtuullisen pieni. Analysointi aiheutti jonkin verran kuormaa palvelimelle, mutta optimoimalla toteutusta tämä voidaan poistaa
 lähes kokonaan. 
 
 Aikaisemmin esitettyä tapaa, jossa hyödynnetään palvelimen tuottamaa lokia, voidaan käyttää myös poikkeavuuksien tunnistamisessa \cite{Multi}. Tässä tapauksessa analysoitiin Apachen tuottamaa HTTP-lokia, ja huomio
-kiinnitettiin kyselyihin, joissa parametreja käyttäen välitettiin arvoja palvelinpuolen ohjelmille tai aktivoitiin dokumentteja. Kyselyt purettiin osiin, ja niitä analysoitiin käyttäen useita eri malleja 
+kiinnitettiin kyselyihin, joissa parametreja käyttäen välitettiin arvoja palvelinpuolen ohjelmille tai aktivoitiin dokumentteja. Kyselyt purettiin osiin ja niitä analysoitiin käyttäen useita eri malleja 
 muun muassa kyselyjen pituutta ja normaalia järjestystä, merkkien jakaumia ja pyyntöjen tiheyttä. Vastaavaa mallia on sovellettu myös poikkeavien järjestelmäkutsujen tunnistamisessa \cite{SystemCall}, joten sen 
-käyttö ei rajoitu pelkästään web-palveluihin. Väärinkäytös- ja anomaliamenetelmien yhdistämistä on myös ehdotettu \cite{Combination}. Tällainen järjestelmä voi toimia siten, että tuleva liikenne syötetään ensiksi 
+käyttö ei rajoitu pelkästään Web-palveluihin. Väärinkäytös- ja anomaliamenetelmien yhdistämistä on myös ehdotettu \cite{Combination}. Tällainen järjestelmä voi toimia siten, että tuleva liikenne syötetään ensiksi 
 anomalioita tutkivalle järjestelmälle, ja vain tunnistetut positiiviset tapaukset ohjataan väärinkäytösjärjestelmälle. Menetelmän etuna on, että virheellisten positiivisten määrä tippuu suuresti, ja tarkan 
 analyysin vaativat tapahtumat pienenevät.

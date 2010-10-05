@@ -6,7 +6,7 @@ Tiedon käsittely jaetaan esikäsittelyyn, menetelmään ja
 jälkikäsittelyyn. Esikäsittelyn aikana palvelinlokit muutetaan sellaiseen
 muotoon, jota menetelmä pystyy käsittelemään. Menetelmävaiheessa
 aineisto ajetaan diffuusiokuvausalgoritmin läpi. Jälkikäsittelyssä sitten
-luetaan diffuusiokuvauksen tuottamaa dataa ja selvitetään
+luetaan diffuusiokuvauksen tuottamaa dataa, ja selvitetään
 mielenkiintoisten havaintojen taustalla olevat HTTP-kyselyt.
 
 Tässä luvussa tutustutaan aluksi tutkittavien lokitiedostojen
@@ -26,7 +26,7 @@ vastuussa muutaman suuren palvelukokonaisuuden pyörittämisestä.
 
 Analysoitava data on Apache-palvelimien tuottamaa lokia, joka sisältää
 Web-palveluille kohdistuvia HTTP-pyyntöjä. Lokia on yhteensä 24
-gigatavua, ja se sisältää yli 1,7 miljardia sivupyyntöä.
+gigatavua ja se sisältää yli 1,7 miljardia sivupyyntöä.
 Lokia on kerätty noin 10 kuukauden
 ajanjaksolta. Se on tallennettu \textit{Combined Log Format} -muotoon,
 joka on yleinen Apache-palvelimen käyttämä lokitiedoston
@@ -132,7 +132,7 @@ feisty && potato \\
 \end{table}
 
 Lokitiedostot on sijoitettu hakemistorakenteeseen, jossa juuressa ovat
-palvelinten nimien mukaiset hakemistot, joiden sisällä sijaitsevat
+palvelinten nimien mukaiset hakemistot. Näiden hakemistojen sisällä sijaitsevat
 lokitiedostot, jotka on nimetään yhdistämällä palvelun nimi
 päivämääräleimaan. Tiedostonnimessä käytetty päivämäärän muoto
 noudattaa ISO 8601 -standardia~\cite{iso8601}, ja tiedostot on pakattu
@@ -154,7 +154,7 @@ feisty & rex & 30.7.2009 & \texttt{feisty/rex.http.2009-07-30.gz}\\
 
 Tässä mainittujen palvelinten lisäksi käytössä on ulkoinen
 välimuistipalvelu, jonka kautta välitetään harvoin muuttuvia
-resursseja, kuten kuvia. Valtaosa dataliikenteestä
+resursseja kuten kuvia. Valtaosa dataliikenteestä
 välitetään palvelun kautta. Välimuistipalvelu toimii siten, että
 mikäli pyydettyä resurssia ei löydy sen omasta muistista, se pyytää
 sitä yhdeltä Web-hotellin palvelimista ja välittää vastauksen edelleen
@@ -180,8 +180,8 @@ Web-palveluun liittyvät kyselyt ovat jakautuneet useaan eri
 tiedostoon eri palvelinten ja vuorokausien mukaisesti.
 
 Tässä työssä käytetty esikäsittelijä on toteutettu osana tätä tutkimusta. Sovelluksen 
-nimi on \textit{PhasefulSplitter}, ja se on ohjelmoitu käyttäen
-Haskell-ohjelmointikielellä \cite{haskell98}. Haskell on valittu, koska se tarjoaa
+nimi on \textit{PhasefulSplitter} ja se on ohjelmoitu käyttäen
+Haskell-ohjelmointikieltä \cite{haskell98}. Haskell on valittu, koska se tarjoaa
 tehokkaat työkalut ohjelmakoodin rinnakkaistamiseen ja datan
 sarjallistamiseen. \textit{PhasefulSplitter} on vapaa ohjelma ja sitä saa
 levittää edelleen ja muuttaa Free Software Foundationin julkaiseman
@@ -357,7 +357,7 @@ numeroidaan. Nämä arvot sijoitetaan matriisin sarakkeisiin taulukon
 \ref{matriisi} mukaisesti.
 Näistä kolme ensimmäistä saraketta yksilöivät HTTP-kyselyn. 
 Tietojen avulla on mahdollista hakea matriisin riviä vastaava
-palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa, kun
+palvelinlokin rivi. Ominaisuutta hyödynnetään analyysivaiheessa kun
 poikkeaviksi havaittuja pisteitä tutkitaan. 
 
 Sarakkeissa 4 ja 5 on HTTP-kyselyn saapumisajankohdasta laskettu tunti ja viikonpäivä. 
@@ -451,7 +451,7 @@ aineistolla suurin esiintynyt 2-grammien lukumäärä oli
 189. Käytännössä havaittiin, että käyttämällämme laitteistolla alle
 200 saraketta sisältävän matriisin laskenta oli riittävän
 nopeaa. Tämän vuoksi dimensioita ei tarvitse vähentää, joten matriiseihin ei sovelleta
-satunnaisprojektiota. Sen sijaan muodostetaan matriisi, jossa
+aikaisemmin esitettyä satunnaisprojektiota. Sen sijaan muodostetaan matriisi, jossa
 luetellaan kussakin HTTP-kyselyssä esiintyvien N-grammien
 esiintymistiheydet. Näin muodostetun matriisin tiedot liitetään
 aiemmin kerättyjen parametrien perään.

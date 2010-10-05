@@ -28,7 +28,7 @@ Analyysissä käyttämämme viikon pituinen jakso sisälsi yhteensä 913 eri
 resurssia ja näihin kohdistuvat kyselymäärät vaihtelivat muutamasta
 kappaleesta aina kymmeniin tuhansiin. Koska Web-palveluihin kohdistuvat 
 tietoturvahyökkäyksissä hyödynnetään erityisesti HTTP-kyselyn parametriosan 
-käsittelyn haavoittuvaisuuksia,keskityimme vain sellaisiin palveluihin, joissa 
+käsittelyn haavoittuvaisuuksia, keskityimme vain sellaisiin palveluihin, joissa 
 esiintyi vaihteleva kirjo parametreja. Tämä rajaus tehtiin suodattamalla pois sellaiset
 resurssit, joihin kohdistui alle sata kyselyä ja joiden
 GET-parametreista muodostettujen erilaisten n-grammien määrä oli alle
@@ -135,7 +135,7 @@ virheitä. Viimeisessä poikkeavassa kyselyssä oli sitten muista eroava määr�
 
 Molempien kuvien \ref{service_721} ja \ref{service_723} poikkeavuudet yhtä lukuunottamatta
 aiheutuivat GET-parametrista, jota ei esiintynyt muissa
-kyselyissä. Ylimääräisen parametrin nimi oli sama, kuin resurssissa 1,
+kyselyissä. Ylimääräisen parametrin nimi oli sama kuin resurssissa 1,
 ja niistä jokainen tuli samasta IP-osoitteesta. Parametrin arvo
 kuitenkin vaihteli kyselystä riippuen. Tämä viittaa siihen, että
 kyselyt olivat tulleet välityspalvelimen kautta, joka jostakin syystä
@@ -266,10 +266,7 @@ yksitellen. Tällöin algoritmin aikavaativuus riippuu ainoastaan
 opetusjakson koosta, eikä analysoitavien pisteiden määrästä. Uudet
 pisteet voidaan projisoida diffuusioavaruuteen esimerkiksi Nyströmin
 laajennuksen avulla, jota emme tähän työhön ottaneet enää
-mukaan. Menetelmä on kuitenkin hyvin tunnettu, ja sitä on sovellettu
-monissa diffuusiokuvausten käyttöön pohjautuvissa tutkimuksissa.
-
-% TODO: Missä Nyströmiä käytetään, kun tässä väitetään sen olevan tunnettu?
+mukaan.
 
 Opetusjakson tarkempi määrittely tarjoaisi analyysin kannalta
 hyödyllisempää tietoa. Jatkokehityksessä seuraava askel olisi
