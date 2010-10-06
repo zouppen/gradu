@@ -158,7 +158,7 @@ osapuolien sekä käyttäjien kesken \cite{WEB2b}.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/soa_arkkitehtuuri.pdf}
-\caption{SoA-arkkitehtuuri.}
+\caption{Palvelukeskeinen arkkitehtuuri.}
 \label{soa}
 \end{figure}
 
@@ -216,45 +216,46 @@ syötteitä, ja huonosti määritettynä käyttäjän antama syöte voidaan tulk
 hyökkääjä joutuu usein etsimään sokeasti, mutta syötteet kuten
 
 \begin{itemize}
-\item ' OR 1=1 "{-}{-}
-\item ') OR 1=1 "{-}{-}
+\item \texttt{' OR 1=1 "{-}{-}}
+\item \texttt{') OR 1=1 "{-}{-}}
 \end {itemize}
 toimivat hyvin usein \cite{WEB2}. Virheellisestä hausta aiheutuvat virheilmoitukset antavat myös erittäin paljon
 hyödyllistä tietoa hyökkääjälle \cite{SQLSS}. Koska suurin osa SQL-tietokannoista mahdollistaa useamman perättäisen syötteen 
-antamisen, kunhan syntaksi pysyy oikeana, voidaan näiden avulla katkaista ohjelman normaali toiminta. Otetaan esimerkiksi SQL-haku
-\begin{tt}
-\begin{center}
-String query= ``SELECT id FROM user\_table WHERE `` + \\
-``username = ' `` + username + ``' AND `` + \\
-``password = PASSWORD(' `` + password + ``')''; \\
-\end{center}
-\end{tt}
-Antamalla käyttäjänimeksi arvon
+antamisen, kunhan syntaksi pysyy oikeana, voidaan näiden avulla
+katkaista ohjelman normaali toiminta. Otetaan esimerkiksi
+seuraava Java-kielellä toteutettu SQL-kyselyn muodostaminen:
 
-\begin{tt}
-\begin{center}
-' OR 1=1; DROP TABLE user\_table;"{-}{-}
-\end{center}
-\end{tt}
-muuttuu tietokannalle ohjautuva kysely muotoon
+\begin{lstlisting}[language=java,aboveskip=0.5cm]
+String query = "SELECT id FROM user WHERE " +
+               "username='" + username + "' AND " +
+               "password=PASSWORD('" + password + "')'';
+\end{lstlisting}
 
-\begin{tt}
-\begin{center}
-String query= ``SELECT id FROM user\_table WHERE username=' ' OR 1=1; DROP TABLE
-user\_table; "{-}{-} ' AND password = PASSWORD ('x');
-\end{center}
-\end{tt}
-SQL-kielessä kaksi perättäistä viivaa tarkoittaa, että kaikki siitä oikealla puolella oleva on kommenttia. 
-Näin ollen lopullinen SQL-haku on 
+\noindent Mikäli muuttujan \texttt{username} arvo on
 
-\begin{tt}
-\begin{center}
-String query= ``SELECT id FROM user\_table WHERE \\username=' ' OR 1=1; DROP TABLE
-user\_table;
-\end{center}
-\end{tt}
-Näin muodostettu haku on syntaktisesti täysin oikea. Kyseinen lause poistaa tietokannassa olevan user\_table tiedoston, joka pitää
-sisällään järjestelmään tallennetut käyttäjät \cite{WEB2}. 
+\begin{lstlisting}[language=sql,aboveskip=0.5cm]
+' OR 1=1;DROP TABLE user;-- 
+\end{lstlisting}
+
+\noindent tällöin tietokannalle ohjattava kysely on seuraava:
+
+\begin{lstlisting}[language=java,aboveskip=0.5cm]
+String query = "SELECT id FROM user WHERE " +
+               "username='" + "' OR 1=1;DROP TABLE user;-- "+
+               "' AND password = PASSWORD ('x')";
+\end{lstlisting}
+
+\noindent SQL-kielessä kaksi perättäistä viivaa tarkoittaa, että kaikki siitä oikealla puolella oleva on kommenttia. 
+Näin ollen lopullinen SQL-haku on:
+
+\begin{lstlisting}[language=sql,aboveskip=0.5cm]
+SELECT id FROM user WHERE username='' OR 1=1;
+DROP TABLE user;
+\end{lstlisting}
+
+\noindent Näin muodostettu haku on syntaktisesti täysin oikea. Kyseinen lause
+poistaa tietokannassa olevan user-taulun, joka tässä tapauksessa
+sisältää järjestelmään tallennetut käyttäjät \cite{WEB2}.
 
 Vastaavanlaisia tekniikoita käyttäen hyökkääjä pystyy tekemään kaiken sen, joka pystytään esittämään SQL-kyselynä, ja johon ajettavalla
 sovelluksella on riittävät oikeudet. Mielivaltaisten käskyjen antaminen, DLL-tiedostojen luominen ja ajaminen sekä tietokannan
@@ -322,11 +323,11 @@ Nykyisin yhä useampi yritys on tietoinen verkon tarjoamista mahdollisuuksista j
 alkaneet panostamaan entistä enemmän tietoturvaan ja niistä harva toimii enää ilman kunnollista suojausta. Palomuurit ja hyökkäysten tunnistamiseen
 ja estämiseen erikoistuneet sovellukset ovat myös kehittyneet viime vuosina niin paljon, että enää harva perinteinen hyökkäys toimii ilman
 suuria muutoksia sen toteutustapaan. Tästä johtuen hyökkääjät ovat omaksuneet yhä salamyhkäisempiä murtautumistekniikoita, jotka pyrkivät kokonaan
-ohittamaan perinteiset palomuurit. Web-pohjaiset sovellukset tarjoavat tähän erinomaisen alustan, ja dynaamisten web-tekniikoiden myötä mahdollisuudet 
+ohittamaan perinteiset palomuurit. Web-pohjaiset sovellukset tarjoavat tähän erinomaisen alustan, ja dynaamisten Web-tekniikoiden myötä mahdollisuudet 
 ovat vain entisestään kasvaneet.
 
 Cross-Site Scripting eli XSS-hyökkäykset eivät ole millään tapaa uusi hyökkäystyyppi, ja joidenkin arvioiden mukaan kahdeksan kymmenestä sivustosta on 
-niille jollakin asteella alttiina. XSS-hyökkäykset ovat myös viime vuosina keränneet suosiota hyökkääjien keskuudessa, sillä dynaamisten web-sovellusten
+niille jollakin asteella alttiina. XSS-hyökkäykset ovat myös viime vuosina keränneet suosiota hyökkääjien keskuudessa, sillä dynaamisten Web-sovellusten
 myötä yhä useampi näistä käyttää erilaisia tiedonlähteitä sisällön keräämiseen. RSS-feedit, widgetit, mashupit ja erilaiset JavaScript-pohjaiset komponentit 
 tarjoavat kaikki hyökkääjille monta mahdollisuutta, johon iskeä. Tähän kun lisätään se, että sovelluksista monet päivittävät tietoja käyttäjän tietämättä, 
 niin tilanteesta muodostuu entistä vaarallisempi \cite{WEB2b}. Tästä johtuen XSS-hyökkäykset muodostavat nyt ja tulevaisuudessa erittäin suuren riskin
@@ -355,7 +356,7 @@ ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/tallennettu.pdf}
-\caption{Palvelimelle tallennettu XSS-hyökkäys}
+\caption{Palvelimelle tallennettu XSS-hyökkäys.}
 \label{tallennettu}
 \end{figure}
 
@@ -368,7 +369,7 @@ osapuolelta  \cite{WEB2}.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/heijastettu.pdf}
-\caption{Palvelimelta heijastettu XSS-hyökkäys}
+\caption{Palvelimelta heijastettu XSS-hyökkäys.}
 \label{heijastettu}
 \end{figure}
 
@@ -398,7 +399,7 @@ Näyttääkin siltä, että yritykset ymmärtävät asian vakavuuden vasta sitte
 
 \subsection{Cross-Site Request Forgery}
 
-Dynaamisten Web-sovellusten yksi keskeisimmistä asiakaspuolen ratkaisuista on Document Object Modeliksi (lyh. DOM) nimetty rakenne, joka on vastuussa siitä,
+Dynaamisten Web-sovellusten yksi keskeisimmistä selaimessa toimivista ratkaisuista on Document Object Modeliksi (lyh. DOM) nimetty rakenne, joka on vastuussa siitä,
 kuinka Web-sivun sisältöä käsitellään, ja kuinka eri objektit kommunikoivat keskenään. Tämä rakenne vastaa siitä, että ainoastaan saman domainin 
 sisäinen kommunikointi ja sisällön muokkaaminen on sallittu. Tämä ratkaisu poistaa sen mahdollisuuden, että Web-sivun DOM:ia voitaisiin muokata toisen
 domainin kautta. Tämä vastaa saman alkuperän periaatetta, jolla pyritään estämään Web-sivuihin ja käyttäjiin kohdistuvia vihamielisiä toimia.
@@ -424,7 +425,7 @@ on helpompi arvata käskyjen ja parametrien oikea muoto \cite{WEB2}.
 
 CSRF hyökkäykset eivät rajoitu pelkästään perinteisiin Web-tekniikoihin, sillä suurin osa dynaamisista teknologioista ovat sille jollakin 
 tavalla alttiina. Erityisesti AJAX ja JavaScript ovat tuoneet mukanaan suuren joukon uusia haasteita, jotka suunnittelijoiden tulee ottaa huomioon uusien
-sovelluksien suunnittelussa. \cite{WEB2b}. Täydellinen suojautuminen CSRF-\-hyökkäyksiltä vaatii syvällistä osaamista käytetyistä tekniikoista, ja 
+sovelluksien suunnittelussa \cite{WEB2b}. Täydellinen suojautuminen CSRF-\-hyökkäyksiltä vaatii syvällistä osaamista käytetyistä tekniikoista, ja 
 tietämystä eri komponenttien välisistä toiminnoista. Puutteellisista
 toteutuksista johtuen monet sivustoista ja palveluista ovat haavoittuvaisia
 CSRF-hyökkäyksille. Tästä tunnettuna esimerkkinä sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF-hyökkäyksen mahdollistava heikkous. Tämän avulla
@@ -461,7 +462,7 @@ saadaan kuitenkin hyvä yleiskuva siitä, minkälaisille heikkouksille sovellus 
 sovellukset on myös hyökkääjien käytössä, niin ainakin aukot, jotka löytyvät yleisimmin käytössä olevilla työkaluilla, tulisi korjata mahdollisimman nopeasti. 
 
 Web Application Security Consortium (lyh. WASC) on vuonna 2004 perustettu avoin kansainvälinen ryhmittymä, joka koostuu tietoturva-alan asiantuntijoista sekä eri 
-yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön best practice -malleja ja standardeja turvallisesta internetistä. Se julkaisee
+yritysmaailman tahoista, joiden tavoitteena on tuottaa vapaaseen käyttöön best practice -malleja ja standardeja turvallisesta Internetistä. Se julkaisee
 erilaisia artikkeleita, esitysmateriaaleja ja tietoturvalinjauksia, joita käytetään hyvin laajasti ohjenuorina yritysmaailmassa sekä tuotekehityksessä \cite{WASC}.
 WASC:n tämän hetkisiin projekteihin kuuluvat Web-sovellusten turvallisuuden tutkimiseen käytettävien ohjelmistojen arviointikriteerien laatiminen sekä tilastointi
 Web-sovellusten turvallisuudesta. Viimeisimmän WASC:n tekemän raportin mukaan tutkituista sivustoista, joita oli yhteensä 12186 kappaletta ja joista löytyi 97554 
@@ -526,7 +527,7 @@ takeita. Näihin tiedostoihin lukeutuvat muun muassa paketeissa mukana tulevat e
 lisäosat, joiden alkuperästä ei ole varmuutta. Toisekseen on tärkeä varmistaa, että käytettyihin sovelluksiin
 on asennettu viimeisimmät päivitykset, sillä ne yleensä korjaavat tunnetut heikkoudet \cite{Hacking}. Jo pelkästään näillä 
 toimilla pystytään suurimmaksi osaksi estämään sellaiset hyökkäykset, jotka kohdistuvat itse käytettyyn palvelinalustaan.
-Palvelunesto- ja spoofing-hyökkäyksiltä nämä eivät suojaa, ja tästä syystä resursseihin kohdistuville hyökkäyksille
+Spoofing- ja palvelunestohyökkäyksiltä nämä eivät suojaa, ja tästä syystä resursseihin kohdistuville hyökkäyksille
 tulee olla erilliset suojausmenetelmät.
 
 \subsection{Snort}

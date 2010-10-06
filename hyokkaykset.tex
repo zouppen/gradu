@@ -68,14 +68,14 @@ onnistuakseen hyökkääjän tulee pystyä vastaamaan oikeilla
 kuittausnumeroilla kohteen lähettämiin paketteihin. Nämä
 kuittausnumerot hyökkääjä joutuu aluksi usein arvaamaan, jonka vuoksi
 tämä hyökkäystapa on usein hankala toteuttaa \cite{WEBS}. Niin kutsuttu Man
-in The Middle -hyökkäys, jossa hyökkääjä kaappaa kahden koneen välisen
+in The Mid\-dle -hyökkäys, jossa hyökkääjä kaappaa kahden koneen välisen
 yhteyden, perustuu myös IP-\-osoitteen väärinkäyttöön. Kuva \ref{Man}
 havainnollistaa hyökkäyksen toteuttamista.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=13cm]{pics/MiTM.pdf}
-\caption{Man in The Middle-hyökkäys}
+\caption{Man in The Middle-hyökkäys.}
 \label{Man}
 \end{figure}
 
@@ -86,14 +86,14 @@ johtuu siitä, että TCP/IP-verkossa on sallittua muokata paketteja
 tiedonsiirron aikana. Näin on, koska eräät IP-pohjaiset palvelut
 edellyttävät pakettien sisällön muuttamista lähettämisen
 yhteydessä. Tällaisia palveluita ovat esimerkiksi mobiili-IP- ja
-VPN-järjestelmät.~\cite{DDOS}.
+VPN-järjestelmät~\cite{DDOS}.
 
-IP spoofing -hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain
+IP Spoofing -hyökkäyksiä voidaan torjua monin eri keinoin. Tehokkain
 tapa on määritellä verkon reitittimet estämään sellaisten pakettien
 kulku, jotka on merkitty lähetetyiksi sisäverkon laitteilta, mutta
 jotka todellisuudessa saapuvat reitittimeen sen ulkopuolisista
 liitännöistä. Jos tämä kuitenkin halutaan sallia, niin jokainen sessio
-tulisi salata reitittimessä. \cite{WEBS}.
+tulisi salata \cite{WEBS}. 
 
 \subsection{ARP Spoofing}
 
@@ -110,7 +110,7 @@ laitteelle eikä myöskään lähiverkossa sijaitseva tietokone pysty
 siirtämään tietoa IP-protokollalla muille lähiverkossa sijaitseville
 laitteille.
 
-ARP spoofing -hyökkäyksessä, jota kutsutaan myös ARP-myrkyttämiseksi,
+ARP Spoofing -hyökkäyksessä, jota kutsutaan myös ARP-myrkyttämiseksi,
 pyritään syöttämään reitittimien ARP-tauluihin virheellistä
 tietoa (kuva \ref{ARP-spoofing}). Tämä tapahtuu kaappaamalla verkon
 yleislähetysviestejä, ja muokkaamalla kuittausviestien sisältöä siten,
@@ -256,7 +256,7 @@ esimerkiksi Web-\-palvelimelle, aiheutuu vastaustulvasta ongelmia
 kohteelle \cite{STACK}.
 
 Koska ylimääräistä palvelinkapasiteettia ei useinkaan ole järkevää
-pitää SYN-\-hukuttamisen varalta, joudutaan ratkaisua
+pitää SYN-hukuttamisen varalta, joudutaan ratkaisua
 hakemaan muualta. Alkeellisin keino on rajoittaa puoliavonaisten
 yhteyksien määrää, jolloin rajan ylittyessä yhteyksiä aletaan
 pudottamaan \cite{TCP}. Toinen käytetty keino on reitittimiltä
@@ -269,7 +269,7 @@ Kehittyneempi suojautumiskeino on muuttaa TCP-protokollan kättelyä
 siten, että yhteyden tarvitsemat resurssit varataan vasta ACK-viestin
 vastaanottamisen yhteydessä. Tätä menetelmää kutsutaan
 SYN-evästykseksi (engl. \textit{SYN Cookies}) ja se on tuettu
-mm. Linuxissa ja FreeBSD:ssä~\cite{syncookies}. Yhteydenmuodostuksessa
+muun muassa Linuxissa ja FreeBSD:ssä~\cite{syncookies}. Yhteydenmuodostuksessa
 tarvittavat parametrit kätketään tällöin SYN-paketin
 järjestysnumeroon. Tämän menetelmän käyttö kuitenkin rajaa pois
 runsaasti TCP-protokollan ominaisuuksista, jonka vuoksi SYN-evästys
@@ -398,7 +398,7 @@ jolloin hyökkäyksessä käytetty zombiverkko hajosi \cite{DDOS}.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/perinteinen_ddos.pdf}
-\caption{Perinteinen DDoS-verkosto}
+\caption{Perinteinen DDoS-verkosto.}
 \label{ddos1}
 \end{figure}
 
@@ -425,7 +425,7 @@ vaikeaa \cite{DDOS}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=12cm]{pics/ddos_uusi.pdf}
-\caption{Nykyisin käytetty DDoS-verkosto}
+\caption{Nykyisin käytetty DDoS-verkosto.}
 \label{ddos2}
 \end{figure}
 
