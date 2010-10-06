@@ -54,7 +54,7 @@ hyökkääjät voivat hyödyntää \cite{JSH}.
 
 \subsection{JavaScript}
 
-JavaScript on Netscapen suunnittelema skriptikieli, joka tunnettiin aluksi nimellä LiveScript. Sun Microsystemsin kehittämän Java-ohjelmointikielen yleistyessä Netscape päätti muuttaa
+JavaScript on Netscapen suunnittelema skriptikieli, joka tunnettiin aluksi nimellä LiveScript. Sun Microsystemsin kehittämän Java-ohjelmointikielen yleistyessä Net\-scape päätti muuttaa
 sen nimen JavaScriptiksi toivoen sen käytön yleistyvän Javan menestyksen myötä. JavaScriptillä kirjoitetut skriptit sijoitetaan HTML:n \texttt{<script>}-elementin sisään, josta voi 
 olla myös viite erilliseen lähdekooditiedostoon. JavaScript vaatii tuen selaimelta, jollainen löytyy miltei jokaisesta Web-\-selaimesta mukaan lukien yleisimmät mobiililaitteet.
 
@@ -194,6 +194,4 @@ sessiossa käytetyn evästeen arvo jokaiseen kyselyyn mukaan, voi palvelin verra
 pääsemästä käsiksi tähän evästeeseen, voi palvelin olla varma, että pyynnön on todellakin tehnyt käyttäjä itse. GWT:stä löytyy valmiiksi tähän tarkoitukseen kirjoitettuja funktioita, joita
 käyttäen jokaiseen pyyntöön voidaan lisätä oikean evästeen arvo. Näitä käyttäen CSRF-hyökkäykset voidaan lähes kokonaan poistaa, kunhan vain palvelinpuoli osaa verrata evästeiden arvoja 
 ja tehdä näiden pohjalta oikeat johtopäätökset. JSONin tapauksessa voidaan tämän lisäksi käyttää jo aikaisemmin esitettyä tapaa, jossa pakettien sisältöä muokataan siten, ettei niiden
-sisältöä voida kaapata käyttäen <script>-elementtiä \cite{GWTsecurity}.
-
-% FIXME onko hyvä tuo <script> ?
+sisältöä voida kaapata käyttäen \texttt{<script>}-elementtiä \cite{GWTsecurity}.

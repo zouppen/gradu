@@ -62,7 +62,7 @@ väliset suhteet.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/web_ymparisto.pdf}
-\caption{Web 2.0 teknologiaperhe.}
+\caption{Web 2.0 -teknologiaperhe.}
 \label{web}
 \end{figure}
 
@@ -274,14 +274,12 @@ pohjautuvat ratkaisut sisältävät usein myös osan seuraavista ominaisuuksista
              on helpompi arvata oikea syöte \cite{SQLSS}
 \end{itemize}
 
-% TODO Syötteen tyypin ehdoton kääntäminen = dynaaminen tyypitys? tarkista.
-
 Esille tulleiden asioiden valossa on selvää, että SQL-kieleen pohjautuvat haavoittuvuudet ovat todellinen uhka tietoturvalle.
 Tästä johtuen on tärkeää, että sovellusten turvallisuus pyritään takaamaan kaikin mahdollisin tavoin. Täysin turvallisen sovelluksen 
 suunnitteleminen on kuitenkin mahdoton tehtävä, mutta noudattamalla muutamia perusperiaatteita voidaan riskiä vähentää huomattavasti.
 
 Verkon tietoturvaratkaisuja valittaessa ja suunniteltaessa
-SQL-injektiohyökkäykset tulee ottaa huomioon.
+SQL-\-injektiohyökkäykset tulee ottaa huomioon.
 Koska injektiohyökkäykset pyrkivät hyödyntämään syötteiden
 virheellistä tulkintaa, voi hyväksyttävien syötteiden rajoittaminen
 tuntua helpolta ratkaisulta ongelmaan. Osittain tämä ratkaisee asian,
@@ -345,14 +343,6 @@ keinoja, ja harvoin käyttäjä edes huomaa joutuneensa hyökkäyksen kohteeksi.
 voidaan kiertää, jolloin hyökkääjän on mahdollista ajaa kohteen selaimessa haluamaansa koodia ja skriptejä. Tämä saman alkuperän periaate on Web-selainten 
 yksi tärkeimmistä suojausmenetelmistä, ja se estää muun muassa skriptien lataamisen yhdestä lähteestä hakemalla tai asettamalla määrityksiä toisesta lähteestä \cite{WEB2}.
 
-XSS-hyökkäykset jaetaan heijastettuihin ja tallennettuihin hyökkäyksiin sen mukaan, kuinka hyökkäys on toteutettu. Tallennetussa hyökkäyksessä haavoittuvalle 
-Web-sivustolle asennetaan pysyvästi vihamielinen skripti, joka ajetaan sivun vierailun yhteydessä \ref{tallennettu}. Tällaiset skriptit ovat yleensä kirjoitettu JavaScriptillä
-ja ne voidaan tallentaa esimerkiksi Web-palvelimen tietokantaan, kommenttikenttiin tai foorumin viesteihin. Koska selain luottaa siihen, 
-että sivuston sisältö on luotettavasta lähteestä, pystyy hyökkääjä tämän jälkeen lukemaan ja muokkaamaan selaimen arkaluontoista sisältöä. Evästeet, jotka ovat Web-sovellusten 
-toiminnan kannalta erittäin tärkeitä, ovat ensimmäisiä kohteita joihin yritetään yleensä päästä käsiksi, sillä ne ylläpitävät yhteyksien tiloja eri 
-sivustoille ja oikean käyttäjän tunnistamiseen tarvittavia tietoja \cite{WEB2b}. Näitä kaappaamalla hyökkääjä pystyy esiintymään verkossa toisena käyttäjänä 
-ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia. 
-
 \begin{figure}[htp]
 \centering
 \includegraphics[width=12cm]{pics/tallennettu.pdf}
@@ -360,7 +350,15 @@ ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia.
 \label{tallennettu}
 \end{figure}
 
-\newpage
+XSS-hyökkäykset jaetaan heijastettuihin ja tallennettuihin hyökkäyksiin sen mukaan, kuinka hyökkäys on toteutettu. Tallennetussa hyökkäyksessä haavoittuvalle 
+Web-sivustolle asennetaan pysyvästi vihamielinen skripti, joka ajetaan
+sivun vierailun yhteydessä (kuva \ref{tallennettu}). Tällaiset skriptit ovat yleensä kirjoitettu JavaScriptillä
+ja ne voidaan tallentaa esimerkiksi Web-palvelimen tietokantaan, kommenttikenttiin tai foorumin viesteihin. Koska selain luottaa siihen, 
+että sivuston sisältö on luotettavasta lähteestä, pystyy hyökkääjä tämän jälkeen lukemaan ja muokkaamaan selaimen arkaluontoista sisältöä. Evästeet, jotka ovat Web-sovellusten 
+toiminnan kannalta erittäin tärkeitä, ovat ensimmäisiä kohteita joihin yritetään yleensä päästä käsiksi, sillä ne ylläpitävät yhteyksien tiloja eri 
+sivustoille ja oikean käyttäjän tunnistamiseen tarvittavia tietoja \cite{WEB2b}. Näitä kaappaamalla hyökkääjä pystyy esiintymään verkossa toisena käyttäjänä 
+ja väärinkäyttämään palveluita kuten verkkopankkia tai webmailia. 
+
 Heijastettu hyökkäys (kuva \ref{heijastettu}) eroaa tallennetusta hyökkäyksestä siten, että haitallista skriptiä ei tallenneta minnekään pystyvästä. Hyökkäyksen kohteeksi käyttäjä joutuu, kun 
 hänet huijataan esimerkiksi painamaan vihamielistä linkkiä, joka tekee käyttäjän puolesta kyselyn haavoittuvalle sivustolle. Haavoittuva sivusto heijastaa kyselyn tuloksen 
 takaisin käyttäjälle esimerkiksi virheviestin tai hakutuloksen muodossa, ja näin toimitettu koodi suoritetaan käyttäjän selaimessa, koska se tulee selaimen luottamalta
@@ -517,8 +515,9 @@ Erilaiset hyökkäykset pyrkivät yleensä hyödyntämään seuraavissa kategori
 \item Syötteen tarkistaminen \cite{Hacking}.
 \end{itemize}
 Kanonisoinnilla tarkoitetaan sääntöjen mukaisen syötteen väärinkäyttöä. Hyökkäys pohjautuu siihen,
-että useimpia palveluita ja resursseja voidaan kutsua monin eri tavoin. Esimerkiksi tiedostoa C:\textbackslash text.txt voidaan 
-kutsua syntaksilla ..\textbackslash text.txt. Sovellukset, jotka tekevät tietoturvapäätökset käyttäen hyödyksi resurssinimeä,
+että useimpia palveluita ja resursseja voidaan kutsua monin eri
+tavoin. Esimerkiksi tiedostoon \texttt{C:\textbackslash text.txt}
+voidaan suhteellisesti viitatata syntaksilla \texttt{..\textbackslash text.txt}. Sovellukset, jotka tekevät tietoturvapäätökset käyttäen hyödyksi resurssinimeä,
 voidaan helposti huijata suorittamaan odottamattomia toimintoja \cite{Hacking}.
 
 Listatuilta asioilta suojautuminen on melko yksinkertaista, kunhan noudattaa muutamia perussääntöjä. Ensinnäkin tuotannossa 
@@ -592,7 +591,7 @@ hyökkääjän kiinnijäämisen riski on pienempi. Suurin osa hyökkäyksistä t
 nykyisin POST-metodia käyttämällä. Se, mitä halutaan lokittaa, voidaan myös tarkkaan määrittää. Salattu ja pakattu liikenne ei myöskään aiheuta ongelmia, sillä lokitus tapahtuu sillä tasolla,
 jossa pyynnöt ovat valmiiksi puretussa muodossa \cite{Mod}.
 
-Liikenteen kirjaamisen ohella ModSecurity voidaan asettaa estämään tulevia hyökkäyksiä, jonka lisäksi sen avulla pystytään nopeasti paikkaamaan löydetyt haavoittuvaisuudet. 
+Liikenteen kirjaamisen ohella ModSecurity voidaan määritellä estämään tulevia hyökkäyksiä, jonka lisäksi sen avulla pystytään nopeasti paikkaamaan löydetyt haavoittuvaisuudet. 
 Ensinnäkin kaikki tulevat paketit voidaan pisteyttää halutulla tavalla, ja tietyn pisterajan ylittäneet paketit voidaan esimerkiksi pudottaa pois. Toinen mahdollisuus on sallia vain 
 tietynlaiset pyynnöt. ModSecurityn käyttämä säännöstökieli mahdollistaa myös palveluiden nopean suojaamisen uusilta hyökkäyksiltä ilman, että palvelun omaan koodiin tarvitsee koskea.
 Tämä on erityisen hyödyllistä niissä tilanteissa, joissa päivitysten tuominen tuotantoon vie aikaa. 
