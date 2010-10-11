@@ -67,7 +67,7 @@ densityplot.classic <- function(zipola, do.lineinfo = T, do.debug = F,randorder 
   }
 }
 
-plot.service <- function(service, filename, do.svg=FALSE, do.pdf=TRUE) {
+plot.service <- function(service, filename, do.svg=TRUE, do.pdf=TRUE) {
 
   print(paste("plotataan: ",service," ",filename))
   
@@ -78,13 +78,13 @@ plot.service <- function(service, filename, do.svg=FALSE, do.pdf=TRUE) {
   if (do.svg) {
     ## Density map
     svg(paste("../pics/tiheyskuvat/service_",service,".svg",sep=""))
-    par(family="serif")
+    par(family="serif",mar=c(0.3,4,1,0.3))
     densityplot.classic(rawdata)
     dev.off()
 
     # Diffusion map
     svg(paste("../pics/diffuusiokuvat/service_",service,".svg",sep=""))
-    par(family="serif")
+    par(family="serif",mar=c(4,4,1,0.3))
     diffusionplot(rawdata, randomness=0.01)
     dev.off()
   }
