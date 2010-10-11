@@ -1,0 +1,48 @@
+% -*- mode: LaTeX; coding: utf-8; -*-
+
+\chapter{Johdanto}
+
+Viime vuosina Web-sovellusten ja -palveluiden suosio on 
+ollut voimakkaassa kasvussa, ja monet palveluista ovat nykyisin kriittisiä osia
+yhteiskuntamme toimivuuden kannalta. Internetin välityksellä
+käytettävien palveluiden tietoturvan ja saatavuuden takaaminen on
+tämän johdosta noussut monessa yrityksessä tärkeään rooliin.
+Tietojärjestelmien siirtyminen julkishallinnon ja
+yritysten erillisverkoista julkiseen Internetiin on vaikuttanut omalta
+osaltaan myös siihen, mihin tietoturvahyökkäykset nykyisin
+kohdistuvat ja kuinka ne pyritään toteuttamaan.
+
+Hyökkäysten muuttuessa yhä hienostuneimmiksi, eivät perinteiset
+tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun
+ylläpitäjiä. Tästä syystä erilaisten tietoturvaratkaisuiden ympärillä
+käy kova kuhina, ja aihepiiri on herättänyt suurta kiinnostusta
+tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty
+selvittämään tietoturvahyökkäyksiä ja näiden mukana tulevia haasteita,
+on lukematon määrä. Haaste on löytää ne menetelmät, jotka oikeasti
+toimivat riittävällä tarkkuudella ja nopeudella.
+
+Tietoturvahyökkäysten tunnistaminen perustuu siihen, että
+analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään
+viitteitä tapahtuvista hyökkäyksistä. Menetelmät jaetaan kahteen eri
+tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen
+(engl. \textit{anomaly detection}) ja väärinkäytösten tunnistamiseen
+(engl. \textit{misuse detection}). Näistä anomalioiden tunnistaminen
+perustuu malleihin, joita luodaan järjestelmän, käyttäjän tai verkon
+normaalista käyttäytymisestä. Tulevaa liikennettä sitten verrataan 
+näin luotuihin malleihin, jolloin opituista malleista poikkeava liikenne
+voidaan tunnistaa. Väärinkäytösten tunnistamiseen tarkoitetut järjestelmät 
+puolestaan sisältävät joukon kuvauksia (engl. \textit{signature}) tunnetuista hyökkäyksistä. 
+Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin näitä vastaavat
+hyökkäykset tunnistetaan. Hyökkäysten tunnistusjärjestelmät
+jaetaan joissakin tapauksissa myös sen mukaan, mistä tutkittava
+liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon
+pohjautuviksi (engl. \textit{network based}) ja asiakaspohjaisiksi
+(engl. \textit{host based}).
+
+Tutkielman rakenne on seuraavanlainen. Luvussa 2 esitellään yleisellä
+tasolla Web-palvelinalustoja, ja käydään läpi Web-palveluiden
+erilaisia toteutustapoja. Luvussa 3 perehdytään uudenlaisiin
+Web-ratkaisuihin ja tietoturvahyökkäyksiin, joiden kohteeksi
+Web-palvelut nykyisin joutuvat. Luku 6 sisältää katsauksen
+tutkimuskenttään liittyvään tutkimukseen. Viimeinen luku sisältää
+yhteenvedon tästä työstä.

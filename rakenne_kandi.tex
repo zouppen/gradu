@@ -1,0 +1,143 @@
+% BACHELOR'S THESIS IN MATHEMATICAL INFORMATION TECHNOLOGY
+% Joel Lehtonen
+%
+% Based on Timo Männikkö's template with some modifications made by
+% Tuomo Sipola (M.Sc.).
+%
+% Uses latex template by Antti-Juhani Kaijanaho and Matthieu Weber.
+%
+
+\documentclass[finnish,logo,nonumbib,creativecommons,nocopyright,lof,pdftex,palatino,utf8]{gradu2}
+
+\usepackage{palatino} % Better font
+\usepackage[intlimits]{amsmath} % For better math mode, namely integrals
+\usepackage{amssymb} % Math symbols
+
+\usepackage[pdftex]{graphicx} % Pictures
+\usepackage{pdfpages} % For inclusion of the article
+
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{framed}
+\usepackage{verbatim} % Multi-line commenting.
+\usepackage{rotating} % Vertical text used in temporary comments.
+\usepackage{listings} % Source code
+
+\tyyppi{kandidaatintutkielma} % muuten oletus on "pro gradu -tutkielma"
+
+% Todo-tags help the examiner's work
+\newcommand{\todo}[1]{\marginpar{\begin{framed}\begin{sideways}\textbf{TODO}: #1\end{sideways}\end{framed}}}
+
+% Source code listings. Annotation can be done between [ and ] in Bash.
+\lstset{frame=single,captionpos=b}
+\renewcommand{\lstlistingname}{Listaus}
+\lstdefinelanguage{bashshell}{language=bash,moredelim=[is][\itshape]{[[}{]]},morekeywords={mkdir,find,classifier,ls,parameter_analyzer,parameter2vector,xargs,apache2data},aboveskip=0.5cm}
+\lstdefinelanguage{MyHaskell}{language=Haskell,morekeywords={ByteString,URL,UTCTime,readZipolaFile,saveLogLines}}
+
+% Define our own abbreviations list
+\newenvironment{abbrlist}[1]{
+  \begin{list}{}{\settowidth{\labelwidth}{\textbf{#1}}
+  \setlength{\leftmargin}{\labelwidth}
+  \addtolength{\leftmargin}{\labelsep}
+  \renewcommand{\makelabel}[1]{\textbf{\hfill##1}}}}%
+{\end{list}}
+
+% No spacing with this enumeration
+\newenvironment{enumerate_no_space}{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+{\end{enumerate}}
+
+% Remove pagebackref in the final version
+% Add "pagebackref=true" to get page numbers where each reference is used
+% Link version for internet viewing
+%\usepackage[pdftex,colorlinks=true]{hyperref}
+
+% PDF information tags
+\pdfinfo{/Title (Web-palveluiden tietoturva) /Author (Joel Lehtonen) /Subject (Tietoturva) /Keywords (tietoturva,web)}
+
+%%% Actual content begins here
+
+\title{Web-palveluiden tietoturva}
+\translatedtitle{Securitu of Web Services}
+
+\setauthor{Joel}{Lehtonen}
+\yhteystiedot{joel.lehtonen@iki.fi}
+%\setdate{30}{8}{2008}
+\license{Tämän teoksen käyttöoikeutta koskee Creative Commons
+  Attribution-ShareAlike 3.0 Unported -lisenssi.}
+
+%-miksi kiinnostavia
+%-mitä tutkittiin
+%-miten tutkittiin
+%-tulokset
+
+% TODO tiivistelmä
+
+\abstract{ In recent years the popularity and usage of Web
+  applications and services have grown rapidly and nowadays many of those
+  services play an important role in our information society. Because
+  of this, securing Web services is essential. The complexity of
+  security attacks has renderd traditional security methods almost
+  useless. Therefore new methods are being developed and diffusion
+  maps are one of the most promising ones. In this thesis, the
+  suitability of diffusion maps in evaluation of HTTP traffic is
+  researched. The results show that the used methods are capable of
+  detecting anomalous HTTP traffic from large data sets. Still, for
+  active intrusion detection further research is needed. }
+
+\tiivistelma{ Viime vuosina Web-sovellusten ja -palveluiden suosio on
+  ollut voimakkaassa kasvussa, ja monet palveluista ovat nykyisin
+  kriittisiä osia yhteiskuntamme toimivuuden kannalta.  Tämän johdosta
+  palveluiden suojaaminen on noussut tärkeään roolin. Hyökkäysten myös
+  muuttuessa yhä hienostuneimmiksi, eivät perinteiset
+  tietoturvamenetelmät tarjoa enää riittävää suojaa. Tämän vuoksi
+  uusia menetelmiä kehitetään jatkuvasti.}
+
+% TODO avainsanat
+
+\avainsanat{
+anomalia,
+diffuusiokuvaus,
+N-grammianalyysi,
+tietoturva,
+Web-palvelu
+}
+\keywords{
+anomaly,
+data security,
+diffusion maps,
+N-gram analysis,
+Web service
+}
+
+\def\termlistname{Lyhenteet}
+
+\begin{document}
+
+% Kirjastulostusta varten fontti luettavamman kokoiseksi
+%\scalefont{1.18}
+
+\include{sanasto_kandi}
+
+\mainmatter
+
+\include{johdanto_kandi}
+\include{www-arkkitehtuuri}
+\include{web-palvelut}
+\include{aiempi_tutkimus}
+\include{johtopaatokset_kandi}
+
+\bibliography{lahteet}{}
+%\bibliographystyle{finplain}
+\bibliographystyle{ieeetr}
+
+%\appendix
+
+%\chapter{Published article}
+%
+%\includepdf[pages=-]{published_article.pdf}
+
+\end{document}
