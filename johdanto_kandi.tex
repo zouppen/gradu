@@ -12,6 +12,14 @@ yritysten erillisverkoista julkiseen Internetiin on vaikuttanut omalta
 osaltaan myös siihen, mihin tietoturvahyökkäykset nykyisin
 kohdistuvat ja kuinka ne pyritään toteuttamaan.
 
+Toimivan ja turvallisen Web-pohjaisen palvelun tarjoaminen vaatii
+nykyisin todella paljon aikaa ja huolellisuutta sekä palvelun
+kehittäjältä että palvelun tarjoajalta ja ylläpitäjältä. Lisäksi
+siirtyminen palvelukeskeiseen arkkitehtuuriin on johtanut siihen, että
+palvelut ovat hajautuneet useammalle palvelimelle jopa eri puolella
+maapalloa. Arkkitehtuurin muutoksen myötä myös tietomurtojen
+tekijöiden kohteeksi on avautunut uusia rajapintoja.
+
 Hyökkäysten muuttuessa yhä hienostuneimmiksi, eivät perinteiset
 tietoturvamenetelmät enää riitä suojaamaan loppukäyttäjiä tai palvelun
 ylläpitäjiä. Tästä syystä erilaisten tietoturvaratkaisuiden ympärillä
@@ -20,24 +28,6 @@ tutkijoiden keskuudessa. Erilaisia ratkaisuja, joissa on pyritty
 selvittämään tietoturvahyökkäyksiä ja näiden mukana tulevia haasteita,
 on lukematon määrä. Haaste on löytää ne menetelmät, jotka oikeasti
 toimivat riittävällä tarkkuudella ja nopeudella.
-
-Tietoturvahyökkäysten tunnistaminen perustuu siihen, että
-analysoimalla yhtä tai useampaa tapahtumaa pyritään löytämään
-viitteitä tapahtuvista hyökkäyksistä. Menetelmät jaetaan kahteen eri
-tyyppiin: anomalioiden eli poikkeavuuksien tunnistamiseen
-(engl. \textit{anomaly detection}) ja väärinkäytösten tunnistamiseen
-(engl. \textit{misuse detection}). Näistä anomalioiden tunnistaminen
-perustuu malleihin, joita luodaan järjestelmän, käyttäjän tai verkon
-normaalista käyttäytymisestä. Tulevaa liikennettä sitten verrataan 
-näin luotuihin malleihin, jolloin opituista malleista poikkeava liikenne
-voidaan tunnistaa. Väärinkäytösten tunnistamiseen tarkoitetut järjestelmät 
-puolestaan sisältävät joukon kuvauksia (engl. \textit{signature}) tunnetuista hyökkäyksistä. 
-Tuleva liikenne tarkistetaan näitä kuvauksia vastaan, jolloin näitä vastaavat
-hyökkäykset tunnistetaan. Hyökkäysten tunnistusjärjestelmät
-jaetaan joissakin tapauksissa myös sen mukaan, mistä tutkittava
-liikenne on kerätty. Tällöin järjestelmät on jaettu verkkoon
-pohjautuviksi (engl. \textit{network based}) ja asiakaspohjaisiksi
-(engl. \textit{host based}).
 
 Tutkielman rakenne on seuraavanlainen. Luvussa 2 esitellään yleisellä
 tasolla Web-palvelinalustoja, ja käydään läpi Web-palveluiden
