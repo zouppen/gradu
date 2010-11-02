@@ -403,7 +403,7 @@ sisäinen kommunikointi ja sisällön muokkaaminen on sallittu. Tämä ratkaisu 
 domainin kautta. Tämä vastaa saman alkuperän periaatetta, jolla pyritään estämään Web-sivuihin ja käyttäjiin kohdistuvia vihamielisiä toimia.
 Webin muuttuessa entistä interaktiivisemmaksi, ovat sivustot kuitenkin alkaneet sallia yhä enemmän domainien välistä kommunikointia. Tällaisia 
 toimia ovat esimerkiksi hyperlinkkien käyttäminen sisällön näyttämisessä, kuvien ja objektien lataaminen sekä toisessa domainissa olevien 
-JavaScriptien ajaminen. Nämä ja monet muut toimet ovat mahdollistaneet entistä monipuolisempien Web-palveluiden suunnittelun, mutta huonosti toteutettuna 
+JavaScriptien ajaminen. Nämä ja monet muut toimet ovat mahdollistaneet entistä monipuolisempien Web-\-palveluiden suunnittelun, mutta huonosti toteutettuna 
 ne jättävät palvelut hyvin haavoittuviksi. Tämä johtuu siitä, että käyttäjän tarkoituksella tekemiä toimia ei pystytä erottamaan niistä toimista, jotka tehdään 
 automaattisesti käyttäjän vieraillessa sivustolla \cite{WEB2}.
 
@@ -421,12 +421,12 @@ käyttäjän yksilöimiseen ja tunnistamiseen, joten riittää, että hyökkää
 jopa useita viikkoja, jolloin sama eväste on pitkään käytössä. Monien sovellusten ja pyyntöjen rakenne on myös hyvin ennalta arvattavissa, jolloin hyökkääjän
 on helpompi arvata käskyjen ja parametrien oikea muoto \cite{WEB2}.
 
-CSRF hyökkäykset eivät rajoitu pelkästään perinteisiin Web-tekniikoihin, sillä suurin osa dynaamisista teknologioista ovat sille jollakin 
+CSRF-hyökkäykset eivät rajoitu pelkästään perinteisiin Web-\-tekniikoihin, sillä suurin osa dynaamisista teknologioista ovat sille jollakin 
 tavalla alttiina. Erityisesti AJAX ja JavaScript ovat tuoneet mukanaan suuren joukon uusia haasteita, jotka suunnittelijoiden tulee ottaa huomioon uusien
 sovelluksien suunnittelussa \cite{WEB2b}. Täydellinen suojautuminen CSRF-\-hyökkäyksiltä vaatii syvällistä osaamista käytetyistä tekniikoista, ja 
 tietämystä eri komponenttien välisistä toiminnoista. Puutteellisista
 toteutuksista johtuen monet sivustoista ja palveluista ovat haavoittuvaisia
-CSRF-hyökkäyksille. Tästä tunnettuna esimerkkinä sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF-hyökkäyksen mahdollistava heikkous. Tämän avulla
+CSRF-\-hyökkäyksille. Tästä tunnettuna esimerkkinä sähköpostisivusto Gmail, josta löytyi vuonna 2007 CSRF-hyökkäyksen mahdollistava heikkous. Tämän avulla
 hyökkääjän oli mahdollista luoda Gmailiin sellainen suodatus, joka ohjasi tulevat postit toiseen osoitteeseen \cite{CSRF}. 
 
 CSRF-hyökkäyksiltä suojautumiseen on käytössä kolme hyvin yleistä tekniikkaa. Näistä käytetyin on sisällyttää jokaiseen palvelinpuolen dataa muokkaavaan
@@ -445,7 +445,7 @@ joka rajoittaa tiettyjen palveluiden käyttöä \cite{CSRF}.
 Näiden ja monien muiden syiden takia tutkimustyö CSRF-hyökkäysten parissa on kasvattanut suosiotaan. Yhdessä tutkimuksessa ehdotettiin erillisen Origin
 otsakkeen lisäämistä pyyntöön, joka korjaisi Referer-kentän heikkoudet \cite{CSRF}. Toisessa tutkimuksessa taas pyrittiin kasvattamaan Web-selaimen turvallisuutta
 lisäämällä selaimeen mekanismi, joka pyrki arvioimaan vastasiko tehdyt pyynnöt käyttäjän toimia \cite{CSRFb}. Näistä kahdesta erilaisesta ratkaisusta on nähtävissä se,
-että tutkimuskenttä CSRF-hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
+että tutkimuskenttä CSRF-\-hyökkäysten ympärillä on hyvin alkuvaiheessa, ja vastuu riittävän suojauksen hoitamisesta jää vielä tällä hetkellä 
 sovelluksen kehittäjälle ja ylläpitäjälle.
 
 \section{Web-palveluiden tietoturvan parantaminen}
