@@ -23,10 +23,10 @@ Graduseminaari on pidetty 25.2.2010 ja siihen on lohkaistu [luku
 dynaamisista WWW-teknologioista](web20.tex). Tiedostoon on siksi
 upotettu vähän ehdollisen kääntämisen sääntöjä, jotta samaa lukua voi
 käyttää seminaarissa ja varsinaisen raportin osana. Kuitenkin
-myöhemmin sisältö varmastikin muuttuu, joten voi olla tarvetta nähdä
-seminaarin aikainen versio. Seminaarissa esitelty versio on
-719cbb86af6712692de76fd0686753f8e45a5e4c ja seminaariraportin korjattu
-versio on 760a3d8fa774e5aa08702111ffcb610978d4d70b.
+myöhemmin sisältö on muuttunut, joten voi olla tarvetta nähdä
+[seminaarissa esitelty versio](https://github.com/zouppen/gradu/tree/719cbb86af6712692de76fd0686753f8e45a5e4c)
+tai
+[opponointipalautteen pohjalta tehdyt korjaukset](https://github.com/zouppen/gradu/compare/seminaari...seminaari_korjattu).
 
 Seminaariraportti käännetään symbolisen linkin kautta, eli ajamalla
 graduhakemiston juuressa:
