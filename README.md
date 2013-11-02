@@ -2,9 +2,9 @@
 
 Kirjoittaneet: Joel Lehtonen ja Kristian Siljander.
 
-Valmistui 18.10.2010. Teoksen tunniste on URN:NBN:fi:jyu-201011023052 ja
-PDF-muotoinen julkaisu on saatavissa osoitteesta
-http://urn.fi/URN:NBN:fi:jyu-201011023052.
+Valmistui 18.10.2010. Teoksen tunniste on *URN:NBN:fi:jyu-201011023052* ja
+PDF-muotoinen julkaisu on saatavissa [JyXistä]
+(http://urn.fi/URN:NBN:fi:jyu-201011023052).
 
 ## Gradun kääntäminen
 
@@ -19,8 +19,8 @@ ei haittaakaan ole.
 
 ## Joelin graduseminaari
 
-Graduseminaari on pidetty 25.2.2010 ja siihen on lohkaistu luku
-dynaamisista WWW-teknologioista (web20.tex). Tiedostoon on siksi
+Graduseminaari on pidetty 25.2.2010 ja siihen on lohkaistu [luku
+dynaamisista WWW-teknologioista](web20.tex). Tiedostoon on siksi
 upotettu vähän ehdollisen kääntämisen sääntöjä, jotta samaa lukua voi
 käyttää seminaarissa ja varsinaisen raportin osana. Kuitenkin
 myöhemmin sisältö varmastikin muuttuu, joten voi olla tarvetta nähdä
@@ -31,7 +31,7 @@ versio on 760a3d8fa774e5aa08702111ffcb610978d4d70b.
 Seminaariraportti käännetään symbolisen linkin kautta, eli ajamalla
 graduhakemiston juuressa:
 
-    pdflatex seminaari_joel.tex. 
+    pdflatex seminaari_joel.tex
 
 Windowsissa tämä voi olla vaikeampaa, pitää ehkä kopoida tiedosto
 alihakemistosta käsin.
